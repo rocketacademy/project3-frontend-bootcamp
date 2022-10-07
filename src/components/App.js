@@ -1,14 +1,17 @@
 import React from "react";
 import "./App.css";
 import HeaderBar from "./Header";
+import PermanentDrawerLeft from "./Drawer";
 
 class App extends React.Component {
   render() {
     return (
       <div className="App">
-        <HeaderBar />
+        <header>
+          <HeaderBar />
+        </header>
         <body>
-          
+          <PermanentDrawerLeft />
         </body>
       </div>
     );

@@ -27,13 +27,13 @@ const HeaderBar = () => {
   };
 
   return (
-    <AppBar position="static" color="transparent" elevation={0}>
+    <AppBar position="absolute" color="transparent" elevation={0}>
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <IconButton sx={{ display: { xs: "none", md: "flex" }, mr: 1 }}>
             <img src={Logo} alt="logo" />
           </IconButton>
-
+          <Typography variant="h5" sx={{ flexGrow: 1, fontFamily: 'Roboto', fontWeight: 600, display: "flex", ml: 10,}}>Dashboard</Typography>
           <Box position="absolute" right="0px" sx={{ flexGrow: 1 }}>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
