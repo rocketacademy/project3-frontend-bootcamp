@@ -8,12 +8,3 @@
   width: 100vw;
   position: relative;
 }
-
-header {
-  position: relative;
-}
-
-body {
-  position: relative;
-  display: grid;
-}

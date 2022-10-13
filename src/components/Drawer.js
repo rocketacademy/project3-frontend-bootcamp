@@ -38,18 +38,18 @@ export default function PermanentDrawerLeft() {
       >
         <Toolbar sx={{ mt: 8 }} />
         <List>
-          {["Properties", "Reservations"].map((text, index) => (
-            <ListItem key={text} disablePadding>
-              <Link to={text}>
-                <ListItemButton>
-                  <ListItemIcon>
-                    {index % 2 === 0 ? <VillaIcon /> : <BookOnlineIcon />}
-                  </ListItemIcon>
-                  <ListItemText primary={text} />
-                </ListItemButton>
-              </Link>
-            </ListItem>
-          ))}
+          <ListItem button component={Link} to="/Properties">
+            <ListItemIcon>
+              <VillaIcon />
+            </ListItemIcon>
+            <ListItemText primary="Properties" />
+          </ListItem>
+          <ListItem button component={Link} to="/Reservations">
+            <ListItemIcon>
+              <BookOnlineIcon />
+            </ListItemIcon>
+            <ListItemText primary="Reservations" />
+          </ListItem>
         </List>
       </Drawer>
     </Box>

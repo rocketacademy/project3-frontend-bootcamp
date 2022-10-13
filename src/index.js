@@ -4,7 +4,7 @@ import { createBrowserRouter, RouterProvider, Route } from "react-router-dom";
 import "./index.css";
 import App from "./routes/App";
 import ErrorPage from "./error-page";
-import Reservations from "./routes/reservations";
+import Reservations from "./routes/Reservations";
 
 const router = createBrowserRouter([
   {
