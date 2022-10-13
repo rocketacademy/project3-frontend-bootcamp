@@ -10,6 +10,7 @@ import ListItemText from "@mui/material/ListItemText";
 import VillaIcon from "@mui/icons-material/Villa";
 import BookOnlineIcon from "@mui/icons-material/BookOnline";
 import { Toolbar } from "@mui/material";
+import { Link } from "react-router-dom";
 
 const drawerWidth = 240;
 
@@ -39,12 +40,14 @@ export default function PermanentDrawerLeft() {
         <List>
           {["Properties", "Reservations"].map((text, index) => (
             <ListItem key={text} disablePadding>
-              <ListItemButton>
-                <ListItemIcon>
-                  {index % 2 === 0 ? <VillaIcon /> : <BookOnlineIcon />}
-                </ListItemIcon>
-                <ListItemText primary={text} />
-              </ListItemButton>
+              <Link to={text}>
+                <ListItemButton>
+                  <ListItemIcon>
+                    {index % 2 === 0 ? <VillaIcon /> : <BookOnlineIcon />}
+                  </ListItemIcon>
+                  <ListItemText primary={text} />
+                </ListItemButton>
+              </Link>
             </ListItem>
           ))}
         </List>

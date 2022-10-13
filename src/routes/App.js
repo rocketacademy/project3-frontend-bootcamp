@@ -1,7 +1,8 @@
 import React from "react";
+import { Outlet } from "react-router-dom";
 import "./App.css";
-import HeaderBar from "./Header";
-import PermanentDrawerLeft from "./Drawer";
+import HeaderBar from "../components/Header";
+import PermanentDrawerLeft from "../components/Drawer";
 
 class App extends React.Component {
   render() {
@@ -9,9 +10,10 @@ class App extends React.Component {
       <div className="App">
         <header>
           <HeaderBar />
+          <PermanentDrawerLeft />
         </header>
         <body>
-          <PermanentDrawerLeft />
+          <Outlet />
         </body>
       </div>
     );
