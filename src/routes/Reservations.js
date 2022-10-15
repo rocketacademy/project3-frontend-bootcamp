@@ -1,79 +1,52 @@
-import { Form } from "react-router-dom";
-import Box from "@mui/material/Box";
-import Container from "@mui/material/Container";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
+import { Link, useParams } from "react-router-dom";
+// ----- import from Mui -----
+import Card from "@mui/material/Card";
+import CardContent from "@mui/material/CardContent";
+import { Container } from "@mui/system";
 
-export default function Reservations() {
-  const contact = {
-    first: "Your",
-    last: "Name",
-    avatar: "https://placekitten.com/g/200/200",
-    twitter: "your_handle",
-    notes: "Some notes",
-    favorite: true,
-  };
+// ----- Constant Variable -----
+const BACKEND_URL = "http://localhost:8080";
 
+const Reservations = () => {
+  const [reservationId, setReservationId] = useState();
+  const [reservation, setReservation] = useState();
+
+  useEffect(() => {
+    if (reservationId) {
+      axios
+        .get(`${BACKEND_URL}/reservations/${reservationId}`)
+        .then((response) => {
+          setReservation(response.data);
+        });
+    }
+  }, [reservationId]);
+
+  const params = useParams();
+  if (reservationId !== params.reservationId) {
+    setReservationId(params.reservationId);
+  }
+
+  const reservationDetails = [];
+  if (reservation) {
+    for (const key in reservation) {
+      reservationDetails.push(
+        <CardContent key={key}>{`${key}: ${reservation[key]}`}</CardContent>
+      );
+    }
+  }
+  console.log(reservationDetails);
+  console.log(reservation);
+  console.log(reservationId);
   return (
-    <Container>Reservations page</Container>
-    //   <div id="contact">
-    //     <div>
-    //       <img key={contact.avatar} src={contact.avatar || null} alt="avatar" />
-    //     </div>
-
-    //     <div>
-    //       <h1>
-    //         {contact.first || contact.last ? (
-    //           <>
-    //             {contact.first} {contact.last}
-    //           </>
-    //         ) : (
-    //           <i>No Name</i>
-    //         )}{" "}
-    //         <Favorite contact={contact} />
-    //       </h1>
-
-    //       {contact.twitter && (
-    //         <p>
-    //           <a target="_blank" href={`https://twitter.com/${contact.twitter}`}>
-    //             {contact.twitter}
-    //           </a>
-    //         </p>
-    //       )}
-
-    //       {contact.notes && <p>{contact.notes}</p>}
-
-    //       <div>
-    //         <Form action="edit">
-    //           <button type="submit">Edit</button>
-    //         </Form>
-    //         <Form
-    //           method="post"
-    //           action="destroy"
-    //           onSubmit={(event) => {
-    //             if (!confirm("Please confirm you want to delete this record.")) {
-    //               event.preventDefault();
-    //             }
-    //           }}
-    //         >
-    //           <button type="submit">Delete</button>
-    //         </Form>
-    //       </div>
-    //     </div>
-    //   </div>
+    <Container>
+      <Link to="/">Home</Link>
+      <Card sx={{ maxWidth: 275 }}>
+        <CardContent>{reservationDetails}</CardContent>
+      </Card>
+    </Container>
   );
-}
+};
 
-// function Favorite({ contact }) {
-//   // yes, this is a `let` for later
-//   let favorite = contact.favorite;
-//   return (
-//     <Form method="post">
-//       <button
-//         name="favorite"
-//         value={favorite ? "false" : "true"}
-//         aria-label={favorite ? "Remove from favorites" : "Add to favorites"}
-//       >
-//         {favorite ? "★" : "☆"}
-//       </button>
-//     </Form>
-//   );
-// }
+export default Reservations;

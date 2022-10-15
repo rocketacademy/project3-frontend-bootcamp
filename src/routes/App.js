@@ -3,9 +3,8 @@ import { Outlet } from "react-router-dom";
 import "./App.css";
 import HeaderBar from "../components/Header";
 import PermanentDrawerLeft from "../components/Drawer";
-import CssBaseline from "@mui/material/CssBaseline";
 import Box from "@mui/material/Box";
-import Container from "@mui/material/Container";
+import ReservationsOverview from "../components/ReservationsOverview";
 
 class App extends React.Component {
   render() {
@@ -15,6 +14,7 @@ class App extends React.Component {
         <PermanentDrawerLeft />
         <Box component="div" sx={{ position: "relative", top: "20%" }}>
           <Outlet />
+          <ReservationsOverview />
         </Box>
       </div>
     );
