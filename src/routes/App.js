@@ -5,20 +5,41 @@ import HeaderBar from "../components/Header";
 import PermanentDrawerLeft from "../components/Drawer";
 import Box from "@mui/material/Box";
 import ReservationsOverview from "../components/ReservationsOverview";
+import { useAuth0 } from "@auth0/auth0-react";
+import LoginButton from "../components/LoginButton";
+import LogoutButton from "../components/LogOutButton";
 
-class App extends React.Component {
-  render() {
-    return (
-      <div className="App">
+const App = () => {
+  const { isAuthenticated } = useAuth0();
+
+  const main = (
+    <div className="App">
+      <HeaderBar />
+      <PermanentDrawerLeft />
+      <Box component="div" sx={{ position: "relative", top: "20%" }}>
+        <ReservationsOverview />
+        <LogoutButton />
+        <Outlet />
+      </Box>
+    </div>
+  );
+
+  const loadMainPage = <div>{isAuthenticated ? main : <LoginButton />}</div>;
+
+  return (
+    <div className="App">
+      {/* <div className="App">
         <HeaderBar />
         <PermanentDrawerLeft />
         <Box component="div" sx={{ position: "relative", top: "20%" }}>
+          <LogoutButton />
           <Outlet />
           <ReservationsOverview />
         </Box>
-      </div>
-    );
-  }
-}
+      </div> */}
+      {loadMainPage}
+    </div>
+  );
+};
 
 export default App;
