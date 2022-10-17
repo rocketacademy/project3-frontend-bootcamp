@@ -9,46 +9,40 @@ import Container from "@mui/material/Container";
 import { useAuth0 } from "@auth0/auth0-react";
 import LoginButton from "../components/LoginButton";
 import LogoutButton from "../components/LogOutButton";
+import { Loading } from "./Loading";
 
 const App = () => {
-  const [loggedInUser, setLoggedInUser] = useState();
-  const { isAuthenticated, user, loginWithRedirect, isLoading } = useAuth0();
+  const { isAuthenticated, user, loginWithRedirect, isLoading, error } =
+    useAuth0();
 
-  // useEffect(() => {
-  //   if (isAuthenticated) {
-  //     console.log(isAuthenticated);
-  //     return;
-  //   } else if (!isAuthenticated) {
-  //     console.log(isAuthenticated);
-  //     loginWithRedirect();
-  //     console.log(isAuthenticated);
-  //   }
-  // }, []);
+  if (isLoading) {
+    return <Loading />;
+  }
 
-  const main = (
-    <div className="App">
-      <HeaderBar />
-      <PermanentDrawerLeft />
-      <Box component="div" sx={{ position: "relative", top: "20%" }}>
-        <LogoutButton />
-        <Outlet />
-      </Box>
-    </div>
-  );
+  // const main = (
+  //   <div className="App">
+  //     <HeaderBar />
+  //     <PermanentDrawerLeft />
+  //     <Box component="div" sx={{ position: "relative", top: "20%" }}>
+  //       <LogoutButton />
+  //       <Outlet />
+  //     </Box>
+  //   </div>
+  // );
 
-  const loadMainPage = <div>{isAuthenticated ? main : <LoginButton />}</div>;
+  // const loadMainPage = <div>{isAuthenticated ? main : <LoginButton />}</div>;
 
   return (
     <div className="App">
-      {/* <div className="App">
+      <div className="App">
         <HeaderBar />
         <PermanentDrawerLeft />
         <Box component="div" sx={{ position: "relative", top: "20%" }}>
           <LogoutButton />
           <Outlet />
         </Box>
-      </div> */}
-      {loadMainPage}
+      </div>
+      {/* {loadMainPage} */}
     </div>
   );
 };
