@@ -5,7 +5,9 @@ import "./index.css";
 import App from "./routes/App";
 import ErrorPage from "./error-page";
 import Reservations from "./routes/Reservations";
+import PropertiesMain from "./routes/PropertiesMain";
 import { Auth0Provider } from "@auth0/auth0-react";
+import NewPropertyForm from "./components/NewPropertyForm";
 
 const router = createBrowserRouter([
   {
@@ -13,6 +15,14 @@ const router = createBrowserRouter([
     element: <App />,
     errorElement: <ErrorPage />,
     children: [
+      {
+        path: "PropertiesMain",
+        element: <PropertiesMain />,
+      },
+      {
+        path: "PropertiesListings/new",
+        element: <NewPropertyForm />,
+      },
       {
         path: "Reservations",
         element: <Reservations />,

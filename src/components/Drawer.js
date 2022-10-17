@@ -38,7 +38,7 @@ export default function PermanentDrawerLeft() {
       >
         <Toolbar sx={{ mt: 8 }} />
         <List>
-          <ListItem button component={Link} to="/Properties">
+          <ListItem button component={Link} to="/PropertiesMain">
             <ListItemIcon>
               <VillaIcon />
             </ListItemIcon>
