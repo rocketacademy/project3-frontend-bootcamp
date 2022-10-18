@@ -11,6 +11,11 @@ import "./index.css";
 import App from "./routes/App";
 import ErrorPage from "./error-page";
 import Reservations from "./routes/Reservations";
+
+import PropertiesMain from "./routes/PropertiesMain";
+import NewPropertyForm from "./components/NewPropertyForm";
+import PropertyListing from "./components/PropertyListing";
+
 import { Auth0Provider, withAuthenticationRequired } from "@auth0/auth0-react";
 
 const ProtectedApp = withAuthenticationRequired(App);
@@ -45,6 +50,18 @@ const router = createBrowserRouter([
     ),
     errorElement: <ErrorPage />,
     children: [
+      {
+        path: "PropertiesMain",
+        element: <PropertiesMain />,
+      },
+      {
+        path: "properties/:propertyId",
+        element: <PropertyListing />,
+      },
+      {
+        path: "PropertiesListing/new",
+        element: <NewPropertyForm />,
+      },
       {
         path: "Reservations",
         element: <Reservations />,
