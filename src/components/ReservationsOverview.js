@@ -30,7 +30,7 @@ const ReservationsOverview = () => {
       field: "customer_id",
       headerName: "Customer ID",
       width: 150,
-      editable: true,
+      
     },
     {
       field: "properties_id",
@@ -79,8 +79,7 @@ const ReservationsOverview = () => {
     <Box
       sx={{
         height: 400,
-        width: "50%",
-        position: "relative",
+        width: 750,
         backgroundColor: "#FFFFFF",
         borderRadius: 8,
       }}

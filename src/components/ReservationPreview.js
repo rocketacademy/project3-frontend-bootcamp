@@ -5,9 +5,6 @@ import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
 
 const ReservationPreview = (props) => {
-  console.log(props.data);
-  let startDate = props.data.start_date;
-  let newDate = startDate.toLocaleString();
   return (
     <Card>
       <CardContent>
@@ -21,7 +18,7 @@ const ReservationPreview = (props) => {
           Property ID: {props.data.properties_id}
         </Typography>
         <Typography variant="body2">
-          Start Date: {newDate}
+          Start Date: {props.data.start_date}
           <br />
           End Date: {props.data.end_date}
         </Typography>

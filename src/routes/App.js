@@ -8,27 +8,32 @@ import ReservationsOverview from "../components/ReservationsOverview";
 import { useAuth0 } from "@auth0/auth0-react";
 import LoginButton from "../components/LoginButton";
 import LogoutButton from "../components/LogOutButton";
+import { Loading } from "./Loading";
 
 const App = () => {
-  const { isAuthenticated } = useAuth0();
+  const { isAuthenticated, user, loginWithRedirect, isLoading, error } =
+    useAuth0();
 
-  const main = (
-    <div className="App">
-      <HeaderBar />
-      <PermanentDrawerLeft />
-      <Box component="div" sx={{ position: "relative", top: "20%" }}>
-        <ReservationsOverview />
-        <LogoutButton />
-        <Outlet />
-      </Box>
-    </div>
-  );
+  if (isLoading) {
+    return <Loading />;
+  }
 
-  const loadMainPage = <div>{isAuthenticated ? main : <LoginButton />}</div>;
+  // const main = (
+  //   <div className="App">
+  //     <HeaderBar />
+  //     <PermanentDrawerLeft />
+  //     <Box component="div" sx={{ position: "relative", top: "20%" }}>
+  //       <LogoutButton />
+  //       <Outlet />
+  //     </Box>
+  //   </div>
+  // );
+
+  // const loadMainPage = <div>{isAuthenticated ? main : <LoginButton />}</div>;
 
   return (
     <div className="App">
-      {/* <div className="App">
+      <div className="App">
         <HeaderBar />
         <PermanentDrawerLeft />
         <Box component="div" sx={{ position: "relative", top: "20%" }}>
@@ -36,8 +41,8 @@ const App = () => {
           <Outlet />
           <ReservationsOverview />
         </Box>
-      </div> */}
-      {loadMainPage}
+      </div>
+      {/* {loadMainPage} */}
     </div>
   );
 };
