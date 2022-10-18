@@ -7,38 +7,38 @@ import Card from "react-bootstrap/Card";
 import { BACKEND_URL } from "../constants.js";
 
 const PropertyListing = () => {
-  const [listingId, setListingId] = useState();
-  const [listing, setListing] = useState({});
+  const [propertyId, setPropertyId] = useState();
+  const [property, setProperty] = useState({});
 
   useEffect(() => {
     // If there is a listingId, retrieve the listing data
-    if (listingId) {
-      axios.get(`${BACKEND_URL}/listings/${listingId}`).then((response) => {
-        setListing(response.data);
+    if (propertyId) {
+      axios.get(`${BACKEND_URL}/properties/${propertyId}`).then((response) => {
+        setProperty(response.data);
       });
     }
     // Only run this effect on change to listingId
-  }, [listingId]);
+  }, [propertyId]);
 
   // Update listing ID in state if needed to trigger data retrieval
   const params = useParams();
-  if (listingId !== params.listingId) {
-    setListingId(params.listingId);
+  if (propertyId !== params.propertyId) {
+    setPropertyId(params.propertyId);
   }
 
   // Store a new JSX element for each property in listing details
-  const listingDetails = [];
-  if (listing) {
-    for (const key in listing) {
-      listingDetails.push(
-        <Card.Text key={key}>{`${key}: ${listing[key]}`}</Card.Text>
+  const propertyDetails = [];
+  if (property) {
+    for (const key in property) {
+      propertyDetails.push(
+        <Card.Text key={key}>{`${key}: ${property[key]}`}</Card.Text>
       );
     }
   }
 
   const handleClick = () => {
-    axios.put(`${BACKEND_URL}/listings/${listingId}`).then((response) => {
-      setListing(response.data);
+    axios.put(`${BACKEND_URL}/properties/${propertyId}`).then((response) => {
+      setProperty(response.data);
     });
   };
 
@@ -47,10 +47,7 @@ const PropertyListing = () => {
       <Link to="/">Home</Link>
       <Card bg="dark">
         <Card.Body>
-          {listingDetails}
-          <Button onClick={handleClick} disabled={listing.BuyerId}>
-            Buy
-          </Button>
+          {propertyDetails}
         </Card.Body>
       </Card>
       <br />

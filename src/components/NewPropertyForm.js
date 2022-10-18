@@ -7,33 +7,37 @@ import { useNavigate } from "react-router-dom";
 import { BACKEND_URL } from "../constants";
 
 const NewPropertyForm = () => {
-  const [title, setTitle] = useState("");
-  const [category, setCategory] = useState("");
-  const [condition, setCondition] = useState("");
+  const [homeType, setHomeType] = useState("");
+  const [totalOccupancy, setTotalOccupancy] = useState("");
+  const [totalBedrooms, setTotalBedrooms] = useState("");
+  const [totalBathrooms, setTotalBathrooms] = useState("");
+  const [summary, setSummary] = useState("");
+  const [address, setAddress] = useState("");
   const [price, setPrice] = useState("");
-  const [description, setDescription] = useState("");
-  const [shippingDetails, setShippingDetails] = useState("");
   const navigate = useNavigate();
 
   const handleChange = (event) => {
     switch (event.target.name) {
-      case "title":
-        setTitle(event.target.value);
+      case "homeType":
+        setHomeType(event.target.value);
         break;
-      case "category":
-        setCategory(event.target.value);
+      case "totalOccupancy":
+        setTotalOccupancy(event.target.value);
         break;
-      case "condition":
-        setCondition(event.target.value);
+      case "totalBedrooms":
+        setTotalBedrooms(event.target.value);
+        break;
+      case "totalBathrooms":
+        setTotalBathrooms(event.target.value);
+        break;
+      case "summary":
+        setSummary(event.target.value);
+        break;
+      case "address":
+        setAddress(event.target.value);
         break;
       case "price":
         setPrice(event.target.value);
-        break;
-      case "description":
-        setDescription(event.target.value);
-        break;
-      case "shippingDetails":
-        setShippingDetails(event.target.value);
         break;
       default:
     }
@@ -45,25 +49,27 @@ const NewPropertyForm = () => {
 
     // Send request to create new listing in backend
     axios
-      .post(`${BACKEND_URL}/listings`, {
-        title,
-        category,
-        condition,
+      .post(`${BACKEND_URL}/properties`, {
+        homeType,
+        totalOccupancy,
+        totalBedrooms,
+        totalBathrooms,
+        summary,
+        address,
         price,
-        description,
-        shippingDetails,
       })
       .then((res) => {
         // Clear form state
-        setTitle("");
-        setCategory("");
-        setCondition("");
-        setPrice(0);
-        setDescription("");
-        setShippingDetails("");
+        setHomeType("");
+        setTotalOccupancy("");
+        setTotalBedrooms("");
+        setTotalBathrooms(0);
+        setSummary("");
+        setAddress("");
+        setPrice("");
 
         // Navigate to listing-specific page after submitting form
-        navigate(`/listings/${res.data.id}`);
+        navigate(`/properties/${res.data.id}`);
       });
   };
 
@@ -73,8 +79,8 @@ const NewPropertyForm = () => {
         <Form.Label>Home Type</Form.Label>
         <Form.Control
           type="text"
-          name="title"
-          value={title}
+          name="homeType"
+          value={homeType}
           onChange={handleChange}
           placeholder="Apartment, Detached, Farmland, Houseboat etc"
         />
@@ -83,8 +89,8 @@ const NewPropertyForm = () => {
         <Form.Label>Total Occupancy</Form.Label>
         <Form.Control
           type="text"
-          name="category"
-          value={category}
+          name="totalOccupancy"
+          value={totalOccupancy}
           onChange={handleChange}
           placeholder="No. of max occupants allowed"
         />
@@ -93,8 +99,8 @@ const NewPropertyForm = () => {
         <Form.Label>Total Bedrooms</Form.Label>
         <Form.Control
           type="text"
-          name="condition"
-          value={condition}
+          name="totalBedrooms"
+          value={totalBedrooms}
           onChange={handleChange}
           placeholder="No. of bedrooms"
         />
@@ -103,8 +109,8 @@ const NewPropertyForm = () => {
         <Form.Label>Total Bathrooms</Form.Label>
         <Form.Control
           type="text"
-          name="condition"
-          value={condition}
+          name="totalBathrooms"
+          value={totalBathrooms}
           onChange={handleChange}
           placeholder="No. of bathrooms"
         />
@@ -113,8 +119,8 @@ const NewPropertyForm = () => {
         <Form.Label>Summary</Form.Label>
         <Form.Control
           type="text"
-          name="condition"
-          value={condition}
+          name="summary"
+          value={summary}
           onChange={handleChange}
           placeholder="Short description here"
         />
@@ -123,8 +129,8 @@ const NewPropertyForm = () => {
         <Form.Label>Address</Form.Label>
         <Form.Control
           type="text"
-          name="condition"
-          value={condition}
+          name="address"
+          value={address}
           onChange={handleChange}
           placeholder="Enter address here"
         />
@@ -136,32 +142,12 @@ const NewPropertyForm = () => {
           name="price"
           value={price}
           onChange={handleChange}
-          placeholder="999"
-        />
-      </Form.Group>
-      <Form.Group>
-        <Form.Label>Description</Form.Label>
-        <Form.Control
-          as="textarea"
-          name="description"
-          value={description}
-          onChange={handleChange}
-          placeholder="Bought 2 months ago, selling because switching to Android."
-        />
-      </Form.Group>
-      <Form.Group>
-        <Form.Label>Shipping Details</Form.Label>
-        <Form.Control
-          as="textarea"
-          name="shippingDetails"
-          value={shippingDetails}
-          onChange={handleChange}
-          placeholder="Same day shipping, we can message to coordinate!"
+          placeholder="2000"
         />
       </Form.Group>
 
       <Button variant="primary" type="submit">
-        List this item
+        List this property!
       </Button>
     </Form>
   );

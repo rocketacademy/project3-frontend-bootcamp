@@ -7,17 +7,19 @@ import { BACKEND_URL } from "../constants.js";
 
 const PropertyListingPreviewList = () => {
   const [listings, setListings] = useState([]);
+  console.log("DISPLAY PROPERTY LISTING")
 
   useEffect(() => {
-    axios.get(`${BACKEND_URL}/listings`).then((response) => {
+    axios.get(`${BACKEND_URL}/properties`).then((response) => {
       setListings(response.data);
     });
     // Only run this effect on component mount
   }, []);
+  console.log(listings)
 
-  const listingPreviews = listings.map((listing) => (
-    <Link to={`/listings/${listing.id}`} key={listing.id}>
-      <PropertyListingPreview data={listing} />
+  const listingPreviews = listings.map((properties) => (
+    <Link to={`/properties/${properties.id}`} key={properties.id}>
+      <PropertyListingPreview data={properties} />
     </Link>
   ));
 

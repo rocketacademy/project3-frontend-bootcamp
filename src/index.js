@@ -8,6 +8,7 @@ import Reservations from "./routes/Reservations";
 import PropertiesMain from "./routes/PropertiesMain";
 import { Auth0Provider } from "@auth0/auth0-react";
 import NewPropertyForm from "./components/NewPropertyForm";
+import PropertyListing from "./components/PropertyListing";
 
 const router = createBrowserRouter([
   {
@@ -20,7 +21,11 @@ const router = createBrowserRouter([
         element: <PropertiesMain />,
       },
       {
-        path: "PropertiesListings/new",
+        path: "properties/:propertyId",
+        element: <PropertyListing />,
+      },
+      {
+        path: "PropertiesListing/new",
         element: <NewPropertyForm />,
       },
       {
