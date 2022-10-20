@@ -1,79 +1,73 @@
-import { Form } from "react-router-dom";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
+import ReservationPreview from "../components/ReservationPreview";
+import { DataGrid } from "@mui/x-data-grid";
 import Box from "@mui/material/Box";
-import Container from "@mui/material/Container";
 
-export default function Reservations() {
-  const contact = {
-    first: "Your",
-    last: "Name",
-    avatar: "https://placekitten.com/g/200/200",
-    twitter: "your_handle",
-    notes: "Some notes",
-    favorite: true,
-  };
+// ----- Constant Variable -----
+const BACKEND_URL = "http://localhost:8080";
+
+const Reservations = () => {
+  const [reservations, setReservations] = useState([]);
+
+  useEffect(() => {
+    axios.get(`${BACKEND_URL}/Reservations`).then((response) => {
+      setReservations(response.data);
+    });
+  }, []);
+
+  const columns = [
+    { field: "id", headerName: "ID", width: 90 },
+    {
+      field: "customer_id",
+      headerName: "Visitor Name",
+      width: 150,
+    },
+    {
+      field: "properties_id",
+      headerName: "Home Type",
+      width: 150,
+      editable: true,
+    },
+    {
+      field: "start_date",
+      headerName: "Check In",
+      type: "date",
+      width: 150,
+      editable: true,
+    },
+    {
+      field: "end_date",
+      headerName: "Check Out",
+      type: "date",
+      width: 150,
+      editable: true,
+    },
+  ];
+
+  console.log(reservations);
+  const rows = [...reservations];
 
   return (
-    <Container>Reservations page</Container>
-    //   <div id="contact">
-    //     <div>
-    //       <img key={contact.avatar} src={contact.avatar || null} alt="avatar" />
-    //     </div>
-
-    //     <div>
-    //       <h1>
-    //         {contact.first || contact.last ? (
-    //           <>
-    //             {contact.first} {contact.last}
-    //           </>
-    //         ) : (
-    //           <i>No Name</i>
-    //         )}{" "}
-    //         <Favorite contact={contact} />
-    //       </h1>
-
-    //       {contact.twitter && (
-    //         <p>
-    //           <a target="_blank" href={`https://twitter.com/${contact.twitter}`}>
-    //             {contact.twitter}
-    //           </a>
-    //         </p>
-    //       )}
-
-    //       {contact.notes && <p>{contact.notes}</p>}
-
-    //       <div>
-    //         <Form action="edit">
-    //           <button type="submit">Edit</button>
-    //         </Form>
-    //         <Form
-    //           method="post"
-    //           action="destroy"
-    //           onSubmit={(event) => {
-    //             if (!confirm("Please confirm you want to delete this record.")) {
-    //               event.preventDefault();
-    //             }
-    //           }}
-    //         >
-    //           <button type="submit">Delete</button>
-    //         </Form>
-    //       </div>
-    //     </div>
-    //   </div>
+    <Box
+      sx={{
+        height: 400,
+        width: 750,
+        backgroundColor: "#FFFFFF",
+        borderRadius: 1,
+      }}
+    >
+      <DataGrid
+        rows={rows}
+        columns={columns}
+        pageSize={5}
+        rowsPerPageOptions={[5]}
+        checkboxSelection
+        disableSelectionOnClick
+        experimentalFeatures={{ newEditingApi: true }}
+      />
+    </Box>
   );
-}
+};
 
-// function Favorite({ contact }) {
-//   // yes, this is a `let` for later
-//   let favorite = contact.favorite;
-//   return (
-//     <Form method="post">
-//       <button
-//         name="favorite"
-//         value={favorite ? "false" : "true"}
-//         aria-label={favorite ? "Remove from favorites" : "Add to favorites"}
-//       >
-//         {favorite ? "★" : "☆"}
-//       </button>
-//     </Form>
-//   );
-// }
+export default Reservations;
