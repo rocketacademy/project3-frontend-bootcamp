@@ -39,10 +39,10 @@ const router = createBrowserRouter([
     path: "/",
     element: (
       <Auth0ProviderWithRedirectCallback
-        domain="dev-l8x5jjx2.us.auth0.com" //move this to .env
-        clientId="gVfAjkawycGi5Y19jv8OSm3gSrKN0Bpd" //move this to .env
+        domain={process.env.REACT_APP_DOMAIN}
+        clientId={process.env.REACT_APP_CLIENT_ID}
         redirectUri={window.location.origin}
-        audience="https://carousell/api"
+        audience={process.env.REACT_APP_AUDIENCE}
         scope="read:current_user update:current_user_metadata"
       >
         <ProtectedApp />

@@ -1,4 +1,5 @@
 import * as React from "react";
+import { Link } from "react-router-dom";
 // ----- import from MUI -----
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
@@ -12,11 +13,11 @@ import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 // ----- import from local files -----
 import Logo from "../images/Logo.png";
-
-const settings = ["Profile", "Account", "Dashboard", "Logout"];
+import { useAuth0 } from "@auth0/auth0-react";
 
 const HeaderBar = () => {
   const [anchorElUser, setAnchorElUser] = React.useState(null);
+  const { logout } = useAuth0();
 
   const handleOpenUserMenu = (event) => {
     setAnchorElUser(event.currentTarget);
@@ -27,10 +28,15 @@ const HeaderBar = () => {
   };
 
   return (
-    <AppBar position="absolute" color="transparent" elevation={0}>
+    <AppBar
+      position="absolute"
+      color="transparent"
+      elevation={0}
+      sx={{ zIndex: (theme) => theme.zIndex.drawer + 1 }}
+    >
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-          <IconButton sx={{ display: { xs: "none", md: "flex" }, mr: 1 }}>
+          <IconButton component={Link} to="/" sx={{ display: { xs: "none", md: "flex" }, mr: 1 }}>
             <img src={Logo} alt="logo" />
           </IconButton>
           <Typography
@@ -67,15 +73,12 @@ const HeaderBar = () => {
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
             >
-              {/* {settings.map((setting) => (
-                <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                  <Typography textAlign="center">{setting}</Typography>
-                </MenuItem>
-              ))} */}
               <MenuItem onClick={handleCloseUserMenu}>
                 <Typography textAlign="center">Profile</Typography>
               </MenuItem>
-              <MenuItem onClick={handleCloseUserMenu}>
+              <MenuItem
+                onClick={() => logout({ returnTo: window.location.origin })}
+              >
                 <Typography textAlign="center">Logout</Typography>
               </MenuItem>
             </Menu>
