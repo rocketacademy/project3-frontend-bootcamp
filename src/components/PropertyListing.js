@@ -7,28 +7,33 @@ import Card from "react-bootstrap/Card";
 import { BACKEND_URL } from "../constants.js";
 
 const PropertyListing = () => {
-  const [propertyId, setPropertyId] = useState();
+  const [propertyName, setpropertyName] = useState();
   const [property, setProperty] = useState({});
 
   useEffect(() => {
     // If there is a listingId, retrieve the listing data
-    if (propertyId) {
-      axios.get(`${BACKEND_URL}/properties/${propertyId}`).then((response) => {
-        setProperty(response.data);
-      });
+    if (propertyName) {
+      axios
+        .get(`${BACKEND_URL}/properties/${propertyName}`)
+        .then((response) => {
+          console.log(response)
+          setProperty(response.data);
+        });
     }
     // Only run this effect on change to listingId
-  }, [propertyId]);
+  }, [propertyName]);
 
   // Update listing ID in state if needed to trigger data retrieval
   const params = useParams();
-  if (propertyId !== params.propertyId) {
-    setPropertyId(params.propertyId);
+  // console.log(params)
+  if (propertyName !== params.propertyName) {
+    setpropertyName(params.propertyName);
   }
 
   // Store a new JSX element for each property in listing details
   const propertyDetails = [];
   if (property) {
+    console.log(property)
     for (const key in property) {
       propertyDetails.push(
         <Card.Text key={key}>{`${key}: ${property[key]}`}</Card.Text>
@@ -37,7 +42,8 @@ const PropertyListing = () => {
   }
 
   const handleClick = () => {
-    axios.put(`${BACKEND_URL}/properties/${propertyId}`).then((response) => {
+    axios.put(`${BACKEND_URL}/properties/${propertyName}`).then((response) => {
+      console.log(response.data)
       setProperty(response.data);
     });
   };

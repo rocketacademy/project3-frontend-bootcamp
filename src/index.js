@@ -55,7 +55,7 @@ const router = createBrowserRouter([
         element: <PropertiesMain />,
       },
       {
-        path: "properties/:propertyId",
+        path: "properties/:propertyName",
         element: <PropertyListing />,
       },
       {

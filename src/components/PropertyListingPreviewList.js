@@ -7,7 +7,7 @@ import { BACKEND_URL } from "../constants.js";
 
 const PropertyListingPreviewList = () => {
   const [listings, setListings] = useState([]);
-  console.log("DISPLAY PROPERTY LISTING")
+  // console.log("DISPLAY PROPERTY LISTING")
 
   useEffect(() => {
     axios.get(`${BACKEND_URL}/properties`).then((response) => {
@@ -15,10 +15,10 @@ const PropertyListingPreviewList = () => {
     });
     // Only run this effect on component mount
   }, []);
-  console.log(listings)
+  // console.log(listings)
 
   const listingPreviews = listings.map((properties) => (
-    <Link to={`/properties/${properties.id}`} key={properties.id}>
+    <Link to={`/properties/${properties.home_name}`} key={properties.home_name}>
       <PropertyListingPreview data={properties} />
     </Link>
   ));
