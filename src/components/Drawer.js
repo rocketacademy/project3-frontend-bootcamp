@@ -28,8 +28,9 @@ export default function PermanentDrawerLeft() {
         }}
         PaperProps={{
           style: {
-            background: "transparent",
+            // background: "transparent",
             border: "none",
+            // opacity: 0.5,
           },
         }}
         variant="permanent"

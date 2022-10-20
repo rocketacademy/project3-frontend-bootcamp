@@ -1,4 +1,5 @@
 import * as React from "react";
+import { Link } from "react-router-dom";
 // ----- import from MUI -----
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
@@ -13,8 +14,6 @@ import MenuItem from "@mui/material/MenuItem";
 // ----- import from local files -----
 import Logo from "../images/Logo.png";
 
-const settings = ["Profile", "Account", "Dashboard", "Logout"];
-
 const HeaderBar = () => {
   const [anchorElUser, setAnchorElUser] = React.useState(null);
 
@@ -27,10 +26,15 @@ const HeaderBar = () => {
   };
 
   return (
-    <AppBar position="absolute" color="transparent" elevation={0}>
+    <AppBar
+      position="absolute"
+      color="transparent"
+      elevation={0}
+      sx={{ zIndex: (theme) => theme.zIndex.drawer + 1 }}
+    >
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-          <IconButton sx={{ display: { xs: "none", md: "flex" }, mr: 1 }}>
+          <IconButton component={Link} to="/" sx={{ display: { xs: "none", md: "flex" }, mr: 1 }}>
             <img src={Logo} alt="logo" />
           </IconButton>
           <Typography

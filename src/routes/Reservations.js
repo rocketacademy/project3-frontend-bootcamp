@@ -1,51 +1,72 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
-// ----- import from Mui -----
-import Card from "@mui/material/Card";
-import CardContent from "@mui/material/CardContent";
-import { Container } from "@mui/system";
+import ReservationPreview from "../components/ReservationPreview";
+import { DataGrid } from "@mui/x-data-grid";
+import Box from "@mui/material/Box";
 
 // ----- Constant Variable -----
 const BACKEND_URL = "http://localhost:8080";
 
 const Reservations = () => {
-  const [reservationId, setReservationId] = useState();
-  const [reservation, setReservation] = useState();
+  const [reservations, setReservations] = useState([]);
 
   useEffect(() => {
-    if (reservationId) {
-      axios
-        .get(`${BACKEND_URL}/reservations/${reservationId}`)
-        .then((response) => {
-          setReservation(response.data);
-        });
-    }
-  }, [reservationId]);
+    axios.get(`${BACKEND_URL}/Reservations`).then((response) => {
+      setReservations(response.data);
+    });
+  }, []);
 
-  const params = useParams();
-  if (reservationId !== params.reservationId) {
-    setReservationId(params.reservationId);
-  }
+  const columns = [
+    { field: "id", headerName: "ID", width: 90 },
+    {
+      field: "customer_id",
+      headerName: "Visitor Name",
+      width: 150,
+    },
+    {
+      field: "properties_id",
+      headerName: "Home Type",
+      width: 150,
+      editable: true,
+    },
+    {
+      field: "start_date",
+      headerName: "Check In",
+      type: "date",
+      width: 150,
+      editable: true,
+    },
+    {
+      field: "end_date",
+      headerName: "Check Out",
+      type: "date",
+      width: 150,
+      editable: true,
+    },
+  ];
 
-  const reservationDetails = [];
-  if (reservation) {
-    for (const key in reservation) {
-      reservationDetails.push(
-        <CardContent key={key}>{`${key}: ${reservation[key]}`}</CardContent>
-      );
-    }
-  }
-  console.log(reservationDetails);
-  console.log(reservation);
-  console.log(reservationId);
+  console.log(reservations);
+  const rows = [...reservations];
+
   return (
-    <Container>
-      <Link to="/">Home</Link>
-      <Card sx={{ maxWidth: 275 }}>
-        <CardContent>{reservationDetails}</CardContent>
-      </Card>
-    </Container>
+    <Box
+      sx={{
+        height: 400,
+        width: 750,
+        backgroundColor: "#FFFFFF",
+        borderRadius: 1,
+      }}
+    >
+      <DataGrid
+        rows={rows}
+        columns={columns}
+        pageSize={5}
+        rowsPerPageOptions={[5]}
+        checkboxSelection
+        disableSelectionOnClick
+        experimentalFeatures={{ newEditingApi: true }}
+      />
+    </Box>
   );
 };
 
