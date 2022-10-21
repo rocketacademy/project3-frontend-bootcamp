@@ -17,10 +17,19 @@ const App = () => {
   }
 
   return (
-    <Container className="App" maxWidth="false">
+    <Container
+      className="App"
+      maxWidth="false"
+      sx={{
+        display: "flex",
+        alignContent: "center",
+      }}
+    >
       <HeaderBar />
-      <PermanentDrawerLeft />
-      <Box sx={{ position: "relative", left: "20%", top: "20%" }}>
+      <Box sx={{ width: "20%" }}>
+        <PermanentDrawerLeft />
+      </Box>
+      <Box sx={{ pt: "10%", width: "80%" }}>
         <Outlet />
       </Box>
     </Container>

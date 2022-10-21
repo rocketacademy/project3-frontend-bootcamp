@@ -18,6 +18,7 @@ export default function PermanentDrawerLeft() {
     <Box sx={{ display: "flex" }}>
       <CssBaseline />
       <Drawer
+        variant="permanent"
         sx={{
           width: drawerWidth,
           flexShrink: 0,
@@ -33,7 +34,6 @@ export default function PermanentDrawerLeft() {
             // opacity: 0.5,
           },
         }}
-        variant="permanent"
         anchor="left"
       >
         <Toolbar sx={{ mt: 8 }} />
