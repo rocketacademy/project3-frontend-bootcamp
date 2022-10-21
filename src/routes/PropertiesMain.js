@@ -1,35 +1,33 @@
 import React from "react";
 import { Link } from "react-router-dom";
-
-// import { Form } from "react-router-dom";
-// import Box from "@mui/material/Box";
-import Container from "@mui/material/Container";
+import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
-import ListItem from "@mui/material/ListItem";
-import ListItemText from "@mui/material/ListItemText";
+import Fab from "@mui/material/Fab";
+import AddIcon from "@mui/icons-material/Add";
+// import { Form } from "react-router-dom";
 
 import PropertyListingPreviewList from "../components/PropertyListingPreviewList";
 
 export default function PropertiesMain() {
-
   return (
-    <Container>
-      <br />
-      Properties page
-      <br />
-      <br />
-      {/* <button
-        onClick={<Link to="/PropertiesListing/new">Add new listing</Link>}
-      >
-        Add new listing
-      </button> */}
-      <Button variant = "contained" component={Link} to = "/PropertiesListing/new">Add new listing</Button>
-      <Link to="/PropertiesListing/new">Add new listing</Link>
-      <br />
-      <br />
+    <Box>
       <PropertyListingPreviewList />
-      <br />
-      <br />
-    </Container>
+      <Fab
+        variant="extended"
+        color="primary"
+        aria-label="add"
+        sx={{
+          position: "absolute",
+          bottom: "10%",
+          right: "10%",
+          float: "right",
+        }}
+        component={Link}
+        to="/PropertiesListing/new"
+      >
+        <AddIcon sx={{ mr: 1 }} />
+        Add New Listing
+      </Fab>
+    </Box>
   );
 }
