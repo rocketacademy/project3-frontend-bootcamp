@@ -80,7 +80,7 @@ const NewPropertyForm = () => {
         <Form.Control
           type="text"
           name="homeType"
-          value={home_Type}
+          value={homeType}
           onChange={handleChange}
           placeholder="Apartment, Detached, Farmland, Houseboat etc"
         />
