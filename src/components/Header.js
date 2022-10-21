@@ -29,14 +29,18 @@ const HeaderBar = () => {
 
   return (
     <AppBar
-      position="absolute"
+      position="fixed"
       color="transparent"
       elevation={0}
-      sx={{ zIndex: (theme) => theme.zIndex.drawer + 1 }}
+      sx={{ zIndex: (theme) => theme.zIndex.drawer + 1}}
     >
-      <Container maxWidth="xl">
+      <Container maxWidth="false">
         <Toolbar disableGutters>
-          <IconButton component={Link} to="/" sx={{ display: { xs: "none", md: "flex" }, mr: 1 }}>
+          <IconButton
+            component={Link}
+            to="/"
+            sx={{ display: { xs: "none", md: "flex" }, mr: 1 }}
+          >
             <img src={Logo} alt="logo" />
           </IconButton>
           <Typography
