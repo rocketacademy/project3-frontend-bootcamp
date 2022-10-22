@@ -258,6 +258,7 @@ const NewPropertyForm = () => {
                 label="Has Internet"
                 value={has_internet}
                 name="has_internet"
+                // type should be boolean or integer
                 type={type}
                 id={`inline-${type}-2`}
               />
