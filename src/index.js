@@ -16,6 +16,7 @@ import PropertiesMain from "./routes/PropertiesMain";
 import NewPropertyForm from "./components/NewPropertyForm";
 import PropertyListing from "./components/PropertyListing";
 
+import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
 import { Auth0Provider, withAuthenticationRequired } from "@auth0/auth0-react";
 
 const ProtectedApp = withAuthenticationRequired(App);

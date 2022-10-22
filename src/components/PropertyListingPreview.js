@@ -6,7 +6,7 @@ import Card from "@mui/material/Card";
 import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
-import Button from "@mui/material/Button";
+// import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import EditIcon from "@mui/icons-material/Edit";
 import Fab from "@mui/material/Fab";
@@ -23,7 +23,7 @@ const PropertyListingPreview = (props) => {
       />
       <CardContent>
         <Typography gutterBottom variant="h5" component="div">
-          {props.data.home_type}
+          {props.data.home_name}
         </Typography>
         <Typography variant="body2" color="text.secondary">
           {props.data.summary}

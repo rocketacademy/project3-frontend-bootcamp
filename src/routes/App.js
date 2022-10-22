@@ -8,6 +8,7 @@ import Container from "@mui/material/Container";
 import { useAuth0 } from "@auth0/auth0-react";
 import { Loading } from "./Loading";
 
+
 const App = () => {
   const { isAuthenticated, user, loginWithRedirect, isLoading, error } =
     useAuth0();

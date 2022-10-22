@@ -222,6 +222,7 @@ const NewPropertyForm = () => {
           />
         </Form.Group>
 
+        {/* checbox form
         <Form class="input-group mt-3 mb-3">
           <Form.Label class="input-group-text" id="inputGroup-sizing-default">
             Facilities
@@ -263,7 +264,7 @@ const NewPropertyForm = () => {
               />
             </div>
           ))}
-        </Form>
+        </Form> */}
 
         {/* Old form */}
         {/* <Form.Group>
