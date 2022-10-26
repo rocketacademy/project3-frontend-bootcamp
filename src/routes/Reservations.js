@@ -19,9 +19,12 @@ const Reservations = () => {
   const columns = [
     { field: "id", headerName: "ID", width: 90 },
     {
-      field: "customer_id",
+      field: "customer_name",
       headerName: "Visitor Name",
       width: 150,
+      valueGetter: (params) => {
+        return params.row.customer.name;
+      },
     },
     {
       field: "properties_id",
@@ -45,7 +48,6 @@ const Reservations = () => {
     },
   ];
 
-  console.log(reservations);
   const rows = [...reservations];
 
   return (
