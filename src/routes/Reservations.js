@@ -27,10 +27,12 @@ const Reservations = () => {
       },
     },
     {
-      field: "properties_id",
+      field: "properties_home_type",
       headerName: "Home Type",
       width: 150,
-      editable: true,
+      valueGetter: (params) => {
+        return params.row.properties.home_type;
+      },
     },
     {
       field: "start_date",
