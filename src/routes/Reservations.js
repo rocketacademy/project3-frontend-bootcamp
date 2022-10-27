@@ -3,18 +3,46 @@ import React, { useEffect, useState } from "react";
 import ReservationPreview from "../components/ReservationPreview";
 import { DataGrid } from "@mui/x-data-grid";
 import Box from "@mui/material/Box";
+import { useAuth0 } from "@auth0/auth0-react";
 
 // ----- Constant Variable -----
 const BACKEND_URL = "http://localhost:8080";
 
 const Reservations = () => {
   const [reservations, setReservations] = useState([]);
+  const { getAccessTokenSilently, user } = useAuth0();
 
   useEffect(() => {
-    axios.get(`${BACKEND_URL}/Reservations`).then((response) => {
-      setReservations(response.data);
-    });
-  }, []);
+    if (user) {
+      const getReservations = async () => {
+        const accessToken = await getAccessTokenSilently({
+          audience: "https://stayhere/api",
+          scope: "read:current_user",
+        });
+        console.log(user);
+        axios
+          .get(`${BACKEND_URL}/Reservations`, {
+            // params: {
+            //   ownerEmail: user.email,
+            // },
+            headers: {
+              Authorization: `Bearer ${accessToken}`,
+            },
+          })
+          .then((response) => {
+            setReservations(response.data);
+          });
+      };
+
+      getReservations();
+    }
+  }, [user]);
+
+  // useEffect(() => {
+  //   axios.get(`${BACKEND_URL}/Reservations`).then((response) => {
+  //     setReservations(response.data);
+  //   });
+  // }, []);
 
   const columns = [
     { field: "id", headerName: "ID", width: 90 },
