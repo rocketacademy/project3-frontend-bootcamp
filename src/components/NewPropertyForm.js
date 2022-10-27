@@ -3,12 +3,24 @@ import React, { useState } from "react";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 
+import {
+  getDownloadURL,
+  ref as storageRef,
+  uploadBytes,
+} from "firebase/storage";
+import { push, ref as databaseRef, set } from "firebase/database";
+import { database, storage } from "../firebase";
+
 import { useNavigate } from "react-router-dom";
 
 import { BACKEND_URL } from "../constants";
 
+const UPLOAD_IMAGES_FOLDER_NAME = "images";
+const ITEMS_FOLDER_NAME = "items";
+
 const NewPropertyForm = () => {
   const [home_name, setHomeName] = useState("");
+  const [image_url, setHomeImage] = useState("");
   const [home_type, setHomeType] = useState("");
   const [total_occupancy, setTotalOccupancy] = useState("");
   const [total_bedrooms, setTotalBedrooms] = useState("");
@@ -22,11 +34,30 @@ const NewPropertyForm = () => {
   const [price, setPrice] = useState("");
   const navigate = useNavigate();
 
+  const [newUpload, setNewUpload] = useState("");
+
+  const [imageUpload, setImageUpload] = useState({
+    imageInputValue: "",
+    imageInputFile: null,
+  });
+
   const handleChange = (event) => {
     switch (event.target.name) {
       case "home_name":
         setHomeName(event.target.value);
         break;
+      // case "image_url":
+      //   const fileRef = storageRef(
+      //     storage,
+      //     `${UPLOAD_IMAGES_FOLDER_NAME}/${imageUpload.imageInputFile.name}`
+      //   );
+      //   uploadBytes(fileRef, imageUpload.imageInputFile).then(() => {
+      //     getDownloadURL(fileRef).then((downloadUrl) => {
+      //       setHomeImage({ image_url: downloadUrl });
+      //       setImageUpload({ imageInputValue: "", imageInputFile: null });
+      //     });
+      //   });
+      //   break;
       case "home_type":
         setHomeType(event.target.value);
         break;
@@ -63,44 +94,74 @@ const NewPropertyForm = () => {
       default:
     }
   };
+  console.log(image_url);
+
+  //  const toggleChange = (event) => {
+  //   this.setState({
+  //      isChecked: !this.state.isChecked,
+  //    });
+  //   }
+
+  // toggleChange = () => {
+  //   this.setState({
+  //     isChecked: !this.state.isChecked,
+  //   });
+  // };
+
+  const handleImageUpload = (event) => {
+    setImageUpload({
+      imageInputValue: event.target.value,
+      imageInputFile: event.target.files[0],
+    });
+  };
 
   const handleSubmit = (event) => {
     // Prevent default form redirect on submission
     event.preventDefault();
 
-    // Send request to create new listing in backend
-    axios
-      .post(`${BACKEND_URL}/properties`, {
-        home_name,
-        home_type,
-        total_occupancy,
-        total_bedrooms,
-        total_bathrooms,
-        summary,
-        address,
-        // has_tv,
-        // has_kitchen,
-        // has_aircon,
-        // has_internet,
-        price,
-      })
-      .then((res) => {
-        // Clear form state
-        setHomeName("");
-        setHomeType("");
-        setTotalOccupancy("");
-        setTotalBedrooms("");
-        setTotalBathrooms("");
-        setSummary("");
-        setAddress("");
-        // setHasTV("");
-        // setHasKitchen("");
-        // setHasAircon("");
-        // setHasInternet("");
-        setPrice("");
-
-        // Navigate to listing-specific page after submitting form
-        navigate(`/properties/${res.data.id}`);
+    const fileRef = storageRef(
+      storage,
+      `${UPLOAD_IMAGES_FOLDER_NAME}/${imageUpload.imageInputFile.name}`
+    );
+    uploadBytes(fileRef, imageUpload.imageInputFile).then(() => {
+      getDownloadURL(fileRef).then((downloadUrl) => {
+        axios
+          .post(`${BACKEND_URL}/properties`, {
+            home_name,
+            image_url: downloadUrl,
+            home_type,
+            total_occupancy,
+            total_bedrooms,
+            total_bathrooms,
+            summary,
+            address,
+            // has_tv,
+            // has_kitchen,
+            // has_aircon,
+            // has_internet,
+            price,
+          })
+          .then((res) => {
+            // Clear form state
+            setHomeName("");
+            setHomeImage("");
+            setHomeType("");
+            setTotalOccupancy("");
+            setTotalBedrooms("");
+            setTotalBathrooms("");
+            setSummary("");
+            setAddress("");
+            // setHasTV("");
+            // setHasKitchen("");
+            // setHasAircon("");
+            // setHasInternet("");
+            setPrice("");
+            setImageUpload({ imageInputValue: "", imageInputFile: null });
+            navigate(`/properties/${res.data.id}`);
+          });
+          
+    });
+    console.log(image_url);
       });
   };
 
@@ -121,6 +182,17 @@ const NewPropertyForm = () => {
             onChange={handleChange}
             placeholder="Small cozy log cabin"
           />
+          <Form.Group class="input-group mt-3 mb-3">
+            <Form.Label class="input-group-text" id="inputGroup-sizing-default">
+              Image
+            </Form.Label>
+            <Form.Control
+              type="file"
+              name="price"
+              value={imageUpload.imageInputValue}
+              onChange={handleImageUpload}
+            />
+          </Form.Group>
         </Form.Group>
         <Form.Group class="input-group mt-3 mb-3">
           <Form.Label class="input-group-text" id="inputGroup-sizing-default">
@@ -149,7 +221,6 @@ const NewPropertyForm = () => {
             placeholder="No. of max occupants allowed"
           />
         </Form.Group>
-
         <Form.Group class="input-group mt-3 mb-3 form-inline">
           <Form.Label class="input-group-text" id="inputGroup-sizing-default">
             Total Bedrooms
@@ -172,31 +243,6 @@ const NewPropertyForm = () => {
             placeholder="No. of bathrooms"
           />
         </Form.Group>
-        {/* 
-        <Form.Group class="input-group mt-3 mb-3">
-          <Form.Label class="input-group-text" id="inputGroup-sizing-default">
-            Total Bedrooms
-          </Form.Label>
-          <Form.Control
-            type="text"
-            name="total_bedrooms"
-            value={total_bedrooms}
-            onChange={handleChange}
-            placeholder="No. of bedrooms"
-          />
-        </Form.Group>
-        <Form.Group class="input-group mt-3 mb-3">
-          <Form.Label class="input-group-text" id="inputGroup-sizing-default">
-            Total Bathrooms
-          </Form.Label>
-          <Form.Control
-            type="text"
-            name="total_bathrooms"
-            value={total_bathrooms}
-            onChange={handleChange}
-            placeholder="No. of bathrooms"
-          />
-        </Form.Group> */}
         <Form.Group class="input-group mt-3 mb-3">
           <Form.Label class="input-group-text" id="inputGroup-sizing-default">
             Summary
@@ -221,11 +267,10 @@ const NewPropertyForm = () => {
             placeholder="Enter address here"
           />
         </Form.Group>
-
         <Form class="input-group mt-3 mb-3">
-          <Form.Label class="input-group-text" id="inputGroup-sizing-default">
+          {/* <Form.Label class="input-group-text" id="inputGroup-sizing-default">
             Facilities
-          </Form.Label>
+          </Form.Label> */}
           <br />
           {["checkbox"].map((type) => (
             <div key={`inline-${type}`} className="mb-3">
@@ -235,7 +280,7 @@ const NewPropertyForm = () => {
                 name="has_tv"
                 value={has_tv}
                 type={type}
-                id={`inline-${type}-1`}
+                // id={`inline-${type}-1`}
               />
               <Form.Check
                 inline
@@ -243,7 +288,7 @@ const NewPropertyForm = () => {
                 value={has_kitchen}
                 name="has_kitchen"
                 type={type}
-                id={`inline-${type}-2`}
+                // id={`inline-${type}-2`}
               />
               <Form.Check
                 inline
@@ -251,7 +296,7 @@ const NewPropertyForm = () => {
                 value={has_aircon}
                 name="has_aircon"
                 type={type}
-                id={`inline-${type}-2`}
+                // id={`inline-${type}-2`}
               />
               <Form.Check
                 inline
@@ -259,8 +304,9 @@ const NewPropertyForm = () => {
                 value={has_internet}
                 name="has_internet"
                 // type should be boolean or integer
+                // need to push when {toggleChange}
                 type={type}
-                id={`inline-${type}-2`}
+                // id={`inline-${type}-2`}
               />
             </div>
           ))}

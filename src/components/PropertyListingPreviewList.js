@@ -8,7 +8,6 @@ import { BACKEND_URL } from "../constants.js";
 
 const PropertyListingPreviewList = () => {
   const [listings, setListings] = useState([]);
-  console.log("DISPLAY PROPERTY LISTING");
 
   useEffect(() => {
     axios.get(`${BACKEND_URL}/properties`).then((response) => {

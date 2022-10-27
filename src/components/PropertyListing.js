@@ -32,7 +32,6 @@ const PropertyListing = () => {
   // Store a new JSX element for each property in listing details
   const propertyDetails = [];
   if (property) {
-    console.log(property)
     for (const key in property) {
       propertyDetails.push(
         <Card.Text key={key}>{`${key}: ${property[key]}`}</Card.Text>

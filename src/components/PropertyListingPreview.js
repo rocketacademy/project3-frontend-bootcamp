@@ -18,7 +18,7 @@ const PropertyListingPreview = (props) => {
       <CardMedia
         component="img"
         height="140"
-        image="/static/images/cards/contemplative-reptile.jpg"
+        image={props.data.image_url}
         alt="green iguana"
       />
       <CardContent>
