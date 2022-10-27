@@ -94,19 +94,6 @@ const NewPropertyForm = () => {
       default:
     }
   };
-  console.log(image_url);
-
-  //  const toggleChange = (event) => {
-  //   this.setState({
-  //      isChecked: !this.state.isChecked,
-  //    });
-  //   }
-
-  // toggleChange = () => {
-  //   this.setState({
-  //     isChecked: !this.state.isChecked,
-  //   });
-  // };
 
   const handleImageUpload = (event) => {
     setImageUpload({
@@ -159,10 +146,9 @@ const NewPropertyForm = () => {
             setImageUpload({ imageInputValue: "", imageInputFile: null });
             navigate(`/properties/${res.data.id}`);
           });
-          
-    });
-    console.log(image_url);
       });
+      console.log(image_url);
+    });
   };
 
   return (
@@ -312,47 +298,6 @@ const NewPropertyForm = () => {
           ))}
         </Form>
 
-        {/* Old form */}
-        {/* <Form.Group>
-          <Form.Label>Has TV?</Form.Label>
-          <Form.Control
-            type="text"
-            name="has_tv"
-            value={has_tv}
-            onChange={handleChange}
-            placeholder="Type yes or no"
-          />
-        </Form.Group>
-        <Form.Group>
-          <Form.Label>Has Kitchen?</Form.Label>
-          <Form.Control
-            type="text"
-            name="has_kitchen"
-            value={has_kitchen}
-            onChange={handleChange}
-            placeholder="Type yes or no"
-          />
-        </Form.Group>
-        <Form.Group>
-          <Form.Label>Has Aircon?</Form.Label>
-          <Form.Control
-            type="text"
-            name="has_aircon"
-            value={has_aircon}
-            onChange={handleChange}
-            placeholder="Type yes or no"
-          />
-        </Form.Group>
-        <Form.Group>
-          <Form.Label>Has internet?</Form.Label>
-          <Form.Control
-            type="text"
-            name="has_internet"
-            value={has_internet}
-            onChange={handleChange}
-            placeholder="Type yes or no"
-          />
-        </Form.Group> */}
         <Form.Group class="input-group mt-3 mb-3">
           <Form.Label class="input-group-text" id="inputGroup-sizing-default">
             Price ($)
