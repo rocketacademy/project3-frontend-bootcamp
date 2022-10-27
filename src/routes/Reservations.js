@@ -47,15 +47,20 @@ const Reservations = () => {
   const columns = [
     { field: "id", headerName: "ID", width: 90 },
     {
-      field: "customer_id",
+      field: "customer_name",
       headerName: "Visitor Name",
       width: 150,
+      valueGetter: (params) => {
+        return params.row.customer.name;
+      },
     },
     {
-      field: "properties_id",
+      field: "properties_home_type",
       headerName: "Home Type",
       width: 150,
-      editable: true,
+      valueGetter: (params) => {
+        return params.row.properties.home_type;
+      },
     },
     {
       field: "start_date",
@@ -73,7 +78,6 @@ const Reservations = () => {
     },
   ];
 
-  console.log(reservations);
   const rows = [...reservations];
 
   return (
