@@ -1,0 +1,161 @@
+import { push, ref as databaseRef, set, update } from "firebase/database";
+import { database, storage } from "../firebase";
+import {
+  getDownloadURL,
+  ref as storageRef,
+  uploadBytes,
+} from "firebase/storage";
+import React, { useState } from "react";
+
+const UPLOAD_IMAGES_FOLDER_NAME = "ItemStorage";
+// const USERS_FOLDER_NAME = "users";
+const ITEMS_FOLDER_NAME = "items";
+// const USER_SALES_FOLDER_NAME = "sales";
+
+const Upload = (props) => {
+  const initialState = {
+    itemName: "",
+    itemPrice: 0,
+    itemDescription: "",
+    itemSalesStatus: "available",
+    sellerUserId: props.info.userID,
+  };
+
+  const [newUpload, setNewUpload] = useState(initialState);
+
+  const [imageUpload, setImageUpload] = useState({
+    imageInputValue: "",
+    imageInputFile: null,
+  });
+
+  const handleNewUpload = (event) => {
+    const { name, value } = event.target;
+    setNewUpload({
+      ...newUpload,
+      [name]: value,
+    });
+  };
+
+  const handleImageUpload = (event) => {
+    setImageUpload({
+      imageInputValue: event.target.value,
+      imageInputFile: event.target.files[0],
+    });
+  };
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    console.log("this is newupload");
+    console.log(!newUpload);
+    const fileRef = storageRef(
+      storage,
+      `${UPLOAD_IMAGES_FOLDER_NAME}/${imageUpload.imageInputFile.name}`
+    );
+
+    uploadBytes(fileRef, imageUpload.imageInputFile).then(() => {
+      getDownloadURL(fileRef).then((downloadUrl) => {
+        const itemsListRef = databaseRef(database, ITEMS_FOLDER_NAME);
+        const newItemRef = push(itemsListRef);
+        // const newItemRefKey = newItemRef.key;
+        // console.log(newItemRefKey);
+        set(newItemRef, {
+          ...newUpload,
+          itemImage: downloadUrl,
+        });
+        setNewUpload(initialState);
+        setImageUpload({ imageInputValue: "", imageInputFile: null });
+        // const updates = {};
+        // updates[
+        //   `/${USERS_FOLDER_NAME}/${props.info.userID}/${USER_SALES_FOLDER_NAME}/${newItemRefKey}`
+        // ] = "";
+        // update(databaseRef(database), updates);
+      });
+    });
+  };
+  return (
+    <div>
+      {props.info.userIsLoggedIn ? (
+        <Container className="uploadPage">
+          <Row className="uploadTitleBar">
+            <Link to="/newsfeed">
+              <CaretLeft set="bold" primaryColor="#2FF522" />
+            </Link>
+            <label className="uploadTitle">Upload</label>
+          </Row>
+          <Row className="uploadDivider">
+            <img src={divider} alt="divider" />
+          </Row>
+          <Row className="bodyBox">
+            <label className="titleLabel">
+              What do you want to sell today?
+            </label>
+            <Row className="inputBox">
+              <form onSubmit={handleSubmit}>
+                <label for="itemName" className="uploadLabel">
+                  Item Name
+                </label>
+                <input
+                  className="textBox"
+                  type="text"
+                  id="itemName"
+                  name="itemName"
+                  value={newUpload.itemName}
+                  onChange={handleNewUpload}
+                  required
+                />
+
+                <label for="itemPrice" className="uploadLabel">
+                  Item Price
+                </label>
+                <div class="currency-wrap">
+                  <span class="currency-code">$</span>
+                  <input
+                    className="textBox"
+                    type="number"
+                    id="itemPrice"
+                    name="itemPrice"
+                    min={1}
+                    value={newUpload.itemPrice}
+                    onChange={handleNewUpload}
+                    required
+                  />
+                </div>
+
+                <label for="itemImage" className="uploadLabel">
+                  Item Image
+                </label>
+                <input
+                  className="textBox"
+                  type="file"
+                  id="itemImage"
+                  name="itemImage"
+                  value={imageUpload.imageInputValue}
+                  onChange={handleImageUpload}
+                  required
+                />
+
+                <label for="itemName" className="uploadLabel">
+                  Item Description
+                </label>
+                <textarea
+                  id="itemDescription"
+                  name="itemDescription"
+                  rows="3"
+                  value={newUpload.itemDescription}
+                  onChange={handleNewUpload}
+                  required
+                />
+
+                <Button className="buttonBox" type="submit">
+                  Start Selling!
+                </Button>
+              </form>
+            </Row>
+          </Row>
+        </Container>
+      ) : (
+        <Navigate to="/login" replace={true} />
+      )}
+    </div>
+  );
+};
