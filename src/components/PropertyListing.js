@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import Card from "react-bootstrap/Card";
+import Box from "@mui/material/Box";
 
 import { BACKEND_URL } from "../constants.js";
 
@@ -15,7 +16,7 @@ const PropertyListing = () => {
       axios
         .get(`${BACKEND_URL}/properties/${propertyName}`)
         .then((response) => {
-          console.log(response)
+          console.log(response);
           setProperty(response.data);
         });
     }
@@ -41,21 +42,19 @@ const PropertyListing = () => {
 
   const handleClick = () => {
     axios.put(`${BACKEND_URL}/properties/${propertyName}`).then((response) => {
-      console.log(response.data)
+      console.log(response.data);
       setProperty(response.data);
     });
   };
 
   return (
-    <div>
+    <Box>
       <Link to="/">Home</Link>
       <Card bg="dark">
-        <Card.Body>
-          {propertyDetails}
-        </Card.Body>
+        <Card.Body>{propertyDetails}</Card.Body>
       </Card>
       <br />
-    </div>
+    </Box>
   );
 };
 
