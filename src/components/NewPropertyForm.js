@@ -2,22 +2,20 @@ import axios from "axios";
 import React, { useState } from "react";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
-import Box from "@mui/material/Box";
 
 import {
   getDownloadURL,
   ref as storageRef,
   uploadBytes,
 } from "firebase/storage";
-import { push, ref as databaseRef, set } from "firebase/database";
-import { database, storage } from "../firebase";
+import {  ref as databaseRef, set } from "firebase/database";
+import {  storage } from "../firebase";
 
 import { useNavigate } from "react-router-dom";
 
 import { BACKEND_URL } from "../constants";
 
 const UPLOAD_IMAGES_FOLDER_NAME = "images";
-const ITEMS_FOLDER_NAME = "items";
 
 const NewPropertyForm = () => {
   const [home_name, setHomeName] = useState("");
@@ -35,8 +33,6 @@ const NewPropertyForm = () => {
   const [price, setPrice] = useState("");
   const navigate = useNavigate();
 
-  const [newUpload, setNewUpload] = useState("");
-
   const [imageUpload, setImageUpload] = useState({
     imageInputValue: "",
     imageInputFile: null,
@@ -47,18 +43,6 @@ const NewPropertyForm = () => {
       case "home_name":
         setHomeName(event.target.value);
         break;
-      // case "image_url":
-      //   const fileRef = storageRef(
-      //     storage,
-      //     `${UPLOAD_IMAGES_FOLDER_NAME}/${imageUpload.imageInputFile.name}`
-      //   );
-      //   uploadBytes(fileRef, imageUpload.imageInputFile).then(() => {
-      //     getDownloadURL(fileRef).then((downloadUrl) => {
-      //       setHomeImage({ image_url: downloadUrl });
-      //       setImageUpload({ imageInputValue: "", imageInputFile: null });
-      //     });
-      //   });
-      //   break;
       case "home_type":
         setHomeType(event.target.value);
         break;
@@ -153,7 +137,7 @@ const NewPropertyForm = () => {
   };
 
   return (
-    <Box>
+    <div>
       <Form onSubmit={handleSubmit}>
         <Form.Group class="input-group mt-3 mb-3">
           <Form.Label class="input-group-text" id="inputGroup-sizing-default">
@@ -255,10 +239,6 @@ const NewPropertyForm = () => {
           />
         </Form.Group>
         <Form class="input-group mt-3 mb-3">
-          {/* <Form.Label class="input-group-text" id="inputGroup-sizing-default">
-            Facilities
-          </Form.Label> */}
-          <br />
           {["checkbox"].map((type) => (
             <div key={`inline-${type}`} className="mb-3">
               <Form.Check
@@ -266,24 +246,30 @@ const NewPropertyForm = () => {
                 label="Has TV"
                 name="has_tv"
                 value={has_tv}
-                type={type}
-                // id={`inline-${type}-1`}
+                type={"checkbox"}
+                onClick={(e) => {
+                  console.log(e.target.checked);
+                }}
               />
               <Form.Check
                 inline
                 label="Has kitchen"
                 value={has_kitchen}
                 name="has_kitchen"
-                type={type}
-                // id={`inline-${type}-2`}
+                type={"checkbox"}
+                onClick={(e) => {
+                  console.log(e.target.checked);
+                }}
               />
               <Form.Check
                 inline
                 label="Has Aircon"
                 value={has_aircon}
                 name="has_aircon"
-                type={type}
-                // id={`inline-${type}-2`}
+                type={"checkbox"}
+                onClick={(e) => {
+                  console.log(e.target.checked);
+                }}
               />
               <Form.Check
                 inline
@@ -292,8 +278,10 @@ const NewPropertyForm = () => {
                 name="has_internet"
                 // type should be boolean or integer
                 // need to push when {toggleChange}
-                type={type}
-                // id={`inline-${type}-2`}
+                type={"checkbox"}
+                onClick={(e) => {
+                  console.log(e.target.checked);
+                }}
               />
             </div>
           ))}
@@ -316,7 +304,7 @@ const NewPropertyForm = () => {
           List this property!
         </Button>
       </Form>
-    </Box>
+    </div>
   );
 };
 
