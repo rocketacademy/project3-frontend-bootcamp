@@ -22,9 +22,9 @@ const Reservations = () => {
         console.log(user);
         axios
           .get(`${BACKEND_URL}/Reservations`, {
-            // params: {
-            //   ownerEmail: user.email,
-            // },
+            params: {
+              ownerEmail: user.email,
+            },
             headers: {
               Authorization: `Bearer ${accessToken}`,
             },

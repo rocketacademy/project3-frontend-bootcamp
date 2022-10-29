@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { useState } from "react";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
+import Box from "@mui/material/Box";
 
 import {
   getDownloadURL,
@@ -141,7 +142,7 @@ const NewPropertyForm = () => {
   };
 
   return (
-    <div>
+    <Box>
       <Form onSubmit={handleSubmit}>
         <Form.Group class="input-group mt-3 mb-3">
           <Form.Label class="input-group-text" id="inputGroup-sizing-default">
@@ -308,7 +309,7 @@ const NewPropertyForm = () => {
           List this property!
         </Button>
       </Form>
-    </div>
+    </Box>
   );
 };
 
