@@ -62,16 +62,20 @@ const NewPropertyForm = () => {
         setAddress(event.target.value);
         break;
       case "has_tv":
-        setHasTV(event.target.value);
+        setAddress(event.target.value);
+        // setHasTV(onClick);
         break;
       case "has_kitchen":
         setHasKitchen(event.target.value);
+        //setHasKitchen(onClick);
         break;
       case "has_aircon":
         setHasAircon(event.target.value);
+        //setHasAircon(onClick);
         break;
       case "has_internet":
         setHasInternet(event.target.value);
+        //setHasInternet(onClick);
         break;
       case "price":
         setPrice(event.target.value);
