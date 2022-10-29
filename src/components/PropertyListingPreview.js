@@ -12,7 +12,6 @@ import EditIcon from "@mui/icons-material/Edit";
 import Fab from "@mui/material/Fab";
 
 const PropertyListingPreview = (props) => {
-  console.log(props.data);
   return (
     <Card sx={{ maxWidth: 345 }}>
       <CardMedia

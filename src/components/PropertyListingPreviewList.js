@@ -15,7 +15,6 @@ const PropertyListingPreviewList = () => {
     });
     // Only run this effect on component mount
   }, []);
-  console.log(listings);
 
   const listingPreviews = listings.map((properties) => (
     <Grid item xs={2} sm={4} md={3}>
