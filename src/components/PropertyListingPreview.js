@@ -1,12 +1,9 @@
 import React from "react";
-// ----- imports from bootstrap -----
-// import Card from "react-bootstrap/Card";
 // ----- imports from Mui -----
 import Card from "@mui/material/Card";
 import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
-// import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import EditIcon from "@mui/icons-material/Edit";
 import Fab from "@mui/material/Fab";
@@ -18,7 +15,7 @@ const PropertyListingPreview = (props) => {
         component="img"
         height="140"
         image={props.data.image_url}
-        alt="green iguana"
+        alt="property image"
       />
       <CardContent>
         <Typography gutterBottom variant="h5" component="div">

@@ -129,10 +129,10 @@ const NewPropertyForm = () => {
             setTotalBathrooms("");
             setSummary("");
             setAddress("");
-            // setHasTV("");
-            // setHasKitchen("");
-            // setHasAircon("");
-            // setHasInternet("");
+            setHasTV("");
+            setHasKitchen("");
+            setHasAircon("");
+            setHasInternet("");
             setPrice("");
             setImageUpload({ imageInputValue: "", imageInputFile: null });
             navigate(`/properties/${res.data.id}`);
