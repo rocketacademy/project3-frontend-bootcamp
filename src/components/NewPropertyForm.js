@@ -8,8 +8,8 @@ import {
   ref as storageRef,
   uploadBytes,
 } from "firebase/storage";
-import {  ref as databaseRef, set } from "firebase/database";
-import {  storage } from "../firebase";
+import { ref as databaseRef, set } from "firebase/database";
+import { storage } from "../firebase";
 
 import { useNavigate } from "react-router-dom";
 
@@ -72,8 +72,6 @@ const NewPropertyForm = () => {
         break;
       case "has_internet":
         setHasInternet(event.target.checked);
-        console.log(event.target.checked);
-        //setHasInternet(onClick);
         break;
       case "price":
         setPrice(event.target.value);
@@ -109,8 +107,8 @@ const NewPropertyForm = () => {
             total_bathrooms,
             summary,
             address,
-            // has_tv,
-            // has_kitchen,
+            has_tv,
+            has_kitchen,
             has_aircon,
             has_internet,
             price,
