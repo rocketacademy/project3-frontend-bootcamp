@@ -1,17 +1,16 @@
 import axios from "axios";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import Box from "@mui/material/Box";
-
 import {
   getDownloadURL,
   ref as storageRef,
   uploadBytes,
 } from "firebase/storage";
-import {  ref as databaseRef, set } from "firebase/database";
-import {  storage } from "../firebase";
-
+import { ref as databaseRef, set } from "firebase/database";
+import { storage } from "../firebase";
+import { useAuth0 } from "@auth0/auth0-react";
 import { useNavigate } from "react-router-dom";
 
 import { BACKEND_URL } from "../constants";
@@ -27,16 +26,25 @@ const NewPropertyForm = () => {
   const [total_bathrooms, setTotalBathrooms] = useState("");
   const [summary, setSummary] = useState("");
   const [address, setAddress] = useState("");
-  const [has_tv, setHasTV] = useState("");
-  const [has_kitchen, setHasKitchen] = useState("");
-  const [has_aircon, setHasAircon] = useState("");
-  const [has_internet, setHasInternet] = useState("");
+  const [has_tv, setHasTV] = useState(false);
+  const [has_kitchen, setHasKitchen] = useState(false);
+  const [has_aircon, setHasAircon] = useState(false);
+  const [has_internet, setHasInternet] = useState(false);
   const [price, setPrice] = useState("");
   const navigate = useNavigate();
 
   const [imageUpload, setImageUpload] = useState({
     imageInputValue: "",
     imageInputFile: null,
+  });
+
+  const { isAuthenticated, getAccessTokenSilently, loginWithRedirect, user } =
+    useAuth0();
+
+  useEffect(() => {
+    if (!isAuthenticated) {
+      loginWithRedirect();
+    }
   });
 
   const handleChange = (event) => {
@@ -63,16 +71,16 @@ const NewPropertyForm = () => {
         setAddress(event.target.value);
         break;
       case "has_tv":
-        setHasTV(event.target.value);
+        setHasTV(event.target.checked);
         break;
       case "has_kitchen":
-        setHasKitchen(event.target.value);
+        setHasKitchen(event.target.checked);
         break;
       case "has_aircon":
-        setHasAircon(event.target.value);
+        setHasAircon(event.target.checked);
         break;
       case "has_internet":
-        setHasInternet(event.target.value);
+        setHasInternet(event.target.checked);
         break;
       case "price":
         setPrice(event.target.value);
@@ -92,6 +100,11 @@ const NewPropertyForm = () => {
     // Prevent default form redirect on submission
     event.preventDefault();
 
+    const accessToken = getAccessTokenSilently({
+      audience: "https://carousell/api",
+      scope: "read:current_user",
+    });
+
     const fileRef = storageRef(
       storage,
       `${UPLOAD_IMAGES_FOLDER_NAME}/${imageUpload.imageInputFile.name}`
@@ -108,11 +121,12 @@ const NewPropertyForm = () => {
             total_bathrooms,
             summary,
             address,
-            // has_tv,
-            // has_kitchen,
-            // has_aircon,
-            // has_internet,
+            has_tv,
+            has_kitchen,
+            has_aircon,
+            has_internet,
             price,
+            ownerEmail: user.email,
           })
           .then((res) => {
             // Clear form state
@@ -124,23 +138,22 @@ const NewPropertyForm = () => {
             setTotalBathrooms("");
             setSummary("");
             setAddress("");
-            // setHasTV("");
-            // setHasKitchen("");
-            // setHasAircon("");
-            // setHasInternet("");
+            setHasTV("");
+            setHasKitchen("");
+            setHasAircon("");
+            setHasInternet("");
             setPrice("");
             setImageUpload({ imageInputValue: "", imageInputFile: null });
             navigate(`/properties/${res.data.id}`);
           });
       });
-      console.log(image_url);
     });
   };
 
   return (
     <Box>
       <Form onSubmit={handleSubmit}>
-        <Form.Group class="input-group mt-3 mb-3">
+        <Form.Group className="input-group mt-3 mb-3">
           <Form.Label class="input-group-text" id="inputGroup-sizing-default">
             Property Name
           </Form.Label>
@@ -154,7 +167,7 @@ const NewPropertyForm = () => {
             onChange={handleChange}
             placeholder="Small cozy log cabin"
           />
-          <Form.Group class="input-group mt-3 mb-3">
+          <Form.Group className="input-group mt-3 mb-3">
             <Form.Label class="input-group-text" id="inputGroup-sizing-default">
               Image
             </Form.Label>
@@ -166,7 +179,7 @@ const NewPropertyForm = () => {
             />
           </Form.Group>
         </Form.Group>
-        <Form.Group class="input-group mt-3 mb-3">
+        <Form.Group className="input-group mt-3 mb-3">
           <Form.Label class="input-group-text" id="inputGroup-sizing-default">
             Home Type
           </Form.Label>
@@ -181,7 +194,7 @@ const NewPropertyForm = () => {
             placeholder="Apartment, Castle, Farmhouse, Houseboat etc"
           />
         </Form.Group>
-        <Form.Group class="input-group mt-3 mb-3">
+        <Form.Group className="input-group mt-3 mb-3">
           <Form.Label class="input-group-text" id="inputGroup-sizing-default">
             Total Occupancy
           </Form.Label>
@@ -193,7 +206,7 @@ const NewPropertyForm = () => {
             placeholder="No. of max occupants allowed"
           />
         </Form.Group>
-        <Form.Group class="input-group mt-3 mb-3 form-inline">
+        <Form.Group className="input-group mt-3 mb-3 form-inline">
           <Form.Label class="input-group-text" id="inputGroup-sizing-default">
             Total Bedrooms
           </Form.Label>
@@ -215,7 +228,7 @@ const NewPropertyForm = () => {
             placeholder="No. of bathrooms"
           />
         </Form.Group>
-        <Form.Group class="input-group mt-3 mb-3">
+        <Form.Group className="input-group mt-3 mb-3">
           <Form.Label class="input-group-text" id="inputGroup-sizing-default">
             Summary
           </Form.Label>
@@ -227,7 +240,7 @@ const NewPropertyForm = () => {
             placeholder="Short description here"
           />
         </Form.Group>
-        <Form.Group class="input-group mt-3 mb-3">
+        <Form.Group className="input-group mt-3 mb-3">
           <Form.Label class="input-group-text" id="inputGroup-sizing-default">
             Address
           </Form.Label>
@@ -248,9 +261,10 @@ const NewPropertyForm = () => {
                 name="has_tv"
                 value={has_tv}
                 type={"checkbox"}
-                onClick={(e) => {
-                  console.log(e.target.checked);
-                }}
+                onClick={handleChange}
+                // onClick={(e) => {
+                //   console.log(e.target.checked);
+                // }}
               />
               <Form.Check
                 inline
@@ -258,9 +272,7 @@ const NewPropertyForm = () => {
                 value={has_kitchen}
                 name="has_kitchen"
                 type={"checkbox"}
-                onClick={(e) => {
-                  console.log(e.target.checked);
-                }}
+                onClick={handleChange}
               />
               <Form.Check
                 inline
@@ -268,27 +280,21 @@ const NewPropertyForm = () => {
                 value={has_aircon}
                 name="has_aircon"
                 type={"checkbox"}
-                onClick={(e) => {
-                  console.log(e.target.checked);
-                }}
+                onClick={handleChange}
               />
               <Form.Check
                 inline
                 label="Has Internet"
                 value={has_internet}
                 name="has_internet"
-                // type should be boolean or integer
-                // need to push when {toggleChange}
                 type={"checkbox"}
-                onClick={(e) => {
-                  console.log(e.target.checked);
-                }}
+                onClick={handleChange}
               />
             </div>
           ))}
         </Form>
 
-        <Form.Group class="input-group mt-3 mb-3">
+        <Form.Group className="input-group mt-3 mb-3">
           <Form.Label class="input-group-text" id="inputGroup-sizing-default">
             Price ($)
           </Form.Label>
