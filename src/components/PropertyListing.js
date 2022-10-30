@@ -16,7 +16,6 @@ const PropertyListing = () => {
       axios
         .get(`${BACKEND_URL}/properties/${propertyName}`)
         .then((response) => {
-          console.log(response);
           setProperty(response.data);
         });
     }
