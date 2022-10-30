@@ -56,7 +56,7 @@ const PropertyListingPreviewList = () => {
     <Box
       sx={{
         flexGrow: 1,
-        height: "100vh",
+        height: "100%",
       }}
     >
       <Grid container spacing={3}>
