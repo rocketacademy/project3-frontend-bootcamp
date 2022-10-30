@@ -26,10 +26,10 @@ const NewPropertyForm = () => {
   const [total_bathrooms, setTotalBathrooms] = useState("");
   const [summary, setSummary] = useState("");
   const [address, setAddress] = useState("");
-  const [has_tv, setHasTV] = useState("");
-  const [has_kitchen, setHasKitchen] = useState("");
-  const [has_aircon, setHasAircon] = useState("");
-  const [has_internet, setHasInternet] = useState("");
+  const [has_tv, setHasTV] = useState(false);
+  const [has_kitchen, setHasKitchen] = useState(false);
+  const [has_aircon, setHasAircon] = useState(false);
+  const [has_internet, setHasInternet] = useState(false);
   const [price, setPrice] = useState("");
   const navigate = useNavigate();
 
