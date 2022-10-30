@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import Box from "@mui/material/Box";
@@ -10,7 +10,7 @@ import {
 } from "firebase/storage";
 import { ref as databaseRef, set } from "firebase/database";
 import { storage } from "../firebase";
-
+import { useAuth0 } from "@auth0/auth0-react";
 import { useNavigate } from "react-router-dom";
 
 import { BACKEND_URL } from "../constants";
@@ -36,6 +36,15 @@ const NewPropertyForm = () => {
   const [imageUpload, setImageUpload] = useState({
     imageInputValue: "",
     imageInputFile: null,
+  });
+
+  const { isAuthenticated, getAccessTokenSilently, loginWithRedirect, user } =
+    useAuth0();
+
+  useEffect(() => {
+    if (!isAuthenticated) {
+      loginWithRedirect();
+    }
   });
 
   const handleChange = (event) => {
@@ -91,6 +100,11 @@ const NewPropertyForm = () => {
     // Prevent default form redirect on submission
     event.preventDefault();
 
+    const accessToken = getAccessTokenSilently({
+      audience: "https://carousell/api",
+      scope: "read:current_user",
+    });
+
     const fileRef = storageRef(
       storage,
       `${UPLOAD_IMAGES_FOLDER_NAME}/${imageUpload.imageInputFile.name}`
@@ -112,6 +126,7 @@ const NewPropertyForm = () => {
             has_aircon,
             has_internet,
             price,
+            ownerEmail: user.email,
           })
           .then((res) => {
             // Clear form state
