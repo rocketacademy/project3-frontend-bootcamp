@@ -18,7 +18,7 @@ const PropertyListingPreviewList = () => {
   console.log(listings);
 
   const listingPreviews = listings.map((properties) => (
-    <Grid item xs={2} sm={4} md={3}>
+    <Grid item xs={2} sm={4} md={4}>
       <Link to={`/properties/${properties.id}`} key={properties.id}>
         <PropertyListingPreview data={properties} />
       </Link>
@@ -26,19 +26,20 @@ const PropertyListingPreviewList = () => {
   ));
 
   return (
-    <Box
-      sx={{
-        flexGrow: 1,
-        height: "100vh",
-      }}
+    <Grid
+      container
+      spacing={{ xs: 2, md: 3 }}
+      columns={{ xs: 4, sm: 8, md: 12 }}
+      
     >
-      <Grid
-        container
-        spacing={3}
-      >
-        {listingPreviews}
-      </Grid>
-    </Box>
+      {listings.map((properties) => (
+        <Grid item xs={2} sm={4} md={4}>
+          <Link to={`/properties/${properties.id}`} key={properties.id}>
+            <PropertyListingPreview data={properties} />
+          </Link>
+        </Grid>
+      ))}
+    </Grid>
   );
 };
 
