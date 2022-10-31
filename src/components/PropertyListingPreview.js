@@ -32,11 +32,6 @@ const PropertyListingPreview = (props) => {
         </Fab>
       </CardActions>
     </Card>
-    // <Card bg="dark">
-    //   <Card.Body>
-    //     <Card.Title>{props.data.id}</Card.Title>
-    //   </Card.Body>
-    // </Card>
   );
 };
 
