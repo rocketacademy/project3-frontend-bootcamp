@@ -8,16 +8,44 @@ import Box from "@mui/material/Box";
 import ImageList from "@mui/material/ImageList";
 import ImageListItem from "@mui/material/ImageListItem";
 import ImageListItemBar from "@mui/material/ImageListItemBar";
+import { useAuth0 } from "@auth0/auth0-react";
 
 export default function Dashboard() {
   const [properties, setProperties] = useState([]);
+  const { getAccessTokenSilently, user } = useAuth0();
 
   useEffect(() => {
-    axios.get(`${BACKEND_URL}/properties`).then((response) => {
-      setProperties(response.data);
-    });
-    // Only run this effect on component mount
-  }, []);
+    if (user) {
+      const getProperties = async () => {
+        const accessToken = await getAccessTokenSilently({
+          audience: "https://stayhere/api",
+          scope: "read:current_user",
+        });
+        console.log(user);
+        axios
+          .get(`${BACKEND_URL}/properties`, {
+            params: {
+              ownerEmail: user.email,
+            },
+            headers: {
+              Authorization: `Bearer ${accessToken}`,
+            },
+          })
+          .then((response) => {
+            setProperties(response.data);
+          });
+      };
+
+      getProperties();
+    }
+  }, [user]);
+
+  // useEffect(() => {
+  //   axios.get(`${BACKEND_URL}/properties`).then((response) => {
+  //     setProperties(response.data);
+  //   });
+  //   // Only run this effect on component mount
+  // }, []);
 
   console.log(properties);
   const imageListMap = properties.map((prop) => (
