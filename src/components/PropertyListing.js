@@ -6,6 +6,10 @@ import Box from "@mui/material/Box";
 
 import { BACKEND_URL } from "../constants.js";
 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { solid, regular, brands, icon } from '@fortawesome/fontawesome-svg-core/import.macro' // <-- import styles to be used
+
+
 const PropertyListing = (props) => {
   const [propertyName, setpropertyName] = useState();
   const [property, setProperty] = useState({});
@@ -39,6 +43,39 @@ const PropertyListing = (props) => {
     }
   }
 
+  const propertyFacilities = [];
+  if (property.has_tv === true) {
+    propertyFacilities.push(
+      <p>
+        <FontAwesomeIcon icon={icon({ name: "tv", style: "solid" })} /> TV
+      </p>
+    );
+  }
+  if (property.has_kitchen === true) {
+    propertyFacilities.push(
+      <p>
+        <FontAwesomeIcon icon={icon({ name: "kitchen-set", style: "solid" })} /> Kitchen
+      </p>
+    );
+  }
+  if (property.has_aircon === true) {
+    propertyFacilities.push(
+      <p>
+        <FontAwesomeIcon
+          icon={icon({ name: "temperature-arrow-down", style: "solid" })}
+        /> Air-con
+      </p>
+    );
+  }
+  if (property.has_internet === true) {
+    propertyFacilities.push(
+      <p>
+        <FontAwesomeIcon icon={icon({ name: "wifi", style: "solid" })} /> Wifi
+      </p>
+    );
+  }
+
+
   // const handleClick = () => {
   //   axios.put(`${BACKEND_URL}/properties/${propertyName}`).then((response) => {
   //     console.log(response.data);
@@ -70,6 +107,7 @@ const PropertyListing = (props) => {
             }}
           />
           <h5>{property.summary}</h5>
+          <p>{property.address}</p>
           <hr
             style={{
               background: "#f0f0f0",
@@ -77,13 +115,8 @@ const PropertyListing = (props) => {
             }}
           />
           <h3>What this place offers</h3>
-          {/* <p>
-            {{
-              if({ property } = true) {},
-            }}
-          </p> */}
-
-          <hr
+          {propertyFacilities}
+          {/* <hr
             style={{
               background: "#f0f0f0",
               float: "center",
@@ -92,8 +125,8 @@ const PropertyListing = (props) => {
               // borderColor: "lime",
               // height: "3px",
             }}
-          />
-          {propertyDetails}
+          /> */}
+          {/* {propertyDetails} */}
         </Card.Body>
       </Card>
       <br />
