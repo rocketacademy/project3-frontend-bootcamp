@@ -23,7 +23,6 @@ const App = () => {
       maxWidth="false"
       sx={{
         display: "flex",
-        alignContent: "center",
         backgroundAttachment: "fixed",
       }}
     >

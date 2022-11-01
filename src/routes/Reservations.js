@@ -83,8 +83,9 @@ const Reservations = () => {
   return (
     <Box
       sx={{
-        height: 400,
-        width: 750,
+        mt: 18,
+        height: "60vh",
+        width: "50vw",
         backgroundColor: "#FFFFFF",
         borderRadius: 1,
       }}

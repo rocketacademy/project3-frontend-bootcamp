@@ -47,8 +47,6 @@ export default function Dashboard() {
   //   // Only run this effect on component mount
   // }, []);
 
-  console.log(properties);
-
   return (
     <Box>
       <Typography
@@ -58,15 +56,16 @@ export default function Dashboard() {
           fontFamily: "Roboto",
           fontWeight: 600,
           display: "flex",
-          ml: 10,
+          pt: 5,
         }}
       >
         Dashboard
       </Typography>
       <ImageList
         sx={{
-          width: "500",
+          width: "80vw",
           height: "60vh",
+          pt: 10,
         }}
         cols={3}
       >
