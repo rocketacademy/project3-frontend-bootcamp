@@ -1,18 +1,27 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useParams, useNavigate } from "react-router-dom";
 import Card from "react-bootstrap/Card";
+import Button from "react-bootstrap/Button";
 import Box from "@mui/material/Box";
+import EditIcon from "@mui/icons-material/Edit";
+import DeleteIcon from "@mui/icons-material/Delete";
+import Fab from "@mui/material/Fab";
 
 import { BACKEND_URL } from "../constants.js";
 
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { solid, regular, brands, icon } from '@fortawesome/fontawesome-svg-core/import.macro' // <-- import styles to be used
-
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  solid,
+  regular,
+  brands,
+  icon,
+} from "@fortawesome/fontawesome-svg-core/import.macro"; // <-- import styles to be used
 
 const PropertyListing = (props) => {
   const [propertyName, setpropertyName] = useState();
   const [property, setProperty] = useState({});
+  const navigate = useNavigate();
 
   useEffect(() => {
     // If there is a listingId, retrieve the listing data
@@ -54,7 +63,8 @@ const PropertyListing = (props) => {
   if (property.has_kitchen === true) {
     propertyFacilities.push(
       <p>
-        <FontAwesomeIcon icon={icon({ name: "kitchen-set", style: "solid" })} /> Kitchen
+        <FontAwesomeIcon icon={icon({ name: "kitchen-set", style: "solid" })} />{" "}
+        Kitchen
       </p>
     );
   }
@@ -63,7 +73,8 @@ const PropertyListing = (props) => {
       <p>
         <FontAwesomeIcon
           icon={icon({ name: "temperature-arrow-down", style: "solid" })}
-        /> Air-con
+        />{" "}
+        Air-con
       </p>
     );
   }
@@ -75,6 +86,11 @@ const PropertyListing = (props) => {
     );
   }
 
+  const handleDelete = async (id, home_name) => {
+    await axios.delete(`${BACKEND_URL}/properties/${id}`);
+    console.log(`${home_name} successfully deleted.`);
+    navigate("/PropertiesMain");
+  };
 
   // const handleClick = () => {
   //   axios.put(`${BACKEND_URL}/properties/${propertyName}`).then((response) => {
@@ -128,6 +144,17 @@ const PropertyListing = (props) => {
           /> */}
           {/* {propertyDetails} */}
         </Card.Body>
+        <Button variant="primary">
+          <EditIcon sx={{ mr: 1 }} />
+          Edit
+        </Button>
+        <Button
+          variant="danger"
+          onClick={() => handleDelete(property.id, property.home_name)}
+        >
+          <DeleteIcon sx={{ mr: 1 }} />
+          Delete
+        </Button>
       </Card>
       <br />
     </Box>

@@ -57,13 +57,10 @@ const PropertyListingPreviewList = () => {
       container
       spacing={{ xs: 2, md: 3 }}
       columns={{ xs: 4, sm: 8, md: 12 }}
-      
     >
       {listings.map((properties) => (
         <Grid item xs={2} sm={4} md={4}>
-          <Link to={`/properties/${properties.id}`} key={properties.id}>
-            <PropertyListingPreview data={properties} />
-          </Link>
+          <PropertyListingPreview data={properties} />
         </Grid>
       ))}
     </Grid>
