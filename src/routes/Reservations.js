@@ -54,11 +54,11 @@ const Reservations = () => {
       },
     },
     {
-      field: "properties_home_type",
-      headerName: "Home Type",
+      field: "properties_home_name",
+      headerName: "Home Name",
       width: 150,
       valueGetter: (params) => {
-        return params.row.properties.home_type;
+        return params.row.properties.home_name;
       },
     },
     {
@@ -84,7 +84,7 @@ const Reservations = () => {
       sx={{
         mt: 18,
         height: "60vh",
-        width: "50vw",
+        width: "70vw",
         backgroundColor: "#FFFFFF",
         borderRadius: 1,
       }}
@@ -94,7 +94,7 @@ const Reservations = () => {
         columns={columns}
         pageSize={5}
         rowsPerPageOptions={[5]}
-        checkboxSelection
+        // checkboxSelection
         disableSelectionOnClick
         experimentalFeatures={{ newEditingApi: true }}
       />
