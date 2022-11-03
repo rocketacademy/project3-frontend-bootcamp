@@ -43,18 +43,6 @@ const HeaderBar = () => {
           >
             <img src={Logo} alt="logo" />
           </IconButton>
-          <Typography
-            variant="h5"
-            sx={{
-              flexGrow: 1,
-              fontFamily: "Roboto",
-              fontWeight: 600,
-              display: "flex",
-              ml: 10,
-            }}
-          >
-            Dashboard
-          </Typography>
           <Box position="absolute" right="0px" sx={{ flexGrow: 1 }}>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>

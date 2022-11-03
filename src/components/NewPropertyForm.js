@@ -151,7 +151,7 @@ const NewPropertyForm = () => {
   };
 
   return (
-    <Box className="overflow-auto" style={{ maxHeight: "400px" }}>
+    <Box sx={{ pt: "10%" }}>
       <Form onSubmit={handleSubmit}>
         <Form.Group className="input-group mt-3 mb-3">
           <Form.Label class="input-group-text" id="inputGroup-sizing-default">

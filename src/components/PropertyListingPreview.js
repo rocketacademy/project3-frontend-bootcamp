@@ -1,36 +1,34 @@
-import React from "react";
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
 // ----- imports from Mui -----
 import Card from "@mui/material/Card";
-import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
-import EditIcon from "@mui/icons-material/Edit";
-import Fab from "@mui/material/Fab";
+// import axios from "axios";
 
 const PropertyListingPreview = (props) => {
+  console.log(props);
+  console.log(props.data.id);
+
   return (
     <Card sx={{ maxWidth: 345 }}>
-      <CardMedia
-        component="img"
-        height="140"
-        image={props.data.image_url}
-        alt="property image"
-      />
-      <CardContent>
-        <Typography gutterBottom variant="h5" component="div">
-          {props.data.home_name}
-        </Typography>
-        <Typography variant="body2" color="text.secondary">
-          {props.data.summary}
-        </Typography>
-      </CardContent>
-      <CardActions>
-        <Fab variant="extended" color="primary" aria-label="edit">
-          <EditIcon sx={{ mr: 1 }} />
-          Edit
-        </Fab>
-      </CardActions>
+      <Link to={`/properties/${props.data.id}`} key={props.data.id}>
+        <CardMedia
+          component="img"
+          height="140"
+          image={props.data.image_url}
+          alt="property image"
+        />
+        <CardContent>
+          <Typography gutterBottom variant="h5" component="div">
+            {props.data.home_name}
+          </Typography>
+          <Typography variant="body2" color="text.secondary">
+            {props.data.summary}
+          </Typography>
+        </CardContent>
+      </Link>
     </Card>
   );
 };
