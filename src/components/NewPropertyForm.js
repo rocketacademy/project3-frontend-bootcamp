@@ -100,10 +100,10 @@ const NewPropertyForm = () => {
     // Prevent default form redirect on submission
     event.preventDefault();
 
-    const accessToken = getAccessTokenSilently({
-      audience: "https://carousell/api",
-      scope: "read:current_user",
-    });
+    // const accessToken = getAccessTokenSilently({
+    //   audience: "https://carousell/api",
+    //   scope: "read:current_user",
+    // });
 
     const fileRef = storageRef(
       storage,
@@ -151,7 +151,10 @@ const NewPropertyForm = () => {
   };
 
   return (
-    <Box>
+    <Box
+      className="overflow-auto"
+      sx={{ maxHeight: "100vh", width: "100vw", pt: "10%"}}
+    >
       <Form onSubmit={handleSubmit}>
         <Form.Group className="input-group mt-3 mb-3">
           <Form.Label class="input-group-text" id="inputGroup-sizing-default">
@@ -262,9 +265,6 @@ const NewPropertyForm = () => {
                 value={has_tv}
                 type={"checkbox"}
                 onClick={handleChange}
-                // onClick={(e) => {
-                //   console.log(e.target.checked);
-                // }}
               />
               <Form.Check
                 inline
@@ -293,7 +293,6 @@ const NewPropertyForm = () => {
             </div>
           ))}
         </Form>
-
         <Form.Group className="input-group mt-3 mb-3">
           <Form.Label class="input-group-text" id="inputGroup-sizing-default">
             Price ($)

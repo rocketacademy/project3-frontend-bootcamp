@@ -5,9 +5,9 @@ import HeaderBar from "../components/Header";
 import PermanentDrawerLeft from "../components/Drawer";
 import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
+import Stack from "@mui/material/Stack";
 import { useAuth0 } from "@auth0/auth0-react";
 import { Loading } from "./Loading";
-
 
 const App = () => {
   const { isAuthenticated, user, loginWithRedirect, isLoading, error } =
@@ -23,16 +23,14 @@ const App = () => {
       maxWidth="false"
       sx={{
         display: "flex",
-        alignContent: "center",
+        backgroundAttachment: "fixed",
       }}
     >
-      <HeaderBar />
       <Box sx={{ width: "20%" }}>
         <PermanentDrawerLeft />
       </Box>
-      <Box sx={{ pt: "10%", width: "80%" }}>
-        <Outlet />
-      </Box>
+      <HeaderBar />
+      <Outlet />
     </Container>
   );
 };
