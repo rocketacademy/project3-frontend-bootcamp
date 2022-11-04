@@ -96,95 +96,59 @@ const EditPropertyForm = (props) => {
     });
   };
 
-  const handleSubmit = async (id, event) => {
+  const handleSubmit = async (id) => {
     // Prevent default form redirect on submission
     // event.preventDefault();
 
-    // const accessToken = getAccessTokenSilently({
-    //   audience: "https://carousell/api",
-    //   scope: "read:current_user",
-    // }):
-    await axios
-      .put(`${BACKEND_URL}/properties/${id}`, {
-        home_name,
-        home_type,
-        total_occupancy,
-        total_bedrooms,
-        total_bathrooms,
-        summary,
-        address,
-        has_tv,
-        has_kitchen,
-        has_aircon,
-        has_internet,
-        price,
-      })
-      .then((res) => {
-        navigate(`/PropertiesMain`);
+    if (imageUpload.imageInputFile === null) {
+      await axios
+        .put(`${BACKEND_URL}/properties/${id}`, {
+          home_name,
+          home_type,
+          total_occupancy,
+          total_bedrooms,
+          total_bathrooms,
+          summary,
+          address,
+          has_tv,
+          has_kitchen,
+          has_aircon,
+          has_internet,
+          price,
+        })
+        .then(() => {
+          navigate("/PropertiesMain");
+        });
+    } else {
+      const fileRef = storageRef(
+        storage,
+        `${UPLOAD_IMAGES_FOLDER_NAME}/${imageUpload.imageInputFile.name}`
+      );
+      uploadBytes(fileRef, imageUpload.imageInputFile).then(() => {
+        getDownloadURL(fileRef).then((downloadUrl) => {
+          axios
+            .put(`${BACKEND_URL}/properties/${id}`, {
+              home_name,
+              image_url: downloadUrl,
+              home_type,
+              total_occupancy,
+              total_bedrooms,
+              total_bathrooms,
+              summary,
+              address,
+              has_tv,
+              has_kitchen,
+              has_aircon,
+              has_internet,
+              price,
+            })
+            .then(() => {
+              setImageUpload({ imageInputValue: "", imageInputFile: null });
+              navigate("/PropertiesMain");
+            });
+        });
       });
-    // if (imageUpload.imageInputFile.name === null) {
-    //   axios
-    //     .put(`${BACKEND_URL}/properties/${props.property.id}`, {
-    //       home_name,
-    //       home_type,
-    //       total_occupancy,
-    //       total_bedrooms,
-    //       total_bathrooms,
-    //       summary,
-    //       address,
-    //       has_tv,
-    //       has_kitchen,
-    //       has_aircon,
-    //       has_internet,
-    //       price,
-    //     })
-    //     .then((res) => {
-    //       // Clear form state
-    //       setHomeName("");
-    //       setHomeImage("");
-    //       setHomeType("");
-    //       setTotalOccupancy("");
-    //       setTotalBedrooms("");
-    //       setTotalBathrooms("");
-    //       setSummary("");
-    //       setAddress("");
-    //       setHasTV("");
-    //       setHasKitchen("");
-    //       setHasAircon("");
-    //       setHasInternet("");
-    //       setPrice("");
-    //       setImageUpload({ imageInputValue: "", imageInputFile: null });
-    //       navigate(`/properties/${res.data.id}`);
-    //     });
-    // } else {
-    //   const fileRef = storageRef(
-    //     storage,
-    //     `${UPLOAD_IMAGES_FOLDER_NAME}/${imageUpload.imageInputFile.name}`
-    //   );
-    //   uploadBytes(fileRef, imageUpload.imageInputFile).then(() => {
-    //     getDownloadURL(fileRef).then((downloadUrl) => {
-    //       axios
-    //         .put(`${BACKEND_URL}/properties/${props.property.id}`, {
-    //           home_name,
-    //           image_url: downloadUrl,
-    //           home_type,
-    //           total_occupancy,
-    //           total_bedrooms,
-    //           total_bathrooms,
-    //           summary,
-    //           address,
-    //           has_tv,
-    //           has_kitchen,
-    //           has_aircon,
-    //           has_internet,
-    //           price,
-    //         })
-    //         .then((res) => {
-    //           navigate(`/properties/${res.data.id}`);
-    //         });
-    //     });
-    //   });
-    // }
+    }
   };
 
   return (
