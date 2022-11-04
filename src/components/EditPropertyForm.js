@@ -106,18 +106,18 @@ const EditPropertyForm = (props) => {
     // }):
     await axios
       .put(`${BACKEND_URL}/properties/${id}`, {
-        home_name: home_name,
-        home_type: home_type,
-        total_occupancy: total_occupancy,
-        total_bedrooms: total_bedrooms,
-        total_bathrooms: total_bathrooms,
-        summary: summary,
-        address: address,
-        has_tv: has_tv,
-        has_kitchen: has_kitchen,
-        has_aircon: has_aircon,
-        has_internet: has_internet,
-        price: price,
+        home_name,
+        home_type,
+        total_occupancy,
+        total_bedrooms,
+        total_bathrooms,
+        summary,
+        address,
+        has_tv,
+        has_kitchen,
+        has_aircon,
+        has_internet,
+        price,
       })
       .then((res) => {
         navigate(`/PropertiesMain`);
