@@ -2,6 +2,11 @@
   text-align: center;
 }
 
+* {
+  margin: 0;
+  padding: 0;
+}
+
 .App-logo {
   height: 40vmin;
   pointer-events: none;
@@ -16,4 +21,21 @@
   justify-content: center;
   font-size: calc(10px + 2vmin);
   color: white;
+}
+
+.git-book {
+  /* padding-top: 20px; */
+  margin-top: 70px;
+}
+
+.schedule-container {
+  margin-top: 70px;
+}
+
+.bg-container {
+  background-image: url('./images/star-bg.jpg');
+  height: 100vh;
+  background-repeat: no-repeat;
+  width: 100%;
+  background-size: cover;
 }
