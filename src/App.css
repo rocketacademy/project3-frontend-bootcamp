@@ -1,5 +1,11 @@
 .App {
   text-align: center;
+  background-color: #050814;
+}
+
+* {
+  margin: 0;
+  padding: 0;
 }
 
 .App-logo {
@@ -8,7 +14,7 @@
 }
 
 .App-header {
-  background-color: #282c34;
+  background-color: #050814;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -16,4 +22,96 @@
   justify-content: center;
   font-size: calc(10px + 2vmin);
   color: white;
+}
+
+.git-book {
+  /* padding-top: 20px; */
+  margin-top: 70px;
+}
+
+/* .schedule-container {
+  margin-top: 70px;
+} */
+
+/* AppShell styling */
+
+/* main container background */
+.mantine-1b9ttsk {
+  background-color: #050814;
+}
+
+.bg-container {
+  /* margin-top: 20px; */
+
+  background-image: url('./images/star-bg-e.jpg');
+  /* height: 100vh; */
+  height: 100%;
+  background-repeat: no-repeat;
+  /* width: 100%; */
+  background-size: cover;
+  margin-left: 280px;
+}
+
+/* Appshell Header */
+/* .mantine-cxzxyw {
+  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  height: 70px;
+  max-height: 70px;
+  position: fixed;
+  box-sizing: border-box;
+  background-color: #050814;
+  border-bottom: 1px solid #0c3b6a;
+} */
+
+/* Appshell navbar */
+.mantine-x4q64m {
+  /* 
+  top: var(--mantine-header-height);
+  left: 0;
+  bottom: 0;
+  z-index: 100; */
+  /* height: calc(
+    100vh - var(--mantine-header-height, 0px) -
+      var(--mantine-footer-height, 0px)
+  ); */
+  /* width: 100%; */
+  /* position: fixed; */
+  /* box-sizing: border-box; */
+
+  display: flex;
+  border-right: 1px solid #0c3b6a;
+  flex-direction: column;
+  text-align: center;
+  align-items: center;
+  background-color: #050814;
+}
+
+.footer-text {
+  color: aliceblue;
+}
+
+.profile-menu {
+  position: fixed;
+  bottom: 100px;
+  right: 50px;
+}
+
+iframe {
+  min-height: 100vh;
+  border: none;
+  display: block;
+  border: none;
+  width: 88vw;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding-left: 300px;
+}
+
+.mantine-1b9ttsk {
+  margin: 0px;
+  padding: 0px;
 }
