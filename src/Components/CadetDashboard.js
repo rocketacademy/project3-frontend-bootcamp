@@ -7,12 +7,16 @@ import {
   MediaQuery,
   Navbar,
   Text,
+  Image,
+  Button,
   useMantineTheme,
 } from '@mantine/core';
 import Gitbook from './Gitbook';
 import Schedule from './Schedule';
 import LandingPage from './LandingPage';
+import Profile from './Profile';
 import { BrowserRouter as Router, Link, Route, Routes } from 'react-router-dom';
+import Rlogo from '../images/rocket-logo.png';
 
 const CadetDashboard = () => {
   const [opened, setOpened] = useState(false);
@@ -38,7 +42,12 @@ const CadetDashboard = () => {
             width={{ sm: 400, lg: 300 }}
           >
             <Navbar.Section>
-              <Text>hello this is title</Text>
+              <div
+                className="nav-logo"
+                style={{ width: 250, marginLeft: 'auto', marginRight: 'auto' }}
+              >
+                <Image src={Rlogo} alt="rocket logo" />
+              </div>
             </Navbar.Section>
             <Navbar.Section grow mt="lg">
               <div style={{ display: 'flex', flexDirection: 'column' }}>
@@ -55,29 +64,34 @@ const CadetDashboard = () => {
               </div>
             </Navbar.Section>
             <Navbar.Section>
-              <Text>Footer</Text>
+              {/* <Text className="footer-text">Footer</Text> */}
+              <Button color="yellow" size="xs">
+                Log Out
+              </Button>
+              <br />
+              <br />
               {/* Can include the logout button here */}
             </Navbar.Section>
           </Navbar>
         }
-        header={
-          <Header height={70} padding="md">
-            {/* Handle other responsive styles with MediaQuery component or createStyles function */}
-            <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-              <MediaQuery largerThan="sm" styles={{ display: 'none' }}>
-                <Burger
-                  opened={opened}
-                  onClick={() => setOpened((o) => !o)}
-                  size="sm"
-                  // color={theme.colors.gray[6]}
-                  mr="xl"
-                />
-              </MediaQuery>
+        // header={
+        //   <Header height={70} padding="md">
+        //     {/* Handle other responsive styles with MediaQuery component or createStyles function */}
+        //     <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+        //       <MediaQuery largerThan="sm" styles={{ display: 'none' }}>
+        //         <Burger
+        //           opened={opened}
+        //           onClick={() => setOpened((o) => !o)}
+        //           size="sm"
+        //           // color={theme.colors.gray[6]}
+        //           mr="xl"
+        //         />
+        //       </MediaQuery>
 
-              <Text>Application header</Text>
-            </div>
-          </Header>
-        }
+        //       <Text>Application header</Text>
+        //     </div>
+        //   </Header>
+        // }
       >
         <Routes>
           <Route path="/" element={<LandingPage />} />
