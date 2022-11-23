@@ -1,5 +1,5 @@
-import React from 'react';
-import { useState } from 'react';
+import React from "react";
+import { useState } from "react";
 import {
   AppShell,
   Burger,
@@ -8,11 +8,12 @@ import {
   Navbar,
   Text,
   useMantineTheme,
-} from '@mantine/core';
-import Gitbook from './Gitbook';
-import Schedule from './Schedule';
-import LandingPage from './LandingPage';
-import { BrowserRouter as Router, Link, Route, Routes } from 'react-router-dom';
+} from "@mantine/core";
+import CourseMaterials from "./CourseMaterials";
+import Schedule from "./Schedule";
+import LandingPage from "./LandingPage";
+import { BrowserRouter as Router, Link, Route, Routes } from "react-router-dom";
+import DisplayMarkdown from "./DisplayMarkdown";
 
 const CadetDashboard = () => {
   const [opened, setOpened] = useState(false);
@@ -41,13 +42,15 @@ const CadetDashboard = () => {
               <Text>hello this is title</Text>
             </Navbar.Section>
             <Navbar.Section grow mt="lg">
-              <div style={{ display: 'flex', flexDirection: 'column' }}>
+              <div style={{ display: "flex", flexDirection: "column" }}>
                 <Text component={Link} variant="link" to="/">
                   Home Page
                 </Text>
-
-                <Text component={Link} variant="link" to="/gitbook">
-                  Gitbook
+                <Text component={Link} variant="link" to="/course-materials">
+                  CourseMaterials
+                </Text>
+                <Text component={Link} variant="link" to="/display-markdown">
+                  Display Markdown
                 </Text>
                 <Text component={Link} variant="link" to="/schedule">
                   Schedule
@@ -63,8 +66,8 @@ const CadetDashboard = () => {
         header={
           <Header height={70} padding="md">
             {/* Handle other responsive styles with MediaQuery component or createStyles function */}
-            <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-              <MediaQuery largerThan="sm" styles={{ display: 'none' }}>
+            <div style={{ display: "flex", justifyContent: "space-between" }}>
+              <MediaQuery largerThan="sm" styles={{ display: "none" }}>
                 <Burger
                   opened={opened}
                   onClick={() => setOpened((o) => !o)}
@@ -81,7 +84,13 @@ const CadetDashboard = () => {
       >
         <Routes>
           <Route path="/" element={<LandingPage />} />
-          <Route path="/gitbook" element={<Gitbook />} />
+          <Route path="/course-materials" element={<CourseMaterials />} />
+          <Route path="/course-materials/:modules" element={<DisplayMarkdown />} />
+          <Route path="/display-markdown" element={<DisplayMarkdown />} />
+          <Route
+            path="/course-materials/:modules"
+            element={<CourseMaterials />}
+          />
           <Route path="/schedule" element={<Schedule />} />
           {/* <Route path="/calendarPage" element={<CalendarExample />} />
             <Route path="/timeInputPage" element={<TimeInputExample />} />
