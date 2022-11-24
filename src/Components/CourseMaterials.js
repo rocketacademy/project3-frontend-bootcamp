@@ -1,6 +1,7 @@
 import React from "react";
 import { useParams, Link } from "react-router-dom";
 import { Text } from "@mantine/core";
+import ModalDemo from "./Modal";
 
 const CourseMaterials = () => {
   return (
@@ -17,6 +18,7 @@ const CourseMaterials = () => {
       <h2>Gitbook</h2>
       <h2>Gitbook</h2>
       <h2>Gitbook</h2>
+      <ModalDemo />
     </div>
   );
 };
