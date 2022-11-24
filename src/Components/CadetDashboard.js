@@ -1,5 +1,5 @@
 import React from 'react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import {
   AppShell,
   Burger,
@@ -17,10 +17,26 @@ import LandingPage from './LandingPage';
 import Profile from './Profile';
 import { BrowserRouter as Router, Link, Route, Routes } from 'react-router-dom';
 import Rlogo from '../images/rocket-logo.png';
+import { ThemeContext } from '@emotion/react';
+import api from '../api/materials';
 
 const CadetDashboard = () => {
   const [opened, setOpened] = useState(false);
+  // const [material, setMaterial] = useState([]);
   // const theme = useMantineTheme();
+
+  // useEffect(() => {
+  //   const fetchMaterials = async () => {
+  //     try {
+  //       const response = await api.get('/materials');
+  //       console.log(response.data);
+  //       setMaterial(response.data);
+  //     } catch (err) {
+  //       console.log(err.response.data);
+  //     }
+  //   };
+  //   fetchMaterials();
+  // }, []);
 
   return (
     <Router>
@@ -28,7 +44,7 @@ const CadetDashboard = () => {
         // navbarOffsetBreakpoint controls when navbar should no longer be offset with padding-left
         navbarOffsetBreakpoint="sm"
         // fixed prop on AppShell will be automatically added to Header and Navbar
-        fixed
+        // fixed
         navbar={
           <Navbar
             padding="md"
@@ -44,7 +60,11 @@ const CadetDashboard = () => {
             <Navbar.Section>
               <div
                 className="nav-logo"
-                style={{ width: 250, marginLeft: 'auto', marginRight: 'auto' }}
+                style={{
+                  width: 250,
+                  marginLeft: 'auto',
+                  marginRight: 'auto',
+                }}
               >
                 <Image src={Rlogo} alt="rocket logo" />
               </div>

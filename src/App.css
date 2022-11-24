@@ -6,6 +6,7 @@
 * {
   margin: 0;
   padding: 0;
+  box-sizing: border-box;
 }
 
 .App-logo {
@@ -114,4 +115,26 @@ iframe {
 .mantine-1b9ttsk {
   margin: 0px;
   padding: 0px;
+}
+
+.test {
+  position: fixed;
+  bottom: 500px;
+  right: 500px;
+}
+
+.test-2 {
+  position: fixed;
+  bottom: 600px;
+  right: 800px;
+}
+
+.time-line {
+  margin-left: 300px;
+}
+
+.bullet-1 {
+  position: fixed;
+  bottom: 600px;
+  right: 800px;
 }

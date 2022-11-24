@@ -1,19 +1,33 @@
 import React from 'react';
+import api from '../api/materials';
+import { useState, useEffect } from 'react';
+import {
+  Card,
+  Text,
+  Container,
+  HoverCard,
+  Avatar,
+  Group,
+  Anchor,
+  Stack,
+} from '@mantine/core';
 
 const Gitbook = () => {
-  return (
-    <div className="git-book">
-      <h2>1</h2>
-      <h2>Gitbook</h2>
-      <h2>Gitbook</h2>
-      <h2>Gitbook</h2>
-      <h2>Gitbook</h2>
-      <h2>Gitbook</h2>
-      <h2>Gitbook</h2>
-      <h2>Gitbook</h2>
-      <h2>Gitbook</h2>
-    </div>
-  );
+  const [material, setMaterial] = useState([]);
+
+  useEffect(() => {
+    const fetchMaterials = async () => {
+      try {
+        const response = await api.get('/materials');
+        console.log(response.data);
+        setMaterial(response.data[0].body);
+      } catch (err) {
+        console.log(err.response.data);
+      }
+    };
+    fetchMaterials();
+  }, []);
+  return <div className="test"></div>;
 };
 
 export default Gitbook;
