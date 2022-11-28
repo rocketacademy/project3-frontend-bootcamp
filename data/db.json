@@ -10,19 +10,75 @@
       "id": 2,
       "module": "Second post",
       "datetime": "July 16, 2021 11:47:48 AM",
-      "body": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. two"
+      "body": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. two",
+      "completed": false
     },
     {
       "id": 3,
       "module": "Number Three",
       "datetime": "July 16, 2021 11:48:01 AM",
-      "body": "Third post... Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+      "body": "Third post... Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+      "completed": false
+    }
+  ],
+  "forum": [
+    {
+      "id": 1,
+      "chapter": "Foundations",
+      "message": "omg yes this chapter was really tough",
+      "author": "Adam",
+      "comments": [
+        {
+          "text": "Yeah siah",
+          "timestamp": "29/08/2022, 21:27:40",
+          "user": "Weiyu"
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "chapter": "HTML",
+      "message": "Sigh! any one can help?",
+      "author": "JYJM",
+      "comments": [
+        {
+          "text": "hohohoho I'm also struggling",
+          "timestamp": "30/09/2022, 20:27:40",
+          "user": "Adam"
+        }
+      ]
+    }
+  ],
+  "chapters": [
+    {
+      "id": 1,
+      "point": 1,
+      "completed": true
+    },
+    {
+      "id": 2,
+      "point": 2,
+      "completed": true
+    },
+    {
+      "id": 3,
+      "point": 3,
+      "completed": true
     },
     {
       "id": 4,
-      "module": "Testing a 4th post",
-      "datetime": "August 02, 2021 11:46:27 AM",
-      "body": "Some more testing paragraphs!"
+      "point": 4,
+      "completed": false
+    },
+    {
+      "id": 5,
+      "point": 5,
+      "completed": false
+    },
+    {
+      "id": 6,
+      "point": 6,
+      "completed": false
     }
   ]
 }

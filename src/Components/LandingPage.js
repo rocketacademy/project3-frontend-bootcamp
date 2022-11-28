@@ -2,6 +2,9 @@ import React from 'react';
 import Profile from './Profile';
 import api from '../api/materials';
 import { useState, useEffect } from 'react';
+import TimeDisplay from './TimeDisplay';
+import CourseMaterials from './CourseMaterials';
+// import starpic from '../images/Star-map-test-01.png';
 import {
   Card,
   Text,
@@ -12,15 +15,14 @@ import {
   Anchor,
   Stack,
 } from '@mantine/core';
-import Gitbook from './Gitbook';
-import StepperModal from './StepperModal';
 
 const LandingPage = () => {
   return (
     <div className="bg-container">
-      <Gitbook />
+      {/* <img className="star-map" src={starpic} alt="star map"></img> */}
       <Profile />
-      <StepperModal />
+      <TimeDisplay />
+      {/* <CourseMaterials /> */}
     </div>
   );
 };

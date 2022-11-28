@@ -11,7 +11,7 @@ import {
   Button,
   useMantineTheme,
 } from '@mantine/core';
-import Gitbook from './Gitbook';
+
 import Schedule from './Schedule';
 import LandingPage from './LandingPage';
 import Profile from './Profile';
@@ -19,6 +19,10 @@ import { BrowserRouter as Router, Link, Route, Routes } from 'react-router-dom';
 import Rlogo from '../images/rocket-logo.png';
 import { ThemeContext } from '@emotion/react';
 import api from '../api/materials';
+
+import CourseMaterials from './CourseMaterials';
+
+import DisplayMarkdown from './DisplayMarkdown';
 
 const CadetDashboard = () => {
   const [opened, setOpened] = useState(false);
@@ -74,9 +78,11 @@ const CadetDashboard = () => {
                 <Text component={Link} variant="link" to="/">
                   Home Page
                 </Text>
-
-                <Text component={Link} variant="link" to="/gitbook">
-                  Gitbook
+                <Text component={Link} variant="link" to="/course-materials">
+                  CourseMaterials
+                </Text>
+                <Text component={Link} variant="link" to="/display-markdown">
+                  Display Markdown
                 </Text>
                 <Text component={Link} variant="link" to="/schedule">
                   Schedule
@@ -115,7 +121,16 @@ const CadetDashboard = () => {
       >
         <Routes>
           <Route path="/" element={<LandingPage />} />
-          <Route path="/gitbook" element={<Gitbook />} />
+          <Route path="/course-materials" element={<CourseMaterials />} />
+          <Route
+            path="/course-materials/:modules"
+            element={<DisplayMarkdown />}
+          />
+          <Route path="/display-markdown" element={<DisplayMarkdown />} />
+          <Route
+            path="/course-materials/:modules"
+            element={<CourseMaterials />}
+          />
           <Route path="/schedule" element={<Schedule />} />
           {/* <Route path="/calendarPage" element={<CalendarExample />} />
             <Route path="/timeInputPage" element={<TimeInputExample />} />
