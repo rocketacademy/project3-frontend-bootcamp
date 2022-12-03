@@ -22,7 +22,7 @@ const LandingPage = () => {
       {/* <img className="star-map" src={starpic} alt="star map"></img> */}
       <Profile />
       <TimeDisplay />
-      {/* <CourseMaterials /> */}
+      <CourseMaterials />
     </div>
   );
 };

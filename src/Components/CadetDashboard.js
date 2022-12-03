@@ -26,21 +26,6 @@ import DisplayMarkdown from './DisplayMarkdown';
 
 const CadetDashboard = () => {
   const [opened, setOpened] = useState(false);
-  // const [material, setMaterial] = useState([]);
-  // const theme = useMantineTheme();
-
-  // useEffect(() => {
-  //   const fetchMaterials = async () => {
-  //     try {
-  //       const response = await api.get('/materials');
-  //       console.log(response.data);
-  //       setMaterial(response.data);
-  //     } catch (err) {
-  //       console.log(err.response.data);
-  //     }
-  //   };
-  //   fetchMaterials();
-  // }, []);
 
   return (
     <Router>
@@ -96,28 +81,9 @@ const CadetDashboard = () => {
               </Button>
               <br />
               <br />
-              {/* Can include the logout button here */}
             </Navbar.Section>
           </Navbar>
         }
-        // header={
-        //   <Header height={70} padding="md">
-        //     {/* Handle other responsive styles with MediaQuery component or createStyles function */}
-        //     <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-        //       <MediaQuery largerThan="sm" styles={{ display: 'none' }}>
-        //         <Burger
-        //           opened={opened}
-        //           onClick={() => setOpened((o) => !o)}
-        //           size="sm"
-        //           // color={theme.colors.gray[6]}
-        //           mr="xl"
-        //         />
-        //       </MediaQuery>
-
-        //       <Text>Application header</Text>
-        //     </div>
-        //   </Header>
-        // }
       >
         <Routes>
           <Route path="/" element={<LandingPage />} />
@@ -132,9 +98,6 @@ const CadetDashboard = () => {
             element={<CourseMaterials />}
           />
           <Route path="/schedule" element={<Schedule />} />
-          {/* <Route path="/calendarPage" element={<CalendarExample />} />
-            <Route path="/timeInputPage" element={<TimeInputExample />} />
-            <Route path="/notificationPage" element={<NotificationExample />} /> */}
         </Routes>
       </AppShell>
     </Router>
