@@ -68,3 +68,40 @@ function DisplayMarkdown() {
 }
 
 export default DisplayMarkdown;
+
+// function DisplayMarkdown(props) {
+//   const [post, setPost] = useState("");
+//   const [isDark, setIsDark] = useState(true);
+//   useEffect(() => {
+//     if (props) {
+//       const getProps = async () => {
+//         axios.get(props.markdown).then((res) => {
+//           setPost(res.data);
+//         });
+//       };
+//       getProps();
+//     }
+//   }, [props]);
+
+//   return (
+//     <div className="DisplayMarkdown-body">
+//       <Markdown
+//         options={{
+//           overrides: {
+//             Code: {
+//               component: Code,
+//               props: {
+//                 isDark,
+//                 setIsDark,
+//               },
+//             },
+//           },
+//         }}
+//       >
+//         {post}
+//       </Markdown>
+//     </div>
+//   );
+// }
+
+// export default DisplayMarkdown;

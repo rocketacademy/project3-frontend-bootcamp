@@ -26,20 +26,10 @@
 }
 
 .git-book {
-  /* padding-top: 20px; */
-  background-image: url('./images/star-bg-e.jpg');
-  height: 100%;
-  background-repeat: no-repeat;
-  /* width: 100%; */
   background-size: cover;
-  /* margin-top: 40px; */
+  padding-top: 40px;
+  height: 500px;
 }
-
-/* .schedule-container {
-  margin-top: 70px;
-} */
-
-/* AppShell styling */
 
 /* main container background */
 .mantine-1b9ttsk {
@@ -104,6 +94,7 @@
   position: fixed;
   bottom: 100px;
   right: 50px;
+  z-index: 1;
 }
 
 .Time-header {
@@ -152,32 +143,78 @@ iframe {
 
 .Chapter-1-btn {
   position: fixed;
-  top: 190px;
+  top: 220px;
   /* bottom: 600px; */
-  left: 525px;
+  left: 530px;
 }
 .Chapter-2-btn {
   position: fixed;
-  bottom: 180px;
+  bottom: 200px;
   left: 740px;
 }
 .Chapter-3-btn {
   position: fixed;
-  bottom: 460px;
-  right: 825px;
+  bottom: 400px;
+  right: 780px;
 }
 .Chapter-4-btn {
   position: fixed;
-  bottom: 40px;
-  right: 495px;
+  bottom: 60px;
+  right: 590px;
 }
 .Chapter-5-btn {
   position: fixed;
-  top: 310px;
-  right: 270px;
+  bottom: 370px;
+  right: 220px;
 }
 .Chapter-6-btn {
   position: fixed;
-  top: 60px;
-  right: 690px;
+  top: 230px;
+  right: 440px;
+}
+.Chapter-7-btn {
+  position: fixed;
+  top: 275px;
+  right: 610px;
+}
+.Chapter-8-btn {
+  position: fixed;
+  top: 125px;
+  right: 650px;
+}
+.Chapter-9-btn {
+  position: fixed;
+  top: 35px;
+  right: 540px;
+}
+.Chapter-10-btn {
+  position: fixed;
+  top: 110px;
+  right: 410px;
+}
+.Chapter-11-btn {
+  position: fixed;
+  top: 65px;
+  right: 190px;
+}
+
+/* Profile stuff */
+
+.Badges {
+  text-align: center;
+}
+
+.mantine-Menu-dropdown {
+  background-color: #0c3b6a;
+  border: none;
+  color: aliceblue;
+}
+
+.mantine-Menu-label,
+.mantine-Menu-divider {
+  color: aliceblue;
+}
+
+.mantine-Menu-item {
+  color: aliceblue;
 }
