@@ -1,7 +1,10 @@
 import { useState, useEffect } from 'react';
 import { Modal, Button, Group } from '@mantine/core';
+import axios from 'axios';
+
+import { BACKEND_URL } from '../../constants.js';
 import DisplayMarkdown from '../DisplayMarkdown';
-import api from '../../api/materials';
+// import api from '../../api/materials';
 import Forum from '../Forum';
 
 import { IconAlertCircle } from '@tabler/icons';
@@ -10,10 +13,12 @@ import StarMapButtonUP from '../StarMapButtonUP';
 
 function ModalDemo() {
   const [opened, setOpened] = useState(false);
-  const [color, setColor] = useState('gray');
+
   const [done, setDone] = useState('');
   const [btn1, setBtn1] = useState('');
+  const [btn1color, setBtn1Color] = useState([]);
   const [btn2, setBtn2] = useState('');
+  const [btn2color, setBtn2Color] = useState([]);
   const [btn3, setBtn3] = useState('');
   const [btn4, setBtn4] = useState('');
   const [btn5, setBtn5] = useState('');
@@ -24,13 +29,21 @@ function ModalDemo() {
   const [btn10, setBtn10] = useState('');
   const [btn11, setBtn11] = useState('');
   const [btn12, setBtn12] = useState('');
-  const [topic, setTopic] = useState('');
+  const [sectionId, setSectionId] = useState(5);
+  const [urlNum, setUrlNum] = useState(1);
+  const [btnNum, setBtnNum] = useState('');
+  const [cadetId, setCadetId] = useState(1);
+  // const [url, setUrl] = useState('');
 
   useEffect(() => {
-    const fetchCompleted = async () => {
+    const fetchChapters = async () => {
       try {
-        const response = await api.get('/chapters');
-        console.log('from completed', response.data);
+        const response = await axios.get(
+          `${BACKEND_URL}/chapters/total-chapters?sectionId=${5}`
+        );
+
+        // const response = await api.get('/chapters');
+        console.log('chapters', response.data);
 
         setBtn1(response.data[0]);
         setBtn2(response.data[1]);
@@ -45,14 +58,40 @@ function ModalDemo() {
         setBtn11(response.data[10]);
         setBtn12(response.data[11]);
         setDone(response.data);
-        console.log('point', btn1.point);
-        console.log('topic', btn1.topic);
+
+        const response2 = await axios.get(
+          `${BACKEND_URL}/cadetChapters/progress-status?cadetId=${cadetId}`
+        );
+        console.log('res2', response2.data);
+        setBtn1Color(response2.data[0].completed);
+        setBtn2Color(response2.data[1].completed);
+        console.log('btn1 color', response2.data[0].completed);
       } catch (err) {
         console.log(err.response.data);
       }
     };
-    fetchCompleted();
+
+    fetchChapters();
   }, []);
+
+  // switch (urlNum) {
+  //   case 1:
+  //     setUrl(
+  //       'https://raw.githubusercontent.com/weiyu95/bootcamp3.0-docs/main/1-frontend/1.2-css/1.2.1-layout.md'
+  //     );
+  //     break;
+
+  //   case 2:
+  //     setUrl(
+  //       'https://raw.githubusercontent.com/weiyu95/capstone-markdownfiles/main/1.1_HTML.md'
+  //     );
+  //     break;
+
+  //   default:
+  //     alert("I'm am sick of this");
+  // }
+
+  // const settingUrl = () => {};
 
   return (
     <>
@@ -72,33 +111,33 @@ function ModalDemo() {
         <div className="Chapter-1-btn">
           <StarMapButtonUP
             setOpened={setOpened}
-            color={btn1.completed ? 'blue' : 'grey'}
-            btnName={btn1.point}
-            topic={btn1.topic}
+            color={btn1color ? 'blue' : 'gray'}
+            btnName="HTML lala"
+            topic={btn1.name}
           />
         </div>
         <div className="Chapter-2-btn">
           <StarMapButtonDown
             setOpened={setOpened}
-            color={btn2.completed ? 'blue' : 'grey'}
-            btnName={btn2.point}
-            topic={btn2.topic}
+            color={btn2color ? 'blue' : 'gray'}
+            btnName={btn2.id}
+            topic={btn2.name}
           />
         </div>
         <div className="Chapter-3-btn">
           <StarMapButtonUP
             setOpened={setOpened}
-            color={btn3.completed ? 'blue' : 'grey'}
-            btnName={btn3.point}
-            topic={btn3.topic}
+            color={btn3 ? 'blue' : 'gray'}
+            btnName={btn3.id}
+            topic={btn3.name}
           />
         </div>
         <div className="Chapter-4-btn">
           <StarMapButtonDown
             setOpened={setOpened}
-            color={btn4.completed ? 'blue' : 'grey'}
-            btnName={btn4.point}
-            topic={btn4.topic}
+            color={btn4.completed ? 'blue' : 'gray'}
+            btnName={btn4.id}
+            topic={btn4.name}
           />
         </div>
         <div className="Chapter-5-btn">
@@ -112,49 +151,49 @@ function ModalDemo() {
         <div className="Chapter-6-btn">
           <StarMapButtonUP
             setOpened={setOpened}
-            color={btn6.completed ? 'blue' : 'grey'}
-            btnName={btn6.point}
-            topic={btn6.topic}
+            color={btn6.completed ? 'blue' : 'gray'}
+            btnName={btn6.id}
+            topic={btn6.name}
           />
         </div>
         <div className="Chapter-7-btn">
           <StarMapButtonDown
             setOpened={setOpened}
-            color={btn7.completed ? 'blue' : 'grey'}
-            btnName={btn7.point}
-            topic={btn7.topic}
+            color={btn7.completed ? 'blue' : 'gray'}
+            btnName={btn7.id}
+            topic={btn7.name}
           />
         </div>
         <div className="Chapter-8-btn">
           <StarMapButtonUP
             setOpened={setOpened}
-            color={btn8.completed ? 'blue' : 'grey'}
-            btnName={btn8.point}
-            topic={btn8.topic}
+            color={btn8.completed ? 'blue' : 'gray'}
+            btnName={btn8.id}
+            topic={btn8.name}
           />
         </div>
         <div className="Chapter-9-btn">
           <StarMapButtonUP
             setOpened={setOpened}
-            color={btn9.completed ? 'blue' : 'grey'}
-            btnName={btn9.point}
-            topic={btn9.topic}
+            color={btn9.completed ? 'blue' : 'gray'}
+            btnName={btn9.id}
+            topic={btn9.name}
           />
         </div>
         <div className="Chapter-10-btn">
           <StarMapButtonDown
             setOpened={setOpened}
-            color={btn10.completed ? 'blue' : 'grey'}
-            btnName={btn10.point}
-            topic={btn10.topic}
+            color={btn10.completed ? 'blue' : 'gray'}
+            btnName={btn10.id}
+            topic={btn10.name}
           />
         </div>
         <div className="Chapter-11-btn">
           <StarMapButtonDown
             setOpened={setOpened}
-            color={btn11.completed ? 'blue' : 'grey'}
-            btnName={btn11.point}
-            topic={btn11.topic}
+            color={btn11.completed ? 'blue' : 'gray'}
+            btnName={btn11.id}
+            topic={btn11.name}
           />
         </div>
       </Group>
