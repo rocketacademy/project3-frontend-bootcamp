@@ -24,6 +24,7 @@ const Badges = () => {
           `${BACKEND_URL}/cadetSections/progress-status?cadetId=${cadetId}`
         );
         console.log('section progress for badges', response.data);
+        console.log('section progress length', response.data.length);
 
         setSectionProgress(response.data);
       } catch (err) {
@@ -35,9 +36,15 @@ const Badges = () => {
 
   return (
     <div className="Badges">
-      {sectionProgress.length >= 2 && sectionProgress[0].completed === true
+      {sectionProgress.length && sectionProgress[0].completed === true
         ? icon1
         : ''}
+      {sectionProgress.length && sectionProgress[1].completed === true
+        ? icon2
+        : ''}
+      {/* {sectionProgress !== undefined && sectionProgress[2].completed === true
+        ? icon3
+        : ''} */}
       {/* {sectionProgress[1].completed === true ? icon2 : ''}
       {sectionProgress[2].completed === true ? icon3 : ''} */}
       {/* {icon4}
