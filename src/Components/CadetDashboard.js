@@ -1,5 +1,5 @@
-import React from "react";
-import { useState } from "react";
+import React from 'react';
+import { useState, useEffect } from 'react';
 import {
   AppShell,
   Burger,
@@ -10,18 +10,22 @@ import {
   Image,
   Button,
   useMantineTheme,
-} from "@mantine/core";
-import CourseMaterials from "./CourseMaterials";
-import Schedule from "./Schedule";
-import LandingPage from "./LandingPage";
+} from '@mantine/core';
+
+import Schedule from './Schedule';
+import LandingPage from './LandingPage';
 import Profile from './Profile';
-import { BrowserRouter as Router, Link, Route, Routes } from "react-router-dom";
-import DisplayMarkdown from "./DisplayMarkdown";
+import { BrowserRouter as Router, Link, Route, Routes } from 'react-router-dom';
 import Rlogo from '../images/rocket-logo.png';
+import { ThemeContext } from '@emotion/react';
+import api from '../api/materials';
+
+import CourseMaterials from './CourseMaterials';
+
+import DisplayMarkdown from './DisplayMarkdown';
 
 const CadetDashboard = () => {
   const [opened, setOpened] = useState(false);
-  // const theme = useMantineTheme();
 
   return (
     <Router>
@@ -29,7 +33,7 @@ const CadetDashboard = () => {
         // navbarOffsetBreakpoint controls when navbar should no longer be offset with padding-left
         navbarOffsetBreakpoint="sm"
         // fixed prop on AppShell will be automatically added to Header and Navbar
-        fixed
+        // fixed
         navbar={
           <Navbar
             padding="md"
@@ -45,13 +49,17 @@ const CadetDashboard = () => {
             <Navbar.Section>
               <div
                 className="nav-logo"
-                style={{ width: 250, marginLeft: 'auto', marginRight: 'auto' }}
+                style={{
+                  width: 250,
+                  marginLeft: 'auto',
+                  marginRight: 'auto',
+                }}
               >
                 <Image src={Rlogo} alt="rocket logo" />
               </div>
             </Navbar.Section>
             <Navbar.Section grow mt="lg">
-              <div style={{ display: "flex", flexDirection: "column" }}>
+              <div style={{ display: 'flex', flexDirection: 'column' }}>
                 <Text component={Link} variant="link" to="/">
                   Home Page
                 </Text>
@@ -73,42 +81,23 @@ const CadetDashboard = () => {
               </Button>
               <br />
               <br />
-              {/* Can include the logout button here */}
             </Navbar.Section>
           </Navbar>
         }
-        header={
-          <Header height={70} padding="md">
-            {/* Handle other responsive styles with MediaQuery component or createStyles function */}
-            <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-              <MediaQuery largerThan="sm" styles={{ display: 'none' }}>
-                <Burger
-                  opened={opened}
-                  onClick={() => setOpened((o) => !o)}
-                  size="sm"
-                  // color={theme.colors.gray[6]}
-                  mr="xl"
-                />
-              </MediaQuery>
-
-        //       <Text>Application header</Text>
-        //     </div>
-        //   </Header>
-        // }
       >
         <Routes>
           <Route path="/" element={<LandingPage />} />
           <Route path="/course-materials" element={<CourseMaterials />} />
-          <Route path="/course-materials/:modules" element={<DisplayMarkdown />} />
+          <Route
+            path="/course-materials/:modules"
+            element={<DisplayMarkdown />}
+          />
           <Route path="/display-markdown" element={<DisplayMarkdown />} />
           <Route
             path="/course-materials/:modules"
             element={<CourseMaterials />}
           />
           <Route path="/schedule" element={<Schedule />} />
-          {/* <Route path="/calendarPage" element={<CalendarExample />} />
-            <Route path="/timeInputPage" element={<TimeInputExample />} />
-            <Route path="/notificationPage" element={<NotificationExample />} /> */}
         </Routes>
       </AppShell>
     </Router>

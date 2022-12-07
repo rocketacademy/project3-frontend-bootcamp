@@ -1,0 +1,120 @@
+{
+  "materials": [
+    {
+      "id": 1,
+      "module": "1st post",
+      "datetime": "July 16, 2021 11:47:39 AM",
+      "body": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+    },
+    {
+      "id": 2,
+      "module": "Second post",
+      "datetime": "July 16, 2021 11:47:48 AM",
+      "body": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. two",
+      "completed": false
+    },
+    {
+      "id": 3,
+      "module": "Number Three",
+      "datetime": "July 16, 2021 11:48:01 AM",
+      "body": "Third post... Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+      "completed": false
+    }
+  ],
+  "forum": [
+    {
+      "id": 1,
+      "chapter": "Foundations",
+      "message": "omg yes this chapter was really tough",
+      "author": "Adam",
+      "comments": [
+        {
+          "text": "Yeah siah",
+          "timestamp": "29/08/2022, 21:27:40",
+          "user": "Weiyu"
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "chapter": "HTML",
+      "message": "Sigh! any one can help?",
+      "author": "JYJM",
+      "comments": [
+        {
+          "text": "hohohoho I'm also struggling",
+          "timestamp": "30/09/2022, 20:27:40",
+          "user": "Adam"
+        }
+      ]
+    }
+  ],
+  "chapters": [
+    {
+      "id": 1,
+      "point": "01",
+      "topic": "Frontend",
+      "completed": true
+    },
+    {
+      "id": 2,
+      "point": "02",
+      "topic": "HTML",
+      "completed": true
+    },
+    {
+      "id": 3,
+      "point": "03",
+      "topic": "CSS",
+      "completed": true
+    },
+    {
+      "id": 4,
+      "point": "04",
+      "topic": "Layout",
+      "completed": false
+    },
+    {
+      "id": 5,
+      "point": "05",
+      "topic": "React",
+      "completed": false
+    },
+    {
+      "id": 6,
+      "point": "P1",
+      "topic": "Project 1",
+      "completed": false
+    },
+    {
+      "id": 7,
+      "point": "E1",
+      "topic": "Recipe Site",
+      "completed": true
+    },
+    {
+      "id": 8,
+      "point": "E2",
+      "topic": "Portfolio Page",
+      "completed": true
+    },
+    {
+      "id": 9,
+      "point": "E3",
+      "topic": "World Clock",
+      "completed": false
+    },
+    {
+      "id": 10,
+      "point": "E4",
+      "topic": "High Card",
+      "completed": false
+    },
+    {
+      "id": 11,
+      "point": "E5",
+      "topic": "Guess The Word",
+      "completed": false
+    }
+  ]
+}

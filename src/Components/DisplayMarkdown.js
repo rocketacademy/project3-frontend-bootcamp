@@ -1,17 +1,17 @@
-import { useEffect, useState } from "react";
-import "./css/DisplayMarkdown.css";
-import Markdown from "markdown-to-jsx";
-import Code from "./Code";
-import { database, storage } from "../firebase";
+import { useEffect, useState } from 'react';
+import './css/DisplayMarkdown.css';
+import Markdown from 'markdown-to-jsx';
+import Code from './Code';
+import { database, storage } from '../firebase';
 import {
   getDownloadURL,
   ref as storageRef,
   uploadBytes,
-} from "firebase/storage";
-import axios from "axios";
-import { Modal } from "@mantine/core";
+} from 'firebase/storage';
+import axios from 'axios';
+import { Modal } from '@mantine/core';
 
-const MARKDOWN_FOLDER_NAME = "markdown";
+const MARKDOWN_FOLDER_NAME = 'markdown';
 
 function DisplayMarkdown(markdown) {
   const [post, setPost] = useState("");
@@ -32,7 +32,7 @@ function DisplayMarkdown(markdown) {
   //   });
   // }, [markdown]);
 
-  console.log(post);
+  // console.log(post);
 
   return (
     <div className="DisplayMarkdown-body">
@@ -56,3 +56,40 @@ function DisplayMarkdown(markdown) {
 }
 
 export default DisplayMarkdown;
+
+// function DisplayMarkdown(props) {
+//   const [post, setPost] = useState("");
+//   const [isDark, setIsDark] = useState(true);
+//   useEffect(() => {
+//     if (props) {
+//       const getProps = async () => {
+//         axios.get(props.markdown).then((res) => {
+//           setPost(res.data);
+//         });
+//       };
+//       getProps();
+//     }
+//   }, [props]);
+
+//   return (
+//     <div className="DisplayMarkdown-body">
+//       <Markdown
+//         options={{
+//           overrides: {
+//             Code: {
+//               component: Code,
+//               props: {
+//                 isDark,
+//                 setIsDark,
+//               },
+//             },
+//           },
+//         }}
+//       >
+//         {post}
+//       </Markdown>
+//     </div>
+//   );
+// }
+
+// export default DisplayMarkdown;

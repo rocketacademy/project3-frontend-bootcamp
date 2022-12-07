@@ -1,25 +1,19 @@
-import React from "react";
-import { useParams, Link } from "react-router-dom";
-import { Text } from "@mantine/core";
-import ModalDemo from "./Modal";
+import React from 'react';
+import { useParams, Link } from 'react-router-dom';
+import { Text, Image } from '@mantine/core';
+import Frontend from './CourseComponents/Frontend';
+import starpic from '../images/star map-01-01.png';
 
 const CourseMaterials = () => {
   return (
-    <div className="git-book">
-      <Text component={Link} variant="link" to="/frontend">
-        Frontend
-      </Text>
-      <h2>Frontend</h2>
-      <h2>Gitbook</h2>
-      <h2>Gitbook</h2>
-      <h2>Gitbook</h2>
-      <h2>Gitbook</h2>
-      <h2>Gitbook</h2>
-      <h2>Gitbook</h2>
-      <h2>Gitbook</h2>
-      <h2>Gitbook</h2>
-      <ModalDemo />
-    </div>
+    // <div className="git-book">
+    <>
+      <div style={{ height: 800, marginLeft: 300, paddingTop: 40 }}>
+        <Image height={900} src={starpic} />
+      </div>
+      <Frontend />
+    </>
+    // </div>
   );
 };
 
