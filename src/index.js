@@ -1,5 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
+import { MantineProvider } from '@mantine/core';
+import { ModalsProvider } from '@mantine/modals';
 import { BrowserRouter } from 'react-router-dom';
 import './index.css';
 import App from './App';
@@ -14,8 +16,10 @@ root.render(
   //   audience={process.env.REACT_APP_AUDIENCE}
   //   scope={process.env.REACT_APP_SCOPE}
   // >
-
-  <App />
-
+  <MantineProvider>
+    <ModalsProvider>
+      <App />
+    </ModalsProvider>
+  </MantineProvider>
   // </Auth0Provider>
 );
