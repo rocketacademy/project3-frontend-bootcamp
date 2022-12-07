@@ -10,16 +10,17 @@ import {
 } from 'firebase/storage';
 import axios from 'axios';
 import { Modal } from '@mantine/core';
+import Forum from './Forum';
 
 const MARKDOWN_FOLDER_NAME = 'markdown';
 
-function DisplayMarkdown() {
+function DisplayMarkdown({ markdown }) {
   const [post, setPost] = useState('');
   const [isDark, setIsDark] = useState(true);
-  const url =
-    'https://raw.githubusercontent.com/weiyu95/bootcamp3.0-docs/main/1-frontend/1.2-css/1.2.1-layout.md';
+  // const url =
+  //   'https://raw.githubusercontent.com/weiyu95/bootcamp3.0-docs/main/1-frontend/1.2-css/1.2.1-layout.md';
 
-  axios.get(url).then((res) => {
+  axios.get(markdown).then((res) => {
     setPost(res.data);
     // console.log(res.data);
   });
@@ -51,6 +52,7 @@ function DisplayMarkdown() {
       >
         {post}
       </Markdown>
+      <Forum />
     </div>
   );
 }

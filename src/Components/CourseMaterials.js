@@ -3,6 +3,7 @@ import { useParams, Link } from 'react-router-dom';
 import { Text, Image } from '@mantine/core';
 import Frontend from './CourseComponents/Frontend';
 import starpic from '../images/star map-01-01.png';
+import ModalComponent from './ModalComponent';
 
 const CourseMaterials = () => {
   return (
@@ -12,6 +13,7 @@ const CourseMaterials = () => {
         <Image height={900} src={starpic} />
       </div>
       <Frontend />
+      {/* <ModalComponent /> */}
     </>
     // </div>
   );
