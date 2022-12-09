@@ -1,9 +1,9 @@
 import React from 'react';
 import Profile from './Profile';
-import api from '../api/materials';
+
 import { useState, useEffect } from 'react';
 import TimeDisplay from './TimeDisplay';
-import CourseMaterials from './CourseMaterials';
+
 // import starpic from '../images/Star-map-test-01.png';
 import {
   Card,
@@ -15,14 +15,16 @@ import {
   Anchor,
   Stack,
 } from '@mantine/core';
+import { Outlet } from 'react-router-dom';
+// import { Outlet } from 'react-router-dom';
 
 const LandingPage = () => {
   return (
     <div className="bg-container">
       {/* <img className="star-map" src={starpic} alt="star map"></img> */}
+      <Outlet />
       <Profile />
       <TimeDisplay />
-      <CourseMaterials />
     </div>
   );
 };
