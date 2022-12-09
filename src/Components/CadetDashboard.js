@@ -1,5 +1,5 @@
-import React from "react";
-import { useState, useEffect } from "react";
+import React from 'react';
+import { useState, useEffect } from 'react';
 import {
   AppShell,
   Burger,
@@ -10,21 +10,22 @@ import {
   Image,
   Button,
   useMantineTheme,
-} from "@mantine/core";
+} from '@mantine/core';
 
-import Schedule from "./Schedule";
-import LandingPage from "./LandingPage";
-import Profile from "./Profile";
-import { BrowserRouter as Router, Link, Route, Routes } from "react-router-dom";
-import Rlogo from "../images/rocket-logo.png";
-import { ThemeContext } from "@emotion/react";
-import api from "../api/materials";
+import Schedule from './Schedule';
+import LandingPage from './LandingPage';
+import Profile from './Profile';
+import { BrowserRouter as Router, Link, Route, Routes } from 'react-router-dom';
+import Rlogo from '../images/rocket-logo.png';
+import { ThemeContext } from '@emotion/react';
+import api from '../api/materials';
 
-import CourseMaterials from "./CourseMaterials";
+import CourseMaterials from './CourseMaterials';
 
-import DisplayMarkdown from "./DisplayMarkdown";
-import LoginButton from "./LoginButton";
-import LogoutButton from "./LogoutButton";
+import DisplayMarkdown from './DisplayMarkdown';
+import LoginButton from './LoginButton';
+import LogoutButton from './LogoutButton';
+import Frontend from './CourseComponents/Frontend';
 
 const CadetDashboard = () => {
   const [opened, setOpened] = useState(false);
@@ -53,24 +54,22 @@ const CadetDashboard = () => {
                 className="nav-logo"
                 style={{
                   width: 250,
-                  marginLeft: "auto",
-                  marginRight: "auto",
+                  marginLeft: 'auto',
+                  marginRight: 'auto',
                 }}
               >
                 <Image src={Rlogo} alt="rocket logo" />
               </div>
             </Navbar.Section>
             <Navbar.Section grow mt="lg">
-              <div style={{ display: "flex", flexDirection: "column" }}>
+              <div style={{ display: 'flex', flexDirection: 'column' }}>
                 <Text component={Link} variant="link" to="/">
                   Home Page
                 </Text>
                 <Text component={Link} variant="link" to="/course-materials">
                   CourseMaterials
                 </Text>
-                <Text component={Link} variant="link" to="/display-markdown">
-                  Display Markdown
-                </Text>
+
                 <Text component={Link} variant="link" to="/schedule">
                   Schedule
                 </Text>
@@ -79,6 +78,7 @@ const CadetDashboard = () => {
             <Navbar.Section>
               {/* <Text className="footer-text">Footer</Text> */}
               <LoginButton />
+              <br />
               <LogoutButton />
               {/* <Button color="yellow" size="xs">
                 Log Out
@@ -92,15 +92,8 @@ const CadetDashboard = () => {
         <Routes>
           <Route path="/" element={<LandingPage />} />
           <Route path="/course-materials" element={<CourseMaterials />} />
-          <Route
-            path="/course-materials/:modules"
-            element={<DisplayMarkdown />}
-          />
-          <Route path="/display-markdown" element={<DisplayMarkdown />} />
-          <Route
-            path="/course-materials/:modules"
-            element={<CourseMaterials />}
-          />
+          <Route path="/course-materials" element={<Frontend />} />
+
           <Route path="/schedule" element={<Schedule />} />
         </Routes>
       </AppShell>
