@@ -16,8 +16,8 @@ import Profile from "./Profile";
 import { BrowserRouter as Router, Link, Route, Routes } from "react-router-dom";
 import { ThemeContext } from "@emotion/react";
 import DisplayMarkdown from "./DisplayMarkdown";
-import LoginButton from "./LoginButton";
 import LogoutButton from "./LogoutButton";
+import { withAuthenticationRequired } from "@auth0/auth0-react";
 
 import Rlogo from "../images/rocket-logo.png";
 import { IconHome2, IconCalendarEvent } from "@tabler/icons";
@@ -35,6 +35,7 @@ import Capstone from "./CourseComponents/Capstone";
 import Algorithms from "./CourseComponents/Algorithms";
 import InterviewPrep from "./CourseComponents/InterviewPrep";
 import Schedule from "./Schedule";
+import Loading from "./Loading";
 
 const CadetDashboard = () => {
   const [opened, setOpened] = useState(false);
@@ -181,12 +182,7 @@ const CadetDashboard = () => {
           </Navbar.Section>
           <Navbar.Section>
             {/* <Text className="footer-text">Footer</Text> */}
-            <LoginButton />
-            <br />
             <LogoutButton />
-            {/* <Button color="yellow" size="xs">
-                Log Out
-              </Button> */}
             <br />
             <br />
           </Navbar.Section>
@@ -213,4 +209,6 @@ const CadetDashboard = () => {
   );
 };
 
-export default CadetDashboard;
+export default withAuthenticationRequired(CadetDashboard, {
+  onRedirecting: () => <Loading />,
+});
