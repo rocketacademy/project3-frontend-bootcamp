@@ -39,7 +39,7 @@
 .bg-container {
   /* margin-top: 20px; */
 
-  background-image: url('./images/star-bg-e.jpg');
+  background-image: url("./images/star-bg-e.jpg");
   /* height: 100vh; */
   height: 100%;
   background-repeat: no-repeat;
