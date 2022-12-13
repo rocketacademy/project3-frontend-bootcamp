@@ -108,7 +108,7 @@ function MainMap() {
                   },
                 })}
                 onClick={() => {
-                  navigate('/welcome');
+                  navigate('/cadet/welcome');
                 }}
               >
                 {btn1.id}
@@ -155,7 +155,7 @@ function MainMap() {
                   },
                 })}
                 onClick={() => {
-                  navigate('/logistics');
+                  navigate('/cadet/logistics');
                 }}
               >
                 {btn2.id}
@@ -198,7 +198,7 @@ function MainMap() {
                   },
                 })}
                 onClick={() => {
-                  navigate('/general-ref');
+                  navigate('/cadet/general-ref');
                 }}
               >
                 {btn3.id}
@@ -207,7 +207,7 @@ function MainMap() {
             <HoverCard.Dropdown>
               <Text fw={500} size="sm">
                 Here are some recommended resources and common conventions that
-                all bootcampers should take note of!
+                all bootcampers should note!
               </Text>
             </HoverCard.Dropdown>
           </HoverCard>
@@ -241,7 +241,7 @@ function MainMap() {
                   },
                 })}
                 onClick={() => {
-                  navigate('/foundations');
+                  navigate('/cadet/foundations');
                 }}
               >
                 {btn4.id}
@@ -287,7 +287,7 @@ function MainMap() {
                   },
                 })}
                 onClick={() => {
-                  navigate('/frontend');
+                  navigate('/cadet/frontend');
                 }}
               >
                 {btn5.id}
@@ -333,7 +333,7 @@ function MainMap() {
                   },
                 })}
                 onClick={() => {
-                  navigate('/full-stack');
+                  navigate('/cadet/full-stack');
                 }}
               >
                 {btn6.id}
@@ -379,7 +379,7 @@ function MainMap() {
                   },
                 })}
                 onClick={() => {
-                  navigate('/backend');
+                  navigate('/cadet/backend');
                 }}
               >
                 {btn7.id}
@@ -429,7 +429,7 @@ function MainMap() {
                   },
                 })}
                 onClick={() => {
-                  navigate('/capstone');
+                  navigate('/cadet/capstone');
                 }}
               >
                 {btn8.id}
@@ -475,7 +475,7 @@ function MainMap() {
                   },
                 })}
                 onClick={() => {
-                  navigate('/algorithms');
+                  navigate('/cadet/algorithms');
                 }}
               >
                 {btn9.id}
@@ -523,7 +523,7 @@ function MainMap() {
                   },
                 })}
                 onClick={() => {
-                  navigate('/interview-prep');
+                  navigate('/cadet/interview-prep');
                 }}
               >
                 {btn10.id}
