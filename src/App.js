@@ -12,6 +12,8 @@ import {
 import CadetDashboard from "./Components/CadetDashboard";
 import RocketMainPage from "./Components/RocketMainPage";
 import PrivateRoutesCadet from "./PrivateRoutesCadet";
+import PrivateRoutesSL from "./PrivateRoutesSL";
+import SLDashboard from "./Components/SLDashboard";
 
 // import { AuthProvider } from './Components/AuthContext';
 
@@ -23,6 +25,7 @@ class App extends React.Component {
         <Routes>
           <Route path="/" element={<RocketMainPage />} />
           <Route path="/cadet/*" element={<CadetDashboard />} />
+          <Route path="/sl/*" element={<SLDashboard />} />
           <Route path="*" element={"Nothing here!"} />
         </Routes>
       </div>
