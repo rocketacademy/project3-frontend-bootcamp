@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Modal, Button, Group, Text, Image } from '@mantine/core';
-import starpic from '../../images/star map-01-01.png';
-
+import starpic from '../../images/Frontend-map.png';
+import '../css/Frontend.css';
 import axios from 'axios';
 
 import { BACKEND_URL } from '../../constants.js';
