@@ -1,0 +1,51 @@
+.Section-1-btn {
+  position: fixed;
+  bottom: 100px;
+  /* bottom: 600px; */
+  left: 430px;
+}
+.Section-2-btn {
+  position: fixed;
+  bottom: 410px;
+  left: 740px;
+}
+.Section-3-btn {
+  position: fixed;
+  top: 275px;
+  left: 450px;
+}
+.Section-4-btn {
+  position: fixed;
+  top: 130px;
+  left: 980px;
+}
+.Section-5-btn {
+  position: fixed;
+  top: 280px;
+  right: 590px;
+}
+.Section-6-btn {
+  position: fixed;
+  top: 175px;
+  right: 340px;
+}
+.Section-7-btn {
+  position: fixed;
+  bottom: 415px;
+  right: 120px;
+}
+.Section-8-btn {
+  position: fixed;
+  bottom: 185px;
+  right: 400px;
+}
+.Section-9-btn {
+  position: fixed;
+  bottom: 310px;
+  right: 640px;
+}
+.Section-10-btn {
+  position: fixed;
+  bottom: 130px;
+  right: 830px;
+}

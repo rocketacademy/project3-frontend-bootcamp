@@ -10,11 +10,12 @@ import {
 } from 'firebase/storage';
 import axios from 'axios';
 import { Modal } from '@mantine/core';
+import Forum from './Forum';
 
 const MARKDOWN_FOLDER_NAME = 'markdown';
 
-function DisplayMarkdown(markdown) {
-  const [post, setPost] = useState("");
+function DisplayMarkdown({ markdown }) {
+  const [post, setPost] = useState('');
   const [isDark, setIsDark] = useState(true);
 
   useEffect(() => {
@@ -51,6 +52,7 @@ function DisplayMarkdown(markdown) {
       >
         {post}
       </Markdown>
+      <Forum />
     </div>
   );
 }

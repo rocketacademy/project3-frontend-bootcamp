@@ -1,11 +1,10 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
 import { Textarea, Button, TextInput } from '@mantine/core';
-import { useNavigate } from 'react-router-dom';
+
 import api from '../api/materials';
 
 const Forum = () => {
-  const navigate = useNavigate();
   // const { topic } = useParams();
   // const user = useContext(UserContext);
   const [fileInputFile, setFileInputFile] = useState(null);
@@ -35,9 +34,9 @@ const Forum = () => {
     fetchForum();
   }, []);
 
-  let forumPosts = posts.map((posts, index) => {
-    return <div className="forum-posts" key={index} id={posts.key}></div>;
-  });
+  // let forumPosts = posts.map((posts, index) => {
+  //   return <div className="forum-posts" key={index} id={posts.key}></div>;
+  // });
 
   //  const handleCompleted  = async (id) => {
 
@@ -53,11 +52,6 @@ const Forum = () => {
   //             console.log(`Error: ${err.message}`);
   //         }
   //     }
-  const changeColor = () => {
-    if (completed === true) {
-      setColor('yellow');
-    } else setColor('gray');
-  };
 
   return (
     <div className="post-box">
@@ -91,9 +85,7 @@ const Forum = () => {
         size="sm"
         mt="md"
         radius="md"
-        onClick={() => {
-          changeColor();
-        }}
+        onClick={() => {}}
       >
         Mark as Completed
       </Button>

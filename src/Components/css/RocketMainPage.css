@@ -1,0 +1,14 @@
+.Rocket-main-page {
+  background-image: url("../../images/Rocket-Main-Pg.png");
+  height: 100vh;
+  /* height: 100%; */
+  background-repeat: no-repeat;
+  /* width: 100%; */
+  background-size: cover;
+}
+
+.Login-btn {
+  position: fixed;
+  top: 50px;
+  right: 150px;
+}

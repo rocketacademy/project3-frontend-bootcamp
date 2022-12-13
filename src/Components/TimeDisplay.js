@@ -57,17 +57,18 @@ export default function TimeDisplay() {
   // }, []);
 
   return (
-    <Container className="Time-header" size={400} px={50}>
-      <Card shadow="sm" p="xl" radius="md" withBorder>
-        <Text ta="center" weight={600} size={14} mt="md">
-          {date.toLocaleTimeString('en-GB')}
-          <br />
-          {date.toLocaleDateString('en-GB')}
-          <br />
-          {day}
-        </Text>
+    // <Container className="Time-header" size={400} px={50}>
+
+    <Paper className="Time-header" shadow="sm" p="xl" radius="sm" withBorder>
+      <Text ta="center" weight={600} size={14}>
+        {date.toLocaleTimeString('en-US')}
         <br />
-      </Card>
-    </Container>
+        {date.toLocaleDateString('en-GB')}
+        <br />
+        {day}
+      </Text>
+    </Paper>
+
+    // </Container>
   );
 }
