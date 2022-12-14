@@ -10,9 +10,10 @@ import {
   Paper,
 } from '@mantine/core';
 import CadetDashboard from './Components/CadetDashboard';
-import SLDashboard from './Components/SLDashboard';
 import RocketMainPage from './Components/RocketMainPage';
 import PrivateRoutesCadet from './PrivateRoutesCadet';
+import PrivateRoutesSL from './PrivateRoutesSL';
+import SLDashboard from './Components/SLDashboard';
 
 // import { AuthProvider } from './Components/AuthContext';
 

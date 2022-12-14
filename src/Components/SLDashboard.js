@@ -1,5 +1,4 @@
 import React from 'react';
-import '../Components/css/SLDashboard.css';
 import { useState, useEffect } from 'react';
 import {
   AppShell,
@@ -78,7 +77,7 @@ const SLDashboard = () => {
                 fw={500}
                 component={Link}
                 variant="link"
-                to="/cadet/main-map"
+                to="/sl/main-map"
               >
                 <IconHome2 color="white" size={13} />
                 Home Page
@@ -88,98 +87,19 @@ const SLDashboard = () => {
                 fw={500}
                 component={Link}
                 variant="link"
-                to="/cadet/schedule"
+                to="/sl/schedule"
               >
                 {' '}
                 <IconCalendarEvent color="white" size={13} />
                 Schedule
               </Text>
               <br />
-              <Text
-                ta="left"
-                component={Link}
-                variant="link"
-                to="/cadet/welcome"
-              >
-                🚀Welcome to Rocket
-              </Text>
-
-              <Text
-                ta="left"
-                component={Link}
-                variant="link"
-                to="/cadet/logistics"
-              >
-                🛠️Logistics
-              </Text>
-              <Text
-                ta="left"
-                component={Link}
-                variant="link"
-                to="/cadet/general-ref"
-              >
-                📚General Reference
-              </Text>
-              <Text
-                ta="left"
-                component={Link}
-                variant="link"
-                to="/cadet/foundations"
-              >
-                💎Foundations
-              </Text>
-              <Text
-                ta="left"
-                component={Link}
-                variant="link"
-                to="/cadet/frontend"
-              >
-                🖼️Frontend
-              </Text>
-              <Text
-                ta="left"
-                component={Link}
-                variant="link"
-                to="/cadet/full-stack"
-              >
-                🏭Full Stack
-              </Text>
-              <Text
-                ta="left"
-                component={Link}
-                variant="link"
-                to="/cadet/backend"
-              >
-                🤖Backend
-              </Text>
-              <Text
-                ta="left"
-                component={Link}
-                variant="link"
-                to="/cadet/capstone"
-              >
-                ⛰️Capstone
-              </Text>
-              <Text
-                ta="left"
-                component={Link}
-                variant="link"
-                to="/cadet/algorithms"
-              >
-                🧮Algorithms
-              </Text>
-              <Text
-                ta="left"
-                component={Link}
-                variant="link"
-                to="/cadet/interview-prep"
-              >
-                💼Interview Prep
+              <Text ta="left" component={Link} variant="link" to="/sl/welcome">
+                🚀PTBC4
               </Text>
             </div>
           </Navbar.Section>
           <Navbar.Section>
-            {/* <Text className="footer-text">Footer</Text> */}
             <LogoutButton />
             <br />
             <br />
@@ -191,15 +111,6 @@ const SLDashboard = () => {
         <Route path="/" element={<LandingPage />}>
           <Route path="/main-map" element={<MainMap />} />
           <Route path="/welcome" element={<Welcome />} />
-          <Route path="/logistics" element={<Logistics />} />
-          <Route path="/general-ref" element={<GeneralRef />} />
-          <Route path="/frontend" element={<Frontend />} />
-          <Route path="/foundations" element={<Foundations />} />
-          <Route path="/full-stack" element={<FullStack />} />
-          <Route path="/backend" element={<Backend />} />
-          <Route path="/capstone" element={<Capstone />} />
-          <Route path="/algorithms" element={<Algorithms />} />
-          <Route path="/interview-prep" element={<InterviewPrep />} />
         </Route>
         <Route path="/schedule" element={<Schedule />} />
       </Routes>
