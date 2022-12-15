@@ -25,7 +25,9 @@ class App extends React.Component {
         <Routes>
           <Route path="/" element={<RocketMainPage />} />
           <Route path="/cadet/*" element={<CadetDashboard />} />
-          <Route path="/sl/*" element={<SLDashboard />} />
+          {/* <Route path="/sl/*" element={<SLDashboard />} /> */}
+          {/* <Route path="/cadet/*" element={<CadetDashboard />} />
+          <Route path="/sl/*" element={<SLDashboard />} /> */}
           <Route path="*" element={'Nothing here!'} />
         </Routes>
       </div>

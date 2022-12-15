@@ -29,9 +29,11 @@ function Frontend() {
   const [btn11, setBtn11] = useState('');
 
   const [cadetId, setCadetId] = useState(1);
+  const [chapterId, setChapterId] = useState('');
 
   const [completedChaps, setCompletedChaps] = useState({});
   const [markdownUrl, setMarkdownUrl] = useState('');
+  const [disabled, setDisabled] = useState(false);
 
   useEffect(() => {
     const fetchChapters = async () => {
@@ -73,6 +75,44 @@ function Frontend() {
     fetchChapters();
   }, []);
 
+  const handleClick = (e) => {
+    // e.preventDefault();
+
+    axios
+      .post(`${BACKEND_URL}/cadetChapters/${chapterId}`, {
+        cadetId: Number(cadetId),
+        ChapterId: Number(chapterId),
+        completed: false,
+        updatedAt: new Date().toLocaleDateString(),
+      })
+      .then((res) => {
+        console.log('resdata:', res.data);
+        console.log('Chapter data created');
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  const handleSubmit = () => {
+    // e.preventDefault();
+
+    axios
+      .put(`${BACKEND_URL}/cadetChapters/${chapterId}`, {
+        completed: true,
+      })
+      .then((res) => {
+        console.log('resdata:', res.data);
+        console.log('marked complete');
+        setDisabled(true);
+        // navigate(`/client/journals/${res.data.id}`);
+        //after clicking submit it will disable the button and also close the modal?
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
   return (
     <>
       <div style={{ height: 800, marginLeft: 300, paddingTop: 40 }}>
@@ -100,6 +140,7 @@ function Frontend() {
               },
             })}
             onClick={() => {
+              handleClick();
               openModal({
                 title: 'FRONTEND',
                 size: '55%',
@@ -108,6 +149,19 @@ function Frontend() {
                 children: (
                   <>
                     <DisplayMarkdown markdown={btn1.markdownUrl} />
+                    <Button
+                      disabled={completedChaps[btn1.id]}
+                      variant="filled"
+                      color="red"
+                      size="sm"
+                      mt="md"
+                      radius="md"
+                      onClick={() => {
+                        handleSubmit();
+                      }}
+                    >
+                      Mark as Completed
+                    </Button>
                   </>
                 ),
               });
@@ -134,6 +188,7 @@ function Frontend() {
               },
             })}
             onClick={() => {
+              handleClick();
               openModal({
                 title: 'HTML',
                 size: '55%',
@@ -142,6 +197,19 @@ function Frontend() {
                 children: (
                   <>
                     <DisplayMarkdown markdown={btn2.markdownUrl} />{' '}
+                    <Button
+                      disabled={completedChaps[btn2.id]}
+                      variant="filled"
+                      color="red"
+                      size="sm"
+                      mt="md"
+                      radius="md"
+                      onClick={() => {
+                        handleSubmit();
+                      }}
+                    >
+                      Mark as Completed
+                    </Button>
                   </>
                 ),
               });
@@ -174,6 +242,7 @@ function Frontend() {
               },
             })}
             onClick={() => {
+              handleClick();
               openModal({
                 title: 'CSS',
                 size: '55%',
@@ -181,6 +250,19 @@ function Frontend() {
                 children: (
                   <>
                     <DisplayMarkdown markdown={btn3.markdownUrl} />
+                    <Button
+                      disabled={completedChaps[btn3.id]}
+                      variant="filled"
+                      color="red"
+                      size="sm"
+                      mt="md"
+                      radius="md"
+                      onClick={() => {
+                        handleSubmit();
+                      }}
+                    >
+                      Mark as Completed
+                    </Button>
                   </>
                 ),
               });
@@ -207,6 +289,7 @@ function Frontend() {
               },
             })}
             onClick={() => {
+              handleClick();
               openModal({
                 title: 'LAYOUT',
                 size: '55%',
@@ -214,6 +297,19 @@ function Frontend() {
                 children: (
                   <>
                     <DisplayMarkdown markdown={btn4.markdownUrl} />
+                    <Button
+                      disabled={completedChaps[btn4.id]}
+                      variant="filled"
+                      color="red"
+                      size="sm"
+                      mt="md"
+                      radius="md"
+                      onClick={() => {
+                        handleSubmit();
+                      }}
+                    >
+                      Mark as Completed
+                    </Button>
                   </>
                 ),
               });
@@ -243,6 +339,7 @@ function Frontend() {
               },
             })}
             onClick={() => {
+              handleClick();
               openModal({
                 title: 'REACT',
                 size: '55%',
@@ -250,6 +347,19 @@ function Frontend() {
                 children: (
                   <>
                     <DisplayMarkdown markdown={btn5.markdownUrl} />
+                    <Button
+                      disabled={completedChaps[btn5.id]}
+                      variant="filled"
+                      color="red"
+                      size="sm"
+                      mt="md"
+                      radius="md"
+                      onClick={() => {
+                        handleSubmit();
+                      }}
+                    >
+                      Mark as Completed
+                    </Button>
                   </>
                 ),
               });
@@ -282,6 +392,7 @@ function Frontend() {
               },
             })}
             onClick={() => {
+              handleClick();
               openModal({
                 title: 'RECIPE SITE E1',
                 size: '55%',
@@ -289,6 +400,19 @@ function Frontend() {
                 children: (
                   <>
                     <DisplayMarkdown markdown={btn6.markdownUrl} />
+                    <Button
+                      disabled={completedChaps[btn6.id]}
+                      variant="filled"
+                      color="red"
+                      size="sm"
+                      mt="md"
+                      radius="md"
+                      onClick={() => {
+                        handleSubmit();
+                      }}
+                    >
+                      Mark as Completed
+                    </Button>
                   </>
                 ),
               });
@@ -315,6 +439,7 @@ function Frontend() {
               },
             })}
             onClick={() => {
+              handleClick();
               openModal({
                 title: 'PORTFOLIO PAGE E2',
                 size: '55%',
@@ -322,6 +447,19 @@ function Frontend() {
                 children: (
                   <>
                     <DisplayMarkdown markdown={btn7.markdownUrl} />
+                    <Button
+                      disabled={completedChaps[btn7.id]}
+                      variant="filled"
+                      color="red"
+                      size="sm"
+                      mt="md"
+                      radius="md"
+                      onClick={() => {
+                        handleSubmit();
+                      }}
+                    >
+                      Mark as Completed
+                    </Button>
                   </>
                 ),
               });
@@ -351,6 +489,7 @@ function Frontend() {
               },
             })}
             onClick={() => {
+              handleClick();
               openModal({
                 title: 'WORLD CLOCK E3',
                 size: '55%',
@@ -358,6 +497,19 @@ function Frontend() {
                 children: (
                   <>
                     <DisplayMarkdown markdown={btn8.markdownUrl} />
+                    <Button
+                      disabled={completedChaps[btn8.id]}
+                      variant="filled"
+                      color="red"
+                      size="sm"
+                      mt="md"
+                      radius="md"
+                      onClick={() => {
+                        handleSubmit();
+                      }}
+                    >
+                      Mark as Completed
+                    </Button>
                   </>
                 ),
               });
@@ -387,6 +539,7 @@ function Frontend() {
               },
             })}
             onClick={() => {
+              handleClick();
               openModal({
                 title: 'HIGH CARD E4',
                 size: '55%',
@@ -394,6 +547,19 @@ function Frontend() {
                 children: (
                   <>
                     <DisplayMarkdown markdown={btn9.markdownUrl} />
+                    <Button
+                      disabled={completedChaps[btn9.id]}
+                      variant="filled"
+                      color="red"
+                      size="sm"
+                      mt="md"
+                      radius="md"
+                      onClick={() => {
+                        handleSubmit();
+                      }}
+                    >
+                      Mark as Completed
+                    </Button>
                   </>
                 ),
               });
@@ -423,6 +589,7 @@ function Frontend() {
               },
             })}
             onClick={() => {
+              handleClick();
               openModal({
                 title: 'GUESS THE WORD E5',
                 size: '55%',
@@ -430,6 +597,19 @@ function Frontend() {
                 children: (
                   <>
                     <DisplayMarkdown markdown={btn10.markdownUrl} />
+                    <Button
+                      disabled={completedChaps[btn10.id]}
+                      variant="filled"
+                      color="red"
+                      size="sm"
+                      mt="md"
+                      radius="md"
+                      onClick={() => {
+                        handleSubmit();
+                      }}
+                    >
+                      Mark as Completed
+                    </Button>
                   </>
                 ),
               });
@@ -459,6 +639,7 @@ function Frontend() {
               },
             })}
             onClick={() => {
+              handleClick();
               openModal({
                 title: 'PROJECT 1: FRONTEND',
                 size: '55%',
@@ -466,6 +647,19 @@ function Frontend() {
                 children: (
                   <>
                     <DisplayMarkdown markdown={btn11.markdownUrl} />
+                    <Button
+                      disabled={completedChaps[btn11.id]}
+                      variant="filled"
+                      color="red"
+                      size="sm"
+                      mt="md"
+                      radius="md"
+                      onClick={() => {
+                        handleSubmit();
+                      }}
+                    >
+                      Mark as Completed
+                    </Button>
                   </>
                 ),
               });
