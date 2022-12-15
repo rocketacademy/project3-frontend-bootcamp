@@ -80,7 +80,7 @@ const CadetDashboard = () => {
                 fw={500}
                 component={Link}
                 variant="link"
-                to="/cadet/main-map"
+                to="/main-map"
               >
                 <IconHome2 color="white" size={13} />
                 Home Page
@@ -90,91 +90,46 @@ const CadetDashboard = () => {
                 fw={500}
                 component={Link}
                 variant="link"
-                to="/cadet/schedule"
+                to="/schedule"
               >
                 {" "}
                 <IconCalendarEvent color="white" size={13} />
                 Schedule
               </Text>
               <br />
-              <Text
-                ta="left"
-                component={Link}
-                variant="link"
-                to="/cadet/welcome"
-              >
+              <Text ta="left" component={Link} variant="link" to="/welcome">
                 🚀Welcome to Rocket
               </Text>
 
-              <Text
-                ta="left"
-                component={Link}
-                variant="link"
-                to="/cadet/logistics"
-              >
+              <Text ta="left" component={Link} variant="link" to="/logistics">
                 🛠️Logistics
               </Text>
-              <Text
-                ta="left"
-                component={Link}
-                variant="link"
-                to="/cadet/general-ref"
-              >
+              <Text ta="left" component={Link} variant="link" to="/general-ref">
                 📚General Reference
               </Text>
-              <Text
-                ta="left"
-                component={Link}
-                variant="link"
-                to="/cadet/foundations"
-              >
+              <Text ta="left" component={Link} variant="link" to="/foundations">
                 💎Foundations
               </Text>
-              <Text
-                ta="left"
-                component={Link}
-                variant="link"
-                to="/cadet/frontend"
-              >
+              <Text ta="left" component={Link} variant="link" to="/frontend">
                 🖼️Frontend
               </Text>
-              <Text
-                ta="left"
-                component={Link}
-                variant="link"
-                to="/cadet/full-stack"
-              >
+              <Text ta="left" component={Link} variant="link" to="/full-stack">
                 🏭Full Stack
               </Text>
-              <Text
-                ta="left"
-                component={Link}
-                variant="link"
-                to="/cadet/backend"
-              >
+              <Text ta="left" component={Link} variant="link" to="/backend">
                 🤖Backend
               </Text>
-              <Text
-                ta="left"
-                component={Link}
-                variant="link"
-                to="/cadet/capstone"
-              >
+              <Text ta="left" component={Link} variant="link" to="/capstone">
                 ⛰️Capstone
               </Text>
-              <Text
-                ta="left"
-                component={Link}
-                variant="link"
-                to="/cadet/algorithms"
-              >
+              <Text ta="left" component={Link} variant="link" to="/algorithms">
                 🧮Algorithms
               </Text>
               <Text
                 ta="left"
                 component={Link}
                 variant="link"
-                to="/cadet/interview-prep"
+                to="/interview-prep"
               >
                 💼Interview Prep
               </Text>

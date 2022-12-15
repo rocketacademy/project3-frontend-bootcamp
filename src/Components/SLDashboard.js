@@ -77,7 +77,7 @@ const SLDashboard = () => {
                 fw={500}
                 component={Link}
                 variant="link"
-                to="/sl/main-map"
+                to="/main-map"
               >
                 <IconHome2 color="white" size={13} />
                 Home Page
@@ -87,7 +87,7 @@ const SLDashboard = () => {
                 fw={500}
                 component={Link}
                 variant="link"
-                to="/sl/schedule"
+                to="/schedule"
               >
                 {" "}
                 <IconCalendarEvent color="white" size={13} />
