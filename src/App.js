@@ -9,31 +9,22 @@ import {
   MantineProvider,
   Paper,
 } from '@mantine/core';
-import CadetDashboard from './Components/CadetDashboard';
 import RocketMainPage from './Components/RocketMainPage';
-import PrivateRoutesCadet from './PrivateRoutesCadet';
-import PrivateRoutesSL from './PrivateRoutesSL';
-import SLDashboard from './Components/SLDashboard';
+import { useAuth0 } from '@auth0/auth0-react';
+import DashBoardNav from './Components/DashboardNav';
 
 // import { AuthProvider } from './Components/AuthContext';
 
-class App extends React.Component {
-  render() {
-    return (
-      // <AuthProvider>
-      <div className="App">
-        <Routes>
-          <Route path="/" element={<RocketMainPage />} />
-          <Route path="/cadet/*" element={<CadetDashboard />} />
-          {/* <Route path="/sl/*" element={<SLDashboard />} /> */}
-          {/* <Route path="/cadet/*" element={<CadetDashboard />} />
-          <Route path="/sl/*" element={<SLDashboard />} /> */}
-          <Route path="*" element={'Nothing here!'} />
-        </Routes>
-      </div>
-      // </AuthProvider>
-    );
-  }
-}
+export default function App() {
+  const { isAuthenticated } = useAuth0();
 
-export default App;
+  return (
+    // <AuthProvider>
+    <div className="App">
+      <Paper>
+        {isAuthenticated !== false ? <DashBoardNav /> : <RocketMainPage />}
+      </Paper>
+    </div>
+    // </AuthProvider>
+  );
+}

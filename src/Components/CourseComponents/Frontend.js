@@ -6,12 +6,14 @@ import axios from 'axios';
 
 import { BACKEND_URL } from '../../constants.js';
 import DisplayMarkdown from '../DisplayMarkdown';
+import { Params, useNavigate } from 'react-router-dom';
 
 import Forum from '../Forum';
 
 import { IconAlertCircle } from '@tabler/icons';
 
 import { openModal, closeAllModals } from '@mantine/modals';
+import { set } from 'firebase/database';
 
 function Frontend() {
   const [opened, setOpened] = useState(false);
@@ -30,16 +32,26 @@ function Frontend() {
 
   const [cadetId, setCadetId] = useState(1);
   const [chapterId, setChapterId] = useState('');
+  const [sectionId, setSectionId] = useState(5);
 
   const [completedChaps, setCompletedChaps] = useState({});
-  const [markdownUrl, setMarkdownUrl] = useState('');
+  const navigate = useNavigate();
+
   const [disabled, setDisabled] = useState(false);
+
+  // const sectId = () => {
+  //   window.location.pathname === '/frontend'
+  //     ? setSectionId(5)
+  //     : console.log(window.location.pathname);
+  // };
 
   useEffect(() => {
     const fetchChapters = async () => {
       try {
+        console.log('pathname', window.location.pathname);
+
         const response = await axios.get(
-          `${BACKEND_URL}/chapters/total-chapters?sectionId=${5}`
+          `${BACKEND_URL}/chapters/total-chapters?sectionId=${sectionId}`
         );
 
         console.log('chapters', response.data);
@@ -63,6 +75,7 @@ function Frontend() {
         let chapsCompleted = {};
 
         for (let i = 0; i < response2.data.length; i++) {
+          console.log('chaptId', response2.data[i].chapterId);
           chapsCompleted[response2.data[i].chapterId] = true;
         }
 
@@ -71,19 +84,20 @@ function Frontend() {
         console.log(err.response.data);
       }
     };
-
+    // sectId();
     fetchChapters();
   }, []);
 
-  const handleClick = (e) => {
+  const handleClick = (id) => {
+    //is it cos we are not sending any form data, hence no need to e.preventDefault?
     // e.preventDefault();
 
     axios
-      .post(`${BACKEND_URL}/cadetChapters/${chapterId}`, {
+      .post(`${BACKEND_URL}/cadetChapters`, {
         cadetId: Number(cadetId),
-        ChapterId: Number(chapterId),
+        chapterId: Number(id),
+        sectionId: Number(sectionId),
         completed: false,
-        updatedAt: new Date().toLocaleDateString(),
       })
       .then((res) => {
         console.log('resdata:', res.data);
@@ -94,19 +108,20 @@ function Frontend() {
       });
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = (e, id) => {
+    //is it cos we are not sending any form data, hence no need to e.preventDefault?
     // e.preventDefault();
 
     axios
-      .put(`${BACKEND_URL}/cadetChapters/${chapterId}`, {
+      .put(`${BACKEND_URL}/cadetChapters`, {
+        cadetId: cadetId,
+        chapterId: id,
+        sectionId: sectionId,
         completed: true,
       })
       .then((res) => {
         console.log('resdata:', res.data);
         console.log('marked complete');
-        setDisabled(true);
-        // navigate(`/client/journals/${res.data.id}`);
-        //after clicking submit it will disable the button and also close the modal?
       })
       .catch((err) => {
         console.log(err);
@@ -140,7 +155,7 @@ function Frontend() {
               },
             })}
             onClick={() => {
-              handleClick();
+              handleClick(btn1.id);
               openModal({
                 title: 'FRONTEND',
                 size: '55%',
@@ -157,7 +172,7 @@ function Frontend() {
                       mt="md"
                       radius="md"
                       onClick={() => {
-                        handleSubmit();
+                        handleSubmit(btn1.id);
                       }}
                     >
                       Mark as Completed
@@ -176,7 +191,7 @@ function Frontend() {
             radius={'xl'}
             styles={(theme) => ({
               root: {
-                backgroundColor: completedChaps[btn1.id] ? 'blue' : 'gray',
+                backgroundColor: completedChaps[btn2.id] ? 'blue' : 'gray',
                 border: 0,
                 height: 33,
                 paddingLeft: 14,
@@ -188,7 +203,7 @@ function Frontend() {
               },
             })}
             onClick={() => {
-              handleClick();
+              handleClick(btn2.id);
               openModal({
                 title: 'HTML',
                 size: '55%',
@@ -205,7 +220,7 @@ function Frontend() {
                       mt="md"
                       radius="md"
                       onClick={() => {
-                        handleSubmit();
+                        handleSubmit(btn2.id);
                       }}
                     >
                       Mark as Completed
@@ -242,7 +257,7 @@ function Frontend() {
               },
             })}
             onClick={() => {
-              handleClick();
+              handleClick(btn3.id);
               openModal({
                 title: 'CSS',
                 size: '55%',
@@ -258,7 +273,7 @@ function Frontend() {
                       mt="md"
                       radius="md"
                       onClick={() => {
-                        handleSubmit();
+                        handleSubmit(btn3.id);
                       }}
                     >
                       Mark as Completed
@@ -289,7 +304,7 @@ function Frontend() {
               },
             })}
             onClick={() => {
-              handleClick();
+              handleClick(btn4.id);
               openModal({
                 title: 'LAYOUT',
                 size: '55%',
@@ -305,7 +320,7 @@ function Frontend() {
                       mt="md"
                       radius="md"
                       onClick={() => {
-                        handleSubmit();
+                        handleSubmit(btn4.id);
                       }}
                     >
                       Mark as Completed
@@ -339,7 +354,7 @@ function Frontend() {
               },
             })}
             onClick={() => {
-              handleClick();
+              handleClick(btn5.id);
               openModal({
                 title: 'REACT',
                 size: '55%',
@@ -355,7 +370,7 @@ function Frontend() {
                       mt="md"
                       radius="md"
                       onClick={() => {
-                        handleSubmit();
+                        handleSubmit(btn5.id);
                       }}
                     >
                       Mark as Completed
@@ -392,8 +407,9 @@ function Frontend() {
               },
             })}
             onClick={() => {
-              handleClick();
+              handleClick(btn6.id);
               openModal({
+                opened: { opened },
                 title: 'RECIPE SITE E1',
                 size: '55%',
                 overflow: 'inside',
@@ -408,7 +424,10 @@ function Frontend() {
                       mt="md"
                       radius="md"
                       onClick={() => {
-                        handleSubmit();
+                        handleSubmit(btn6.id);
+                        // setDisabled(true);
+                        // closeAllModals();
+                        navigate('/foundations');
                       }}
                     >
                       Mark as Completed
@@ -439,7 +458,7 @@ function Frontend() {
               },
             })}
             onClick={() => {
-              handleClick();
+              handleClick(btn7.id);
               openModal({
                 title: 'PORTFOLIO PAGE E2',
                 size: '55%',
@@ -455,7 +474,7 @@ function Frontend() {
                       mt="md"
                       radius="md"
                       onClick={() => {
-                        handleSubmit();
+                        handleSubmit(btn7.id);
                       }}
                     >
                       Mark as Completed
@@ -489,7 +508,7 @@ function Frontend() {
               },
             })}
             onClick={() => {
-              handleClick();
+              handleClick(btn8.id);
               openModal({
                 title: 'WORLD CLOCK E3',
                 size: '55%',
@@ -505,7 +524,7 @@ function Frontend() {
                       mt="md"
                       radius="md"
                       onClick={() => {
-                        handleSubmit();
+                        handleSubmit(btn8.id);
                       }}
                     >
                       Mark as Completed
@@ -539,7 +558,7 @@ function Frontend() {
               },
             })}
             onClick={() => {
-              handleClick();
+              handleClick(btn9.id);
               openModal({
                 title: 'HIGH CARD E4',
                 size: '55%',
@@ -555,7 +574,7 @@ function Frontend() {
                       mt="md"
                       radius="md"
                       onClick={() => {
-                        handleSubmit();
+                        handleSubmit(btn9.id);
                       }}
                     >
                       Mark as Completed
@@ -589,7 +608,7 @@ function Frontend() {
               },
             })}
             onClick={() => {
-              handleClick();
+              handleClick(btn10.id);
               openModal({
                 title: 'GUESS THE WORD E5',
                 size: '55%',
@@ -605,7 +624,7 @@ function Frontend() {
                       mt="md"
                       radius="md"
                       onClick={() => {
-                        handleSubmit();
+                        handleSubmit(btn10.id);
                       }}
                     >
                       Mark as Completed
@@ -639,7 +658,7 @@ function Frontend() {
               },
             })}
             onClick={() => {
-              handleClick();
+              handleClick(btn11.id);
               openModal({
                 title: 'PROJECT 1: FRONTEND',
                 size: '55%',
@@ -655,7 +674,7 @@ function Frontend() {
                       mt="md"
                       radius="md"
                       onClick={() => {
-                        handleSubmit();
+                        handleSubmit(btn11.id);
                       }}
                     >
                       Mark as Completed
