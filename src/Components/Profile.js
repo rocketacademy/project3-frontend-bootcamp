@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 import {
   Menu,
   Button,
@@ -7,36 +7,46 @@ import {
   Title,
   Center,
   Image,
-} from '@mantine/core';
-import { IconSettings, IconMessageCircle, IconNotes } from '@tabler/icons';
-import ProgressBar from './ProgressBar';
-import Badges from './Badges';
-import pic from '../images/profile pic.jpg';
-import { useState, useEffect } from 'react';
-import { Link, useParams, useNavigate } from 'react-router-dom';
-import { BACKEND_URL } from '../constants.js';
-import axios from 'axios';
+} from "@mantine/core";
+import { IconSettings, IconMessageCircle, IconNotes } from "@tabler/icons";
+import ProgressBar from "./ProgressBar";
+import Badges from "./Badges";
+import pic from "../images/profile pic.jpg";
+import { useState, useEffect } from "react";
+import { Link, useParams, useNavigate } from "react-router-dom";
+import { BACKEND_URL } from "../constants.js";
+import axios from "axios";
+import { useAuth0 } from "@auth0/auth0-react";
 
 // to add in get photo URL for profile picture here + also the name upon auth0 log in
 
 const Profile = () => {
-  const [name, setName] = useState('NAME');
+  const [name, setName] = useState("NAME");
   const [cadetId, setCadetId] = useState(1);
+  const { user } = useAuth0();
 
   useEffect(() => {
-    const fetchCompleted = async () => {
-      try {
-        const response = await axios.get(
-          `${BACKEND_URL}/cadetSections/progress-status?cadetId=${cadetId}`
-        );
-        console.log('cadet name', response.data);
-        // setName(response.data);
-      } catch (err) {
-        console.log(err.response.data);
-      }
-    };
-    fetchCompleted();
-  }, []);
+    if (user) {
+      const fetchCompleted = async () => {
+        try {
+          const response = await axios.get(
+            // `${BACKEND_URL}/cadetSections/progress-status?cadetId=${cadetId}`,
+            `${BACKEND_URL}/cadets/cadet`,
+            {
+              params: {
+                cadetEmail: user.email,
+              },
+            }
+          );
+          console.log("cadet name", response.data);
+          setName(response.data.name);
+        } catch (err) {
+          console.log(err.response.data);
+        }
+      };
+      fetchCompleted();
+    }
+  }, [user]);
 
   return (
     <div className="profile-menu">
