@@ -22,7 +22,7 @@ import { useAuth0, withAuthenticationRequired } from "@auth0/auth0-react";
 import Rlogo from "../images/rocket-logo.png";
 import { IconHome2, IconCalendarEvent } from "@tabler/icons";
 
-import LandingPage from "./LandingPage";
+import CadetLandingPage from "./CadetLandingPage";
 import MainMap from "./CourseComponents/MainMap";
 import Welcome from "./CourseComponents/Welcome";
 import Logistics from "./CourseComponents/Logistics";
