@@ -1,23 +1,21 @@
 import { useState, useEffect } from 'react';
-import { Modal, Button, Group, Text, Image } from '@mantine/core';
+import { Button, Group, Text, Image } from '@mantine/core';
 import starpic from '../../images/Frontend-map.png';
+// import ModalBtn from '../ModalBtn';
+import MarkCompleteBtn from '../MarkCompleteBtn';
 import '../css/Frontend.css';
 import axios from 'axios';
-
 import { BACKEND_URL } from '../../constants.js';
 import DisplayMarkdown from '../DisplayMarkdown';
-
-import Forum from '../Forum';
-
-import { IconAlertCircle } from '@tabler/icons';
-
-import { openModal, closeAllModals } from '@mantine/modals';
+import { useParams } from 'react-router-dom';
+import { openModal } from '@mantine/modals';
+import { set } from 'firebase/database';
+import ModelTitle from '../ModelTitle';
 
 function Frontend() {
   const [opened, setOpened] = useState(false);
   const [btn1, setBtn1] = useState('');
   const [btn2, setBtn2] = useState('');
-
   const [btn3, setBtn3] = useState('');
   const [btn4, setBtn4] = useState('');
   const [btn5, setBtn5] = useState('');
@@ -27,17 +25,18 @@ function Frontend() {
   const [btn9, setBtn9] = useState('');
   const [btn10, setBtn10] = useState('');
   const [btn11, setBtn11] = useState('');
-
   const [cadetId, setCadetId] = useState(1);
 
   const [completedChaps, setCompletedChaps] = useState({});
-  const [markdownUrl, setMarkdownUrl] = useState('');
+
+  const { sectionId } = useParams();
+  const [markCompleted, setMarkCompleted] = useState();
 
   useEffect(() => {
     const fetchChapters = async () => {
       try {
         const response = await axios.get(
-          `${BACKEND_URL}/chapters/total-chapters?sectionId=${5}`
+          `${BACKEND_URL}/chapters/total-chapters?sectionId=${sectionId}`
         );
 
         console.log('chapters', response.data);
@@ -61,6 +60,7 @@ function Frontend() {
         let chapsCompleted = {};
 
         for (let i = 0; i < response2.data.length; i++) {
+          // console.log('chaptId', response2.data[i].chapterId);
           chapsCompleted[response2.data[i].chapterId] = true;
         }
 
@@ -69,9 +69,42 @@ function Frontend() {
         console.log(err.response.data);
       }
     };
-
+    // sectId();
     fetchChapters();
-  }, []);
+  }, [markCompleted]);
+
+  const handleClick = (id) => {
+    axios
+      .post(`${BACKEND_URL}/cadetChapters`, {
+        cadetId: Number(cadetId),
+        chapterId: Number(id),
+        sectionId: Number(sectionId),
+        completed: false,
+      })
+      .then((res) => {
+        console.log('Chapter data created');
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  const handleSubmit = (id) => {
+    axios
+      .put(`${BACKEND_URL}/cadetChapters`, {
+        cadetId: cadetId,
+        chapterId: id,
+        sectionId: sectionId,
+      })
+      .then((res) => {
+        console.log('resdata:', res.data);
+        console.log('marked complete');
+        setMarkCompleted(id);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
 
   return (
     <>
@@ -80,9 +113,7 @@ function Frontend() {
       </div>
       <Group position="center">
         <div className="Chapter-1-btn">
-          <Text fw={600} c="white" ta="left">
-            {btn1.name}
-          </Text>
+          <ModelTitle id={btn1.name} />
           <Button
             id={1}
             radius={'xl'}
@@ -100,6 +131,7 @@ function Frontend() {
               },
             })}
             onClick={() => {
+              handleClick(btn1.id);
               openModal({
                 title: 'FRONTEND',
                 size: '55%',
@@ -108,6 +140,12 @@ function Frontend() {
                 children: (
                   <>
                     <DisplayMarkdown markdown={btn1.markdownUrl} />
+
+                    <MarkCompleteBtn
+                      completedChaps={completedChaps[btn1.id]}
+                      id={btn1.id}
+                      handleSubmit={handleSubmit}
+                    />
                   </>
                 ),
               });
@@ -122,7 +160,7 @@ function Frontend() {
             radius={'xl'}
             styles={(theme) => ({
               root: {
-                backgroundColor: completedChaps[btn1.id] ? 'blue' : 'gray',
+                backgroundColor: completedChaps[btn2.id] ? 'blue' : 'gray',
                 border: 0,
                 height: 33,
                 paddingLeft: 14,
@@ -134,6 +172,7 @@ function Frontend() {
               },
             })}
             onClick={() => {
+              handleClick(btn2.id);
               openModal({
                 title: 'HTML',
                 size: '55%',
@@ -142,6 +181,11 @@ function Frontend() {
                 children: (
                   <>
                     <DisplayMarkdown markdown={btn2.markdownUrl} />{' '}
+                    <MarkCompleteBtn
+                      completedChaps={completedChaps[btn2.id]}
+                      id={btn2.id}
+                      handleSubmit={handleSubmit}
+                    />
                   </>
                 ),
               });
@@ -149,14 +193,10 @@ function Frontend() {
           >
             {btn2.chapterIndex}
           </Button>
-          <Text fw={600} c="white" ta="left">
-            {btn2.name}
-          </Text>
+          <ModelTitle id={btn2.name} />
         </div>
         <div className="Chapter-3-btn">
-          <Text fw={600} c="white" ta="left">
-            {btn3.name}
-          </Text>
+          <ModelTitle id={btn3.name} />
           <Button
             id={3}
             radius={'xl'}
@@ -174,6 +214,7 @@ function Frontend() {
               },
             })}
             onClick={() => {
+              handleClick(btn3.id);
               openModal({
                 title: 'CSS',
                 size: '55%',
@@ -181,6 +222,11 @@ function Frontend() {
                 children: (
                   <>
                     <DisplayMarkdown markdown={btn3.markdownUrl} />
+                    <MarkCompleteBtn
+                      completedChaps={completedChaps[btn3.id]}
+                      id={btn3.id}
+                      handleSubmit={handleSubmit}
+                    />
                   </>
                 ),
               });
@@ -207,6 +253,7 @@ function Frontend() {
               },
             })}
             onClick={() => {
+              handleClick(btn4.id);
               openModal({
                 title: 'LAYOUT',
                 size: '55%',
@@ -214,6 +261,11 @@ function Frontend() {
                 children: (
                   <>
                     <DisplayMarkdown markdown={btn4.markdownUrl} />
+                    <MarkCompleteBtn
+                      completedChaps={completedChaps[btn4.id]}
+                      id={btn4.id}
+                      handleSubmit={handleSubmit}
+                    />
                   </>
                 ),
               });
@@ -221,9 +273,7 @@ function Frontend() {
           >
             {btn4.chapterIndex}
           </Button>
-          <Text fw={600} c="white" ta="left">
-            {btn4.name}
-          </Text>
+          <ModelTitle id={btn4.name} />
         </div>
         <div className="Chapter-5-btn">
           <Button
@@ -243,6 +293,7 @@ function Frontend() {
               },
             })}
             onClick={() => {
+              handleClick(btn5.id);
               openModal({
                 title: 'REACT',
                 size: '55%',
@@ -250,6 +301,11 @@ function Frontend() {
                 children: (
                   <>
                     <DisplayMarkdown markdown={btn5.markdownUrl} />
+                    <MarkCompleteBtn
+                      completedChaps={completedChaps[btn5.id]}
+                      id={btn5.id}
+                      handleSubmit={handleSubmit}
+                    />
                   </>
                 ),
               });
@@ -257,14 +313,21 @@ function Frontend() {
           >
             {btn5.chapterIndex}
           </Button>
-          <Text fw={600} c="white" ta="left">
-            {btn5.name}
-          </Text>
+          <ModelTitle id={btn5.name} />
         </div>
         <div className="Chapter-6-btn">
           <Text fw={600} c="white" ta="left">
             {btn6.name}
           </Text>
+          {/* <ModalBtn
+            completedChaps={completedChaps[btn6.id]}
+            id={btn6.id}
+            handleSubmit={handleSubmit}
+            handleClick={handleClick}
+            markdownUrl={btn6.markdownUrl}
+            opened={opened}
+            openModal={openModal}
+          /> */}
           <Button
             id={6}
             radius={'xl'}
@@ -282,13 +345,20 @@ function Frontend() {
               },
             })}
             onClick={() => {
+              handleClick(btn6.id);
               openModal({
+                opened: { opened },
                 title: 'RECIPE SITE E1',
                 size: '55%',
                 overflow: 'inside',
                 children: (
                   <>
                     <DisplayMarkdown markdown={btn6.markdownUrl} />
+                    <MarkCompleteBtn
+                      completedChaps={completedChaps[btn6.id]}
+                      id={btn6.id}
+                      handleSubmit={handleSubmit}
+                    />
                   </>
                 ),
               });
@@ -315,6 +385,7 @@ function Frontend() {
               },
             })}
             onClick={() => {
+              handleClick(btn7.id);
               openModal({
                 title: 'PORTFOLIO PAGE E2',
                 size: '55%',
@@ -322,6 +393,11 @@ function Frontend() {
                 children: (
                   <>
                     <DisplayMarkdown markdown={btn7.markdownUrl} />
+                    <MarkCompleteBtn
+                      completedChaps={completedChaps[btn7.id]}
+                      id={btn7.id}
+                      handleSubmit={handleSubmit}
+                    />
                   </>
                 ),
               });
@@ -329,9 +405,7 @@ function Frontend() {
           >
             {btn7.chapterIndex}
           </Button>
-          <Text fw={600} c="white" ta="left">
-            {btn7.name}
-          </Text>
+          <ModelTitle id={btn7.name} />
         </div>
         <div className="Chapter-8-btn">
           <Button
@@ -351,6 +425,7 @@ function Frontend() {
               },
             })}
             onClick={() => {
+              handleClick(btn8.id);
               openModal({
                 title: 'WORLD CLOCK E3',
                 size: '55%',
@@ -358,6 +433,11 @@ function Frontend() {
                 children: (
                   <>
                     <DisplayMarkdown markdown={btn8.markdownUrl} />
+                    <MarkCompleteBtn
+                      completedChaps={completedChaps[btn8.id]}
+                      id={btn8.id}
+                      handleSubmit={handleSubmit}
+                    />
                   </>
                 ),
               });
@@ -365,9 +445,7 @@ function Frontend() {
           >
             {btn8.chapterIndex}
           </Button>
-          <Text fw={600} c="white" ta="left">
-            {btn8.name}
-          </Text>
+          <ModelTitle id={btn8.name} />
         </div>
         <div className="Chapter-9-btn">
           <Button
@@ -387,6 +465,7 @@ function Frontend() {
               },
             })}
             onClick={() => {
+              handleClick(btn9.id);
               openModal({
                 title: 'HIGH CARD E4',
                 size: '55%',
@@ -394,6 +473,11 @@ function Frontend() {
                 children: (
                   <>
                     <DisplayMarkdown markdown={btn9.markdownUrl} />
+                    <MarkCompleteBtn
+                      completedChaps={completedChaps[btn9.id]}
+                      id={btn9.id}
+                      handleSubmit={handleSubmit}
+                    />
                   </>
                 ),
               });
@@ -401,9 +485,7 @@ function Frontend() {
           >
             {btn9.chapterIndex}
           </Button>
-          <Text fw={600} c="white" ta="left">
-            {btn9.name}
-          </Text>
+          <ModelTitle id={btn9.name} />
         </div>
         <div className="Chapter-10-btn">
           <Button
@@ -413,9 +495,9 @@ function Frontend() {
               root: {
                 backgroundColor: completedChaps[btn10.id] ? 'blue' : 'gray',
                 border: 0,
-                height: 33,
-                paddingLeft: 13,
-                paddingRight: 13,
+                height: 35,
+                paddingLeft: 14,
+                paddingRight: 14,
 
                 '&:hover': {
                   backgroundColor: theme.fn.darken('#00acee', 0.2),
@@ -423,6 +505,7 @@ function Frontend() {
               },
             })}
             onClick={() => {
+              handleClick(btn10.id);
               openModal({
                 title: 'GUESS THE WORD E5',
                 size: '55%',
@@ -430,6 +513,11 @@ function Frontend() {
                 children: (
                   <>
                     <DisplayMarkdown markdown={btn10.markdownUrl} />
+                    <MarkCompleteBtn
+                      completedChaps={completedChaps[btn10.id]}
+                      id={btn10.id}
+                      handleSubmit={handleSubmit}
+                    />
                   </>
                 ),
               });
@@ -437,9 +525,7 @@ function Frontend() {
           >
             {btn10.chapterIndex}
           </Button>
-          <Text fw={600} c="white" ta="left">
-            {btn10.name}
-          </Text>
+          <ModelTitle id={btn10.name} />
         </div>
         <div className="Chapter-11-btn">
           <Button
@@ -449,9 +535,9 @@ function Frontend() {
               root: {
                 backgroundColor: completedChaps[btn11.id] ? 'blue' : 'gray',
                 border: 0,
-                height: 33,
-                paddingLeft: 11,
-                paddingRight: 11,
+                height: 35,
+                paddingLeft: 12,
+                paddingRight: 12,
 
                 '&:hover': {
                   backgroundColor: theme.fn.darken('#00acee', 0.2),
@@ -459,6 +545,7 @@ function Frontend() {
               },
             })}
             onClick={() => {
+              handleClick(btn11.id);
               openModal({
                 title: 'PROJECT 1: FRONTEND',
                 size: '55%',
@@ -466,6 +553,11 @@ function Frontend() {
                 children: (
                   <>
                     <DisplayMarkdown markdown={btn11.markdownUrl} />
+                    <MarkCompleteBtn
+                      completedChaps={completedChaps[btn11.id]}
+                      id={btn11.id}
+                      handleSubmit={handleSubmit}
+                    />
                   </>
                 ),
               });
@@ -473,9 +565,7 @@ function Frontend() {
           >
             {btn11.chapterIndex}
           </Button>
-          <Text fw={600} c="white" ta="left">
-            {btn11.name}
-          </Text>
+          <ModelTitle id={btn11.name} />
         </div>
       </Group>
     </>

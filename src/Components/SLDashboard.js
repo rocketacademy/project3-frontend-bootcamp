@@ -1,5 +1,5 @@
-import React from "react";
-import { useState, useEffect } from "react";
+import React from 'react';
+import { useState, useEffect } from 'react';
 import {
   AppShell,
   Burger,
@@ -10,32 +10,23 @@ import {
   Image,
   Button,
   useMantineTheme,
-} from "@mantine/core";
+} from '@mantine/core';
 
-import Profile from "./Profile";
-import { BrowserRouter as Router, Link, Route, Routes } from "react-router-dom";
-import { ThemeContext } from "@emotion/react";
-import DisplayMarkdown from "./DisplayMarkdown";
-import LogoutButton from "./LogoutButton";
-import { withAuthenticationRequired } from "@auth0/auth0-react";
+import Profile from './Profile';
+import { BrowserRouter as Router, Link, Route, Routes } from 'react-router-dom';
+import { ThemeContext } from '@emotion/react';
+import DisplayMarkdown from './DisplayMarkdown';
+import LogoutButton from './LogoutButton';
+import { withAuthenticationRequired } from '@auth0/auth0-react';
 
-import Rlogo from "../images/rocket-logo.png";
-import { IconHome2, IconCalendarEvent } from "@tabler/icons";
+import Rlogo from '../images/rocket-logo.png';
+import { IconHome2, IconCalendarEvent } from '@tabler/icons';
 
-import LandingPage from "./LandingPage";
-import MainMap from "./CourseComponents/MainMap";
-import Welcome from "./CourseComponents/Welcome";
-import Logistics from "./CourseComponents/Logistics";
-import GeneralRef from "./CourseComponents/GeneralRef";
-import Foundations from "./CourseComponents/Foundations";
-import Frontend from "./CourseComponents/Frontend";
-import FullStack from "./CourseComponents/FullStack";
-import Backend from "./CourseComponents/Backend";
-import Capstone from "./CourseComponents/Capstone";
-import Algorithms from "./CourseComponents/Algorithms";
-import InterviewPrep from "./CourseComponents/InterviewPrep";
-import Schedule from "./Schedule";
-import Loading from "./Loading";
+import MainMap from './CourseComponents/MainMap';
+
+import SLLandingPage from './SLLandingPage';
+import Schedule from './Schedule';
+import Loading from './Loading';
 
 const SLDashboard = () => {
   const [opened, setOpened] = useState(false);
@@ -63,15 +54,15 @@ const SLDashboard = () => {
               className="nav-logo"
               style={{
                 width: 250,
-                marginLeft: "auto",
-                marginRight: "auto",
+                marginLeft: 'auto',
+                marginRight: 'auto',
               }}
             >
               <Image src={Rlogo} alt="rocket logo" />
             </div>
           </Navbar.Section>
           <Navbar.Section grow mt="lg">
-            <div style={{ display: "flex", flexDirection: "column" }}>
+            <div style={{ display: 'flex', flexDirection: 'column' }}>
               <Text
                 ta="center"
                 fw={500}
@@ -89,14 +80,11 @@ const SLDashboard = () => {
                 variant="link"
                 to="/schedule"
               >
-                {" "}
+                {' '}
                 <IconCalendarEvent color="white" size={13} />
                 Schedule
               </Text>
               <br />
-              <Text ta="left" component={Link} variant="link" to="/sl/welcome">
-                🚀PTBC4
-              </Text>
             </div>
           </Navbar.Section>
           <Navbar.Section>
@@ -108,9 +96,8 @@ const SLDashboard = () => {
       }
     >
       <Routes>
-        <Route path="/" element={<LandingPage />}>
-          <Route path="/main-map" element={<MainMap />} />
-          <Route path="/welcome" element={<Welcome />} />
+        <Route path="/" element={<SLLandingPage />}>
+          <Route path="cadet/main-map" element={<MainMap />} />
         </Route>
         <Route path="/schedule" element={<Schedule />} />
       </Routes>
