@@ -1,16 +1,11 @@
 import { useState, useEffect } from 'react';
-import { Modal, Button, Group, Text, Image, HoverCard } from '@mantine/core';
+import { Button, Group, Text, Image, HoverCard } from '@mantine/core';
 import starpic from '../../images/Main tracker-01.png';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import '../css/MainMap.css';
-
 import { BACKEND_URL } from '../../constants.js';
-import DisplayMarkdown from '../DisplayMarkdown';
-
-import Forum from '../Forum';
-
-import { openModal, closeAllModals } from '@mantine/modals';
+import MainMapBtn from './MainMapBtn';
 
 function MainMap() {
   const [opened, setOpened] = useState(false);
@@ -33,10 +28,7 @@ function MainMap() {
   useEffect(() => {
     const fetchSections = async () => {
       try {
-        const response = await axios.get(
-          // `${BACKEND_URL}/chapters/total-chapters?sectionId=${5}`
-          `${BACKEND_URL}/sections`
-        );
+        const response = await axios.get(`${BACKEND_URL}/sections`);
 
         console.log('sections', response.data);
 
@@ -108,11 +100,16 @@ function MainMap() {
                   },
                 })}
                 onClick={() => {
-                  navigate('/welcome');
+                  navigate('/welcome/1');
                 }}
               >
                 {btn1.id}
               </Button>
+              {/* <MainMapBtn
+                completedChaps={completedChaps}
+                id={btn1.id}
+                navigate={navigate}
+              /> */}
             </HoverCard.Target>
             <HoverCard.Dropdown>
               <Text fw={500} size="sm">
@@ -155,7 +152,7 @@ function MainMap() {
                   },
                 })}
                 onClick={() => {
-                  navigate('/logistics');
+                  navigate('/logistics/2');
                 }}
               >
                 {btn2.id}
@@ -188,7 +185,6 @@ function MainMap() {
                     paddingLeft: 13,
                     paddingRight: 13,
 
-                    // color: completedChaps[btn3.id] ? 'white' : 'gray',
                     '&:hover': {
                       backgroundColor: completedChaps[btn3.id]
                         ? theme.fn.darken('#ef5152', 0.2)
@@ -198,7 +194,7 @@ function MainMap() {
                   },
                 })}
                 onClick={() => {
-                  navigate('/general-ref');
+                  navigate('/general-ref/3');
                 }}
               >
                 {btn3.id}
@@ -207,7 +203,7 @@ function MainMap() {
             <HoverCard.Dropdown>
               <Text fw={500} size="sm">
                 Here are some recommended resources and common conventions that
-                all bootcampers should take note of!
+                all bootcampers should note!
               </Text>
             </HoverCard.Dropdown>
           </HoverCard>
@@ -241,7 +237,7 @@ function MainMap() {
                   },
                 })}
                 onClick={() => {
-                  navigate('/foundations');
+                  navigate('/foundations/4');
                 }}
               >
                 {btn4.id}
@@ -287,7 +283,7 @@ function MainMap() {
                   },
                 })}
                 onClick={() => {
-                  navigate('/frontend');
+                  navigate('/frontend/5');
                 }}
               >
                 {btn5.id}
@@ -333,7 +329,7 @@ function MainMap() {
                   },
                 })}
                 onClick={() => {
-                  navigate('/full-stack');
+                  navigate('/full-stack/6');
                 }}
               >
                 {btn6.id}
@@ -379,7 +375,7 @@ function MainMap() {
                   },
                 })}
                 onClick={() => {
-                  navigate('/backend');
+                  navigate('/backend/7');
                 }}
               >
                 {btn7.id}

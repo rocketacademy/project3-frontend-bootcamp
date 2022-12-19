@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import logo from "./logo.png";
 import "./App.css";
 import api from "./api/materials";
+import { Routes, Route, useNavigate } from "react-router-dom";
 import {
   ColorScheme,
   ColorSchemeProvider,
@@ -11,6 +12,7 @@ import {
 import RocketMainPage from "./Components/RocketMainPage";
 import { useAuth0 } from "@auth0/auth0-react";
 import DashBoardNav from "./Components/DashboardNav";
+
 import { AuthProvider } from "./Components/AuthContext";
 
 export default function App() {
