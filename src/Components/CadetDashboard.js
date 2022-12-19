@@ -17,7 +17,7 @@ import { BrowserRouter as Router, Link, Route, Routes } from "react-router-dom";
 import { ThemeContext } from "@emotion/react";
 import DisplayMarkdown from "./DisplayMarkdown";
 import LogoutButton from "./LogoutButton";
-import { withAuthenticationRequired } from "@auth0/auth0-react";
+import { useAuth0, withAuthenticationRequired } from "@auth0/auth0-react";
 
 import Rlogo from "../images/rocket-logo.png";
 import { IconHome2, IconCalendarEvent } from "@tabler/icons";
@@ -36,9 +36,33 @@ import Algorithms from "./CourseComponents/Algorithms";
 import InterviewPrep from "./CourseComponents/InterviewPrep";
 import Schedule from "./Schedule";
 import Loading from "./Loading";
+import { useAuth } from "./AuthContext";
+import axios from "axios";
+import { BACKEND_URL } from "../constants";
 
 const CadetDashboard = () => {
   const [opened, setOpened] = useState(false);
+  const { user, isAuthenticated } = useAuth0();
+  const { updateCadetInfo } = useAuth();
+
+  const getAllInfo = async () => {
+    if (user[`https://any-namespace/roles`].length === 0) {
+      const response = await axios.get(`${BACKEND_URL}/cadets/cadet`, {
+        params: {
+          cadetEmail: user.email,
+        },
+      });
+
+      updateCadetInfo(response.data);
+      console.log(response.data);
+    }
+  };
+
+  useEffect(() => {
+    if (isAuthenticated) {
+      getAllInfo();
+    }
+  }, [user]);
 
   return (
     <AppShell

@@ -11,7 +11,6 @@ import {
 import RocketMainPage from "./Components/RocketMainPage";
 import { useAuth0 } from "@auth0/auth0-react";
 import DashBoardNav from "./Components/DashboardNav";
-
 import { AuthProvider } from "./Components/AuthContext";
 
 export default function App() {
