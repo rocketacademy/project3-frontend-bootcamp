@@ -97,39 +97,59 @@ const CadetDashboard = () => {
                 Schedule
               </Text>
               <br />
-              <Text ta="left" component={Link} variant="link" to="/welcome">
+              <Text ta="left" component={Link} variant="link" to="/welcome/1">
                 🚀Welcome to Rocket
               </Text>
 
-              <Text ta="left" component={Link} variant="link" to="/logistics">
+              <Text ta="left" component={Link} variant="link" to="/logistics/2">
                 🛠️Logistics
               </Text>
-              <Text ta="left" component={Link} variant="link" to="/general-ref">
+              <Text
+                ta="left"
+                component={Link}
+                variant="link"
+                to="/general-ref/3"
+              >
                 📚General Reference
               </Text>
-              <Text ta="left" component={Link} variant="link" to="/foundations">
+              <Text
+                ta="left"
+                component={Link}
+                variant="link"
+                to="/foundations/4"
+              >
                 💎Foundations
               </Text>
-              <Text ta="left" component={Link} variant="link" to="/frontend">
+              <Text ta="left" component={Link} variant="link" to="/frontend/5">
                 🖼️Frontend
               </Text>
-              <Text ta="left" component={Link} variant="link" to="/full-stack">
+              <Text
+                ta="left"
+                component={Link}
+                variant="link"
+                to="/full-stack/6"
+              >
                 🏭Full Stack
               </Text>
-              <Text ta="left" component={Link} variant="link" to="/backend">
+              <Text ta="left" component={Link} variant="link" to="/backend/7">
                 🤖Backend
               </Text>
-              <Text ta="left" component={Link} variant="link" to="/capstone">
+              <Text ta="left" component={Link} variant="link" to="/capstone/8">
                 ⛰️Capstone
               </Text>
-              <Text ta="left" component={Link} variant="link" to="/algorithms">
+              <Text
+                ta="left"
+                component={Link}
+                variant="link"
+                to="/algorithms/9"
+              >
                 🧮Algorithms
               </Text>
               <Text
                 ta="left"
                 component={Link}
                 variant="link"
-                to="/interview-prep"
+                to="/interview-prep/10"
               >
                 💼Interview Prep
               </Text>
@@ -147,6 +167,20 @@ const CadetDashboard = () => {
       <Routes>
         <Route path="/" element={<CadetLandingPage />}>
           <Route path="/main-map" element={<MainMap />} />
+          <Route path="/welcome/:sectionId" element={<Welcome />} />
+          <Route path="/logistics/:sectionId" element={<Logistics />} />
+          <Route path="/general-ref/:sectionId" element={<GeneralRef />} />
+          <Route path="/foundations/:sectionId" element={<Foundations />} />
+          <Route path="/frontend/:sectionId" element={<Frontend />} />
+          <Route path="/full-stack/:sectionId" element={<FullStack />} />
+          <Route path="/backend/:sectionId" element={<Backend />} />
+          <Route path="/capstone/:sectionId" element={<Capstone />} />
+          <Route path="/algorithms/:sectionId" element={<Algorithms />} />
+          <Route
+            path="/interview-prep/:sectionId"
+            element={<InterviewPrep />}
+          />
+          {/* <Route path="/main-map" element={<MainMap />} />
           <Route path="/welcome" element={<Welcome />} />
           <Route path="/logistics" element={<Logistics />} />
           <Route path="/general-ref" element={<GeneralRef />} />
@@ -156,7 +190,7 @@ const CadetDashboard = () => {
           <Route path="/backend" element={<Backend />} />
           <Route path="/capstone" element={<Capstone />} />
           <Route path="/algorithms" element={<Algorithms />} />
-          <Route path="/interview-prep" element={<InterviewPrep />} />
+          <Route path="/interview-prep" element={<InterviewPrep />} /> */}
         </Route>
         <Route path="/schedule" element={<Schedule />} />
       </Routes>
