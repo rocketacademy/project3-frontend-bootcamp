@@ -1,8 +1,8 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
 import { Textarea, Button, TextInput } from '@mantine/core';
-
-import api from '../api/materials';
+import { BACKEND_URL } from '../constants.js';
+import axios from 'axios';
 
 const Forum = () => {
   // const { topic } = useParams();
@@ -17,22 +17,42 @@ const Forum = () => {
   const [color, setColor] = useState('gray');
   const [completed, setCompleted] = useState('');
   const [completedMat, setCompletedMat] = useState('');
-
+  const [chapterId, setChapterId] = useState('');
+  const [disabled, setDisabled] = useState(false);
   // const FORUM_FOLDER_NAME = topic;
   // const FORUM_IMAGES_FOLDER_NAME = 'forumImages';
 
-  useEffect(() => {
-    const fetchForum = async () => {
-      try {
-        const response = await api.get('/forum');
-        console.log(response.data);
-        setCourse(response.data);
-      } catch (err) {
-        console.log(err.response.data);
-      }
-    };
-    fetchForum();
-  }, []);
+  // useEffect(() => {
+  //   const fetchForum = async () => {
+  //     try {
+  //       const response = await api.get('/forum');
+  //       console.log(response.data);
+  //       setCourse(response.data);
+  //     } catch (err) {
+  //       console.log(err.response.data);
+  //     }
+  //   };
+  //   fetchForum();
+  // }, []);
+
+  // const handleSubmit = () => {
+  //   // e.preventDefault();
+
+  //   axios
+  //     .put(`${BACKEND_URL}/cadetChapters/${chapterId}`, {
+  //       completed: true,
+  //     })
+  //     .then((res) => {
+  //       console.log('resdata:', res.data);
+  //       console.log('marked complete');
+  //       setDisabled(true);
+  //       // navigate(`/client/journals/${res.data.id}`);
+  //       //after clicking submit it will disable the button and also close the modal?
+  //     })
+  //     .catch((err) => {
+  //       console.log(err);
+  //     });
+  // };
 
   // let forumPosts = posts.map((posts, index) => {
   //   return <div className="forum-posts" key={index} id={posts.key}></div>;
@@ -78,16 +98,6 @@ const Forum = () => {
 
       <Button variant="filled" color="tan" size="sm" mt="md" radius="md">
         Submit
-      </Button>
-      <Button
-        variant="filled"
-        color="red"
-        size="sm"
-        mt="md"
-        radius="md"
-        onClick={() => {}}
-      >
-        Mark as Completed
       </Button>
 
       {/* add another button for mark as completed */}

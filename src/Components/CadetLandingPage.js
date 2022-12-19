@@ -18,7 +18,7 @@ import {
 import { Outlet } from 'react-router-dom';
 // import { Outlet } from 'react-router-dom';
 
-const LandingPage = () => {
+const CadetLandingPage = () => {
   return (
     <div className="bg-container">
       {/* <img className="star-map" src={starpic} alt="star map"></img> */}
@@ -29,4 +29,4 @@ const LandingPage = () => {
   );
 };
 
-export default LandingPage;
+export default CadetLandingPage;

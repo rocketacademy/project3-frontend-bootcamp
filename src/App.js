@@ -1,34 +1,30 @@
-import React from "react";
-import logo from "./logo.png";
-import "./App.css";
-import api from "./api/materials";
-import { Routes, Route, useNavigate } from "react-router-dom";
+import React from 'react';
+import logo from './logo.png';
+import './App.css';
+import api from './api/materials';
+import { Routes, Route, useNavigate } from 'react-router-dom';
 import {
   ColorScheme,
   ColorSchemeProvider,
   MantineProvider,
   Paper,
-} from "@mantine/core";
-import CadetDashboard from "./Components/CadetDashboard";
-import RocketMainPage from "./Components/RocketMainPage";
-import PrivateRoutesCadet from "./PrivateRoutesCadet";
+} from '@mantine/core';
+import RocketMainPage from './Components/RocketMainPage';
+import { useAuth0 } from '@auth0/auth0-react';
+import DashBoardNav from './Components/DashboardNav';
 
-// import { AuthProvider } from './Components/AuthContext';
+import { AuthProvider } from "./Components/AuthContext";
 
-class App extends React.Component {
-  render() {
-    return (
-      // <AuthProvider>
+export default function App() {
+  const { isAuthenticated } = useAuth0();
+
+  return (
+    <AuthProvider>
       <div className="App">
-        <Routes>
-          <Route path="/" element={<RocketMainPage />} />
-          <Route path="/cadet/*" element={<CadetDashboard />} />
-          <Route path="*" element={"Nothing here!"} />
-        </Routes>
+        <Paper>
+          {isAuthenticated !== false ? <DashBoardNav /> : <RocketMainPage />}
+        </Paper>
       </div>
-      // </AuthProvider>
-    );
-  }
+    </AuthProvider>
+  );
 }
-
-export default App;
