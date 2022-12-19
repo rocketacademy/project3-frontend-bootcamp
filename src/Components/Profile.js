@@ -17,36 +17,12 @@ import { Link, useParams, useNavigate } from "react-router-dom";
 import { BACKEND_URL } from "../constants.js";
 import axios from "axios";
 import { useAuth0 } from "@auth0/auth0-react";
+import { useAuth } from "./AuthContext";
 
 // to add in get photo URL for profile picture here + also the name upon auth0 log in
 
 const Profile = () => {
-  const [name, setName] = useState("NAME");
-  const [cadetId, setCadetId] = useState(1);
-  const { user } = useAuth0();
-
-  useEffect(() => {
-    if (user) {
-      const fetchCompleted = async () => {
-        try {
-          const response = await axios.get(
-            // `${BACKEND_URL}/cadetSections/progress-status?cadetId=${cadetId}`,
-            `${BACKEND_URL}/cadets/cadet`,
-            {
-              params: {
-                cadetEmail: user.email,
-              },
-            }
-          );
-          console.log("cadet name", response.data);
-          setName(response.data.name);
-        } catch (err) {
-          console.log(err.response.data);
-        }
-      };
-      fetchCompleted();
-    }
-  }, [user]);
+  const { cadetInfo } = useAuth();
 
   return (
     <div className="profile-menu">
@@ -64,7 +40,7 @@ const Profile = () => {
 
         <Menu.Dropdown align="center">
           <Image src={pic} alt="it's me" size="xl" />
-          <Title order={4}>Welcome {name}</Title>
+          <Title order={4}>Welcome {cadetInfo.name}</Title>
           <br />
           <ProgressBar />
           <Title order={6}>Badges Earned:</Title>
