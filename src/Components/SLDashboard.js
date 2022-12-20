@@ -16,6 +16,8 @@ import Profile from './Profile';
 import { BrowserRouter as Router, Link, Route, Routes } from 'react-router-dom';
 import { ThemeContext } from '@emotion/react';
 import DisplayMarkdown from './DisplayMarkdown';
+import CadetDashboard from './CadetDashboard';
+import SingleCadetProgress from './SingleCadetProgress';
 import LogoutButton from './LogoutButton';
 import { withAuthenticationRequired } from '@auth0/auth0-react';
 
@@ -27,6 +29,7 @@ import MainMap from './CourseComponents/MainMap';
 import SLLandingPage from './SLLandingPage';
 import Schedule from './Schedule';
 import Loading from './Loading';
+import CadetProgress from './CadetProgress';
 
 const SLDashboard = () => {
   const [opened, setOpened] = useState(false);
@@ -68,10 +71,20 @@ const SLDashboard = () => {
                 fw={500}
                 component={Link}
                 variant="link"
-                to="/main-map"
+                to="sl/all-cadet-progress"
               >
                 <IconHome2 color="white" size={13} />
                 Home Page
+              </Text>
+              <Text
+                ta="center"
+                fw={500}
+                component={Link}
+                variant="link"
+                to="sl/all-cadet-progress/:cadetId"
+              >
+                <IconHome2 color="white" size={13} />
+                Single Cadet
               </Text>
               <Text
                 ta="center"
@@ -97,7 +110,11 @@ const SLDashboard = () => {
     >
       <Routes>
         <Route path="/" element={<SLLandingPage />}>
-          <Route path="cadet/main-map" element={<MainMap />} />
+          <Route path="sl/all-cadet-progress" element={<CadetProgress />} />
+          <Route
+            path="sl/all-cadet-progress/:cadetId"
+            element={<SingleCadetProgress />}
+          />
         </Route>
         <Route path="/schedule" element={<Schedule />} />
       </Routes>
@@ -108,3 +125,7 @@ const SLDashboard = () => {
 export default withAuthenticationRequired(SLDashboard, {
   onRedirecting: () => <Loading />,
 });
+
+//see all students progress
+// see particular student progress
+// see forum comments (participate in forum)
