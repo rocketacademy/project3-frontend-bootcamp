@@ -1,4 +1,3 @@
-import React from 'react';
 import { useState, useEffect } from 'react';
 import { Button, Group, Text, Image } from '@mantine/core';
 import starpic from '../../images/Frontend-map.png';
@@ -10,9 +9,9 @@ import { BACKEND_URL } from '../../constants.js';
 import DisplayMarkdown from '../DisplayMarkdown';
 import { useParams } from 'react-router-dom';
 import { openModal } from '@mantine/modals';
-import { useAuth } from '../AuthContext';
 import { set } from 'firebase/database';
 import ModelTitle from '../ModelTitle';
+import { useAuth } from '../AuthContext';
 
 function Frontend() {
   const [opened, setOpened] = useState(false);
@@ -27,7 +26,9 @@ function Frontend() {
   const [btn9, setBtn9] = useState('');
   const [btn10, setBtn10] = useState('');
   const [btn11, setBtn11] = useState('');
+  // const [cadetId, setCadetId] = useState(1);
   const { cadetInfo } = useAuth();
+
   const [completedChaps, setCompletedChaps] = useState({});
 
   const { sectionId } = useParams();

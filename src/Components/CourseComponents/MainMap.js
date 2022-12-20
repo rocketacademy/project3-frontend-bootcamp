@@ -5,8 +5,9 @@ import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import '../css/MainMap.css';
 import { BACKEND_URL } from '../../constants.js';
+import MainMapBtn from './MainMapBtn';
+import { useAuth0 } from '@auth0/auth0-react';
 import { useAuth } from '../AuthContext';
-// import MainMapBtn from './MainMapBtn';
 
 function MainMap() {
   const [opened, setOpened] = useState(false);
@@ -21,12 +22,30 @@ function MainMap() {
   const [btn8, setBtn8] = useState('');
   const [btn9, setBtn9] = useState('');
   const [btn10, setBtn10] = useState('');
-  const { cadetInfo } = useAuth();
-
+  const { user, isAuthenticated } = useAuth0();
+  const [cadetId, setCadetId] = useState(1);
+  // const { cadetInfo } = useAuth();
   const navigate = useNavigate();
   const [completedChaps, setCompletedChaps] = useState({});
 
+  const getAllInfo = async () => {
+    if (user[`https://any-namespace/roles`].length === 0) {
+      const response = await axios.get(`${BACKEND_URL}/cadets/cadet`, {
+        params: {
+          cadetEmail: user.email,
+        },
+      });
+
+      setCadetId(response.data.id);
+      console.log(response.data.id);
+    }
+  };
+
   useEffect(() => {
+    if (isAuthenticated) {
+      getAllInfo();
+    }
+
     const fetchSections = async () => {
       try {
         const response = await axios.get(`${BACKEND_URL}/sections`);
@@ -45,7 +64,7 @@ function MainMap() {
         setBtn10(response.data[9]);
 
         const response2 = await axios.get(
-          `${BACKEND_URL}/cadetSections/progress-status?cadetId=${cadetInfo.id}`
+          `${BACKEND_URL}/cadetSections/progress-status?cadetId=${cadetId}`
         );
         console.log('res2', response2.data);
         let sectsCompleted = {};
@@ -61,7 +80,7 @@ function MainMap() {
     };
 
     fetchSections();
-  }, []);
+  }, [user]);
 
   return (
     <>
