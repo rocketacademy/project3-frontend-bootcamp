@@ -16,7 +16,6 @@ import {
   Stack,
 } from '@mantine/core';
 import { Outlet } from 'react-router-dom';
-// import { Outlet } from 'react-router-dom';
 
 const CadetLandingPage = () => {
   return (
