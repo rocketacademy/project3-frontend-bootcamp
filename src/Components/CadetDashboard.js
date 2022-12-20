@@ -1,5 +1,5 @@
-import React from 'react';
-import { useState, useEffect } from 'react';
+import React from "react";
+import { useState, useEffect } from "react";
 import {
   AppShell,
   Burger,
@@ -10,35 +10,59 @@ import {
   Image,
   Button,
   useMantineTheme,
-} from '@mantine/core';
+} from "@mantine/core";
 
-import Profile from './Profile';
-import { BrowserRouter as Router, Link, Route, Routes } from 'react-router-dom';
-import { ThemeContext } from '@emotion/react';
-import DisplayMarkdown from './DisplayMarkdown';
-import LogoutButton from './LogoutButton';
-import { withAuthenticationRequired } from '@auth0/auth0-react';
+import Profile from "./Profile";
+import { BrowserRouter as Router, Link, Route, Routes } from "react-router-dom";
+import { ThemeContext } from "@emotion/react";
+import DisplayMarkdown from "./DisplayMarkdown";
+import LogoutButton from "./LogoutButton";
+import { useAuth0, withAuthenticationRequired } from "@auth0/auth0-react";
 
-import Rlogo from '../images/rocket-logo.png';
-import { IconHome2, IconCalendarEvent } from '@tabler/icons';
+import Rlogo from "../images/rocket-logo.png";
+import { IconHome2, IconCalendarEvent } from "@tabler/icons";
 
-import CadetLandingPage from './CadetLandingPage';
-import MainMap from './CourseComponents/MainMap';
-import Welcome from './CourseComponents/Welcome';
-import Logistics from './CourseComponents/Logistics';
-import GeneralRef from './CourseComponents/GeneralRef';
-import Foundations from './CourseComponents/Foundations';
-import Frontend from './CourseComponents/Frontend';
-import FullStack from './CourseComponents/FullStack';
-import Backend from './CourseComponents/Backend';
-import Capstone from './CourseComponents/Capstone';
-import Algorithms from './CourseComponents/Algorithms';
-import InterviewPrep from './CourseComponents/InterviewPrep';
-import Schedule from './Schedule';
-import Loading from './Loading';
+import CadetLandingPage from "./CadetLandingPage";
+import MainMap from "./CourseComponents/MainMap";
+import Welcome from "./CourseComponents/Welcome";
+import Logistics from "./CourseComponents/Logistics";
+import GeneralRef from "./CourseComponents/GeneralRef";
+import Foundations from "./CourseComponents/Foundations";
+import Frontend from "./CourseComponents/Frontend";
+import FullStack from "./CourseComponents/FullStack";
+import Backend from "./CourseComponents/Backend";
+import Capstone from "./CourseComponents/Capstone";
+import Algorithms from "./CourseComponents/Algorithms";
+import InterviewPrep from "./CourseComponents/InterviewPrep";
+import Schedule from "./Schedule";
+import Loading from "./Loading";
+import { useAuth } from "./AuthContext";
+import axios from "axios";
+import { BACKEND_URL } from "../constants";
 
 const CadetDashboard = () => {
   const [opened, setOpened] = useState(false);
+  const { user, isAuthenticated } = useAuth0();
+  const { updateCadetInfo } = useAuth();
+
+  const getAllInfo = async () => {
+    if (user[`https://any-namespace/roles`].length === 0) {
+      const response = await axios.get(`${BACKEND_URL}/cadets/cadet`, {
+        params: {
+          cadetEmail: user.email,
+        },
+      });
+
+      updateCadetInfo(response.data);
+      console.log(response.data);
+    }
+  };
+
+  useEffect(() => {
+    if (isAuthenticated) {
+      getAllInfo();
+    }
+  }, [user]);
 
   return (
     <AppShell
@@ -63,15 +87,15 @@ const CadetDashboard = () => {
               className="nav-logo"
               style={{
                 width: 250,
-                marginLeft: 'auto',
-                marginRight: 'auto',
+                marginLeft: "auto",
+                marginRight: "auto",
               }}
             >
               <Image src={Rlogo} alt="rocket logo" />
             </div>
           </Navbar.Section>
           <Navbar.Section grow mt="lg">
-            <div style={{ display: 'flex', flexDirection: 'column' }}>
+            <div style={{ display: "flex", flexDirection: "column" }}>
               {/* <Text component={Link} variant="link" to="/">
                   Home Page
                 </Text> */}
@@ -92,7 +116,7 @@ const CadetDashboard = () => {
                 variant="link"
                 to="/schedule"
               >
-                {' '}
+                {" "}
                 <IconCalendarEvent color="white" size={13} />
                 Schedule
               </Text>

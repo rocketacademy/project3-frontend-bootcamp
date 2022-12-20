@@ -10,11 +10,9 @@ export function AuthProvider({ children }) {
   //set user data that you are going to pass down to different componenet.
   const [cadetInfo, setCadetInfo] = useState([]);
   const [slInfo, setSlInfo] = useState([]);
-  const [template, setTemplate] = useState(0);
   const [currentUserEmail, setCurrentUserEmail] = useState([]);
 
   // function required to setState in other components
-
   const updateCadetInfo = (data) => {
     setCadetInfo(data);
   };
