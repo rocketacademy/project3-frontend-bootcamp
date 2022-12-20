@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 import {
   Menu,
   Button,
@@ -7,19 +7,13 @@ import {
   Title,
   Center,
   Image,
-} from "@mantine/core";
-import { IconSettings, IconMessageCircle, IconNotes } from "@tabler/icons";
-import ProgressBar from "./ProgressBar";
-import Badges from "./Badges";
-import pic from "../images/profile pic.jpg";
-import { useState, useEffect } from "react";
-import { Link, useParams, useNavigate } from "react-router-dom";
-import { BACKEND_URL } from "../constants.js";
-import axios from "axios";
-import { useAuth0 } from "@auth0/auth0-react";
-import { useAuth } from "./AuthContext";
+} from '@mantine/core';
+import { IconSettings, IconMessageCircle, IconNotes } from '@tabler/icons';
+import ProgressBar from './ProgressBar';
+import Badges from './Badges';
 
-// to add in get photo URL for profile picture here + also the name upon auth0 log in
+import { useAuth0 } from '@auth0/auth0-react';
+import { useAuth } from './AuthContext';
 
 const Profile = () => {
   const { cadetInfo } = useAuth();
@@ -31,7 +25,7 @@ const Profile = () => {
           <Avatar
             component="a"
             target="_blank"
-            src={pic}
+            src={cadetInfo.photoLink}
             alt="it's me"
             radius="xl"
             size="lg"
@@ -39,7 +33,7 @@ const Profile = () => {
         </Menu.Target>
 
         <Menu.Dropdown align="center">
-          <Image src={pic} alt="it's me" size="xl" />
+          <Image src={cadetInfo.photoLink} alt="it's me" size="xl" />
           <Title order={4}>Welcome {cadetInfo.name}</Title>
           <br />
           <ProgressBar />
@@ -53,8 +47,6 @@ const Profile = () => {
           <Menu.Item icon={<IconSettings size={14} />}>Settings</Menu.Item>
         </Menu.Dropdown>
       </Menu>
-
-      {/* Should be done with a mantine menu element or modal */}
     </div>
   );
 };

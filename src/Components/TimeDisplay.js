@@ -1,12 +1,28 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 // import axios from 'axios';
 import { Card, Text, Grid, Container, Image, Paper } from '@mantine/core';
 
 export default function TimeDisplay() {
-  // const [quote, setQuote] = useState('');
-  // const [author, setAuthor] = useState('');
-  // const [photo, setPhoto] = useState('');
   const [date, setDate] = useState(new Date());
+  const [timerDays, setTimerDays] = useState('00');
+
+  let interval = useRef();
+
+  const startTimer = () => {
+    const countDownDate = new Date('May 14 2022').getTime();
+    interval = setInterval(() => {
+      const now = new Date().getTime();
+      const distance = countDownDate - now;
+
+      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+
+      if (distance < 0) {
+        clearInterval(interval.current);
+      } else {
+        setTimerDays(days);
+      }
+    });
+  };
 
   const weekday = [
     'Sunday',
@@ -27,34 +43,12 @@ export default function TimeDisplay() {
 
   useEffect(() => {
     let timerID = setInterval(() => tick(), 1000);
+    startTimer();
 
     return function cleanup() {
       clearInterval(timerID);
     };
   });
-
-  // useEffect(() => {
-  //   axios
-  //     .get(`https://api.quotable.io/random`)
-
-  //     .then((response) => {
-  //       console.log('res', response);
-  //       setQuote(response.data.content);
-  //       setAuthor(response.data.author);
-  //     });
-
-  //   axios
-  //     .get(
-  //       `https://api.unsplash.com/photos/random/?topics=happy&client_id=${process.env.REACT_APP_APP_ACCESS_KEY}`
-  //     )
-
-  //     .then((photo) => {
-  //       console.log('res', photo);
-  //       console.log('photos: ', photo.data);
-
-  //       setPhoto(photo.data.urls.regular);
-  //     });
-  // }, []);
 
   return (
     // <Container className="Time-header" size={400} px={50}>
@@ -66,6 +60,8 @@ export default function TimeDisplay() {
         {date.toLocaleDateString('en-GB')}
         <br />
         {day}
+        <br />
+        {timerDays}
       </Text>
     </Paper>
 

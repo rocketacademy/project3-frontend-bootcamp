@@ -5,7 +5,8 @@ import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import '../css/MainMap.css';
 import { BACKEND_URL } from '../../constants.js';
-import MainMapBtn from './MainMapBtn';
+import { useAuth } from '../AuthContext';
+// import MainMapBtn from './MainMapBtn';
 
 function MainMap() {
   const [opened, setOpened] = useState(false);
@@ -20,8 +21,8 @@ function MainMap() {
   const [btn8, setBtn8] = useState('');
   const [btn9, setBtn9] = useState('');
   const [btn10, setBtn10] = useState('');
+  const { cadetInfo } = useAuth();
 
-  const [cadetId, setCadetId] = useState(1);
   const navigate = useNavigate();
   const [completedChaps, setCompletedChaps] = useState({});
 
@@ -44,7 +45,7 @@ function MainMap() {
         setBtn10(response.data[9]);
 
         const response2 = await axios.get(
-          `${BACKEND_URL}/cadetSections/progress-status?cadetId=${cadetId}`
+          `${BACKEND_URL}/cadetSections/progress-status?cadetId=${cadetInfo.id}`
         );
         console.log('res2', response2.data);
         let sectsCompleted = {};

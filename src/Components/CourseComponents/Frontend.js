@@ -1,3 +1,4 @@
+import React from 'react';
 import { useState, useEffect } from 'react';
 import { Button, Group, Text, Image } from '@mantine/core';
 import starpic from '../../images/Frontend-map.png';
@@ -9,6 +10,7 @@ import { BACKEND_URL } from '../../constants.js';
 import DisplayMarkdown from '../DisplayMarkdown';
 import { useParams } from 'react-router-dom';
 import { openModal } from '@mantine/modals';
+import { useAuth } from '../AuthContext';
 import { set } from 'firebase/database';
 import ModelTitle from '../ModelTitle';
 
@@ -25,8 +27,7 @@ function Frontend() {
   const [btn9, setBtn9] = useState('');
   const [btn10, setBtn10] = useState('');
   const [btn11, setBtn11] = useState('');
-  const [cadetId, setCadetId] = useState(1);
-
+  const { cadetInfo } = useAuth();
   const [completedChaps, setCompletedChaps] = useState({});
 
   const { sectionId } = useParams();
@@ -40,6 +41,7 @@ function Frontend() {
         );
 
         console.log('chapters', response.data);
+        console.log(cadetInfo);
 
         setBtn1(response.data[0]);
         setBtn2(response.data[1]);
@@ -54,7 +56,7 @@ function Frontend() {
         setBtn11(response.data[10]);
 
         const response2 = await axios.get(
-          `${BACKEND_URL}/cadetChapters/progress-status?cadetId=${cadetId}`
+          `${BACKEND_URL}/cadetChapters/progress-status?cadetId=${cadetInfo.id}`
         );
         console.log('res2', response2.data);
         let chapsCompleted = {};
@@ -76,13 +78,14 @@ function Frontend() {
   const handleClick = (id) => {
     axios
       .post(`${BACKEND_URL}/cadetChapters`, {
-        cadetId: Number(cadetId),
+        cadetId: Number(cadetInfo.id),
         chapterId: Number(id),
         sectionId: Number(sectionId),
         completed: false,
       })
       .then((res) => {
         console.log('Chapter data created');
+        console.log('cadetId', cadetInfo.id);
       })
       .catch((err) => {
         console.log(err);
@@ -92,9 +95,9 @@ function Frontend() {
   const handleSubmit = (id) => {
     axios
       .put(`${BACKEND_URL}/cadetChapters`, {
-        cadetId: cadetId,
-        chapterId: id,
-        sectionId: sectionId,
+        cadetId: Number(cadetInfo.id),
+        chapterId: Number(id),
+        sectionId: Number(sectionId),
       })
       .then((res) => {
         console.log('resdata:', res.data);
@@ -140,7 +143,6 @@ function Frontend() {
                 children: (
                   <>
                     <DisplayMarkdown markdown={btn1.markdownUrl} />
-
                     <MarkCompleteBtn
                       completedChaps={completedChaps[btn1.id]}
                       id={btn1.id}
