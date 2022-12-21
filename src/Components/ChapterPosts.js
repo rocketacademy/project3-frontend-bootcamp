@@ -1,49 +1,37 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
-import PropertyListingPreview from "./PropertyListingPreview";
 import { BACKEND_URL } from "../constants.js";
+// import { useAuth } from "./AuthContext";
+import { PostBlock } from "./PostBlock.js";
+import { List } from "@mantine/core";
 
-const ChapterPosts = () => {
-  const [listings, setListings] = useState([]);
+const ChapterPosts = (chapterId) => {
+  // const { cadetInfo } = useAuth();
+  const [posts, setPosts] = useState([]);
 
   useEffect(() => {
-    
-      const getProperties = async () => {
-        axios
-          .get(`${BACKEND_URL}/posts`, {
-            params: {
-              cadetId: cadetId,
-            },
-          })
-          .then((response) => {
-            setListings(response.data);
-          });
-      };
+    const getPosts = async () => {
+      axios
+        .get(`${BACKEND_URL}/posts`, {
+          params: {
+            chapterId: chapterId,
+          },
+        })
+        .then((response) => {
+          setPosts(response.data);
+        });
+    };
 
-      getProperties();
-    
-  }, [user]);
-
-  const listingPreviews = listings.map((properties) => (
-    <Grid item xs={2} sm={4} md={4}>
-      <PropertyListingPreview data={properties} />
-    </Grid>
-  ));
+    getPosts();
+  }, [chapterId]);
 
   return (
-    <Grid
-      container
-      spacing={{ xs: 2, md: 3 }}
-      columns={{ xs: 4, sm: 8, md: 12 }}
-    >
-      {listings.map((properties) => (
-        <Grid item xs={2} sm={4} md={4}>
-          <PropertyListingPreview data={properties} />
-        </Grid>
+    <List type="ordered" withPadding>
+      {posts.map((post) => (
+        <PostBlock post={post} />
       ))}
-    </Grid>
+    </List>
   );
 };
 
-export default PropertyListingPreviewList;
+export default ChapterPosts;

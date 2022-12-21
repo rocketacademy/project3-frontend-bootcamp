@@ -52,7 +52,7 @@ function DisplayMarkdown({ markdown }) {
       >
         {post}
       </Markdown>
-      <Forum />
+      {/* <Forum /> */}
     </div>
   );
 }

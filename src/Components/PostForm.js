@@ -1,16 +1,16 @@
-import React, { useState, useEffect } from "react";
-import { Textarea, Button, TextInput } from "@mantine/core";
+import React, { useState } from "react";
+import { Textarea, Button } from "@mantine/core";
 import { BACKEND_URL } from "../constants";
 import axios from "axios";
+import { useAuth } from "./AuthContext";
 
 const PostForm = (chapterId) => {
+  const { cadetInfo } = useAuth();
   const [author, setAuthor] = useState();
   const [message, setMessage] = useState("");
 
-  useEffect(() => {}, []);
-
   const handleChange = (event) => {
-    setAuthor(cadets.name);
+    setAuthor(cadetInfo.id);
     setMessage(event.target.value);
   };
 
@@ -22,7 +22,7 @@ const PostForm = (chapterId) => {
         chapterId,
         message,
       })
-      .then((res) => {
+      .then(() => {
         setAuthor("");
         setMessage("");
       });
