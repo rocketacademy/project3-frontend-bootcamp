@@ -71,7 +71,7 @@ const SLDashboard = () => {
                 fw={500}
                 component={Link}
                 variant="link"
-                to="sl/all-cadet-progress"
+                to="/main-map"
               >
                 <IconHome2 color="white" size={13} />
                 Home Page
@@ -110,9 +110,9 @@ const SLDashboard = () => {
     >
       <Routes>
         <Route path="/" element={<SLLandingPage />}>
-          <Route path="sl/all-cadet-progress" element={<CadetProgress />} />
+          <Route path="/main-map" element={<CadetProgress />} />
           <Route
-            path="sl/all-cadet-progress/:cadetId"
+            path="/all-cadet-progress/:cadetId"
             element={<SingleCadetProgress />}
           />
         </Route>

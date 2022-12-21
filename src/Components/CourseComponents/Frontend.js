@@ -26,7 +26,7 @@ function Frontend() {
   const [btn9, setBtn9] = useState('');
   const [btn10, setBtn10] = useState('');
   const [btn11, setBtn11] = useState('');
-  // const [cadetId, setCadetId] = useState(1);
+
   const { cadetInfo } = useAuth();
 
   const [completedChaps, setCompletedChaps] = useState({});
