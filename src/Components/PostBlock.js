@@ -11,7 +11,6 @@ const useStyles = createStyles((theme) => ({
 export function PostBlock(props) {
   const { classes } = useStyles();
 
-  console.log("inpropsBlock", props.post.id);
   return (
     
     <div>

@@ -1,15 +1,15 @@
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, createContext } from "react";
 import { BACKEND_URL } from "../constants.js";
-// import { useAuth } from "./AuthContext";
 import { PostBlock } from "./PostBlock.js";
 import { List } from "@mantine/core";
+import PostForm from "./PostForm.js";
+
+export const PostsContext = createContext();
 
 const ChapterPosts = (props) => {
-  // const { cadetInfo } = useAuth();
   const [posts, setPosts] = useState([]);
 
-  console.log("in chapterPosts", props);
   useEffect(() => {
     const getPosts = async () => {
       axios
@@ -25,12 +25,26 @@ const ChapterPosts = (props) => {
     getPosts();
   }, [props.chapter]);
 
+  const onPostUpdate = (post) => {
+    setPosts((prevPosts) => {
+      return [...prevPosts, post];
+    });
+  };
+
+  console.log("ChapterPosts", props);
   return (
-    <List type="ordered" withPadding>
-      {posts.map((post) => (
-        <PostBlock post={post} />
-      ))}
-    </List>
+    <PostsContext.Provider value={posts}>
+      <List type="ordered" withPadding>
+        {posts.map((post) => (
+          <PostBlock post={post} key={post.id} />
+        ))}
+      </List>
+      <PostForm
+        chapter={props.chapter}
+        cadet={props.cadet}
+        onPostUpdate={onPostUpdate}
+      />
+    </PostsContext.Provider>
   );
 };
 
