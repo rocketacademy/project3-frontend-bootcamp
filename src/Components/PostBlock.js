@@ -1,3 +1,4 @@
+import React from "react";
 import { createStyles, Text, Avatar, Group } from "@mantine/core";
 
 const useStyles = createStyles((theme) => ({
@@ -7,21 +8,24 @@ const useStyles = createStyles((theme) => ({
   },
 }));
 
-export function PostBlock(post) {
+export function PostBlock(props) {
   const { classes } = useStyles();
+
+  console.log("inpropsBlock", props.post.id);
   return (
+    
     <div>
       <Group>
-        <Avatar src={post.image} alt={post.name} radius="xl" />
+        <Avatar src={props.image} alt={props.name} radius="xl" />
         <div>
-          <Text size="sm">{post.name}</Text>
+          <Text size="sm">{props.post.author}</Text>
           <Text size="xs" color="dimmed">
-            {post.createdAt}
+            {props.post.createdAt}
           </Text>
         </div>
       </Group>
       <Text className={classes.body} size="sm">
-        {post.message}
+        {props.post.content}
       </Text>
     </div>
   );

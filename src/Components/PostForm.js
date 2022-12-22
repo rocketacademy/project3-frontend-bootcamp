@@ -4,14 +4,17 @@ import { BACKEND_URL } from "../constants";
 import axios from "axios";
 import { useAuth } from "./AuthContext";
 
-const PostForm = (chapterId) => {
-  const { cadetInfo } = useAuth();
+const PostForm = (props) => {
+  // const { cadetInfo } = useAuth();
   const [author, setAuthor] = useState();
-  const [message, setMessage] = useState("");
+  const [chapterId, setChapterId] = useState();
+  const [content, setContent] = useState("");
+  console.log(props);
 
   const handleChange = (event) => {
-    setAuthor(cadetInfo.id);
-    setMessage(event.target.value);
+    setAuthor(props.cadet.id);
+    setChapterId(props.chapter);
+    setContent(event.target.value);
   };
 
   const handleSubmit = (event) => {
@@ -20,19 +23,22 @@ const PostForm = (chapterId) => {
       .post(`${BACKEND_URL}/posts`, {
         author,
         chapterId,
-        message,
+        content,
       })
-      .then(() => {
-        setAuthor("");
-        setMessage("");
+      .then((res) => {
+        setAuthor();
+        setChapterId();
+        setContent("");
+        console.log(res);
       });
   };
   return (
     <div>
       <Textarea
+        label="Post your messages:"
         placeholder="What are your thoughts?"
         variant="filled"
-        value={message}
+        value={content}
         onChange={handleChange}
         autosize
         minRows={2}

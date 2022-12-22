@@ -146,8 +146,8 @@ function Frontend() {
                 children: (
                   <>
                     <DisplayMarkdown markdown={btn1.markdownUrl} />
-                    <ChapterPosts chapterId={btn1.id} />
-                    <PostForm chapterId={btn1.id} />
+                    <ChapterPosts chapter={btn1.id} />
+                    <PostForm chapter={btn1.id} cadet={cadetInfo} />
                     <MarkCompleteBtn
                       completedChaps={completedChaps[btn1.id]}
                       id={btn1.id}
