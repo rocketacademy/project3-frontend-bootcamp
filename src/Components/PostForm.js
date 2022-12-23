@@ -20,7 +20,7 @@ const PostForm = ({ chapter, cadet, onPostUpdate }) => {
       authorImage: cadet.photoLink,
       chapterId: chapter,
       content: event.target.value,
-      createdAt: new Date().toLocaleString("nl-NL"),
+      createdAt: new Date().toLocaleString(),
     });
   };
 
@@ -31,7 +31,6 @@ const PostForm = ({ chapter, cadet, onPostUpdate }) => {
         ...post,
       })
       .then((res) => {
-        console.log("inside handlesubmit", post);
         onPostUpdate(post);
         setPost({
           author: null,
