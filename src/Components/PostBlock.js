@@ -10,14 +10,18 @@ const useStyles = createStyles((theme) => ({
 
 export function PostBlock(props) {
   const { classes } = useStyles();
-
+  
   return (
-    
     <div>
       <Group>
-        <Avatar src={props.image} alt={props.name} radius="xl" />
+        <Avatar
+          src={props.post.authorImage}
+          alt={props.post.authorName}
+          radius="xl"
+          size="lg"
+        />
         <div>
-          <Text size="sm">{props.post.author}</Text>
+          <Text size="sm">{props.post.authorName}</Text>
           <Text size="xs" color="dimmed">
             {props.post.createdAt}
           </Text>

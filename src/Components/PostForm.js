@@ -6,6 +6,8 @@ import axios from "axios";
 const PostForm = ({ chapter, cadet, onPostUpdate }) => {
   const [post, setPost] = useState({
     author: null,
+    authorName: "",
+    authorImage: "",
     chapterId: null,
     content: "",
     createdAt: null,
@@ -14,9 +16,11 @@ const PostForm = ({ chapter, cadet, onPostUpdate }) => {
   const handleChange = (event) => {
     setPost({
       author: cadet.id,
+      authorName: cadet.name,
+      authorImage: cadet.photoLink,
       chapterId: chapter,
       content: event.target.value,
-      createdAt: new Date().toLocaleString(),
+      createdAt: new Date().toLocaleString("nl-NL"),
     });
   };
 
@@ -27,11 +31,15 @@ const PostForm = ({ chapter, cadet, onPostUpdate }) => {
         ...post,
       })
       .then((res) => {
+        console.log("inside handlesubmit", post);
         onPostUpdate(post);
         setPost({
           author: null,
+          authorName: "",
+          authorImage: "",
           chapterId: null,
           content: "",
+          createdAt: null,
         });
         console.log(res);
       });
