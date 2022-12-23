@@ -12,6 +12,7 @@ import { openModal } from '@mantine/modals';
 import { set } from 'firebase/database';
 import ModelTitle from '../ModelTitle';
 import { useAuth } from '../AuthContext';
+import ChapterPosts from '../ChapterPosts';
 
 function Frontend() {
   const [opened, setOpened] = useState(false);
@@ -144,6 +145,7 @@ function Frontend() {
                 children: (
                   <>
                     <DisplayMarkdown markdown={btn1.markdownUrl} />
+                    <ChapterPosts chapter={btn1.id} cadet={cadetInfo} />
                     <MarkCompleteBtn
                       completedChaps={completedChaps[btn1.id]}
                       id={btn1.id}
