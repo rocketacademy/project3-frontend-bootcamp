@@ -1,56 +1,79 @@
 import React from 'react';
 import axios from 'axios';
-import { Title, Paper } from '@mantine/core';
+import { Title, Paper, filterProps } from '@mantine/core';
 import { useState, useEffect } from 'react';
-import { Button, Group, Text, Image } from '@mantine/core';
+import { Button, Group, Text, Image, Container } from '@mantine/core';
 import { BACKEND_URL } from '../constants.js';
 import { useParams } from 'react-router-dom';
 import { useAuth } from './AuthContext';
+import CadetChaptProgress from './CadetChaptProgress.js';
+import CadetSectionProgress from './CadetSectionProgress.js';
 
 const CadetProgress = () => {
-  const [cadets, setCadets] = useState([]);
-  const [cadetProgress, setCadetProgress] = useState();
+  const [cadets, setCadets] = useState();
+  const [chaptProgress, setChaptProgress] = useState([]);
+  const [sectProgress, setSectProgress] = useState([]);
+  const [allCadetProgress, setAllCadetProgress] = useState({});
 
   useEffect(() => {
     const fetchCadetProgress = async () => {
       try {
         const response = await axios.get(`${BACKEND_URL}/cadets`);
 
-        console.log('cadet', response.data);
-        console.log('cadet progress', response.data[0].cadetSections);
-
-        let chapsCompleted = [];
-        for (let i = 0; i < response.data.length; i++) {
-          // console.log('chaptId', response2.data[i].chapterId);
-          chapsCompleted.push[response.data[i].id] = true;
-          setCadets(cadets);
-          console.log('hmm', chapsCompleted);
-        }
-
-        // const response2 = await axios.get(
-        //   `${BACKEND_URL}/cadetChapters/progress-status?cadetId=${cadetInfo.id}`
-        // );
-        // console.log('res2', response2.data);
-        // let chapsCompleted = {};
-
-        // for (let i = 0; i < response2.data.length; i++) {
-        //   // console.log('chaptId', response2.data[i].chapterId);
-        //   chapsCompleted[response2.data[i].chapterId] = true;
-        // }
-
-        // setCompletedChaps(chapsCompleted);
+        console.log('all cadets info', response.data);
+        setCadets(response.data);
       } catch (err) {
         console.log(err.response.data);
       }
     };
-    // sectId();
+
     fetchCadetProgress();
   }, []);
+
+  let cadetList;
+  if (cadets && cadets.length !== 0) {
+    cadetList = cadets.map((cadet) => {
+      console.log('cadet Id', cadet.id);
+      console.log('cadet names', cadet.name);
+      return cadetList;
+
+      // return (
+      //   <>
+      //     <Container>
+      //       <h4 key={chapterId}>{chapterId.chapterId}</h4>
+      //     </Container>
+      //   </>
+      // );
+    });
+  }
+
+  let cadetSects;
+  if (cadets && cadets.length !== 0) {
+    cadetSects = cadets.map((cadet) => {
+      sectProgress.push(cadet.cadetSections);
+      console.log('all sect progress', sectProgress);
+      // console.log('individual cadet chapter prog', cadet.cadetChapters);
+      // console.log('individual cadet section id', cadet.cadetSections);
+      return cadetSects;
+    });
+  }
+
+  let cadetChapts;
+  if (cadets && cadets.length !== 0) {
+    cadetChapts = cadets.map((cadet) => {
+      chaptProgress.push(cadet.cadetChapters);
+      console.log('all chap progress', chaptProgress);
+      // console.log('individual cadet chapter prog', cadet.cadetChapters);
+      // console.log('individual cadet section id', cadet.cadetSections);
+      return cadetChapts;
+    });
+  }
 
   return (
     <div>
       <Title order={1} color="yellow">
-        CadetProgress
+        {/* <CadetChaptProgress chapterProg={props.cadetChapters} />
+        <CadetSectionProgress sectionProg={cadets} /> */}
       </Title>
     </div>
   );
