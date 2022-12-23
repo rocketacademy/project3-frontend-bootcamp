@@ -1,37 +1,37 @@
-import { useEffect, useState } from 'react';
-import './css/DisplayMarkdown.css';
-import Markdown from 'markdown-to-jsx';
-import Code from './Code';
-import { database, storage } from '../firebase';
+import { useEffect, useState } from "react";
+import "./css/DisplayMarkdown.css";
+import Markdown from "markdown-to-jsx";
+import Code from "./Code";
+import { database, storage } from "../firebase";
 import {
   getDownloadURL,
   ref as storageRef,
   uploadBytes,
-} from 'firebase/storage';
-import axios from 'axios';
-import { Modal, Button } from '@mantine/core';
-import Forum from './Forum';
+} from "firebase/storage";
+import axios from "axios";
+import { Modal, Button } from "@mantine/core";
+import Forum from "./Forum";
 
-const MARKDOWN_FOLDER_NAME = 'markdown';
+const MARKDOWN_FOLDER_NAME = "markdown";
 
 function DisplayMarkdown({ markdown }) {
-  const [post, setPost] = useState('');
+  const [post, setPost] = useState("");
   const [isDark, setIsDark] = useState(true);
-  // const url =
-  //   'https://raw.githubusercontent.com/weiyu95/bootcamp3.0-docs/main/1-frontend/1.2-css/1.2.1-layout.md';
 
-  axios.get(markdown).then((res) => {
-    setPost(res.data);
-    // console.log(res.data);
-  });
+  useEffect(() => {
+    if (markdown) {
+      const getProps = async () => {
+        axios.get(markdown).then((res) => setPost(res.data));
+      };
+      getProps();
+    }
+  }, [markdown]);
 
   // useEffect(() => {
-
-  //   axios.get(url).then((res) => {
+  //   axios.get(markdown.markdown).then((res) => {
   //     setPost(res.data);
-  //     // console.log(res.data);
   //   });
-  // }, []);
+  // }, [markdown]);
 
   // console.log(post);
 
@@ -52,7 +52,7 @@ function DisplayMarkdown({ markdown }) {
       >
         {post}
       </Markdown>
-      <Forum />
+      {/* <Forum /> */}
     </div>
   );
 }
