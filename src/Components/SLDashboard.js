@@ -18,6 +18,7 @@ import { ThemeContext } from '@emotion/react';
 import DisplayMarkdown from './DisplayMarkdown';
 import CadetDashboard from './CadetDashboard';
 import SingleCadetProgress from './SingleCadetProgress';
+import CadetChaptProgress from './CadetChaptProgress';
 import LogoutButton from './LogoutButton';
 import { withAuthenticationRequired } from '@auth0/auth0-react';
 
@@ -71,7 +72,7 @@ const SLDashboard = () => {
                 fw={500}
                 component={Link}
                 variant="link"
-                to="sl/all-cadet-progress"
+                to="/main-map"
               >
                 <IconHome2 color="white" size={13} />
                 Home Page
@@ -110,9 +111,11 @@ const SLDashboard = () => {
     >
       <Routes>
         <Route path="/" element={<SLLandingPage />}>
-          <Route path="sl/all-cadet-progress" element={<CadetProgress />} />
+          <Route path="/main-map" element={<CadetProgress />} />
+          <Route path="/main-map/:sectionId" element={<CadetProgress />} />
+          {/* <Route path="/main-map/:sectionId" element={<CadetChaptProgress />} /> */}
           <Route
-            path="sl/all-cadet-progress/:cadetId"
+            path="/cadet-progress/:cadetId"
             element={<SingleCadetProgress />}
           />
         </Route>
