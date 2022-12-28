@@ -1,5 +1,11 @@
 import React from "react";
-import { createStyles, Text, Avatar, Group } from "@mantine/core";
+import {
+  createStyles,
+  Text,
+  Avatar,
+  Group,
+  TypographyStylesProvider,
+} from "@mantine/core";
 
 const useStyles = createStyles((theme) => ({
   body: {
@@ -10,7 +16,7 @@ const useStyles = createStyles((theme) => ({
 
 export function PostBlock(props) {
   const { classes } = useStyles();
-  
+  console.log(props);
   return (
     <div>
       <Group>
@@ -27,9 +33,9 @@ export function PostBlock(props) {
           </Text>
         </div>
       </Group>
-      <Text className={classes.body} size="sm">
-        {props.post.content}
-      </Text>
+      <TypographyStylesProvider className={classes.body}>
+        <div dangerouslySetInnerHTML={{ __html: props.post.content }} />
+      </TypographyStylesProvider>
     </div>
   );
 }
