@@ -6,9 +6,9 @@ const SLLandingPage = () => {
   return (
     <div>
       {' '}
-      <Title order={1} color="yellow">
+      {/* <Title order={1} color="yellow">
         Sl landing page
-      </Title>
+      </Title> */}
       <Outlet />
       <TimeDisplay />
     </div>

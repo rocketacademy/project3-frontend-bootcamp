@@ -18,6 +18,7 @@ import { ThemeContext } from '@emotion/react';
 import DisplayMarkdown from './DisplayMarkdown';
 import CadetDashboard from './CadetDashboard';
 import SingleCadetProgress from './SingleCadetProgress';
+import CadetChaptProgress from './CadetChaptProgress';
 import LogoutButton from './LogoutButton';
 import { withAuthenticationRequired } from '@auth0/auth0-react';
 
@@ -111,8 +112,10 @@ const SLDashboard = () => {
       <Routes>
         <Route path="/" element={<SLLandingPage />}>
           <Route path="/main-map" element={<CadetProgress />} />
+          <Route path="/main-map/:sectionId" element={<CadetProgress />} />
+          {/* <Route path="/main-map/:sectionId" element={<CadetChaptProgress />} /> */}
           <Route
-            path="/all-cadet-progress/:cadetId"
+            path="/cadet-progress/:cadetId"
             element={<SingleCadetProgress />}
           />
         </Route>

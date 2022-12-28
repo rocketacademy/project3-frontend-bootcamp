@@ -1,0 +1,50 @@
+.Section-progress-container {
+  display: flex;
+  flex-wrap: nowrap;
+  /* align-items: center; */
+  justify-content: center;
+  position: absolute;
+  right: 0;
+  left: 0;
+  top: 100px;
+  bottom: 0;
+  /* margin: auto; */
+  margin-left: 400px;
+}
+
+.SL-dashboard-sect-btn {
+  margin: 2em 0.5em;
+}
+
+.Cadet-Names {
+  padding: 50px;
+  /* width: 500px; */
+}
+
+.chapter-progress-list {
+  justify-items: center;
+  margin: auto;
+  margin-top: 200px;
+  margin-left: 400px;
+  width: 1400px;
+}
+
+.individual-chapter-progress-list {
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+
+  padding-bottom: 50px;
+}
+
+.cadet-names {
+  font-weight: 600;
+  min-width: 100px;
+  justify-content: flex-start;
+  align-items: flex-start;
+  /* margin-right: 50px; */
+}
+
+.cadet-progress-map {
+  margin-left: 50px;
+}
