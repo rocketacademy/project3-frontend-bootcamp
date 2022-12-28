@@ -23,8 +23,6 @@ const ChapterPosts = (props) => {
     getPosts();
   }, [props.chapter]);
 
-  console.log("chapterpost", posts);
-
   const onPostUpdate = (post) => {
     setPosts((prevPosts) => {
       return [...prevPosts, post];
