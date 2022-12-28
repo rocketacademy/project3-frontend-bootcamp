@@ -1,8 +1,17 @@
-import React, { useState, useEffect } from "react";
-import { Textarea, Button } from "@mantine/core";
+import React, { useState, useEffect, useCallback } from "react";
+import { Button } from "@mantine/core";
 import { BACKEND_URL } from "../constants";
 import axios from "axios";
 import { RichTextEditor } from "@mantine/rte";
+import {
+  getDownloadURL,
+  ref,
+  ref as storageRef,
+  uploadBytes,
+} from "firebase/storage";
+import { storage } from "../firebase";
+
+const UPLOAD_IMAGES_FOLDER_NAME = "postImageUploads";
 
 const PostForm = ({ chapter, cadet, onPostUpdate }) => {
   const [value, onChange] = useState("<p><br></p>");
@@ -13,6 +22,10 @@ const PostForm = ({ chapter, cadet, onPostUpdate }) => {
     chapterId: null,
     content: "",
     createdAt: null,
+  });
+  const [imageUpload, setImageUpload] = useState({
+    imageInputValue: "",
+    imageInputFile: null,
   });
 
   useEffect(() => {
@@ -26,17 +39,22 @@ const PostForm = ({ chapter, cadet, onPostUpdate }) => {
     });
   }, [value, cadet.id, cadet.name, cadet.photoLink, chapter]);
 
-  const handleChange = () => {
-    setPost({
-      author: cadet.id,
-      authorName: cadet.name,
-      authorImage: cadet.photoLink,
-      chapterId: chapter,
-      content: value,
-      createdAt: new Date().toLocaleString(),
-    });
-  };
-  console.log("post content", post.content);
+  const handleImageUpload = useCallback(
+    (file) =>
+      new Promise((resolve, reject) => {
+        const fileRef = ref(
+          storage,
+          `${UPLOAD_IMAGES_FOLDER_NAME}/${file.name}`
+        );
+        uploadBytes(fileRef, file).then(() => {
+          getDownloadURL(fileRef)
+            .then((downloadUrl) => resolve(downloadUrl))
+            .catch(() => reject(new Error("Upload failed")));
+        });
+      }),
+    []
+  );
+
   const handleSubmit = (event) => {
     event.preventDefault();
     axios
@@ -57,23 +75,14 @@ const PostForm = ({ chapter, cadet, onPostUpdate }) => {
         onChange("");
       });
   };
-  console.log(value);
 
   return (
     <div>
-      {/* <Textarea
-        label="Post your messages:"
-        placeholder="What are your thoughts?"
-        variant="filled"
-        value={post.content}
-        onChange={handleChange}
-        autosize
-        minRows={2}
-      /> */}
       <RichTextEditor
         id="rte"
         value={value}
         onChange={onChange}
+        onImageUpload={handleImageUpload}
         placeholder="Post your messages here"
       />
 
