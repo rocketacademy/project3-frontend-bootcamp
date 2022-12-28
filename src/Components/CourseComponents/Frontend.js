@@ -75,7 +75,7 @@ function Frontend() {
     };
     // sectId();
     fetchChapters();
-  }, [markCompleted]);
+  }, [cadetInfo, sectionId]);
 
   const handleClick = (id) => {
     axios
