@@ -1,9 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Textarea, Button } from "@mantine/core";
 import { BACKEND_URL } from "../constants";
 import axios from "axios";
+import { RichTextEditor } from "@mantine/rte";
 
 const PostForm = ({ chapter, cadet, onPostUpdate }) => {
+  const [value, onChange] = useState("<p><br></p>");
   const [post, setPost] = useState({
     author: null,
     authorName: "",
@@ -13,17 +15,28 @@ const PostForm = ({ chapter, cadet, onPostUpdate }) => {
     createdAt: null,
   });
 
-  const handleChange = (event) => {
+  useEffect(() => {
     setPost({
       author: cadet.id,
       authorName: cadet.name,
       authorImage: cadet.photoLink,
       chapterId: chapter,
-      content: event.target.value,
-      createdAt: new Date().toLocaleString("nl-NL"),
+      content: value,
+      createdAt: new Date().toLocaleString(),
+    });
+  }, [value, cadet.id, cadet.name, cadet.photoLink, chapter]);
+
+  const handleChange = () => {
+    setPost({
+      author: cadet.id,
+      authorName: cadet.name,
+      authorImage: cadet.photoLink,
+      chapterId: chapter,
+      content: value,
+      createdAt: new Date().toLocaleString(),
     });
   };
-
+  console.log("post content", post.content);
   const handleSubmit = (event) => {
     event.preventDefault();
     axios
@@ -31,7 +44,7 @@ const PostForm = ({ chapter, cadet, onPostUpdate }) => {
         ...post,
       })
       .then((res) => {
-        console.log("inside handlesubmit", post);
+        console.log("in handle submit", res);
         onPostUpdate(post);
         setPost({
           author: null,
@@ -41,12 +54,14 @@ const PostForm = ({ chapter, cadet, onPostUpdate }) => {
           content: "",
           createdAt: null,
         });
-        console.log(res);
+        onChange("");
       });
   };
+  console.log(value);
+
   return (
     <div>
-      <Textarea
+      {/* <Textarea
         label="Post your messages:"
         placeholder="What are your thoughts?"
         variant="filled"
@@ -54,9 +69,15 @@ const PostForm = ({ chapter, cadet, onPostUpdate }) => {
         onChange={handleChange}
         autosize
         minRows={2}
+      /> */}
+      <RichTextEditor
+        id="rte"
+        value={value}
+        onChange={onChange}
+        placeholder="Post your messages here"
       />
 
-      {post.content === "" ? (
+      {value === "<p><br></p>" ? (
         <Button
           variant="filled"
           color="tan"

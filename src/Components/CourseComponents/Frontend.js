@@ -185,7 +185,12 @@ function Frontend() {
 
                 children: (
                   <>
+<<<<<<< HEAD
                     <DisplayMarkdown markdown={btn2.markdownUrl} />{' '}
+=======
+                    <DisplayMarkdown markdown={btn2.markdownUrl} />
+                    <ChapterPosts chapter={btn2.id} cadet={cadetInfo} />
+>>>>>>> 21b14a263ea2b62d1549873500f1b94218bb1353
                     <MarkCompleteBtn
                       completedChaps={completedChaps[btn2.id]}
                       id={btn2.id}
@@ -227,6 +232,7 @@ function Frontend() {
                 children: (
                   <>
                     <DisplayMarkdown markdown={btn3.markdownUrl} />
+                    <ChapterPosts chapter={btn3.id} cadet={cadetInfo} />
                     <MarkCompleteBtn
                       completedChaps={completedChaps[btn3.id]}
                       id={btn3.id}
@@ -266,6 +272,7 @@ function Frontend() {
                 children: (
                   <>
                     <DisplayMarkdown markdown={btn4.markdownUrl} />
+                    <ChapterPosts chapter={btn4.id} cadet={cadetInfo} />
                     <MarkCompleteBtn
                       completedChaps={completedChaps[btn4.id]}
                       id={btn4.id}
@@ -306,6 +313,7 @@ function Frontend() {
                 children: (
                   <>
                     <DisplayMarkdown markdown={btn5.markdownUrl} />
+                    <ChapterPosts chapter={btn5.id} cadet={cadetInfo} />
                     <MarkCompleteBtn
                       completedChaps={completedChaps[btn5.id]}
                       id={btn5.id}
@@ -359,6 +367,7 @@ function Frontend() {
                 children: (
                   <>
                     <DisplayMarkdown markdown={btn6.markdownUrl} />
+                    <ChapterPosts chapter={btn6.id} cadet={cadetInfo} />
                     <MarkCompleteBtn
                       completedChaps={completedChaps[btn6.id]}
                       id={btn6.id}
@@ -398,6 +407,7 @@ function Frontend() {
                 children: (
                   <>
                     <DisplayMarkdown markdown={btn7.markdownUrl} />
+                    <ChapterPosts chapter={btn7.id} cadet={cadetInfo} />
                     <MarkCompleteBtn
                       completedChaps={completedChaps[btn7.id]}
                       id={btn7.id}
@@ -438,6 +448,7 @@ function Frontend() {
                 children: (
                   <>
                     <DisplayMarkdown markdown={btn8.markdownUrl} />
+                    <ChapterPosts chapter={btn8.id} cadet={cadetInfo} />
                     <MarkCompleteBtn
                       completedChaps={completedChaps[btn8.id]}
                       id={btn8.id}
@@ -478,6 +489,7 @@ function Frontend() {
                 children: (
                   <>
                     <DisplayMarkdown markdown={btn9.markdownUrl} />
+                    <ChapterPosts chapter={btn9.id} cadet={cadetInfo} />
                     <MarkCompleteBtn
                       completedChaps={completedChaps[btn9.id]}
                       id={btn9.id}
@@ -518,6 +530,7 @@ function Frontend() {
                 children: (
                   <>
                     <DisplayMarkdown markdown={btn10.markdownUrl} />
+                    <ChapterPosts chapter={btn10.id} cadet={cadetInfo} />
                     <MarkCompleteBtn
                       completedChaps={completedChaps[btn10.id]}
                       id={btn10.id}
@@ -558,6 +571,7 @@ function Frontend() {
                 children: (
                   <>
                     <DisplayMarkdown markdown={btn11.markdownUrl} />
+                    <ChapterPosts chapter={btn11.id} cadet={cadetInfo} />
                     <MarkCompleteBtn
                       completedChaps={completedChaps[btn11.id]}
                       id={btn11.id}
