@@ -159,11 +159,12 @@ function Frontend() {
               openModal({
                 title: "FRONTEND",
                 size: "55%",
-                overflow: "inside",
+                overflow: "auto",
 
                 children: (
                   <>
                     <DisplayMarkdown markdown={btn1.markdownUrl} />
+                    <br />
                     <ChapterPosts chapter={btn1.id} cadet={cadetInfo} />
                     <MarkCompleteBtn
                       completedChaps={completedChaps[btn1.id]}
