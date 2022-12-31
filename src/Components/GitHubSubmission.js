@@ -1,23 +1,48 @@
-import React from "react";
-import { Button } from "@mantine/core";
+import React, { useState } from "react";
+import { TextInput, Button, Group, Box } from "@mantine/core";
+import { useForm } from "@mantine/form";
+import axios from "axios";
+import { BACKEND_URL } from "../constants";
 
-const GitHubSubmissionBtn = ({ id, handleUpload }) => {
+const GitHubSubmission = ({ id, cadetId }) => {
+  const [opened, setOpened] = useState(false);
+  const [repoUrl, setRepoUrl] = useState("");
+
+  const handleChange = (event) => {
+    setRepoUrl(event.target.value);
+  };
+
+  const handleSubmit = () => {
+    console.log("handleSubmit", id);
+    axios
+      .put(`${BACKEND_URL}/gitHubSubmissions`, {
+        cadetId: Number(cadetId),
+        chapterId: Number(id),
+        repoUrl: String(repoUrl),
+      })
+      .then((res) => {
+        console.log("resdata:", res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
   return (
-    <div>
-      <Button
-        variant="filled"
-        color="blue"
-        size="sm"
-        mt="md"
-        radius="md"
-        onClick={() => {
-          handleUpload(id);
-        }}
-      >
-        Submit your GitHub repo here!
-      </Button>
-    </div>
+    <Box sx={{ maxWidth: 300 }} mx="left" mt="md">
+      <TextInput
+        label="GitHub Repo"
+        placeholder="https://github.com/user/project-name"
+        value={repoUrl}
+        onChange={handleChange}
+      />
+      <Group position="left" mt="md">
+        <Button radius="md" type="submit" onClick={handleSubmit}>
+          Submit GitHub Repo
+        </Button>
+      </Group>
+    </Box>
   );
 };
 
-export default GitHubSubmissionBtn;
+export default GitHubSubmission;

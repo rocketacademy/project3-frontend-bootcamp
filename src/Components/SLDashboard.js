@@ -1,5 +1,5 @@
-import React from 'react';
-import { useState, useEffect } from 'react';
+import React from "react";
+import { useState, useEffect } from "react";
 import {
   AppShell,
   Burger,
@@ -10,27 +10,28 @@ import {
   Image,
   Button,
   useMantineTheme,
-} from '@mantine/core';
+} from "@mantine/core";
 
-import Profile from './Profile';
-import { BrowserRouter as Router, Link, Route, Routes } from 'react-router-dom';
-import { ThemeContext } from '@emotion/react';
-import DisplayMarkdown from './DisplayMarkdown';
-import CadetDashboard from './CadetDashboard';
-import SingleCadetProgress from './SingleCadetProgress';
-import CadetChaptProgress from './CadetChaptProgress';
-import LogoutButton from './LogoutButton';
-import { withAuthenticationRequired } from '@auth0/auth0-react';
+import Profile from "./Profile";
+import { BrowserRouter as Router, Link, Route, Routes } from "react-router-dom";
+import { ThemeContext } from "@emotion/react";
+import DisplayMarkdown from "./DisplayMarkdown";
+import CadetDashboard from "./CadetDashboard";
+import SingleCadetProgress from "./SingleCadetProgress";
+import CadetChaptProgress from "./CadetChaptProgress";
+import LogoutButton from "./LogoutButton";
+import { withAuthenticationRequired } from "@auth0/auth0-react";
 
-import Rlogo from '../images/rocket-logo.png';
-import { IconHome2, IconCalendarEvent } from '@tabler/icons';
+import Rlogo from "../images/rocket-logo.png";
+import { IconHome2, IconCalendarEvent } from "@tabler/icons";
 
-import MainMap from './CourseComponents/MainMap';
+import MainMap from "./CourseComponents/MainMap";
 
-import SLLandingPage from './SLLandingPage';
-import Schedule from './Schedule';
-import Loading from './Loading';
-import CadetProgress from './CadetProgress';
+import SLLandingPage from "./SLLandingPage";
+import Schedule from "./Schedule";
+import Loading from "./Loading";
+import CadetProgress from "./CadetProgress";
+import GitHubSubmissionsDisplay from "./GitHubSubmissionsDisplay";
 
 const SLDashboard = () => {
   const [opened, setOpened] = useState(false);
@@ -58,15 +59,15 @@ const SLDashboard = () => {
               className="nav-logo"
               style={{
                 width: 250,
-                marginLeft: 'auto',
-                marginRight: 'auto',
+                marginLeft: "auto",
+                marginRight: "auto",
               }}
             >
               <Image src={Rlogo} alt="rocket logo" />
             </div>
           </Navbar.Section>
           <Navbar.Section grow mt="lg">
-            <div style={{ display: 'flex', flexDirection: 'column' }}>
+            <div style={{ display: "flex", flexDirection: "column" }}>
               <Text
                 ta="center"
                 fw={500}
@@ -94,9 +95,20 @@ const SLDashboard = () => {
                 variant="link"
                 to="/schedule"
               >
-                {' '}
+                {" "}
                 <IconCalendarEvent color="white" size={13} />
                 Schedule
+              </Text>
+              <Text
+                ta="center"
+                fw={500}
+                component={Link}
+                variant="link"
+                to="/submissions"
+              >
+                {" "}
+                <IconCalendarEvent color="white" size={13} />
+                GitHub Submissions
               </Text>
               <br />
             </div>
@@ -118,6 +130,7 @@ const SLDashboard = () => {
             path="/cadet-progress/:cadetId"
             element={<SingleCadetProgress />}
           />
+          <Route path="/submissions" element={<GitHubSubmissionsDisplay />} />
         </Route>
         <Route path="/schedule" element={<Schedule />} />
       </Routes>

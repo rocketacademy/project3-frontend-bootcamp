@@ -13,7 +13,7 @@ import { set } from "firebase/database";
 import ModelTitle from "../ModelTitle";
 import { useAuth } from "../AuthContext";
 import ChapterPosts from "../ChapterPosts";
-import GitHubSubmissionBtn from "../GitHubSubmission";
+import GitHubSubmission from "../GitHubSubmission";
 
 function Frontend() {
   const [opened, setOpened] = useState(false);
@@ -93,6 +93,36 @@ function Frontend() {
       .catch((err) => {
         console.log(err);
       });
+
+    // axios
+    //   .post(`${BACKEND_URL}/gitHubSubmissions`, {
+    //     cadetId: Number(cadetInfo.id),
+    //     chapterId: Number(id),
+    //     repoUrl: "",
+    //   })
+    //   .then((res) => {
+    //     console.log("submission data created");
+    //     console.log("cadetId", cadetInfo.id);
+    //   })
+    //   .catch((err) => {
+    //     console.log(err);
+    //   });
+  };
+
+  const handleCreateSubmissionData = (id) => {
+    axios
+      .post(`${BACKEND_URL}/gitHubSubmissions`, {
+        cadetId: Number(cadetInfo.id),
+        chapterId: Number(id),
+        repoUrl: "",
+      })
+      .then((res) => {
+        console.log("submission data created");
+        console.log("cadetId", cadetInfo.id);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
   const handleSubmit = (id) => {
@@ -110,24 +140,6 @@ function Frontend() {
       .catch((err) => {
         console.log(err);
       });
-  };
-
-  const handleUpload = (id) => {
-    console.log("handleUpload");
-    // axios
-    //   .put(`${BACKEND_URL}/cadetChapters`, {
-    //     cadetId: Number(cadetInfo.id),
-    //     chapterId: Number(id),
-    //     sectionId: Number(sectionId),
-    //   })
-    //   .then((res) => {
-    //     console.log("resdata:", res.data);
-    //     console.log("marked complete");
-    //     setMarkCompleted(id);
-    //   })
-    //   .catch((err) => {
-    //     console.log(err);
-    //   });
   };
 
   return (
@@ -375,6 +387,7 @@ function Frontend() {
             })}
             onClick={() => {
               handleClick(btn6.id);
+              handleCreateSubmissionData(btn6.id);
               openModal({
                 opened: { opened },
                 title: "RECIPE SITE E1",
@@ -384,10 +397,7 @@ function Frontend() {
                   <>
                     <DisplayMarkdown markdown={btn6.markdownUrl} />
                     <ChapterPosts chapter={btn6.id} cadet={cadetInfo} />
-                    <GitHubSubmissionBtn
-                      id={btn6.id}
-                      handleSubmit={handleUpload}
-                    />
+                    <GitHubSubmission id={btn6.id} cadetId={cadetInfo.id} />
                     <MarkCompleteBtn
                       completedChaps={completedChaps[btn6.id]}
                       id={btn6.id}
@@ -420,6 +430,7 @@ function Frontend() {
             })}
             onClick={() => {
               handleClick(btn7.id);
+              handleCreateSubmissionData(btn7.id);
               openModal({
                 title: "PORTFOLIO PAGE E2",
                 size: "55%",
@@ -428,6 +439,7 @@ function Frontend() {
                   <>
                     <DisplayMarkdown markdown={btn7.markdownUrl} />
                     <ChapterPosts chapter={btn7.id} cadet={cadetInfo} />
+                    <GitHubSubmission id={btn7.id} cadetId={cadetInfo.id} />
                     <MarkCompleteBtn
                       completedChaps={completedChaps[btn7.id]}
                       id={btn7.id}
