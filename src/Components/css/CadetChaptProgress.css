@@ -27,13 +27,13 @@
   margin-top: 200px;
   margin-left: 400px;
   width: 1400px;
+  min-height: 420px;
 }
 
 .individual-chapter-progress-list {
   justify-content: center;
   align-items: center;
   margin-top: 20px;
-
   padding-bottom: 50px;
 }
 

@@ -12,10 +12,10 @@ import {
   filterProps,
   List,
 } from '@mantine/core';
-import { BrowserRouter as Router, Link, useNavigate } from 'react-router-dom';
+
 import { BACKEND_URL } from '../constants.js';
 import { useParams } from 'react-router-dom';
-import { useAuth } from './AuthContext';
+
 import CadetChaptProgress from './CadetChaptProgress.js';
 import '../Components/css/CadetChaptProgress.css';
 import CadetSectionProgress from './CadetSectionProgress.js';
@@ -33,7 +33,6 @@ const CadetProgress = () => {
   const [singleProgress, setSingleProgress] = useState([]);
   const [markCompleted, setMarkCompleted] = useState();
   const [completedChaps, setCompletedChaps] = useState({});
-  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchCadetProgress = async () => {
@@ -51,7 +50,7 @@ const CadetProgress = () => {
   }, []);
 
   return (
-    <div>
+    <div className="progress-list-paper">
       <Paper className="chapter-progress-list">
         <SLDashboardlinks />
         {sectionId ? (

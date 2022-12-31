@@ -43,10 +43,7 @@ const CadetChaptProgress = ({ cadetId, cadetName }) => {
   let cadetProgressList = progress?.map((chapter) => {
     return (
       <>
-        <Button>
-          {chapter.chapterId}
-          {chapter.completed}
-        </Button>
+        <Button radius="xl">{chapter.chapterId}</Button>
       </>
     );
   });
@@ -59,14 +56,3 @@ const CadetChaptProgress = ({ cadetId, cadetName }) => {
 };
 
 export default CadetChaptProgress;
-
-//  <span>
-//    {progress
-//      ? progress.map((chapter) => (
-//          <Button>
-//            {chapter.chapterId}
-//            {chapter.completed}
-//          </Button>
-//        ))
-//      : 'Sorry no info'}
-//  </span>;

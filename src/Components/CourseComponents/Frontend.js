@@ -146,6 +146,7 @@ function Frontend() {
                   <>
                     <DisplayMarkdown markdown={btn1.markdownUrl} />
                     <ChapterPosts chapter={btn1.id} cadet={cadetInfo} />
+
                     <MarkCompleteBtn
                       completedChaps={completedChaps[btn1.id]}
                       id={btn1.id}
@@ -185,12 +186,8 @@ function Frontend() {
 
                 children: (
                   <>
-<<<<<<< HEAD
-                    <DisplayMarkdown markdown={btn2.markdownUrl} />{' '}
-=======
                     <DisplayMarkdown markdown={btn2.markdownUrl} />
                     <ChapterPosts chapter={btn2.id} cadet={cadetInfo} />
->>>>>>> 21b14a263ea2b62d1549873500f1b94218bb1353
                     <MarkCompleteBtn
                       completedChaps={completedChaps[btn2.id]}
                       id={btn2.id}

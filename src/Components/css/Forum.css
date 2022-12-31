@@ -1,0 +1,41 @@
+.progress-list-paper {
+  margin: 1rem;
+  /* padding: 2rem 2rem; */
+  /* text-align: center; */
+  align-items: center;
+  justify-items: center;
+}
+
+.fsectionlist-progress-list {
+  background-color: #06113e;
+  justify-items: center;
+  margin: auto;
+  margin-top: 100px;
+  margin-left: 400px;
+  width: 1400px;
+  min-height: 420px;
+}
+
+.forum-sect-btn-list {
+  /* display: inline-block; */
+  width: 250px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  margin-left: 1rem;
+}
+
+.chapter-list-btns {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  margin-bottom: 1rem;
+  margin-left: 1rem;
+  margin-right: 1rem;
+}
+
+.post-list {
+  margin-top: 3rem;
+
+  justify-items: center;
+  align-items: center;
+}

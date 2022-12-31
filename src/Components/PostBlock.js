@@ -1,11 +1,11 @@
-import React from "react";
+import React from 'react';
 import {
   createStyles,
   Text,
   Avatar,
   Group,
   TypographyStylesProvider,
-} from "@mantine/core";
+} from '@mantine/core';
 
 const useStyles = createStyles((theme) => ({
   body: {
@@ -19,6 +19,7 @@ export function PostBlock(props) {
   console.log(props);
   return (
     <div>
+      <br />
       <Group>
         <Avatar
           src={props.post.authorImage}
@@ -36,6 +37,7 @@ export function PostBlock(props) {
       <TypographyStylesProvider className={classes.body}>
         <div dangerouslySetInnerHTML={{ __html: props.post.content }} />
       </TypographyStylesProvider>
+      <hr />
     </div>
   );
 }

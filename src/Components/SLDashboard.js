@@ -19,6 +19,9 @@ import DisplayMarkdown from './DisplayMarkdown';
 import CadetDashboard from './CadetDashboard';
 import SingleCadetProgress from './SingleCadetProgress';
 import CadetChaptProgress from './CadetChaptProgress';
+import Forum from './Forum';
+import ForumChapter from './ForumChapter';
+import ForumSection from './ForumSection';
 import LogoutButton from './LogoutButton';
 import { withAuthenticationRequired } from '@auth0/auth0-react';
 
@@ -82,11 +85,12 @@ const SLDashboard = () => {
                 fw={500}
                 component={Link}
                 variant="link"
-                to="sl/all-cadet-progress/:cadetId"
+                to="/forum"
               >
                 <IconHome2 color="white" size={13} />
-                Single Cadet
+                Forum
               </Text>
+
               <Text
                 ta="center"
                 fw={500}
@@ -94,7 +98,6 @@ const SLDashboard = () => {
                 variant="link"
                 to="/schedule"
               >
-                {' '}
                 <IconCalendarEvent color="white" size={13} />
                 Schedule
               </Text>
@@ -113,11 +116,13 @@ const SLDashboard = () => {
         <Route path="/" element={<SLLandingPage />}>
           <Route path="/main-map" element={<CadetProgress />} />
           <Route path="/main-map/:sectionId" element={<CadetProgress />} />
+
           {/* <Route path="/main-map/:sectionId" element={<CadetChaptProgress />} /> */}
-          <Route
-            path="/cadet-progress/:cadetId"
-            element={<SingleCadetProgress />}
-          />
+        </Route>
+
+        <Route path="/forum" element={<Forum />}>
+          <Route path="/forum/:sectionId" element={<Forum />} />
+          <Route path="/forum/:sectionId/:chapterId" element={<Forum />} />
         </Route>
         <Route path="/schedule" element={<Schedule />} />
       </Routes>

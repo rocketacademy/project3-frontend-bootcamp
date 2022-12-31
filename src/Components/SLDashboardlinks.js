@@ -11,8 +11,6 @@ import {
   filterProps,
   List,
 } from '@mantine/core';
-import CadetChaptProgress from './CadetChaptProgress.js';
-import CadetSectionProgress from './CadetSectionProgress.js';
 
 const SLDashboardlinks = ({ cadetNames, cadetIdList, sectProgress }) => {
   const navigate = useNavigate();

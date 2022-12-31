@@ -1,9 +1,9 @@
-import axios from "axios";
-import React, { useEffect, useState } from "react";
-import { BACKEND_URL } from "../constants.js";
-import { PostBlock } from "./PostBlock.js";
-import { List } from "@mantine/core";
-import PostForm from "./PostForm.js";
+import axios from 'axios';
+import React, { useEffect, useState } from 'react';
+import { BACKEND_URL } from '../constants.js';
+import { PostBlock } from './PostBlock.js';
+import { List } from '@mantine/core';
+import PostForm from './PostForm.js';
 
 const ChapterPosts = (props) => {
   const [posts, setPosts] = useState([]);
@@ -31,6 +31,8 @@ const ChapterPosts = (props) => {
 
   return (
     <div>
+      <br />
+      <br />
       <List type="ordered" withPadding>
         {posts.map((post) => (
           <PostBlock post={post} key={post.id} />
@@ -41,6 +43,7 @@ const ChapterPosts = (props) => {
         cadet={props.cadet}
         onPostUpdate={onPostUpdate}
       />
+      <br />
     </div>
   );
 };
