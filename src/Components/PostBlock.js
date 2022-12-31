@@ -1,4 +1,5 @@
 import React from "react";
+import axios from "axios";
 import {
   createStyles,
   Text,
@@ -8,9 +9,11 @@ import {
   Paper,
   Menu,
   ActionIcon,
-  Container,
 } from "@mantine/core";
+import { openModal } from "@mantine/modals";
 import { IconPencil, IconTrash, IconDots } from "@tabler/icons";
+import { BACKEND_URL } from "../constants";
+import EditPost from "./EditPost";
 
 const useStyles = createStyles((theme) => ({
   body: {
@@ -20,7 +23,7 @@ const useStyles = createStyles((theme) => ({
   card: {
     position: "relative",
     cursor: "pointer",
-    overflow: "hidden",
+    overflow: "visible",
     transition: "transform 150ms ease, box-shadow 100ms ease",
     padding: theme.spacing.xl,
     paddingLeft: theme.spacing.xl * 2,
@@ -48,7 +51,22 @@ const useStyles = createStyles((theme) => ({
 
 export function PostBlock(props) {
   const { classes } = useStyles();
-  console.log(props);
+
+  const handleEdit = async (post) => {
+    openModal({
+      modalId: "edit",
+      size: "auto",
+      overflow: "auto",
+      children: <EditPost post={post} />,
+    });
+  };
+
+  const handleDelete = async (id) => {
+    await axios.delete(`${BACKEND_URL}/posts/${id}`);
+    props.onPostDelete(id);
+    console.log("post successfully deleted.");
+  };
+
   return (
     <Paper withBorder radius="md" className={classes.card}>
       <Group position="apart">
@@ -66,26 +84,32 @@ export function PostBlock(props) {
             </Text>
           </div>
         </Group>
-        <Group>
-          <Menu transition="pop" withArrow>
-            <Menu.Target>
-              <ActionIcon>
-                <IconDots size={16} stroke={1.5} />
-              </ActionIcon>
-            </Menu.Target>
-            <Menu.Dropdown>
-              <Menu.Item icon={<IconPencil size={16} stroke={1.5} />}>
-                Edit message
-              </Menu.Item>
-              <Menu.Item
-                icon={<IconTrash size={16} stroke={1.5} />}
-                color="red"
-              >
-                Delete message
-              </Menu.Item>
-            </Menu.Dropdown>
-          </Menu>
-        </Group>
+        {props.cadet.id === props.post.author ? (
+          <Group>
+            <Menu transition="pop" withArrow>
+              <Menu.Target>
+                <ActionIcon>
+                  <IconDots size={16} stroke={1.5} />
+                </ActionIcon>
+              </Menu.Target>
+              <Menu.Dropdown>
+                <Menu.Item
+                  icon={<IconPencil size={16} stroke={1.5} />}
+                  onClick={() => handleEdit(props.post)}
+                >
+                  Edit message
+                </Menu.Item>
+                <Menu.Item
+                  icon={<IconTrash size={16} stroke={1.5} />}
+                  color="red"
+                  onClick={() => handleDelete(props.post.id)}
+                >
+                  Delete message
+                </Menu.Item>
+              </Menu.Dropdown>
+            </Menu>
+          </Group>
+        ) : null}
       </Group>
       <TypographyStylesProvider className={classes.body}>
         <div dangerouslySetInnerHTML={{ __html: props.post.content }} />
