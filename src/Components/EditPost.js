@@ -10,34 +10,30 @@ import {
   uploadBytes,
 } from "firebase/storage";
 import { storage } from "../firebase";
+import { closeModal } from "@mantine/modals";
 
 const UPLOAD_IMAGES_FOLDER_NAME = "postImageUploads";
 
-const PostForm = ({ chapter, cadet, onPostUpdate }) => {
-  const [value, onChange] = useState("<p><br></p>");
+const EditPost = (props) => {
+  const [value, onChange] = useState(props.post.content);
   const [post, setPost] = useState({
     author: null,
     authorName: "",
     authorImage: "",
     chapterId: null,
     content: "",
-    createdAt: null,
-  });
-  const [imageUpload, setImageUpload] = useState({
-    imageInputValue: "",
-    imageInputFile: null,
   });
 
+  console.log("props in EditPost", props);
   useEffect(() => {
     setPost({
-      author: cadet.id,
-      authorName: cadet.name,
-      authorImage: cadet.photoLink,
-      chapterId: chapter,
+      author: props.post.author,
+      authorName: props.post.authorName,
+      authorImage: props.post.authorImage,
+      chapterId: props.post.chapterId,
       content: value,
-      createdAt: new Date().toLocaleString(),
     });
-  }, [value, cadet.id, cadet.name, cadet.photoLink, chapter]);
+  }, [props.post, value]);
 
   const handleImageUpload = useCallback(
     (file) =>
@@ -55,21 +51,19 @@ const PostForm = ({ chapter, cadet, onPostUpdate }) => {
     []
   );
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
+  const handleSubmit = (id) => {
+    // event.preventDefault();
     axios
-      .post(`${BACKEND_URL}/posts`, {
+      .put(`${BACKEND_URL}/posts/${id}`, {
         ...post,
       })
-      .then((res) => {
-        onPostUpdate(res.data);
+      .then(() => {
         setPost({
           author: null,
           authorName: "",
           authorImage: "",
           chapterId: null,
           content: "",
-          createdAt: null,
         });
         onChange("");
       });
@@ -103,13 +97,16 @@ const PostForm = ({ chapter, cadet, onPostUpdate }) => {
           size="sm"
           mt="md"
           radius="md"
-          onClick={handleSubmit}
+          onClick={() => {
+            handleSubmit(props.post.id);
+            closeModal("edit");
+          }}
         >
-          Submit
+          Save
         </Button>
       )}
     </div>
   );
 };
 
-export default PostForm;
+export default EditPost;

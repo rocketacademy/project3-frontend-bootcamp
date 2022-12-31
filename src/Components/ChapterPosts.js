@@ -7,7 +7,7 @@ import PostForm from './PostForm.js';
 
 const ChapterPosts = (props) => {
   const [posts, setPosts] = useState([]);
-
+  
   useEffect(() => {
     const getPosts = async () => {
       axios
@@ -29,13 +29,24 @@ const ChapterPosts = (props) => {
     });
   };
 
+  const onPostDelete = (postId) => {
+    setPosts(posts.filter((prevPost) => prevPost.id !== postId));
+  };
+
   return (
     <div>
       <br />
       <br />
       <List type="ordered" withPadding>
         {posts.map((post) => (
-          <PostBlock post={post} key={post.id} />
+          <PostBlock
+            key={post.id}
+            cadet={props.cadet}
+            chapter={props.chapter}
+            post={post}
+            onPostUpdate={onPostUpdate}
+            onPostDelete={onPostDelete}
+          />
         ))}
       </List>
       <PostForm

@@ -34,6 +34,7 @@ import SLLandingPage from './SLLandingPage';
 import Schedule from './Schedule';
 import Loading from './Loading';
 import CadetProgress from './CadetProgress';
+import GitHubSubmissionsDisplay from './GitHubSubmissionsDisplay';
 
 const SLDashboard = () => {
   const [opened, setOpened] = useState(false);
@@ -98,8 +99,20 @@ const SLDashboard = () => {
                 variant="link"
                 to="/schedule"
               >
+                {' '}
                 <IconCalendarEvent color="white" size={13} />
                 Schedule
+              </Text>
+              <Text
+                ta="center"
+                fw={500}
+                component={Link}
+                variant="link"
+                to="/submissions"
+              >
+                {' '}
+                <IconCalendarEvent color="white" size={13} />
+                GitHub Submissions
               </Text>
               <br />
             </div>
@@ -123,6 +136,11 @@ const SLDashboard = () => {
         <Route path="/forum" element={<Forum />}>
           <Route path="/forum/:sectionId" element={<Forum />} />
           <Route path="/forum/:sectionId/:chapterId" element={<Forum />} />
+          <Route
+            path="/cadet-progress/:cadetId"
+            element={<SingleCadetProgress />}
+          />
+          <Route path="/submissions" element={<GitHubSubmissionsDisplay />} />
         </Route>
         <Route path="/schedule" element={<Schedule />} />
       </Routes>
