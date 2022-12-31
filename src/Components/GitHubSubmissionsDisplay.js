@@ -31,6 +31,7 @@ const GitHubSubmissionsDisplay = () => {
     </tr>
   ));
 
+  // to implement split into filter by cadets and filter by chapters
   return (
     <div>
       <Paper className="chapter-progress-list">
