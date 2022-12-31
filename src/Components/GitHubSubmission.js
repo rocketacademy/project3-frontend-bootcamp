@@ -26,6 +26,8 @@ const GitHubSubmission = ({ id, cadetId }) => {
       .catch((err) => {
         console.log(err);
       });
+
+    setRepoUrl("SUBMITTED!");
   };
 
   return (
