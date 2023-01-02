@@ -69,7 +69,7 @@ function MainMap() {
           }
 
           setCompletedChaps(sectsCompleted);
-          console.log('sectscompleted', completedChaps);
+          console.log('sects Completed', sectsCompleted);
         }
       } catch (err) {
         console.log(err.response.data);

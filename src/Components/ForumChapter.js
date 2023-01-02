@@ -5,7 +5,8 @@ import { Textarea, Button, TextInput, Card, Title } from '@mantine/core';
 import { BACKEND_URL } from '../constants.js';
 import SLPostBlock from './SLPostBlock.js';
 import { List } from '@mantine/core';
-import PostForm from './PostForm.js';
+import SLPostForm from './SLPostForm.js';
+
 import axios from 'axios';
 import { connectStorageEmulator } from 'firebase/storage';
 import './css/Forum.css';
@@ -73,6 +74,8 @@ const ForumChapter = () => {
       ) : (
         ''
       )}
+
+      <SLPostForm />
 
       {/* <PostForm
         chapter={chapterId}

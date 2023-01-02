@@ -3,14 +3,14 @@ import { Button } from "@mantine/core";
 import { BACKEND_URL } from "../constants";
 import axios from "axios";
 import { RichTextEditor } from "@mantine/rte";
+import { showNotification } from "@mantine/notifications";
+import { closeModal } from "@mantine/modals";
 import {
   getDownloadURL,
-  ref,
   ref as storageRef,
   uploadBytes,
 } from "firebase/storage";
 import { storage } from "../firebase";
-import { closeModal } from "@mantine/modals";
 
 const UPLOAD_IMAGES_FOLDER_NAME = "postImageUploads";
 
@@ -38,7 +38,7 @@ const EditPost = (props) => {
   const handleImageUpload = useCallback(
     (file) =>
       new Promise((resolve, reject) => {
-        const fileRef = ref(
+        const fileRef = storageRef(
           storage,
           `${UPLOAD_IMAGES_FOLDER_NAME}/${file.name}`
         );
@@ -52,21 +52,31 @@ const EditPost = (props) => {
   );
 
   const handleSubmit = (id) => {
-    // event.preventDefault();
-    axios
-      .put(`${BACKEND_URL}/posts/${id}`, {
-        ...post,
-      })
-      .then(() => {
-        setPost({
-          author: null,
-          authorName: "",
-          authorImage: "",
-          chapterId: null,
-          content: "",
+    try {
+      axios
+        .put(`${BACKEND_URL}/posts/${id}`, {
+          ...post,
+        })
+        .then(() => {
+          showNotification({
+            message: "Post edited!",
+            color: "teal",
+          });
+          setPost({
+            author: null,
+            authorName: "",
+            authorImage: "",
+            chapterId: null,
+            content: "",
+          });
+          onChange("");
         });
-        onChange("");
+    } catch (error) {
+      showNotification({
+        message: error.message,
+        color: "red",
       });
+    }
   };
 
   return (

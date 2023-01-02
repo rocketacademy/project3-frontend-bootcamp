@@ -11,9 +11,11 @@ import {
   ActionIcon,
 } from '@mantine/core';
 import { openModal } from '@mantine/modals';
+import { openConfirmModal } from '@mantine/modals';
 import { IconPencil, IconTrash, IconDots } from '@tabler/icons';
 import { BACKEND_URL } from '../constants';
 import EditPost from './EditPost';
+import { showNotification } from '@mantine/notifications';
 
 const useStyles = createStyles((theme) => ({
   body: {
@@ -52,7 +54,7 @@ const useStyles = createStyles((theme) => ({
 export function PostBlock(props) {
   const { classes } = useStyles();
 
-  const handleEdit = async (post) => {
+  const handleEdit = (post) => {
     openModal({
       modalId: 'edit',
       size: 'auto',
@@ -62,9 +64,28 @@ export function PostBlock(props) {
   };
 
   const handleDelete = async (id) => {
-    await axios.delete(`${BACKEND_URL}/posts/${id}`);
-    props.onPostDelete(id);
-    console.log('post successfully deleted.');
+    openConfirmModal({
+      title: 'Confirm deleting this post?',
+      labels: { confirm: 'Delete', cancel: 'Cancel' },
+      confirmProps: { color: 'red' },
+      onCancel: () => console.log('Cancel'),
+      onConfirm: async () => {
+        try {
+          await axios.delete(`${BACKEND_URL}/posts/${id}`);
+          props.onPostDelete(id);
+          showNotification({
+            message: 'Post deleted!',
+            color: 'teal',
+          });
+          console.log('post successfully deleted.');
+        } catch (error) {
+          showNotification({
+            message: error.message,
+            color: 'red',
+          });
+        }
+      },
+    });
   };
 
   return (

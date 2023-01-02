@@ -68,8 +68,6 @@ const Forum = () => {
         <div className="chapter-list-btns">
           <ForumSection />
         </div>
-
-        {/* <ChapterPosts /> */}
       </Paper>
     </div>
   );

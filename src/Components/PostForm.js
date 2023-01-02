@@ -3,9 +3,9 @@ import { Button } from "@mantine/core";
 import { BACKEND_URL } from "../constants";
 import axios from "axios";
 import { RichTextEditor } from "@mantine/rte";
+import { showNotification } from "@mantine/notifications";
 import {
   getDownloadURL,
-  ref,
   ref as storageRef,
   uploadBytes,
 } from "firebase/storage";
@@ -23,10 +23,6 @@ const PostForm = ({ chapter, cadet, onPostUpdate }) => {
     content: "",
     createdAt: null,
   });
-  const [imageUpload, setImageUpload] = useState({
-    imageInputValue: "",
-    imageInputFile: null,
-  });
 
   useEffect(() => {
     setPost({
@@ -42,7 +38,7 @@ const PostForm = ({ chapter, cadet, onPostUpdate }) => {
   const handleImageUpload = useCallback(
     (file) =>
       new Promise((resolve, reject) => {
-        const fileRef = ref(
+        const fileRef = storageRef(
           storage,
           `${UPLOAD_IMAGES_FOLDER_NAME}/${file.name}`
         );
@@ -57,22 +53,33 @@ const PostForm = ({ chapter, cadet, onPostUpdate }) => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    axios
-      .post(`${BACKEND_URL}/posts`, {
-        ...post,
-      })
-      .then((res) => {
-        onPostUpdate(res.data);
-        setPost({
-          author: null,
-          authorName: "",
-          authorImage: "",
-          chapterId: null,
-          content: "",
-          createdAt: null,
+    try {
+      axios
+        .post(`${BACKEND_URL}/posts`, {
+          ...post,
+        })
+        .then((res) => {
+          showNotification({
+            message: "Post Created!",
+            color: "teal",
+          });
+          onPostUpdate(res.data);
+          setPost({
+            author: null,
+            authorName: "",
+            authorImage: "",
+            chapterId: null,
+            content: "",
+            createdAt: null,
+          });
+          onChange("");
         });
-        onChange("");
+    } catch (error) {
+      showNotification({
+        message: error.message,
+        color: "red",
       });
+    }
   };
 
   return (

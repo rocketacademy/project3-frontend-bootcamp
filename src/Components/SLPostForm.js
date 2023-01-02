@@ -4,7 +4,7 @@ import { BACKEND_URL } from '../constants';
 import axios from 'axios';
 import { RichTextEditor } from '@mantine/rte';
 
-const PostForm = ({ chapter, cadet, onPostUpdate }) => {
+const SLPostForm = ({ chapter, cadet, onPostUpdate }) => {
   const [value, onChange] = useState('<p><br></p>');
   const [post, setPost] = useState({
     author: null,
@@ -104,4 +104,4 @@ const PostForm = ({ chapter, cadet, onPostUpdate }) => {
   );
 };
 
-export default PostForm;
+export default SLPostForm;
