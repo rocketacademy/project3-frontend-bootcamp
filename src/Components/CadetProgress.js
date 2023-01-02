@@ -1,4 +1,5 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import {
@@ -12,10 +13,10 @@ import {
   filterProps,
   List,
 } from '@mantine/core';
-import { BrowserRouter as Router, Link, useNavigate } from 'react-router-dom';
+
 import { BACKEND_URL } from '../constants.js';
 import { useParams } from 'react-router-dom';
-import { useAuth } from './AuthContext';
+
 import CadetChaptProgress from './CadetChaptProgress.js';
 import '../Components/css/CadetChaptProgress.css';
 import CadetSectionProgress from './CadetSectionProgress.js';
@@ -28,12 +29,11 @@ const CadetProgress = () => {
   const [chaptProgress, setChaptProgress] = useState([]);
   const [sectProgress, setSectProgress] = useState([]);
   const [allCadetProgress, setAllCadetProgress] = useState({});
-
+  const navigate = useNavigate();
   const [progress, setProgress] = useState([]);
   const [singleProgress, setSingleProgress] = useState([]);
   const [markCompleted, setMarkCompleted] = useState();
   const [completedChaps, setCompletedChaps] = useState({});
-  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchCadetProgress = async () => {
@@ -51,11 +51,17 @@ const CadetProgress = () => {
   }, []);
 
   return (
-    <div>
+    <div className="progress-list-paper">
       <Paper className="chapter-progress-list">
         <SLDashboardlinks />
+        <br />
+        <br />
         {sectionId ? (
           <List type="ordered" withPadding>
+            <Title fw={700} order={2} underline border color="#0B7285">
+              = ALL CADET CHAPTER PROGRESS =
+            </Title>
+            <br />
             {cadets?.map((cadet) => (
               <div className="individual-chapter-progress-list">
                 <span className="cadet-names">{cadet.name}</span>
@@ -67,6 +73,11 @@ const CadetProgress = () => {
           </List>
         ) : (
           <List type="ordered" withPadding>
+            <Title fw={700} order={2} underline border color="#0B7285">
+              = ALL CADET SECTION PROGRESS =
+            </Title>
+            <br />
+
             {cadets?.map((cadet) => (
               <div className="individual-chapter-progress-list">
                 <span className="cadet-names">{cadet.name}</span>
@@ -77,6 +88,25 @@ const CadetProgress = () => {
             ))}
           </List>
         )}
+        <Button
+          className="navigate-btn"
+          variant="outline"
+          color="teal"
+          styles={(theme) => ({
+            root: {
+              '&:hover': {
+                backgroundColor: theme.fn.darken('#38D9A9', 0.2),
+                color: '#FFF',
+              },
+            },
+          })}
+          onClick={() => navigate('/main-map')}
+        >
+          Back To All Sections
+        </Button>
+        <br />
+        <br />
+        <br />
       </Paper>
     </div>
   );

@@ -1,8 +1,14 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
-import { Textarea, Button, TextInput } from '@mantine/core';
+import { Textarea, Button, Paper, Grid } from '@mantine/core';
 import { BACKEND_URL } from '../constants.js';
 import axios from 'axios';
+import '../Components/css/Forum.css';
+import ForumNavlinks from './ForumNavlinks.js';
+import ForumSection from './ForumSection.js';
+import { useParams } from 'react-router-dom';
+import ChapterPosts from './ChapterPosts.js';
+import ForumChapter from './ForumChapter.js';
 
 const Forum = () => {
   // const { topic } = useParams();
@@ -22,87 +28,68 @@ const Forum = () => {
   // const FORUM_FOLDER_NAME = topic;
   // const FORUM_IMAGES_FOLDER_NAME = 'forumImages';
 
-  // useEffect(() => {
-  //   const fetchForum = async () => {
-  //     try {
-  //       const response = await api.get('/forum');
-  //       console.log(response.data);
-  //       setCourse(response.data);
-  //     } catch (err) {
-  //       console.log(err.response.data);
-  //     }
-  //   };
-  //   fetchForum();
-  // }, []);
+  //useEffect to get all the available chapters and map into different links, each link will display available chapters in that component
 
-  // const handleSubmit = () => {
-  //   // e.preventDefault();
+  const [chapters, setChapters] = useState('');
+  const { sectionId } = useParams();
 
-  //   axios
-  //     .put(`${BACKEND_URL}/cadetChapters/${chapterId}`, {
-  //       completed: true,
-  //     })
-  //     .then((res) => {
-  //       console.log('resdata:', res.data);
-  //       console.log('marked complete');
-  //       setDisabled(true);
-  //       // navigate(`/client/journals/${res.data.id}`);
-  //       //after clicking submit it will disable the button and also close the modal?
-  //     })
-  //     .catch((err) => {
-  //       console.log(err);
-  //     });
-  // };
+  useEffect(() => {
+    const fetchSectionChapters = async () => {
+      try {
+        const response = await axios.get(
+          //ALL chapters completed by single cadet across whole BC
+          `${BACKEND_URL}/chapters/total-chapters?sectionId=${sectionId}`
+        );
 
-  // let forumPosts = posts.map((posts, index) => {
-  //   return <div className="forum-posts" key={index} id={posts.key}></div>;
-  // });
+        setChapters(response.data);
+      } catch (err) {
+        console.log(err.response.data);
+      }
+    };
 
-  //  const handleCompleted  = async (id) => {
-
-  //         const updateCompleted = { id, completed: editCompleted };
-  //         try {
-  //             const response = await api.put(`/materials/${id}`, updateCompleted);
-  //             setCourse(
-  //               course.map((post) =>
-  //                 course.id === id ? { ...response.data } : course
-  //               )
-  //             );
-  //         } catch (err) {
-  //             console.log(`Error: ${err.message}`);
-  //         }
-  //     }
+    fetchSectionChapters();
+    console.log('section param', sectionId);
+    // sectId();
+  }, [sectionId]);
 
   return (
-    <div className="post-box">
-      <TextInput
-        label="Post your messages:"
-        variant="filled"
-        type="text"
-        placeholder="Post Title"
-        value={titleInput}
-        onChange={(e) => setTitleInput(e.target.value)}
-      />
-      <br />
-
-      <br />
-
-      <Textarea
-        placeholder="What are your thoughts?"
-        variant="filled"
-        value={inputMessage}
-        onChange={(e) => setInputMessage(e.target.value)}
-        autosize
-        minRows={2}
-      />
-
-      <Button variant="filled" color="tan" size="sm" mt="md" radius="md">
-        Submit
-      </Button>
-
-      {/* add another button for mark as completed */}
+    <div className="progress-list-paper">
+      <Paper withBorder shadow="sm" className="fsectionlist-progress-list">
+        <Grid>
+          <Grid.Col span={3}>
+            <div className="forum-sect-btn-list">
+              <ForumNavlinks />
+            </div>
+          </Grid.Col>
+          <Grid.Col span={8}>
+            <ForumChapter />
+          </Grid.Col>
+        </Grid>
+        <div className="chapter-list-btns">
+          <ForumSection />
+        </div>
+      </Paper>
     </div>
   );
 };
-
 export default Forum;
+
+// <div className="progress-list-paper">
+//   <Paper className="fsectionlist-progress-list">
+//     <Grid>
+//       <Grid.Col span={3}>
+//         <div className="forum-sect-btn-list">
+//           <ForumNavlinks />
+//         </div>
+//       </Grid.Col>
+//       <Grid.Col span={4} offset={2}>
+//         <div className="chapter-list-btns">
+//           <ForumSection />
+//         </div>
+//       </Grid.Col>
+
+//       {/* {relevantChapters} */}
+//       {/* <ChapterPosts /> */}
+//     </Grid>
+//   </Paper>
+// </div>;
