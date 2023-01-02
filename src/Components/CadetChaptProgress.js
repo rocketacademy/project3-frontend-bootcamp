@@ -46,13 +46,15 @@ const CadetChaptProgress = ({ cadetId, cadetName }) => {
         {chapter.completed === true ? (
           <>
             <Button className="chapter-btn" radius="xl" color="blue">
-              {chapter.chapterId}
+              {/* {chapter.chapterId} */}
+              {chapter.chapter.name}
             </Button>
           </>
         ) : (
           <>
             <Button className="chapter-btn" radius="xl" color="gray">
-              {chapter.chapterId}
+              {/* {chapter.chapterId} */}
+              {chapter.chapter.name}
             </Button>
           </>
         )}

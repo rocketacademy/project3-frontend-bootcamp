@@ -59,9 +59,10 @@ function MainMap() {
           console.log(response.data.id);
 
           const response2 = await axios.get(
-            `${BACKEND_URL}/cadetSections/progress-status?cadetId=${response.data.id}`
+            `${BACKEND_URL}/cadetSections/completed-progress-status?cadetId=${response.data.id}`
           );
           console.log('res2', response2.data);
+
           let sectsCompleted = {};
 
           for (let i = 0; i < response2.data.length; i++) {
