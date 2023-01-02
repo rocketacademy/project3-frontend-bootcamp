@@ -13,6 +13,7 @@ import { set } from "firebase/database";
 import ModelTitle from "../ModelTitle";
 import { useAuth } from "../AuthContext";
 import ChapterPosts from "../ChapterPosts";
+import GitHubSubmission from "../GitHubSubmission";
 
 function Frontend() {
   const [opened, setOpened] = useState(false);
@@ -75,7 +76,7 @@ function Frontend() {
     };
     // sectId();
     fetchChapters();
-  }, [cadetInfo, sectionId]);
+  }, [cadetInfo, sectionId, markCompleted]);
 
   const handleClick = (id) => {
     axios
@@ -87,6 +88,36 @@ function Frontend() {
       })
       .then((res) => {
         console.log("Chapter data created");
+        console.log("cadetId", cadetInfo.id);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+
+    // axios
+    //   .post(`${BACKEND_URL}/gitHubSubmissions`, {
+    //     cadetId: Number(cadetInfo.id),
+    //     chapterId: Number(id),
+    //     repoUrl: "",
+    //   })
+    //   .then((res) => {
+    //     console.log("submission data created");
+    //     console.log("cadetId", cadetInfo.id);
+    //   })
+    //   .catch((err) => {
+    //     console.log(err);
+    //   });
+  };
+
+  const handleCreateSubmissionData = (id) => {
+    axios
+      .post(`${BACKEND_URL}/gitHubSubmissions`, {
+        cadetId: Number(cadetInfo.id),
+        chapterId: Number(id),
+        repoUrl: "",
+      })
+      .then((res) => {
+        console.log("submission data created");
         console.log("cadetId", cadetInfo.id);
       })
       .catch((err) => {
@@ -356,6 +387,7 @@ function Frontend() {
             })}
             onClick={() => {
               handleClick(btn6.id);
+              handleCreateSubmissionData(btn6.id);
               openModal({
                 opened: { opened },
                 title: "RECIPE SITE E1",
@@ -365,6 +397,7 @@ function Frontend() {
                   <>
                     <DisplayMarkdown markdown={btn6.markdownUrl} />
                     <ChapterPosts chapter={btn6.id} cadet={cadetInfo} />
+                    <GitHubSubmission id={btn6.id} cadetId={cadetInfo.id} />
                     <MarkCompleteBtn
                       completedChaps={completedChaps[btn6.id]}
                       id={btn6.id}
@@ -397,6 +430,7 @@ function Frontend() {
             })}
             onClick={() => {
               handleClick(btn7.id);
+              handleCreateSubmissionData(btn7.id);
               openModal({
                 title: "PORTFOLIO PAGE E2",
                 size: "55%",
@@ -405,6 +439,7 @@ function Frontend() {
                   <>
                     <DisplayMarkdown markdown={btn7.markdownUrl} />
                     <ChapterPosts chapter={btn7.id} cadet={cadetInfo} />
+                    <GitHubSubmission id={btn7.id} cadetId={cadetInfo.id} />
                     <MarkCompleteBtn
                       completedChaps={completedChaps[btn7.id]}
                       id={btn7.id}
@@ -438,6 +473,7 @@ function Frontend() {
             })}
             onClick={() => {
               handleClick(btn8.id);
+              handleCreateSubmissionData(btn8.id);
               openModal({
                 title: "WORLD CLOCK E3",
                 size: "55%",
@@ -446,6 +482,7 @@ function Frontend() {
                   <>
                     <DisplayMarkdown markdown={btn8.markdownUrl} />
                     <ChapterPosts chapter={btn8.id} cadet={cadetInfo} />
+                    <GitHubSubmission id={btn8.id} cadetId={cadetInfo.id} />
                     <MarkCompleteBtn
                       completedChaps={completedChaps[btn8.id]}
                       id={btn8.id}
@@ -479,6 +516,7 @@ function Frontend() {
             })}
             onClick={() => {
               handleClick(btn9.id);
+              handleCreateSubmissionData(btn9.id);
               openModal({
                 title: "HIGH CARD E4",
                 size: "55%",
@@ -487,6 +525,7 @@ function Frontend() {
                   <>
                     <DisplayMarkdown markdown={btn9.markdownUrl} />
                     <ChapterPosts chapter={btn9.id} cadet={cadetInfo} />
+                    <GitHubSubmission id={btn9.id} cadetId={cadetInfo.id} />
                     <MarkCompleteBtn
                       completedChaps={completedChaps[btn9.id]}
                       id={btn9.id}
@@ -520,6 +559,7 @@ function Frontend() {
             })}
             onClick={() => {
               handleClick(btn10.id);
+              handleCreateSubmissionData(btn10.id);
               openModal({
                 title: "GUESS THE WORD E5",
                 size: "55%",
@@ -528,6 +568,7 @@ function Frontend() {
                   <>
                     <DisplayMarkdown markdown={btn10.markdownUrl} />
                     <ChapterPosts chapter={btn10.id} cadet={cadetInfo} />
+                    <GitHubSubmission id={btn10.id} cadetId={cadetInfo.id} />
                     <MarkCompleteBtn
                       completedChaps={completedChaps[btn10.id]}
                       id={btn10.id}
@@ -561,6 +602,7 @@ function Frontend() {
             })}
             onClick={() => {
               handleClick(btn11.id);
+              handleCreateSubmissionData(btn11.id);
               openModal({
                 title: "PROJECT 1: FRONTEND",
                 size: "55%",
@@ -569,6 +611,7 @@ function Frontend() {
                   <>
                     <DisplayMarkdown markdown={btn11.markdownUrl} />
                     <ChapterPosts chapter={btn11.id} cadet={cadetInfo} />
+                    <GitHubSubmission id={btn11.id} cadetId={cadetInfo.id} />
                     <MarkCompleteBtn
                       completedChaps={completedChaps[btn11.id]}
                       id={btn11.id}
