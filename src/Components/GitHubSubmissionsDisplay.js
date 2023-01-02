@@ -25,8 +25,8 @@ const GitHubSubmissionsDisplay = () => {
 
   const rows = submissionsData.map((element) => (
     <tr key={element.id}>
-      <td>{element.cadetId}</td>
-      <td>{element.chapterId}</td>
+      <td>{element.cadet.name}</td>
+      <td>{element.chapter.name}</td>
       <td>{element.repoUrl}</td>
     </tr>
   ));
@@ -35,7 +35,13 @@ const GitHubSubmissionsDisplay = () => {
   return (
     <div>
       <Paper className="chapter-progress-list">
-        <Table>
+        <Table
+          horizontalSpacing="xs"
+          verticalSpacing="xs"
+          striped
+          highlightOnHover
+          withColumnBorders
+        >
           <thead>
             <tr>
               <th>Cadet</th>
