@@ -2,6 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import { MantineProvider } from "@mantine/core";
 import { ModalsProvider } from "@mantine/modals";
+import { NotificationsProvider } from "@mantine/notifications";
 import { BrowserRouter } from "react-router-dom";
 import "./index.css";
 import App from "./App";
@@ -18,9 +19,11 @@ root.render(
   >
     <MantineProvider>
       <ModalsProvider>
-        <BrowserRouter>
-          <App />
-        </BrowserRouter>
+        <NotificationsProvider autoClose={3000}>
+          <BrowserRouter>
+            <App />
+          </BrowserRouter>
+        </NotificationsProvider>
       </ModalsProvider>
     </MantineProvider>
   </Auth0Provider>
