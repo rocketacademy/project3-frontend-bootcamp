@@ -1,7 +1,7 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
 import { BACKEND_URL } from '../constants.js';
-import { Button, Text } from '@mantine/core';
+import { Button, Text, Title } from '@mantine/core';
 import '../Components/css/CadetChaptProgress.css';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
@@ -37,15 +37,19 @@ const CadetSectionProgress = ({ cadetId }) => {
     return (
       <>
         {section.completed === true ? (
-          <Button radius="xl" color="green">
-            {section.sectionId}
-            {section.completed}
-          </Button>
+          <>
+            <Button className="section-btn" color="green">
+              {section.sectionId}
+              {section.completed}
+            </Button>
+          </>
         ) : (
-          <Button radius="xl" color="gray">
-            {section.sectionId}
-            {section.completed}
-          </Button>
+          <>
+            <Button className="section-btn" color="gray">
+              {section.sectionId}
+              {section.completed}
+            </Button>
+          </>
         )}
       </>
     );

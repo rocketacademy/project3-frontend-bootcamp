@@ -1,5 +1,5 @@
-import React from "react";
-import { useState, useEffect } from "react";
+import React from 'react';
+import { useState, useEffect } from 'react';
 import {
   AppShell,
   Burger,
@@ -10,28 +10,31 @@ import {
   Image,
   Button,
   useMantineTheme,
-} from "@mantine/core";
+} from '@mantine/core';
 
-import Profile from "./Profile";
-import { BrowserRouter as Router, Link, Route, Routes } from "react-router-dom";
-import { ThemeContext } from "@emotion/react";
-import DisplayMarkdown from "./DisplayMarkdown";
-import CadetDashboard from "./CadetDashboard";
-import SingleCadetProgress from "./SingleCadetProgress";
-import CadetChaptProgress from "./CadetChaptProgress";
-import LogoutButton from "./LogoutButton";
-import { withAuthenticationRequired } from "@auth0/auth0-react";
+import Profile from './Profile';
+import { BrowserRouter as Router, Link, Route, Routes } from 'react-router-dom';
+import { ThemeContext } from '@emotion/react';
+import DisplayMarkdown from './DisplayMarkdown';
+import CadetDashboard from './CadetDashboard';
 
-import Rlogo from "../images/rocket-logo.png";
-import { IconHome2, IconCalendarEvent } from "@tabler/icons";
+import CadetChaptProgress from './CadetChaptProgress';
+import Forum from './Forum';
+import ForumChapter from './ForumChapter';
+import ForumSection from './ForumSection';
+import LogoutButton from './LogoutButton';
+import { withAuthenticationRequired } from '@auth0/auth0-react';
 
-import MainMap from "./CourseComponents/MainMap";
+import Rlogo from '../images/rocket-logo.png';
+import { IconHome2, IconCalendarEvent } from '@tabler/icons';
 
-import SLLandingPage from "./SLLandingPage";
-import Schedule from "./Schedule";
-import Loading from "./Loading";
-import CadetProgress from "./CadetProgress";
-import GitHubSubmissionsDisplay from "./GitHubSubmissionsDisplay";
+import MainMap from './CourseComponents/MainMap';
+
+import SLLandingPage from './SLLandingPage';
+import Schedule from './Schedule';
+import Loading from './Loading';
+import CadetProgress from './CadetProgress';
+import GitHubSubmissionsDisplay from './GitHubSubmissionsDisplay';
 
 const SLDashboard = () => {
   const [opened, setOpened] = useState(false);
@@ -59,15 +62,15 @@ const SLDashboard = () => {
               className="nav-logo"
               style={{
                 width: 250,
-                marginLeft: "auto",
-                marginRight: "auto",
+                marginLeft: 'auto',
+                marginRight: 'auto',
               }}
             >
               <Image src={Rlogo} alt="rocket logo" />
             </div>
           </Navbar.Section>
           <Navbar.Section grow mt="lg">
-            <div style={{ display: "flex", flexDirection: "column" }}>
+            <div style={{ display: 'flex', flexDirection: 'column' }}>
               <Text
                 ta="center"
                 fw={500}
@@ -83,11 +86,13 @@ const SLDashboard = () => {
                 fw={500}
                 component={Link}
                 variant="link"
-                to="sl/all-cadet-progress/:cadetId"
+                to="/forum/1/1"
+                // to="/forum"
               >
                 <IconHome2 color="white" size={13} />
-                Single Cadet
+                Forum
               </Text>
+
               <Text
                 ta="center"
                 fw={500}
@@ -95,7 +100,7 @@ const SLDashboard = () => {
                 variant="link"
                 to="/schedule"
               >
-                {" "}
+                {' '}
                 <IconCalendarEvent color="white" size={13} />
                 Schedule
               </Text>
@@ -106,7 +111,7 @@ const SLDashboard = () => {
                 variant="link"
                 to="/submissions"
               >
-                {" "}
+                {' '}
                 <IconCalendarEvent color="white" size={13} />
                 GitHub Submissions
               </Text>
@@ -125,12 +130,19 @@ const SLDashboard = () => {
         <Route path="/" element={<SLLandingPage />}>
           <Route path="/main-map" element={<CadetProgress />} />
           <Route path="/main-map/:sectionId" element={<CadetProgress />} />
+          <Route path="/submissions" element={<GitHubSubmissionsDisplay />} />
+
           {/* <Route path="/main-map/:sectionId" element={<CadetChaptProgress />} /> */}
-          <Route
+        </Route>
+
+        <Route path="/forum" element={<Forum />}>
+          <Route path="/forum/:sectionId" element={<Forum />} />
+          <Route path="/forum/:sectionId/:chapterId" element={<Forum />} />
+          {/* <Route path="/forum/:sectionId/:chapterId" element={<Forum />} /> */}
+          {/* <Route
             path="/cadet-progress/:cadetId"
             element={<SingleCadetProgress />}
-          />
-          <Route path="/submissions" element={<GitHubSubmissionsDisplay />} />
+          /> */}
         </Route>
         <Route path="/schedule" element={<Schedule />} />
       </Routes>
