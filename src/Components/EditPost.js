@@ -5,7 +5,6 @@ import axios from "axios";
 import { RichTextEditor } from "@mantine/rte";
 import {
   getDownloadURL,
-  ref,
   ref as storageRef,
   uploadBytes,
 } from "firebase/storage";
@@ -38,7 +37,7 @@ const EditPost = (props) => {
   const handleImageUpload = useCallback(
     (file) =>
       new Promise((resolve, reject) => {
-        const fileRef = ref(
+        const fileRef = storageRef(
           storage,
           `${UPLOAD_IMAGES_FOLDER_NAME}/${file.name}`
         );

@@ -5,7 +5,6 @@ import axios from "axios";
 import { RichTextEditor } from "@mantine/rte";
 import {
   getDownloadURL,
-  ref,
   ref as storageRef,
   uploadBytes,
 } from "firebase/storage";
@@ -23,10 +22,6 @@ const PostForm = ({ chapter, cadet, onPostUpdate }) => {
     content: "",
     createdAt: null,
   });
-  const [imageUpload, setImageUpload] = useState({
-    imageInputValue: "",
-    imageInputFile: null,
-  });
 
   useEffect(() => {
     setPost({
@@ -42,7 +37,7 @@ const PostForm = ({ chapter, cadet, onPostUpdate }) => {
   const handleImageUpload = useCallback(
     (file) =>
       new Promise((resolve, reject) => {
-        const fileRef = ref(
+        const fileRef = storageRef(
           storage,
           `${UPLOAD_IMAGES_FOLDER_NAME}/${file.name}`
         );
