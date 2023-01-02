@@ -39,3 +39,8 @@
   justify-items: center;
   align-items: center;
 }
+
+.post-background {
+  height: 540px;
+  overflow: auto;
+}

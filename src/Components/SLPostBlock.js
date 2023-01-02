@@ -49,7 +49,14 @@ const useStyles = createStyles((theme) => ({
   },
 }));
 
-export function PostBlock(props) {
+export default function SLPostBlock({
+  chapterId,
+  post,
+  cadet,
+  key,
+  onPostDelete,
+  onPostUpdate,
+}) {
   const { classes } = useStyles();
 
   const handleEdit = async (post) => {
@@ -63,28 +70,30 @@ export function PostBlock(props) {
 
   const handleDelete = async (id) => {
     await axios.delete(`${BACKEND_URL}/posts/${id}`);
-    props.onPostDelete(id);
+    onPostDelete(id);
     console.log('post successfully deleted.');
   };
 
   return (
     <Paper withBorder radius="md" className={classes.card}>
+      <Text>Chapter {post.chapterId}</Text>
+
       <Group position="apart">
         <Group>
           <Avatar
-            src={props.post.authorImage}
-            alt={props.post.authorName}
+            src={post.authorImage}
+            alt={post.authorName}
             radius="xl"
             size="lg"
           />
           <div>
-            <Text size="sm">{props.post.authorName}</Text>
+            <Text size="sm">{post.authorName}</Text>
             <Text size="xs" color="dimmed">
-              {props.post.createdAt}
+              {post.createdAt}
             </Text>
           </div>
         </Group>
-        {props.cadet.id === props.post.author ? (
+        {/* {cadet.id === post.author ? (
           <Group>
             <Menu transition="pop" withArrow>
               <Menu.Target>
@@ -95,24 +104,24 @@ export function PostBlock(props) {
               <Menu.Dropdown>
                 <Menu.Item
                   icon={<IconPencil size={16} stroke={1.5} />}
-                  onClick={() => handleEdit(props.post)}
+                  onClick={() => handleEdit(post)}
                 >
                   Edit message
                 </Menu.Item>
                 <Menu.Item
                   icon={<IconTrash size={16} stroke={1.5} />}
                   color="red"
-                  onClick={() => handleDelete(props.post.id)}
+                  onClick={() => handleDelete(post.id)}
                 >
                   Delete message
                 </Menu.Item>
               </Menu.Dropdown>
             </Menu>
           </Group>
-        ) : null}
+        ) : null} */}
       </Group>
       <TypographyStylesProvider className={classes.body}>
-        <div dangerouslySetInnerHTML={{ __html: props.post.content }} />
+        <div dangerouslySetInnerHTML={{ __html: post.content }} />
       </TypographyStylesProvider>
     </Paper>
   );

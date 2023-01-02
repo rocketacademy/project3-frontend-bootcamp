@@ -1,29 +1,29 @@
-import { useState, useEffect } from "react";
-import { Button, Group, Text, Image, HoverCard } from "@mantine/core";
-import starpic from "../../images/Main tracker-01.png";
-import { Link, useNavigate } from "react-router-dom";
-import axios from "axios";
-import "../css/MainMap.css";
-import { BACKEND_URL } from "../../constants.js";
-import MainMapBtn from "./MainMapBtn";
-import { useAuth0 } from "@auth0/auth0-react";
-import { useAuth } from "../AuthContext";
+import { useState, useEffect } from 'react';
+import { Button, Group, Text, Image, HoverCard } from '@mantine/core';
+import starpic from '../../images/Main tracker-01.png';
+import { Link, useNavigate } from 'react-router-dom';
+import axios from 'axios';
+import '../css/MainMap.css';
+import { BACKEND_URL } from '../../constants.js';
+import MainMapBtn from './MainMapBtn';
+import { useAuth0 } from '@auth0/auth0-react';
+import { useAuth } from '../AuthContext';
 
 function MainMap() {
   const [opened, setOpened] = useState(false);
-  const [btn1, setBtn1] = useState("");
-  const [btn2, setBtn2] = useState("");
+  const [btn1, setBtn1] = useState('');
+  const [btn2, setBtn2] = useState('');
 
-  const [btn3, setBtn3] = useState("");
-  const [btn4, setBtn4] = useState("");
-  const [btn5, setBtn5] = useState("");
-  const [btn6, setBtn6] = useState("");
-  const [btn7, setBtn7] = useState("");
-  const [btn8, setBtn8] = useState("");
-  const [btn9, setBtn9] = useState("");
-  const [btn10, setBtn10] = useState("");
+  const [btn3, setBtn3] = useState('');
+  const [btn4, setBtn4] = useState('');
+  const [btn5, setBtn5] = useState('');
+  const [btn6, setBtn6] = useState('');
+  const [btn7, setBtn7] = useState('');
+  const [btn8, setBtn8] = useState('');
+  const [btn9, setBtn9] = useState('');
+  const [btn10, setBtn10] = useState('');
   const { user, isAuthenticated } = useAuth0();
-  const [cadetId, setCadetId] = useState("");
+  const [cadetId, setCadetId] = useState('');
   const { cadetInfo } = useAuth();
   const navigate = useNavigate();
   const [completedChaps, setCompletedChaps] = useState({});
@@ -35,7 +35,7 @@ function MainMap() {
       try {
         const response = await axios.get(`${BACKEND_URL}/sections`);
 
-        console.log("sections", response.data);
+        console.log('sections', response.data);
 
         setBtn1(response.data[0]);
         setBtn2(response.data[1]);
@@ -61,7 +61,7 @@ function MainMap() {
           const response2 = await axios.get(
             `${BACKEND_URL}/cadetSections/progress-status?cadetId=${response.data.id}`
           );
-          console.log("res2", response2.data);
+          console.log('res2', response2.data);
           let sectsCompleted = {};
 
           for (let i = 0; i < response2.data.length; i++) {
@@ -69,6 +69,7 @@ function MainMap() {
           }
 
           setCompletedChaps(sectsCompleted);
+          console.log('sectscompleted', completedChaps);
         }
       } catch (err) {
         console.log(err.response.data);
@@ -95,28 +96,28 @@ function MainMap() {
             <HoverCard.Target>
               <Button
                 id={1}
-                radius={"xl"}
+                radius={'xl'}
                 styles={(theme) => ({
                   root: {
                     backgroundColor: completedChaps[btn1.id]
-                      ? "#ef5152"
-                      : "#ABB2B9",
+                      ? '#ef5152'
+                      : '#ABB2B9',
                     border: 0,
                     height: 33,
                     paddingLeft: 15,
                     paddingRight: 15,
-                    color: "#fff",
+                    color: '#fff',
 
-                    "&:hover": {
+                    '&:hover': {
                       backgroundColor: completedChaps[btn1.id]
-                        ? theme.fn.darken("#ef5152", 0.2)
-                        : theme.fn.darken("#ABB2B9", 0.2),
-                      color: "#ffeb99",
+                        ? theme.fn.darken('#ef5152', 0.2)
+                        : theme.fn.darken('#ABB2B9', 0.2),
+                      color: '#ffeb99',
                     },
                   },
                 })}
                 onClick={() => {
-                  navigate("/welcome/1");
+                  navigate('/welcome/1');
                 }}
               >
                 {btn1.id}
@@ -147,28 +148,28 @@ function MainMap() {
             <HoverCard.Target>
               <Button
                 id={2}
-                radius={"xl"}
+                radius={'xl'}
                 styles={(theme) => ({
                   root: {
                     backgroundColor: completedChaps[btn2.id]
-                      ? "#ef5152"
-                      : "#ABB2B9",
+                      ? '#ef5152'
+                      : '#ABB2B9',
                     border: 0,
                     height: 33,
                     paddingLeft: 14,
                     paddingRight: 14,
-                    color: "#fff",
+                    color: '#fff',
 
-                    "&:hover": {
+                    '&:hover': {
                       backgroundColor: completedChaps[btn2.id]
-                        ? theme.fn.darken("#ef5152", 0.2)
-                        : theme.fn.darken("#ABB2B9", 0.2),
-                      color: "#ffeb99",
+                        ? theme.fn.darken('#ef5152', 0.2)
+                        : theme.fn.darken('#ABB2B9', 0.2),
+                      color: '#ffeb99',
                     },
                   },
                 })}
                 onClick={() => {
-                  navigate("/logistics/2");
+                  navigate('/logistics/2');
                 }}
               >
                 {btn2.id}
@@ -190,27 +191,27 @@ function MainMap() {
             <HoverCard.Target>
               <Button
                 id={3}
-                radius={"xl"}
+                radius={'xl'}
                 styles={(theme) => ({
                   root: {
                     backgroundColor: completedChaps[btn3.id]
-                      ? "#ef5152"
-                      : "#ABB2B9",
+                      ? '#ef5152'
+                      : '#ABB2B9',
                     border: 0,
                     height: 33,
                     paddingLeft: 13,
                     paddingRight: 13,
 
-                    "&:hover": {
+                    '&:hover': {
                       backgroundColor: completedChaps[btn3.id]
-                        ? theme.fn.darken("#ef5152", 0.2)
-                        : theme.fn.darken("#ABB2B9", 0.2),
-                      color: "#ffeb99",
+                        ? theme.fn.darken('#ef5152', 0.2)
+                        : theme.fn.darken('#ABB2B9', 0.2),
+                      color: '#ffeb99',
                     },
                   },
                 })}
                 onClick={() => {
-                  navigate("/general-ref/3");
+                  navigate('/general-ref/3');
                 }}
               >
                 {btn3.id}
@@ -232,28 +233,28 @@ function MainMap() {
             <HoverCard.Target>
               <Button
                 id={4}
-                radius={"xl"}
+                radius={'xl'}
                 styles={(theme) => ({
                   root: {
                     backgroundColor: completedChaps[btn4.id]
-                      ? "#ef5152"
-                      : "#ABB2B9",
+                      ? '#ef5152'
+                      : '#ABB2B9',
                     border: 0,
                     height: 33,
                     paddingLeft: 13,
                     paddingRight: 13,
-                    color: "#fff",
+                    color: '#fff',
 
-                    "&:hover": {
+                    '&:hover': {
                       backgroundColor: completedChaps[btn4.id]
-                        ? theme.fn.darken("#ef5152", 0.2)
-                        : theme.fn.darken("#ABB2B9", 0.2),
-                      color: "#ffeb99",
+                        ? theme.fn.darken('#ef5152', 0.2)
+                        : theme.fn.darken('#ABB2B9', 0.2),
+                      color: '#ffeb99',
                     },
                   },
                 })}
                 onClick={() => {
-                  navigate("/foundations/4");
+                  navigate('/foundations/4');
                 }}
               >
                 {btn4.id}
@@ -278,28 +279,28 @@ function MainMap() {
             <HoverCard.Target>
               <Button
                 id={5}
-                radius={"xl"}
+                radius={'xl'}
                 styles={(theme) => ({
                   root: {
                     backgroundColor: completedChaps[btn5.id]
-                      ? "#ef5152"
-                      : "#ABB2B9",
+                      ? '#ef5152'
+                      : '#ABB2B9',
                     border: 0,
                     height: 33,
                     paddingLeft: 13,
                     paddingRight: 13,
-                    color: "#fff",
+                    color: '#fff',
 
-                    "&:hover": {
+                    '&:hover': {
                       backgroundColor: completedChaps[btn5.id]
-                        ? theme.fn.darken("#ef5152", 0.2)
-                        : theme.fn.darken("#ABB2B9", 0.2),
-                      color: "#ffeb99",
+                        ? theme.fn.darken('#ef5152', 0.2)
+                        : theme.fn.darken('#ABB2B9', 0.2),
+                      color: '#ffeb99',
                     },
                   },
                 })}
                 onClick={() => {
-                  navigate("/frontend/5");
+                  navigate('/frontend/5');
                 }}
               >
                 {btn5.id}
@@ -324,28 +325,28 @@ function MainMap() {
             <HoverCard.Target>
               <Button
                 id={6}
-                radius={"xl"}
+                radius={'xl'}
                 styles={(theme) => ({
                   root: {
                     backgroundColor: completedChaps[btn6.id]
-                      ? "#ef5152"
-                      : "#ABB2B9",
+                      ? '#ef5152'
+                      : '#ABB2B9',
                     border: 0,
                     height: 33,
                     paddingLeft: 13,
                     paddingRight: 13,
-                    color: "#fff",
+                    color: '#fff',
 
-                    "&:hover": {
+                    '&:hover': {
                       backgroundColor: completedChaps[btn6.id]
-                        ? theme.fn.darken("#ef5152", 0.2)
-                        : theme.fn.darken("#ABB2B9", 0.2),
-                      color: "#ffeb99",
+                        ? theme.fn.darken('#ef5152', 0.2)
+                        : theme.fn.darken('#ABB2B9', 0.2),
+                      color: '#ffeb99',
                     },
                   },
                 })}
                 onClick={() => {
-                  navigate("/full-stack/6");
+                  navigate('/full-stack/6');
                 }}
               >
                 {btn6.id}
@@ -370,28 +371,28 @@ function MainMap() {
             <HoverCard.Target>
               <Button
                 id={7}
-                radius={"xl"}
+                radius={'xl'}
                 styles={(theme) => ({
                   root: {
                     backgroundColor: completedChaps[btn7.id]
-                      ? "#ef5152"
-                      : "#ABB2B9",
+                      ? '#ef5152'
+                      : '#ABB2B9',
                     border: 0,
                     height: 33,
                     paddingLeft: 13,
                     paddingRight: 13,
-                    color: "#fff",
+                    color: '#fff',
 
-                    "&:hover": {
+                    '&:hover': {
                       backgroundColor: completedChaps[btn7.id]
-                        ? theme.fn.darken("#ef5152", 0.2)
-                        : theme.fn.darken("#ABB2B9", 0.2),
-                      color: "#ffeb99",
+                        ? theme.fn.darken('#ef5152', 0.2)
+                        : theme.fn.darken('#ABB2B9', 0.2),
+                      color: '#ffeb99',
                     },
                   },
                 })}
                 onClick={() => {
-                  navigate("/backend/7");
+                  navigate('/backend/7');
                 }}
               >
                 {btn7.id}
@@ -420,28 +421,28 @@ function MainMap() {
             <HoverCard.Target>
               <Button
                 id={8}
-                radius={"xl"}
+                radius={'xl'}
                 styles={(theme) => ({
                   root: {
                     backgroundColor: completedChaps[btn8.id]
-                      ? "#ef5152"
-                      : "#ABB2B9",
+                      ? '#ef5152'
+                      : '#ABB2B9',
                     border: 0,
                     height: 33,
                     paddingLeft: 13,
                     paddingRight: 13,
-                    color: "#fff",
+                    color: '#fff',
 
-                    "&:hover": {
+                    '&:hover': {
                       backgroundColor: completedChaps[btn8.id]
-                        ? theme.fn.darken("#ef5152", 0.2)
-                        : theme.fn.darken("#ABB2B9", 0.2),
-                      color: "#ffeb99",
+                        ? theme.fn.darken('#ef5152', 0.2)
+                        : theme.fn.darken('#ABB2B9', 0.2),
+                      color: '#ffeb99',
                     },
                   },
                 })}
                 onClick={() => {
-                  navigate("/capstone");
+                  navigate('/capstone');
                 }}
               >
                 {btn8.id}
@@ -466,28 +467,28 @@ function MainMap() {
             <HoverCard.Target>
               <Button
                 id={9}
-                radius={"xl"}
+                radius={'xl'}
                 styles={(theme) => ({
                   root: {
                     backgroundColor: completedChaps[btn9.id]
-                      ? "#ef5152"
-                      : "#ABB2B9",
+                      ? '#ef5152'
+                      : '#ABB2B9',
                     border: 0,
                     height: 33,
                     paddingLeft: 13,
                     paddingRight: 13,
-                    color: "#fff",
+                    color: '#fff',
 
-                    "&:hover": {
+                    '&:hover': {
                       backgroundColor: completedChaps[btn9.id]
-                        ? theme.fn.darken("#ef5152", 0.2)
-                        : theme.fn.darken("#ABB2B9", 0.2),
-                      color: "#ffeb99",
+                        ? theme.fn.darken('#ef5152', 0.2)
+                        : theme.fn.darken('#ABB2B9', 0.2),
+                      color: '#ffeb99',
                     },
                   },
                 })}
                 onClick={() => {
-                  navigate("/algorithms");
+                  navigate('/algorithms');
                 }}
               >
                 {btn9.id}
@@ -514,28 +515,28 @@ function MainMap() {
             <HoverCard.Target>
               <Button
                 id={10}
-                radius={"xl"}
+                radius={'xl'}
                 styles={(theme) => ({
                   root: {
                     backgroundColor: completedChaps[btn10.id]
-                      ? "#ef5152"
-                      : "#ABB2B9",
+                      ? '#ef5152'
+                      : '#ABB2B9',
                     border: 0,
                     height: 33,
                     paddingLeft: 11,
                     paddingRight: 11,
-                    color: "#fff",
+                    color: '#fff',
 
-                    "&:hover": {
+                    '&:hover': {
                       backgroundColor: completedChaps[btn10.id]
-                        ? theme.fn.darken("#ef5152", 0.2)
-                        : theme.fn.darken("#ABB2B9", 0.2),
-                      color: "#ffeb99",
+                        ? theme.fn.darken('#ef5152', 0.2)
+                        : theme.fn.darken('#ABB2B9', 0.2),
+                      color: '#ffeb99',
                     },
                   },
                 })}
                 onClick={() => {
-                  navigate("/interview-prep");
+                  navigate('/interview-prep');
                 }}
               >
                 {btn10.id}

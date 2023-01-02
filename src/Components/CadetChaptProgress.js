@@ -40,10 +40,22 @@ const CadetChaptProgress = ({ cadetId, cadetName }) => {
 
   console.log('all progress', progress);
 
-  let cadetProgressList = progress?.map((chapter) => {
+  let cadetProgressList = progress.map((chapter) => {
     return (
       <>
-        <Button radius="xl">{chapter.chapterId}</Button>
+        {chapter.completed === true ? (
+          <>
+            <Button className="chapter-btn" radius="xl" color="blue">
+              {chapter.chapterId}
+            </Button>
+          </>
+        ) : (
+          <>
+            <Button className="chapter-btn" radius="xl" color="gray">
+              {chapter.chapterId}
+            </Button>
+          </>
+        )}
       </>
     );
   });

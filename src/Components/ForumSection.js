@@ -1,6 +1,6 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
-import { Textarea, Button, TextInput } from '@mantine/core';
+import { Textarea, Button, TextInput, Text } from '@mantine/core';
 import { useNavigate } from 'react-router-dom';
 import { BACKEND_URL } from '../constants.js';
 import { useParams } from 'react-router-dom';
@@ -28,22 +28,9 @@ const ForumSection = () => {
 
     fetchSectionChapters();
     console.log('section param', sectionId);
-    // sectId();
   }, [sectionId]);
 
   console.log('hup hup', chapters);
-
-  // let relevantChapters = chapters?.map((chapter) => {
-  //   return (
-  //     <div fullWidth ta="center" style={{ width: 300 }}>
-  //       <Button color="teal">
-  //         {chapter.id}
-  //         {'   '}
-  //         {chapter.name}
-  //       </Button>
-  //     </div>
-  //   );
-  // });
 
   return (
     <>
@@ -64,18 +51,3 @@ const ForumSection = () => {
 };
 
 export default ForumSection;
-
-// {
-//   chapters?.map((chapter) => (
-//     <div fullWidth ta="center" style={{ width: 300 }}>
-//       <Button
-//         color="teal"
-//         onClick={() => navigate(`/forum/3/${chapter.id}`)}
-//       >
-//         {chapter.id}
-//         {'   '}
-//         {chapter.name}
-//       </Button>
-//     </div>
-//   ));
-// }

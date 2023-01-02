@@ -7,7 +7,7 @@ import PostForm from './PostForm.js';
 
 const ChapterPosts = (props) => {
   const [posts, setPosts] = useState([]);
-  
+
   useEffect(() => {
     const getPosts = async () => {
       axios
@@ -18,6 +18,7 @@ const ChapterPosts = (props) => {
         })
         .then((response) => {
           setPosts(response.data);
+          console.log('inside post', response.data);
         });
     };
     getPosts();

@@ -1,13 +1,14 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import { Textarea, Button, TextInput, Card } from '@mantine/core';
+import { Textarea, Button, TextInput, Card, Title } from '@mantine/core';
 import { BACKEND_URL } from '../constants.js';
-import { PostBlock } from './PostBlock.js';
+import SLPostBlock from './SLPostBlock.js';
 import { List } from '@mantine/core';
 import PostForm from './PostForm.js';
 import axios from 'axios';
 import { connectStorageEmulator } from 'firebase/storage';
+import './css/Forum.css';
 
 const ForumChapter = () => {
   const [sections, setSections] = useState([]);
@@ -38,13 +39,34 @@ const ForumChapter = () => {
     });
   };
 
+  const onPostDelete = (postId) => {
+    setPosts(posts.filter((prevPost) => prevPost.id !== postId));
+  };
+
   return (
     <div className="post-list">
+      <Title fw={700} order={2} underline border color="#0B7285">
+        = Forum Discussions =
+      </Title>
+      <br />
       {posts.length > 0 ? (
-        <Card shadow="sm" p="xl" radius="md" withBorder>
+        <Card
+          className="post-background"
+          shadow="sm"
+          p="xl"
+          radius="md"
+          withBorder
+        >
           <List type="ordered">
             {posts?.map((post) => (
-              <PostBlock post={post} key={post.id} />
+              <SLPostBlock
+                chapterId={post.chapterId}
+                post={post}
+                key={post.id}
+                cadet={post.cadetId}
+                onPostUpdate={onPostUpdate}
+                onPostDelete={onPostDelete}
+              />
             ))}
           </List>
         </Card>

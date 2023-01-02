@@ -16,9 +16,22 @@
   margin: 2em 0.5em;
 }
 
+.section-btn {
+  margin-right: 0.5em;
+}
+
+.chapter-btn {
+  margin-right: 0.5em;
+}
+
 .Cadet-Names {
   padding: 50px;
   /* width: 500px; */
+}
+
+.navigate-btn {
+  float: right;
+  margin-right: 2em;
 }
 
 .chapter-progress-list {

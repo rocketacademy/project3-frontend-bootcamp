@@ -17,7 +17,7 @@ import { BrowserRouter as Router, Link, Route, Routes } from 'react-router-dom';
 import { ThemeContext } from '@emotion/react';
 import DisplayMarkdown from './DisplayMarkdown';
 import CadetDashboard from './CadetDashboard';
-import SingleCadetProgress from './SingleCadetProgress';
+
 import CadetChaptProgress from './CadetChaptProgress';
 import Forum from './Forum';
 import ForumChapter from './ForumChapter';
@@ -86,7 +86,8 @@ const SLDashboard = () => {
                 fw={500}
                 component={Link}
                 variant="link"
-                to="/forum"
+                to="/forum/1/1"
+                // to="/forum"
               >
                 <IconHome2 color="white" size={13} />
                 Forum
@@ -129,6 +130,7 @@ const SLDashboard = () => {
         <Route path="/" element={<SLLandingPage />}>
           <Route path="/main-map" element={<CadetProgress />} />
           <Route path="/main-map/:sectionId" element={<CadetProgress />} />
+          <Route path="/submissions" element={<GitHubSubmissionsDisplay />} />
 
           {/* <Route path="/main-map/:sectionId" element={<CadetChaptProgress />} /> */}
         </Route>
@@ -136,11 +138,11 @@ const SLDashboard = () => {
         <Route path="/forum" element={<Forum />}>
           <Route path="/forum/:sectionId" element={<Forum />} />
           <Route path="/forum/:sectionId/:chapterId" element={<Forum />} />
-          <Route
+          {/* <Route path="/forum/:sectionId/:chapterId" element={<Forum />} /> */}
+          {/* <Route
             path="/cadet-progress/:cadetId"
             element={<SingleCadetProgress />}
-          />
-          <Route path="/submissions" element={<GitHubSubmissionsDisplay />} />
+          /> */}
         </Route>
         <Route path="/schedule" element={<Schedule />} />
       </Routes>
