@@ -3,6 +3,7 @@ import { Button } from "@mantine/core";
 import { BACKEND_URL } from "../constants";
 import axios from "axios";
 import { RichTextEditor } from "@mantine/rte";
+import { showNotification } from "@mantine/notifications";
 import {
   getDownloadURL,
   ref as storageRef,
@@ -52,22 +53,33 @@ const PostForm = ({ chapter, cadet, onPostUpdate }) => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    axios
-      .post(`${BACKEND_URL}/posts`, {
-        ...post,
-      })
-      .then((res) => {
-        onPostUpdate(res.data);
-        setPost({
-          author: null,
-          authorName: "",
-          authorImage: "",
-          chapterId: null,
-          content: "",
-          createdAt: null,
+    try {
+      axios
+        .post(`${BACKEND_URL}/posts`, {
+          ...post,
+        })
+        .then((res) => {
+          showNotification({
+            message: "Post Created!",
+            color: "teal",
+          });
+          onPostUpdate(res.data);
+          setPost({
+            author: null,
+            authorName: "",
+            authorImage: "",
+            chapterId: null,
+            content: "",
+            createdAt: null,
+          });
+          onChange("");
         });
-        onChange("");
+    } catch (error) {
+      showNotification({
+        message: error.message,
+        color: "red",
       });
+    }
   };
 
   return (
