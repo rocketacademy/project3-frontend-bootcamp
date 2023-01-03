@@ -1,6 +1,7 @@
-import React from 'react';
-import { BrowserRouter as Router, Link, useNavigate } from 'react-router-dom';
+import React from "react";
+import { BrowserRouter as Router, Link, useNavigate } from "react-router-dom";
 import {
+  createStyles,
   Button,
   Group,
   Text,
@@ -10,16 +11,37 @@ import {
   Paper,
   filterProps,
   List,
-} from '@mantine/core';
+} from "@mantine/core";
+
+const useStyles = createStyles((theme) => ({
+  button: {
+    margin: theme.spacing.sm,
+    backgroundColor: theme.colors.yellow,
+
+    "&:hover": {
+      boxShadow: theme.shadows.md,
+      backgroundColor: theme.colors.pink[5],
+    },
+
+    "&:focus": {
+      boxShadow: theme.shadows.lg,
+      backgroundColor: theme.colors.red[7],
+    },
+  },
+}));
 
 const SLDashboardlinks = ({ cadetNames, cadetIdList, sectProgress }) => {
   const navigate = useNavigate();
+  const { classes } = useStyles();
+
   return (
     <div>
       <Button
-        className="SL-dashboard-sect-btn"
-        onClick={() => navigate('/main-map/1')}
-        color="yellow"
+        className={classes.button}
+        id="btn1"
+        onClick={() => {
+          navigate("/main-map/1");
+        }}
         ta="center"
       >
         Section 1
@@ -27,9 +49,9 @@ const SLDashboardlinks = ({ cadetNames, cadetIdList, sectProgress }) => {
         Welcome!
       </Button>
       <Button
-        className="SL-dashboard-sect-btn"
-        onClick={() => navigate('/main-map/2')}
-        color="yellow"
+        className={classes.button}
+        id="btn2"
+        onClick={() => navigate("/main-map/2")}
         ta="center"
       >
         Section 2
@@ -37,9 +59,9 @@ const SLDashboardlinks = ({ cadetNames, cadetIdList, sectProgress }) => {
         Logistics
       </Button>
       <Button
-        className="SL-dashboard-sect-btn"
-        onClick={() => navigate('/main-map/3')}
-        color="yellow"
+        className={classes.button}
+        id="btn3"
+        onClick={() => navigate("/main-map/3")}
         ta="center"
       >
         Section 3
@@ -47,9 +69,9 @@ const SLDashboardlinks = ({ cadetNames, cadetIdList, sectProgress }) => {
         General Reference
       </Button>
       <Button
-        className="SL-dashboard-sect-btn"
-        onClick={() => navigate('/main-map/4')}
-        color="yellow"
+        className={classes.button}
+        id="btn4"
+        onClick={() => navigate("/main-map/4")}
         ta="center"
       >
         Section 4
@@ -57,9 +79,8 @@ const SLDashboardlinks = ({ cadetNames, cadetIdList, sectProgress }) => {
         Foundations
       </Button>
       <Button
-        className="SL-dashboard-sect-btn"
-        onClick={() => navigate('/main-map/5')}
-        color="yellow"
+        className={classes.button}
+        onClick={() => navigate("/main-map/5")}
         ta="center"
       >
         Section 5
@@ -67,9 +88,8 @@ const SLDashboardlinks = ({ cadetNames, cadetIdList, sectProgress }) => {
         Frontend
       </Button>
       <Button
-        className="SL-dashboard-sect-btn"
-        onClick={() => navigate('/main-map/6')}
-        color="yellow"
+        className={classes.button}
+        onClick={() => navigate("/main-map/6")}
         ta="center"
       >
         Section 6
@@ -77,9 +97,8 @@ const SLDashboardlinks = ({ cadetNames, cadetIdList, sectProgress }) => {
         Full Stack
       </Button>
       <Button
-        className="SL-dashboard-sect-btn"
-        onClick={() => navigate('/main-map/7')}
-        color="yellow"
+        className={classes.button}
+        onClick={() => navigate("/main-map/7")}
         ta="center"
       >
         Section 7
@@ -87,9 +106,8 @@ const SLDashboardlinks = ({ cadetNames, cadetIdList, sectProgress }) => {
         Backend
       </Button>
       <Button
-        className="SL-dashboard-sect-btn"
-        onClick={() => navigate('/main-map/8')}
-        color="yellow"
+        className={classes.button}
+        onClick={() => navigate("/main-map/8")}
         ta="center"
       >
         Section 8
@@ -97,9 +115,8 @@ const SLDashboardlinks = ({ cadetNames, cadetIdList, sectProgress }) => {
         Capstone
       </Button>
       <Button
-        className="SL-dashboard-sect-btn"
-        onClick={() => navigate('/main-map/9')}
-        color="yellow"
+        className={classes.button}
+        onClick={() => navigate("/main-map/9")}
         ta="center"
       >
         Section 9
@@ -107,9 +124,8 @@ const SLDashboardlinks = ({ cadetNames, cadetIdList, sectProgress }) => {
         Algorithms
       </Button>
       <Button
-        className="SL-dashboard-sect-btn"
-        onClick={() => navigate('/main-map/10')}
-        color="yellow"
+        className={classes.button}
+        onClick={() => navigate("/main-map/10")}
         ta="center"
       >
         Section 10
