@@ -1,13 +1,13 @@
-import { useState, useEffect } from "react";
-import { Button, Group, Text, Image, HoverCard } from "@mantine/core";
-import starpic from "../../images/Main tracker-01.png";
-import { Link, useNavigate } from "react-router-dom";
-import axios from "axios";
-import "../css/MainMap.css";
-import { BACKEND_URL } from "../../constants.js";
-import MainMapBtn from "./MainMapBtn";
-import { useAuth0 } from "@auth0/auth0-react";
-import { useAuth } from "../AuthContext";
+import { useState, useEffect } from 'react';
+import { Button, Group, Text, Image, HoverCard } from '@mantine/core';
+import starpic from '../../images/Main tracker-01.png';
+import { Link, useNavigate } from 'react-router-dom';
+import axios from 'axios';
+import '../css/MainMap.css';
+import { BACKEND_URL } from '../../constants.js';
+import MainMapBtn from './MainMapBtn';
+import { useAuth0 } from '@auth0/auth0-react';
+import { useAuth } from '../AuthContext';
 
 function MainMap() {
   const [opened, setOpened] = useState(false);
@@ -59,7 +59,7 @@ function MainMap() {
           console.log(response.data.id);
 
           const response2 = await axios.get(
-            `${BACKEND_URL}/cadetSections/progress-status?cadetId=${response.data.id}`
+            `${BACKEND_URL}/cadetSections/completed-progress-status?cadetId=${response.data.id}`
           );
           console.log('res2', response2.data);
           let sectsCompleted = {};

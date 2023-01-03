@@ -177,7 +177,3 @@ const SLDashboard = () => {
 export default withAuthenticationRequired(SLDashboard, {
   onRedirecting: () => <Loading />,
 });
-
-//see all students progress
-// see particular student progress
-// see forum comments (participate in forum)

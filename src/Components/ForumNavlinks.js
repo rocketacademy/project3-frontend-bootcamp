@@ -1,15 +1,30 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Button } from '@mantine/core';
+import { Button, createStyles } from '@mantine/core';
+
+const useStyles = createStyles((theme) => ({
+  button: {
+    margin: '2.5em 2em 1em',
+    backgroundColor: theme.colors.yellow[1],
+    color: theme.colors.cyan[9],
+
+    '&:hover': {
+      boxShadow: theme.shadows.md,
+      backgroundColor: theme.colors.yellow[3],
+      color: theme.colors.gray[0],
+    },
+
+    '&:focus': {
+      boxShadow: theme.shadows.lg,
+      backgroundColor: theme.colors.yellow[5],
+      color: theme.colors.gray[0],
+    },
+  },
+}));
 
 const ForumNavlinks = () => {
   const navigate = useNavigate();
-
-  // <div className="section-nav-btn" style={{ width: 200 }}>
-  //   <Button fullWidth variant="light">
-  //     Full width button
-  //   </Button>
-  // </div>;
+  const { classes } = useStyles();
 
   return (
     <>
@@ -17,8 +32,8 @@ const ForumNavlinks = () => {
         <Button
           fullWidth
           variant="light"
-          className="SL-dashboard-sect-btn"
-          onClick={() => navigate('/forum/1')}
+          className={classes.button}
+          onClick={() => navigate('/forum/1/1')}
           color="orange"
           ta="center"
         >
@@ -31,7 +46,7 @@ const ForumNavlinks = () => {
         <Button
           fullWidth
           variant="light"
-          className="SL-dashboard-sect-btn"
+          className={classes.button}
           onClick={() => navigate('/forum/2')}
           color="orange"
           ta="center"
@@ -45,7 +60,7 @@ const ForumNavlinks = () => {
         <Button
           fullWidth
           variant="light"
-          className="SL-dashboard-sect-btn"
+          className={classes.button}
           onClick={() => navigate('/forum/3')}
           color="orange"
           ta="center"
@@ -60,7 +75,7 @@ const ForumNavlinks = () => {
         <Button
           fullWidth
           variant="light"
-          className="SL-dashboard-sect-btn"
+          className={classes.button}
           onClick={() => navigate('/forum/4')}
           color="orange"
           ta="center"
@@ -74,8 +89,8 @@ const ForumNavlinks = () => {
         <Button
           fullWidth
           variant="light"
-          className="SL-dashboard-sect-btn"
-          onClick={() => navigate('/forum/5')}
+          className={classes.button}
+          onClick={() => navigate('/forum/5/17')}
           color="orange"
           ta="center"
         >
@@ -88,7 +103,7 @@ const ForumNavlinks = () => {
         <Button
           fullWidth
           variant="light"
-          className="SL-dashboard-sect-btn"
+          className={classes.button}
           onClick={() => navigate('/forum/6')}
           color="orange"
           ta="center"
@@ -102,7 +117,7 @@ const ForumNavlinks = () => {
         <Button
           fullWidth
           variant="light"
-          className="SL-dashboard-sect-btn"
+          className={classes.button}
           onClick={() => navigate('/forum/7')}
           color="orange"
           ta="center"
@@ -116,7 +131,7 @@ const ForumNavlinks = () => {
         <Button
           fullWidth
           variant="light"
-          className="SL-dashboard-sect-btn"
+          className={classes.button}
           onClick={() => navigate('/forum/8')}
           color="orange"
           ta="center"
@@ -130,7 +145,7 @@ const ForumNavlinks = () => {
         <Button
           fullWidth
           variant="light"
-          className="SL-dashboard-sect-btn"
+          className={classes.button}
           onClick={() => navigate('/forum/9')}
           color="orange"
           ta="center"
@@ -144,7 +159,7 @@ const ForumNavlinks = () => {
         <Button
           fullWidth
           variant="light"
-          className="SL-dashboard-sect-btn"
+          className={classes.button}
           onClick={() => navigate('/forum/10')}
           color="orange"
           ta="center"

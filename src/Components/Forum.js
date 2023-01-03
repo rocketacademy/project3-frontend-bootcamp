@@ -1,6 +1,6 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
-import { Textarea, Button, Paper, Grid } from '@mantine/core';
+import { Textarea, Button, Paper, Grid, Title } from '@mantine/core';
 import { BACKEND_URL } from '../constants.js';
 import axios from 'axios';
 import '../Components/css/Forum.css';
@@ -11,8 +11,6 @@ import ChapterPosts from './ChapterPosts.js';
 import ForumChapter from './ForumChapter.js';
 
 const Forum = () => {
-  // const { topic } = useParams();
-  // const user = useContext(UserContext);
   const [fileInputFile, setFileInputFile] = useState(null);
   const [posts, setPosts] = useState([]);
   const [course, setCourse] = useState([]);
@@ -23,10 +21,7 @@ const Forum = () => {
   const [color, setColor] = useState('gray');
   const [completed, setCompleted] = useState('');
   const [completedMat, setCompletedMat] = useState('');
-  // const [chapterId, setChapterId] = useState('');
   const [disabled, setDisabled] = useState(false);
-  // const FORUM_FOLDER_NAME = topic;
-  // const FORUM_IMAGES_FOLDER_NAME = 'forumImages';
 
   //useEffect to get all the available chapters and map into different links, each link will display available chapters in that component
 
@@ -49,7 +44,6 @@ const Forum = () => {
 
     fetchSectionChapters();
     console.log('section param', sectionId);
-    // sectId();
   }, [sectionId]);
 
   return (
@@ -62,7 +56,13 @@ const Forum = () => {
             </div>
           </Grid.Col>
           <Grid.Col span={8}>
-            {chapterId ? <ForumChapter /> : 'Currently no data'}
+            {chapterId ? (
+              <ForumChapter />
+            ) : (
+              <Title order={1} color="yellow">
+                'No Forum Chats'
+              </Title>
+            )}
           </Grid.Col>
         </Grid>
         <div className="chapter-list-btns">
@@ -73,23 +73,3 @@ const Forum = () => {
   );
 };
 export default Forum;
-
-// <div className="progress-list-paper">
-//   <Paper className="fsectionlist-progress-list">
-//     <Grid>
-//       <Grid.Col span={3}>
-//         <div className="forum-sect-btn-list">
-//           <ForumNavlinks />
-//         </div>
-//       </Grid.Col>
-//       <Grid.Col span={4} offset={2}>
-//         <div className="chapter-list-btns">
-//           <ForumSection />
-//         </div>
-//       </Grid.Col>
-
-//       {/* {relevantChapters} */}
-//       {/* <ChapterPosts /> */}
-//     </Grid>
-//   </Paper>
-// </div>;
