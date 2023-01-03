@@ -3,8 +3,10 @@ import { Textarea, Button } from '@mantine/core';
 import { BACKEND_URL } from '../constants';
 import axios from 'axios';
 import { RichTextEditor } from '@mantine/rte';
+import { useAuth } from './AuthContext';
 
-const SLPostForm = ({ chapter, cadet, onPostUpdate }) => {
+const SLPostForm = ({ onPostUpdate, chapter }) => {
+  const { slInfo } = useAuth();
   const [value, onChange] = useState('<p><br></p>');
   const [post, setPost] = useState({
     author: null,
@@ -17,20 +19,20 @@ const SLPostForm = ({ chapter, cadet, onPostUpdate }) => {
 
   useEffect(() => {
     setPost({
-      author: cadet.id,
-      authorName: cadet.name,
-      authorImage: cadet.photoLink,
+      author: slInfo.id,
+      authorName: slInfo.name,
+      authorImage: slInfo.photoLink,
       chapterId: chapter,
       content: value,
       createdAt: new Date().toLocaleString(),
     });
-  }, [value, cadet.id, cadet.name, cadet.photoLink, chapter]);
+  }, [value, slInfo.id, slInfo.name, slInfo.photoLink, chapter]);
 
   const handleChange = () => {
     setPost({
-      author: cadet.id,
-      authorName: cadet.name,
-      authorImage: cadet.photoLink,
+      author: slInfo.id,
+      authorName: slInfo.name,
+      authorImage: slInfo.photoLink,
       chapterId: chapter,
       content: value,
       createdAt: new Date().toLocaleString(),

@@ -56,11 +56,16 @@ const CadetProgress = () => {
         <SLDashboardlinks />
         <br />
         <br />
+
         {sectionId ? (
           <List type="ordered" withPadding>
             <Title fw={700} order={2} underline border color="#0B7285">
               = ALL CADET CHAPTER PROGRESS =
             </Title>
+            <br />
+            <Text fz="lg" fw={500}>
+              Current Section: {sectionId}
+            </Text>
             <br />
             {cadets?.map((cadet) => (
               <div className="individual-chapter-progress-list">

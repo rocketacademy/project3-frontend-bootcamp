@@ -17,13 +17,15 @@ import { BrowserRouter as Router, Link, Route, Routes } from 'react-router-dom';
 import { ThemeContext } from '@emotion/react';
 import DisplayMarkdown from './DisplayMarkdown';
 import CadetDashboard from './CadetDashboard';
-
+import { useAuth } from './AuthContext';
+import { useAuth0, withAuthenticationRequired } from '@auth0/auth0-react';
 import CadetChaptProgress from './CadetChaptProgress';
 import Forum from './Forum';
 import ForumChapter from './ForumChapter';
 import ForumSection from './ForumSection';
 import LogoutButton from './LogoutButton';
-import { withAuthenticationRequired } from '@auth0/auth0-react';
+import axios from 'axios';
+import { BACKEND_URL } from '../constants';
 
 import Rlogo from '../images/rocket-logo.png';
 import { IconHome2, IconCalendarEvent } from '@tabler/icons';
@@ -38,6 +40,28 @@ import GitHubSubmissionsDisplay from './GitHubSubmissionsDisplay';
 
 const SLDashboard = () => {
   const [opened, setOpened] = useState(false);
+  const { user, isAuthenticated } = useAuth0();
+  const { updateSlInfo } = useAuth();
+
+  const getAllInfo = async () => {
+    if (user[`https://any-namespace/roles`].length === 1) {
+      //need to create SL controller
+      const response = await axios.get(`${BACKEND_URL}/sls/sl`, {
+        params: {
+          slEmail: user.email,
+        },
+      });
+
+      updateSlInfo(response.data);
+      console.log(response.data);
+    }
+  };
+
+  useEffect(() => {
+    if (isAuthenticated) {
+      getAllInfo();
+    }
+  }, [user]);
 
   return (
     <AppShell

@@ -75,7 +75,11 @@ const ForumChapter = () => {
         ''
       )}
 
-      <SLPostForm />
+      <SLPostForm
+        chapter={chapterId}
+        // cadet={props.cadet}
+        onPostUpdate={onPostUpdate}
+      />
 
       {/* <PostForm
         chapter={chapterId}
