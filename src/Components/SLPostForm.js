@@ -62,16 +62,7 @@ const SLPostForm = ({ onPostUpdate, chapter }) => {
   console.log(value);
 
   return (
-    <div>
-      {/* <Textarea
-        label="Post your messages:"
-        placeholder="What are your thoughts?"
-        variant="filled"
-        value={post.content}
-        onChange={handleChange}
-        autosize
-        minRows={2}
-      /> */}
+    <>
       <RichTextEditor
         id="rte"
         value={value}
@@ -83,9 +74,9 @@ const SLPostForm = ({ onPostUpdate, chapter }) => {
         <Button
           variant="filled"
           color="tan"
-          size="sm"
-          mt="md"
-          radius="md"
+          size="xs"
+          mt="sm"
+          radius="sm"
           disabled
         >
           Submit
@@ -94,15 +85,17 @@ const SLPostForm = ({ onPostUpdate, chapter }) => {
         <Button
           variant="filled"
           color="tan"
-          size="sm"
-          mt="md"
-          radius="md"
+          size="xs"
+          mt="sm"
+          radius="sm"
           onClick={handleSubmit}
         >
           Submit
         </Button>
       )}
-    </div>
+      <br />
+      <br />
+    </>
   );
 };
 

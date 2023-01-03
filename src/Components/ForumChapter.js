@@ -1,7 +1,7 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import { Textarea, Button, TextInput, Card, Title } from '@mantine/core';
+import { Textarea, Button, TextInput, Card, Title, Text } from '@mantine/core';
 import { BACKEND_URL } from '../constants.js';
 import SLPostBlock from './SLPostBlock.js';
 import { List } from '@mantine/core';
@@ -13,7 +13,7 @@ import './css/Forum.css';
 
 const ForumChapter = () => {
   const [sections, setSections] = useState([]);
-  const { sectionId, chapterId } = useParams();
+  const { chapterId } = useParams();
   const [posts, setPosts] = useState([]);
 
   useEffect(() => {
@@ -32,8 +32,6 @@ const ForumChapter = () => {
     getPosts();
   }, [chapterId]);
 
-  console.log('hup ho', sections);
-
   const onPostUpdate = (post) => {
     setPosts((prevPosts) => {
       return [...prevPosts, post];
@@ -49,7 +47,11 @@ const ForumChapter = () => {
       <Title fw={700} order={2} underline border color="#0B7285">
         = Forum Discussions =
       </Title>
+      <Text c="#1971C2" fz="lg" fw={500}>
+        Current Chapter: {chapterId}
+      </Text>
       <br />
+
       {posts.length > 0 ? (
         <Card
           className="post-background"
@@ -70,22 +72,13 @@ const ForumChapter = () => {
               />
             ))}
           </List>
+          <SLPostForm chapter={chapterId} onPostUpdate={onPostUpdate} />
         </Card>
       ) : (
-        ''
+        ' '
       )}
 
-      <SLPostForm
-        chapter={chapterId}
-        // cadet={props.cadet}
-        onPostUpdate={onPostUpdate}
-      />
-
-      {/* <PostForm
-        chapter={chapterId}
-        cadet={props.cadet}
-        onPostUpdate={onPostUpdate}
-      /> */}
+      {/* <SLPostForm chapter={chapterId} onPostUpdate={onPostUpdate} /> */}
     </div>
   );
 };

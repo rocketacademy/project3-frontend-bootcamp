@@ -54,6 +54,7 @@ const CadetProgress = () => {
     <div className="progress-list-paper">
       <Paper className="chapter-progress-list">
         <SLDashboardlinks />
+
         <br />
         <br />
 

@@ -1,11 +1,30 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
 import { BACKEND_URL } from '../constants.js';
-import { Button, Text } from '@mantine/core';
+import { Button, Text, createStyles } from '@mantine/core';
 import '../Components/css/CadetChaptProgress.css';
 import SLDashboardlinks from './SLDashboardlinks.js';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
+
+const useStyles = createStyles((theme) => ({
+  button: {
+    margin: theme.spacing.sm,
+    backgroundColor: theme.colors.blue,
+    cursor: 'auto',
+
+    '&:hover': {
+      // boxShadow: theme.shadows.md,
+
+      backgroundColor: theme.colors.blue,
+    },
+
+    // '&:focus': {
+    //   boxShadow: theme.shadows.lg,
+    //   backgroundColor: theme.colors.red[7],
+    // },
+  },
+}));
 
 const CadetChaptProgress = ({ cadetId, cadetName }) => {
   // const CadetChaptProgress = () => {
@@ -16,6 +35,7 @@ const CadetChaptProgress = ({ cadetId, cadetName }) => {
   const [completedChaps, setCompletedChaps] = useState({});
 
   const { sectionId } = useParams();
+  const { classes } = useStyles();
 
   useEffect(() => {
     const fetchChapters = async () => {
@@ -45,14 +65,14 @@ const CadetChaptProgress = ({ cadetId, cadetName }) => {
       <>
         {chapter.completed === true ? (
           <>
-            <Button className="chapter-btn" radius="xl" color="blue">
+            <Button className={classes.button} radius="xl">
               {/* {chapter.chapterId} */}
               {chapter.chapter.name}
             </Button>
           </>
         ) : (
           <>
-            <Button className="chapter-btn" radius="xl" color="gray">
+            <Button className={classes.button} radius="xl">
               {/* {chapter.chapterId} */}
               {chapter.chapter.name}
             </Button>

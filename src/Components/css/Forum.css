@@ -10,7 +10,7 @@
   background-color: #06113e;
   justify-items: center;
   margin: auto;
-  margin-top: 100px;
+  margin-top: 20px;
   margin-left: 400px;
   width: 1400px;
   min-height: 420px;
@@ -22,6 +22,7 @@
   padding-top: 20px;
   padding-bottom: 20px;
   margin-left: 1rem;
+  margin-top: 100px;
 }
 
 .chapter-list-btns {
@@ -34,13 +35,12 @@
 }
 
 .post-list {
-  margin-top: 3rem;
-
+  margin-top: 2.5rem;
   justify-items: center;
   align-items: center;
 }
 
 .post-background {
-  height: 540px;
+  height: 610px;
   overflow: auto;
 }

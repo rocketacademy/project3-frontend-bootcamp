@@ -14,6 +14,7 @@ import { openModal } from '@mantine/modals';
 import { IconPencil, IconTrash, IconDots } from '@tabler/icons';
 import { BACKEND_URL } from '../constants';
 import EditPost from './EditPost';
+import { useAuth } from './AuthContext';
 
 const useStyles = createStyles((theme) => ({
   body: {
@@ -27,11 +28,12 @@ const useStyles = createStyles((theme) => ({
     transition: 'transform 150ms ease, box-shadow 100ms ease',
     padding: theme.spacing.xl,
     paddingLeft: theme.spacing.xl * 2,
+    height: 170,
 
-    '&:hover': {
-      boxShadow: theme.shadows.md,
-      transform: 'scale(1.02)',
-    },
+    // '&:hover': {
+    //   boxShadow: theme.shadows.md,
+    //   transform: 'scale(1.02)',
+    // },
 
     '&::before': {
       content: '""',
@@ -58,6 +60,7 @@ export default function SLPostBlock({
   onPostUpdate,
 }) {
   const { classes } = useStyles();
+  const { slInfo } = useAuth();
 
   const handleEdit = async (post) => {
     openModal({
@@ -76,7 +79,7 @@ export default function SLPostBlock({
 
   return (
     <Paper withBorder radius="md" className={classes.card}>
-      <Text>Chapter {post.chapterId}</Text>
+      {/* <Text>Chapter {post.chapterId}</Text> */}
 
       <Group position="apart">
         <Group>
@@ -93,7 +96,7 @@ export default function SLPostBlock({
             </Text>
           </div>
         </Group>
-        {/* {cadet.id === post.author ? (
+        {slInfo.id === post.author ? (
           <Group>
             <Menu transition="pop" withArrow>
               <Menu.Target>
@@ -118,7 +121,7 @@ export default function SLPostBlock({
               </Menu.Dropdown>
             </Menu>
           </Group>
-        ) : null} */}
+        ) : null}
       </Group>
       <TypographyStylesProvider className={classes.body}>
         <div dangerouslySetInnerHTML={{ __html: post.content }} />
