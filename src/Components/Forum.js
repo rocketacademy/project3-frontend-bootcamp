@@ -23,7 +23,7 @@ const Forum = () => {
   const [color, setColor] = useState('gray');
   const [completed, setCompleted] = useState('');
   const [completedMat, setCompletedMat] = useState('');
-  const [chapterId, setChapterId] = useState('');
+  // const [chapterId, setChapterId] = useState('');
   const [disabled, setDisabled] = useState(false);
   // const FORUM_FOLDER_NAME = topic;
   // const FORUM_IMAGES_FOLDER_NAME = 'forumImages';
@@ -31,7 +31,7 @@ const Forum = () => {
   //useEffect to get all the available chapters and map into different links, each link will display available chapters in that component
 
   const [chapters, setChapters] = useState('');
-  const { sectionId } = useParams();
+  const { sectionId, chapterId } = useParams();
 
   useEffect(() => {
     const fetchSectionChapters = async () => {
@@ -62,7 +62,7 @@ const Forum = () => {
             </div>
           </Grid.Col>
           <Grid.Col span={8}>
-            <ForumChapter />
+            {chapterId ? <ForumChapter /> : 'Currently no data'}
           </Grid.Col>
         </Grid>
         <div className="chapter-list-btns">
