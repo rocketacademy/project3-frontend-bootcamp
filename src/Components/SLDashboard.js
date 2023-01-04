@@ -43,6 +43,8 @@ const SLDashboard = () => {
   const { user, isAuthenticated } = useAuth0();
   const { updateSlInfo, slInfo } = useAuth();
 
+  const [submissionsData, setSubmissionsData] = useState([]);
+
   const getAllInfo = async () => {
     if (user[`https://any-namespace/roles`].length === 1) {
       //need to create SL controller
@@ -62,6 +64,21 @@ const SLDashboard = () => {
       getAllInfo();
     }
   }, [user]);
+
+  useEffect(() => {
+    const fetchSubmissions = async () => {
+      try {
+        const response = await axios.get(`${BACKEND_URL}/gitHubSubmissions`);
+
+        console.log('all submissions info', response.data);
+        setSubmissionsData(response.data);
+      } catch (err) {
+        console.log(err.response.data);
+      }
+    };
+
+    fetchSubmissions();
+  }, []);
 
   return (
     <AppShell
@@ -162,7 +179,10 @@ const SLDashboard = () => {
         <Route path="/" element={<SLLandingPage />}>
           <Route path="/main-map" element={<CadetProgress />} />
           <Route path="/main-map/:sectionId" element={<CadetProgress />} />
-          <Route path="/submissions" element={<GitHubSubmissionsDisplay />} />
+          <Route
+            path="/submissions"
+            element={<GitHubSubmissionsDisplay data={submissionsData} />}
+          />
 
           {/* <Route path="/main-map/:sectionId" element={<CadetChaptProgress />} /> */}
         </Route>
