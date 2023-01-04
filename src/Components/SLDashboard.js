@@ -9,7 +9,7 @@ import {
   Text,
   Image,
   Button,
-  useMantineTheme,
+  Title,
 } from '@mantine/core';
 
 import Profile from './Profile';
@@ -41,7 +41,7 @@ import GitHubSubmissionsDisplay from './GitHubSubmissionsDisplay';
 const SLDashboard = () => {
   const [opened, setOpened] = useState(false);
   const { user, isAuthenticated } = useAuth0();
-  const { updateSlInfo } = useAuth();
+  const { updateSlInfo, slInfo } = useAuth();
 
   const getAllInfo = async () => {
     if (user[`https://any-namespace/roles`].length === 1) {
@@ -92,7 +92,15 @@ const SLDashboard = () => {
             >
               <Image src={Rlogo} alt="rocket logo" />
             </div>
+            <br />
           </Navbar.Section>
+          <Title order={5} color="white">
+            Welcome <br />
+          </Title>
+          <Title order={3} color="yellow">
+            {slInfo.name}
+          </Title>
+
           <Navbar.Section grow mt="lg">
             <div style={{ display: 'flex', flexDirection: 'column' }}>
               <Text
