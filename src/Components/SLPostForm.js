@@ -5,10 +5,11 @@ import axios from 'axios';
 import { RichTextEditor } from '@mantine/rte';
 import { useAuth } from './AuthContext';
 
-const SLPostForm = ({ onPostUpdate, chapter }) => {
+const SLPostForm = ({ sl, onPostUpdate, chapter }) => {
   const { slInfo } = useAuth();
   const [value, onChange] = useState('<p><br></p>');
   const [post, setPost] = useState({
+    sl: null,
     author: null,
     authorName: '',
     authorImage: '',
@@ -19,7 +20,8 @@ const SLPostForm = ({ onPostUpdate, chapter }) => {
 
   useEffect(() => {
     setPost({
-      author: slInfo.id,
+      sl: slInfo.id,
+      author: null,
       authorName: slInfo.name,
       authorImage: slInfo.photoLink,
       chapterId: chapter,
@@ -30,7 +32,8 @@ const SLPostForm = ({ onPostUpdate, chapter }) => {
 
   const handleChange = () => {
     setPost({
-      author: slInfo.id,
+      // author: slInfo.id,
+      sl: slInfo.id,
       authorName: slInfo.name,
       authorImage: slInfo.photoLink,
       chapterId: chapter,
@@ -50,6 +53,7 @@ const SLPostForm = ({ onPostUpdate, chapter }) => {
         onPostUpdate(post);
         setPost({
           author: null,
+          sl: null,
           authorName: '',
           authorImage: '',
           chapterId: null,
@@ -62,7 +66,7 @@ const SLPostForm = ({ onPostUpdate, chapter }) => {
   console.log(value);
 
   return (
-    <>
+    <div className="sl-post-form ">
       <RichTextEditor
         id="rte"
         value={value}
@@ -95,7 +99,7 @@ const SLPostForm = ({ onPostUpdate, chapter }) => {
       )}
       <br />
       <br />
-    </>
+    </div>
   );
 };
 

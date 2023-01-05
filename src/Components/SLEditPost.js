@@ -14,7 +14,7 @@ import { storage } from '../firebase';
 
 const UPLOAD_IMAGES_FOLDER_NAME = 'postImageUploads';
 
-const EditPost = (props) => {
+const SLEditPost = (props) => {
   const [value, onChange] = useState(props.post.content);
   const [post, setPost] = useState({
     sl: null,
@@ -122,4 +122,4 @@ const EditPost = (props) => {
   );
 };
 
-export default EditPost;
+export default SLEditPost;

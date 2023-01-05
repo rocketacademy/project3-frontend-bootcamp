@@ -13,7 +13,9 @@ import {
 import { openModal } from '@mantine/modals';
 import { IconPencil, IconTrash, IconDots } from '@tabler/icons';
 import { BACKEND_URL } from '../constants';
-import EditPost from './EditPost';
+import { openConfirmModal } from '@mantine/modals';
+import { showNotification } from '@mantine/notifications';
+import SLEditPost from './SLEditPost';
 import { useAuth } from './AuthContext';
 
 const useStyles = createStyles((theme) => ({
@@ -52,9 +54,11 @@ const useStyles = createStyles((theme) => ({
 }));
 
 export default function SLPostBlock({
+  sl,
   chapterId,
   post,
   cadet,
+  slId,
   key,
   onPostDelete,
   onPostUpdate,
@@ -67,14 +71,39 @@ export default function SLPostBlock({
       modalId: 'edit',
       size: 'auto',
       overflow: 'auto',
-      children: <EditPost post={post} />,
+      children: <SLEditPost post={post} />,
     });
   };
 
+  // const handleDelete = async (id) => {
+  //   await axios.delete(`${BACKEND_URL}/posts/${id}`);
+  //   onPostDelete(id);
+  //   console.log('post successfully deleted.');
+  // };
+
   const handleDelete = async (id) => {
-    await axios.delete(`${BACKEND_URL}/posts/${id}`);
-    onPostDelete(id);
-    console.log('post successfully deleted.');
+    openConfirmModal({
+      title: 'Confirm deleting this post?',
+      labels: { confirm: 'Delete', cancel: 'Cancel' },
+      confirmProps: { color: 'red' },
+      onCancel: () => console.log('Cancel'),
+      onConfirm: async () => {
+        try {
+          await axios.delete(`${BACKEND_URL}/posts/${id}`);
+          onPostDelete(id);
+          showNotification({
+            message: 'Post deleted!',
+            color: 'red',
+          });
+          console.log('post successfully deleted.');
+        } catch (error) {
+          showNotification({
+            message: error.message,
+            color: 'red',
+          });
+        }
+      },
+    });
   };
 
   return (
@@ -96,7 +125,7 @@ export default function SLPostBlock({
             </Text>
           </div>
         </Group>
-        {slInfo.id === post.author ? (
+        {slInfo.id === post.sl ? (
           <Group>
             <Menu transition="pop" withArrow>
               <Menu.Target>
