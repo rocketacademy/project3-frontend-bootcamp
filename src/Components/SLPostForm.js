@@ -1,9 +1,16 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { Textarea, Button } from '@mantine/core';
 import { BACKEND_URL } from '../constants';
 import axios from 'axios';
 import { RichTextEditor } from '@mantine/rte';
 import { useAuth } from './AuthContext';
+import {
+  getDownloadURL,
+  ref as storageRef,
+  uploadBytes,
+} from 'firebase/storage';
+import { storage } from '../firebase';
+const UPLOAD_IMAGES_FOLDER_NAME = 'postImageUploads';
 
 const SLPostForm = ({ sl, onPostUpdate, chapter }) => {
   const { slInfo } = useAuth();
@@ -30,17 +37,22 @@ const SLPostForm = ({ sl, onPostUpdate, chapter }) => {
     });
   }, [value, slInfo.id, slInfo.name, slInfo.photoLink, chapter]);
 
-  const handleChange = () => {
-    setPost({
-      // author: slInfo.id,
-      sl: slInfo.id,
-      authorName: slInfo.name,
-      authorImage: slInfo.photoLink,
-      chapterId: chapter,
-      content: value,
-      createdAt: new Date().toLocaleString(),
-    });
-  };
+  const handleImageUpload = useCallback(
+    (file) =>
+      new Promise((resolve, reject) => {
+        const fileRef = storageRef(
+          storage,
+          `${UPLOAD_IMAGES_FOLDER_NAME}/${file.name}`
+        );
+        uploadBytes(fileRef, file).then(() => {
+          getDownloadURL(fileRef)
+            .then((downloadUrl) => resolve(downloadUrl))
+            .catch(() => reject(new Error('Upload failed')));
+        });
+      }),
+    []
+  );
+
   console.log('post content', post.content);
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -50,9 +62,9 @@ const SLPostForm = ({ sl, onPostUpdate, chapter }) => {
       })
       .then((res) => {
         console.log('in handle submit', res);
-        onPostUpdate(post);
+        onPostUpdate(res.data);
         setPost({
-          author: null,
+          // author: null,
           sl: null,
           authorName: '',
           authorImage: '',
@@ -68,10 +80,16 @@ const SLPostForm = ({ sl, onPostUpdate, chapter }) => {
   return (
     <div className="sl-post-form ">
       <RichTextEditor
+        styles={{ overflow: 'auto' }}
         id="rte"
         value={value}
         onChange={onChange}
+        onImageUpload={handleImageUpload}
         placeholder="Post your messages here"
+        // id="rte"
+        // value={value}
+        // onChange={onChange}
+        // placeholder="Post your messages here"
       />
 
       {value === '<p><br></p>' ? (

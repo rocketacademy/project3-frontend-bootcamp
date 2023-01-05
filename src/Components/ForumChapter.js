@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { Textarea, Button, TextInput, Card, Title, Text } from '@mantine/core';
 import { BACKEND_URL } from '../constants.js';
-import SLPostBlock from './SLPostBlock.js';
+import { SLPostBlock } from './SLPostBlock.js';
 import { List } from '@mantine/core';
 import SLPostForm from './SLPostForm.js';
 import { useAuth } from './AuthContext';
@@ -34,7 +34,7 @@ const ForumChapter = () => {
     };
     getPosts();
     setSlId(slInfo);
-  }, [chapterId]);
+  }, [chapterId, posts]);
 
   const onPostUpdate = (post) => {
     setPosts((prevPosts) => {

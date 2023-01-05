@@ -53,7 +53,7 @@ const useStyles = createStyles((theme) => ({
   },
 }));
 
-export default function SLPostBlock({
+export function SLPostBlock({
   sl,
   chapterId,
   post,
@@ -68,9 +68,10 @@ export default function SLPostBlock({
 
   const handleEdit = async (post) => {
     openModal({
-      modalId: 'edit',
+      modalId: 'slEdit',
       size: 'auto',
       overflow: 'auto',
+
       children: <SLEditPost post={post} />,
     });
   };

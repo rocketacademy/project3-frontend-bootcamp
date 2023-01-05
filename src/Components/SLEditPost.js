@@ -3,6 +3,7 @@ import { Button } from '@mantine/core';
 import { BACKEND_URL } from '../constants';
 import axios from 'axios';
 import { RichTextEditor } from '@mantine/rte';
+// import { RichTextEditor } from '@mantine/tiptap';
 import { showNotification } from '@mantine/notifications';
 import { closeModal } from '@mantine/modals';
 import {
@@ -89,9 +90,8 @@ const SLEditPost = (props) => {
         value={value}
         onChange={onChange}
         onImageUpload={handleImageUpload}
-        placeholder="Post your messages here"
+        placeholder="lalala"
       />
-
       {value === '<p><br></p>' ? (
         <Button
           variant="filled"
@@ -112,7 +112,7 @@ const SLEditPost = (props) => {
           radius="md"
           onClick={() => {
             handleSubmit(props.post.id);
-            closeModal('edit');
+            closeModal('slEdit');
           }}
         >
           Save
