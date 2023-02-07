@@ -1,0 +1,42 @@
+.btn {
+  width: 50px;
+  height: 50px;
+  border-radius: 50px;
+  border: 2px solid #ff7e55;
+  background-color: #ff5722;
+  color: #eeeeee;
+  transition: width 0.7s;
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 20px;
+}
+
+.btn:hover {
+  width: 180px;
+  transition: width 0.7s;
+}
+
+.btn i {
+  opacity: 1;
+  transition: opacity 0.5s;
+}
+
+.btn:hover i {
+  opacity: 0;
+  transition: opacity 0.5s;
+}
+
+.btn .buttonText {
+  opacity: 0;
+  transition: opacity 0.5s;
+  position: absolute;
+  width: 100%;
+  left: 0;
+}
+
+.btn:hover .buttonText {
+  opacity: 1;
+  transition: opacity 0.5s;
+}

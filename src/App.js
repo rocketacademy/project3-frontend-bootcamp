@@ -1,20 +1,27 @@
-import React from "react";
-import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
-import logo from "./assets//images/logo.png";
-import "./App.css";
-import "./assets//fonts/font.css";
+import React from 'react';
+import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
+// import logo from './assets//images/logo.png';
+import './App.css';
+import './assets//fonts/font.css';
+import { Profile } from './profile/components/Profile';
+import { Navbar } from './navbar/components/Navbar';
 
 class App extends React.Component {
   render() {
     return (
-      <BrowserRouter>
-        <div className="App">
-          <header className="App-header">
-            <img src={logo} className="App-logo" alt="logo" />
+      // <BrowserRouter>
+      <div className="App">
+        <header className="App-header">
+          <BrowserRouter>
+            <Routes>
+              <Route index element={<Navbar />} />
+              <Route path="profile" element={<Profile />} />
+            </Routes>
+            {/* <img src={logo} className="App-logo" alt="logo" />
             <h2>Hello.</h2>
             <p>This is the base repo.</p>
-          </header>
-          {/* <Routes>
+          </header> */}
+            {/* <Routes>
 
           // Navbar goes here.
             <Route element={<Home />}>
@@ -36,8 +43,9 @@ class App extends React.Component {
             //Intro w/ sign up/ login page
             <Route path="*" element={<WelcomePage />} />
           </Routes> */}
-        </div>
-      </BrowserRouter>
+          </BrowserRouter>
+        </header>
+      </div>
     );
   }
 }
