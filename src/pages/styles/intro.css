@@ -1,0 +1,12 @@
+.container {
+  position: relative;
+  text-align: left;
+}
+
+.top-left {
+  position: absolute;
+  top: 8px;
+  left: 46px;
+  font-size: 40px;
+  line-height: 0.8;
+}
