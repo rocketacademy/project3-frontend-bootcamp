@@ -3,18 +3,24 @@ import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import logo from "./assets//images/logo.png";
 import "./App.css";
 import "./assets//fonts/font.css";
+import WelcomePage from "./pages/IntroPage";
 
-class App extends React.Component {
-  render() {
-    return (
-      <BrowserRouter>
-        <div className="App">
-          <header className="App-header">
-            <img src={logo} className="App-logo" alt="logo" />
-            <h2>Hello.</h2>
-            <p>This is the base repo.</p>
-          </header>
-          {/* <Routes>
+function App() {
+  return (
+    <BrowserRouter>
+      {/* <div className="App">
+        <header className="App-header">
+          <img src={logo} className="App-logo" alt="logo" />
+          <h2>Hello.</h2>
+          <p>This is the base repo.</p>
+        </header> */}
+
+      <Routes>
+        <Route path="/welcome" element={<WelcomePage />} />
+        <Route path="/listings" element={<WelcomePage />} />
+      </Routes>
+
+      {/* <Routes>
 
           // Navbar goes here.
             <Route element={<Home />}>
@@ -36,10 +42,9 @@ class App extends React.Component {
             //Intro w/ sign up/ login page
             <Route path="*" element={<WelcomePage />} />
           </Routes> */}
-        </div>
-      </BrowserRouter>
-    );
-  }
+      {/* </div> */}
+    </BrowserRouter>
+  );
 }
 
 export default App;
