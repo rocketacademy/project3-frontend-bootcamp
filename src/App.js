@@ -1,9 +1,11 @@
-import React from "react";
-import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
-import logo from "./assets//images/logo.png";
-import "./App.css";
-import "./assets//fonts/font.css";
-import WelcomePage from "./pages/IntroPage";
+import React from 'react';
+import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
+import logo from './assets//images/logo.png';
+import './App.css';
+import './assets//fonts/font.css';
+import WelcomePage from './pages/IntroPage';
+import Navbar from './navbar/Navbar';
+import Profile from './pages/UserProfile';
 
 
 function App() {
@@ -19,6 +21,8 @@ function App() {
       <Routes>
         <Route path="/welcome" element={<WelcomePage />} />
         <Route path="/listings" element={<WelcomePage />} />
+        <Route path="/navbar" element={<Navbar />} />
+        <Route path="/profile" element={<Profile />} />
       </Routes>
 
       {/* <Routes>
