@@ -4,13 +4,14 @@ import React from "react";
 import { Layout, Space, Menu, Button, Card, Col, Row, Avatar } from "antd";
 import intropage from "../assets//images/intropage.jpg";
 import logo from "../assets//images/logo.png";
-import bike from "../assets//images/bike.jpg";
 
 import "./styles/intro.css";
 import { MessageOutlined, LikeOutlined } from "@ant-design/icons";
+import axios from "axios";
+import { useEffect, useState } from "react";
 
-const { Header, Footer, Content } = Layout;
 const { Meta } = Card;
+const { Header, Footer, Content } = Layout;
 const menuHeaders = ["About", "Press", "Contact"];
 
 const headerStyle = {
@@ -34,6 +35,20 @@ const footerStyle = {
   backgroundColor: "#303841",
 };
 export default function WelcomePage() {
+  const [listingsReturned, setListingsReturned] = useState([]);
+
+  useEffect(() => {
+    axios
+      .get("http://localhost:3000/")
+      .then(function (response) {
+        setListingsReturned(response.data);
+        console.log(response.data);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  }, []);
+
   return (
     <Space
       direction="vertical"
@@ -90,62 +105,22 @@ export default function WelcomePage() {
           <h2>These are some listings you might be interested in:</h2>
 
           <Row gutter={16}>
+            {listingsReturned.map(({ category, item_name, photo_url }, key) => (
             <Col span={6}>
               <Card
                 hoverable
                 style={{ width: 300 }}
-                cover={<img alt="example" src={bike} />}
+                cover={<img src={photo_url} />}
                 actions={[
                   <MessageOutlined key="message" />,
                   <LikeOutlined key="like" />,
                 ]}
               >
-                <Meta
-                  avatar={<Avatar src="https://joeschmoe.io/api/v1/random" />}
-                  title="Loco 2-Wheel Bike"
-                  description="Brand new"
-                />
+                <Meta title={item_name} description={category} />
               </Card>
             </Col>
-            <Col span={6}>
-              <Card
-                hoverable
-                style={{ width: 300 }}
-                cover={<img alt="example" src={bike} />}
-                actions={[
-                  <MessageOutlined key="message" />,
-                  <LikeOutlined key="like" />,
-                ]}
-              >
-                <Meta title="Loco 2-Wheel Bike" description="Brand new" />
-              </Card>
-            </Col>
-            <Col span={6}>
-              <Card
-                hoverable
-                style={{ width: 300 }}
-                cover={<img alt="example" src={bike} />}
-                actions={[
-                  <MessageOutlined key="message" />,
-                  <LikeOutlined key="like" />,
-                ]}
-              >
-                <Meta title="Loco 2-Wheel Bike" description="Brand new" />
-              </Card>
-            </Col>
-            <Col span={6}>
-              <Card
-                hoverable
-                style={{ width: 300 }}
-                cover={<img alt="example" src={bike} />}
-                actions={[
-                  <MessageOutlined key="message" />,
-                  <LikeOutlined key="like" />,
-                ]}
-              >
-                <Meta title="Loco 2-Wheel Bike" description="Brand new" />
-              </Card>
-            </Col>
+            ))}
+            
           </Row>
 
           <Space wrap>
