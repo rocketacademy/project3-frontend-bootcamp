@@ -3,8 +3,8 @@ import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
 // import logo from './assets//images/logo.png';
 import './App.css';
 import './assets//fonts/font.css';
-import { Profile } from './profile/components/Profile';
-import { Navbar } from './navbar/components/Navbar';
+import { EditProfile } from './pages/EditProfile';
+import { Navbar } from './navbar/Navbar';
 
 class App extends React.Component {
   render() {
@@ -15,7 +15,7 @@ class App extends React.Component {
           <BrowserRouter>
             <Routes>
               <Route index element={<Navbar />} />
-              <Route path="profile" element={<Profile />} />
+              <Route path="profile" element={<EditProfile />} />
             </Routes>
             {/* <img src={logo} className="App-logo" alt="logo" />
             <h2>Hello.</h2>

@@ -1,6 +1,7 @@
+// users can edit the details of their profile on this page
 import { React, useState, useEffect } from 'react';
-import styles from './profile.module.css';
-import { Navbar } from '../../navbar/components/Navbar';
+// import styles from './profile.module.css';
+import { Navbar } from '../navbar/Navbar';
 // import { Logout } from '../../logout/components/Logout';
 import { PlusOutlined } from '@ant-design/icons';
 import { Button, Form, Input, TreeSelect, Upload, Select } from 'antd';
@@ -8,7 +9,7 @@ import { useAuth0 } from '@auth0/auth0-react';
 // import { MRTstations } from './MRTstations';
 // import { useState } from 'react';
 
-export function Profile() {
+export function EditProfile() {
   const { TextArea } = Input;
   const { Option } = Select;
 
@@ -28,14 +29,15 @@ export function Profile() {
     if (user && !accessToken) {
       getAccessTokenSilently().then((jwt) => setAccessToken(jwt));
     }
-  }, [user]);
+  }, [user, accessToken]);
   console.log(accessToken);
 
   return (
     <div>
       <Navbar />
 
-      <div className={styles.formBody}>
+      <div>
+        {/* className={styles.formBody}> */}
         <Form
           labelCol={{
             span: 8
@@ -112,4 +114,4 @@ export function Profile() {
   );
 }
 
-export default Profile;
+export default EditProfile;

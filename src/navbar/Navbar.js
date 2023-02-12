@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import styles from './navbar.module.css';
-import logo from '../../g&t.png';
+import logo from '../g&t.png';
 import { NavbarData } from './NavbarData';
 import { useAuth0 } from '@auth0/auth0-react';
 
