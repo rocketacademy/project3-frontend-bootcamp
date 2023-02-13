@@ -4,6 +4,9 @@ import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
 import './App.css';
 import './assets//fonts/font.css';
 import { EditProfile } from './pages/EditProfile';
+import WelcomePage from './pages/IntroPage';
+import Profile from './pages/UserProfile';
+import EditListing from './pages/EditListing';
 import { Navbar } from './navbar/Navbar';
 
 class App extends React.Component {
@@ -14,8 +17,12 @@ class App extends React.Component {
         <header className="App-header">
           <BrowserRouter>
             <Routes>
-              <Route index element={<Navbar />} />
-              <Route path="profile" element={<EditProfile />} />
+              <Route path="/welcome" element={<WelcomePage />} />
+              <Route path="/listings" element={<WelcomePage />} />
+              <Route path="/navbar" element={<Navbar />} />
+              <Route path="/settings" element={<EditProfile />} />
+              <Route path="/profile" element={<Profile />} />
+              <Route path="/editlisting" element={<EditListing />} />
             </Routes>
             {/* <img src={logo} className="App-logo" alt="logo" />
             <h2>Hello.</h2>

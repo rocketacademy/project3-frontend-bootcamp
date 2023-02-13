@@ -1,12 +1,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400&display=swap');
 
 body {
-  background-color: #eeeeee;
+  /* background-color: #eeeeee; */
   font-family: 'Cormorant Garamond', serif;
 }
 
 .App {
-  text-align: center;
+  /* text-align: center; */
 }
 
 /* .App-logo {
@@ -16,13 +16,13 @@ body {
 } */
 
 .App-header {
-  background-color: #eeeeee;
+  /* background-color: #eeeeee; */
   /* min-height: 100vh; */
   /* display: flex; */
   /* flex-direction: column; */
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
+  /* font-size: calc(10px + 2vmin); */
   color: #303841;
   font-family: 'Cormorant Garamond', serif;
 }
