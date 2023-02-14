@@ -1,8 +1,7 @@
 // users can edit the details of their profile on this page
 import { React, useState, useEffect } from 'react';
 // import styles from './profile.module.css';
-import { Navbar } from '../navbar/Navbar';
-// import { Logout } from '../../logout/components/Logout';
+// import { Navbar } from '../navbar/Navbar';
 import { PlusOutlined } from '@ant-design/icons';
 import { Button, Form, Input, TreeSelect, Upload, Select } from 'antd';
 import { useAuth0 } from '@auth0/auth0-react';
@@ -34,7 +33,7 @@ export function EditProfile() {
 
   return (
     <div>
-      <Navbar />
+      {/* <Navbar /> */}
 
       <div>
         {/* className={styles.formBody}> */}
