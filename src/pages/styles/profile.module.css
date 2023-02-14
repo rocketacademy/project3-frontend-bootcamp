@@ -2,7 +2,7 @@ body {
   font-family: 'Cormorant Garamond', serif;
   margin: 0;
   padding: 0;
-  background-color: #ff7e55;
+  background-color: #fff;
 }
 
 .container {
@@ -13,7 +13,7 @@ body {
 }
 
 .menu {
-  width: 20%;
+  width: 12%;
   background-color: #eeeeee;
   padding: 30px;
   border-radius: 20px;
@@ -38,6 +38,12 @@ body {
   margin-left: 10%;
   max-height: 100%;
   /* margin-left: 0.2rem; */
+}
+
+.logo img {
+  height: auto;
+  width: 150px;
+  align-content: center;
 }
 
 h2 {
