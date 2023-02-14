@@ -1,0 +1,26 @@
+.ant-carousel .slick-prev,
+.ant-carousel .slick-prev:hover,
+.ant-carousel .slick-prev:focus {
+  font-size: 2em;
+  left: 20px;
+  z-index: 3;
+  color: #ff7e55;
+}
+
+.ant-carousel .slick-next,
+.ant-carousel .slick-next:hover,
+.ant-carousel .slick-next:focus {
+  font-size: 2em;
+  right: 20px;
+  z-index: 3;
+  color: #ff7e55;
+}
+
+.all-listing {
+  margin: 50px 50px;
+}
+
+.categories-title {
+  margin: 20px 50px;
+  color: #ff7e55;
+}
