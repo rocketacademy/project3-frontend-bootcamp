@@ -1,7 +1,6 @@
 import React from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { HomePage } from "./components/HomePage";
-import { AuthPage } from "./components/AuthPage";
 import { User } from "./components/User";
 import { EditUser } from "./components/EditUser";
 import { useAuth0 } from "@auth0/auth0-react";
@@ -14,7 +13,6 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<HomePage />} />
-        <Route path="/auth" element={<AuthPage />} />
         <Route
           path="user/:id"
           element={
