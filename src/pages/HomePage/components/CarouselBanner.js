@@ -12,7 +12,7 @@ export default function CarouselBanner() {
       arrows={true}
       prevArrow={<LeftCircleTwoTone twoToneColor="ff7e55" />}
       nextArrow={<RightCircleTwoTone twoToneColor="ff7e55" />}
-      style={{ width: 1400, margin: "20px 50px" }}
+      style={{ margin: "20px 50px" }}
     >
       <Card
         style={{ width: 500 }}

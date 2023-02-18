@@ -9,6 +9,7 @@ import {
 } from "@ant-design/icons";
 import "../homepage.css";
 import { Col, Row } from "antd";
+import { NewSideNavbar } from "../../../commoncomponents/Navbar/Navbar";
 
 export default function ListingCards() {
   const { Meta } = Card;

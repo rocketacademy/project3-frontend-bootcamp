@@ -1,14 +1,14 @@
 // user profile page
-import React from 'react';
-import styles from './styles/profile.module.css';
-import { UsersProfile } from './UsersProfile.js';
-import { UserListings } from './UserListings';
-import profilepic from '../assets//images/profilepic.jpeg';
-import { EditOutlined, DeleteOutlined } from '@ant-design/icons';
+import React from "react";
+import styles from "./userprofile.module.css";
+import { UsersProfile } from "./UsersProfile.js";
+import { UserListings } from "./UserListings";
+import profilepic from "../../assets/images/profilepic.jpeg";
+import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
 // import bike from '../assets//images/bike.jpg';
-import book from '../assets//images/book.webp';
-import logo from '../assets//images/logo.png';
-import { Card, Button, Tag } from 'antd';
+import book from "../../assets/images/book.webp";
+import logo from "../../assets/images/logo.png";
+import { Card, Button, Tag } from "antd";
 
 const { Meta } = Card;
 
@@ -24,13 +24,13 @@ export function UserProfile() {
               </div>
             </div>
             <li>
-              <a href="home">Home</a>
+              <a href="homepage">Home</a>
             </li>
             <li>
-              <a href="settings">Settings</a>
+              <a href="profile">Profile</a>
             </li>
             <li>
-              <a href="createlisting">Post</a>
+              <a href="createlisting">Create Listing</a>
             </li>
             <li>
               <a href="logout">Logout</a>
@@ -102,14 +102,18 @@ export function UserProfile() {
                   width: 300,
                   marginRight: 10,
                   marginBottom: 20,
-                  display: 'inline-block',
-                  wordWrap: 'break-word'
+                  display: "inline-block",
+                  wordWrap: "break-word",
                 }}
                 // cover={<img alt={listing.alt} src={listing.photo} />}
                 cover={<img alt={listing.alt} src={book} />}
-                actions={[<EditOutlined key="edit" />, <DeleteOutlined key="delete" />]}>
+                actions={[
+                  <EditOutlined key="edit" />,
+                  <DeleteOutlined key="delete" />,
+                ]}
+              >
                 <Meta
-                  style={{ wordWrap: 'break-word' }}
+                  style={{ wordWrap: "break-word" }}
                   title={listing.title}
                   description={listing.description}
                 />

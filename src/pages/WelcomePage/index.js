@@ -2,10 +2,10 @@
 
 import React from "react";
 import { Layout, Space, Menu, Button, Card, Col, Row, Avatar } from "antd";
-import intropage from "../assets//images/intropage.jpg";
-import logo from "../assets//images/logo.png";
+import intropage from "../../assets/images/intropage.jpg";
+import logo from "../../assets/images/logo.png";
 
-import "./styles/intro.css";
+import "./welcomepage.css";
 import { MessageOutlined, LikeOutlined } from "@ant-design/icons";
 import axios from "axios";
 import { useEffect, useState } from "react";
@@ -106,21 +106,20 @@ export default function WelcomePage() {
 
           <Row gutter={16}>
             {listingsReturned.map(({ category, item_name, photo_url }, key) => (
-            <Col span={6}>
-              <Card
-                hoverable
-                style={{ width: 300 }}
-                cover={<img src={photo_url} />}
-                actions={[
-                  <MessageOutlined key="message" />,
-                  <LikeOutlined key="like" />,
-                ]}
-              >
-                <Meta title={item_name} description={category} />
-              </Card>
-            </Col>
+              <Col span={6}>
+                <Card
+                  hoverable
+                  style={{ width: 300 }}
+                  cover={<img src={photo_url} />}
+                  actions={[
+                    <MessageOutlined key="message" />,
+                    <LikeOutlined key="like" />,
+                  ]}
+                >
+                  <Meta title={item_name} description={category} />
+                </Card>
+              </Col>
             ))}
-            
           </Row>
 
           <Space wrap>
