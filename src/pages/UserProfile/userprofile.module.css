@@ -1,5 +1,5 @@
 body {
-  font-family: 'Cormorant Garamond', serif;
+  font-family: "Cormorant Garamond", serif;
   margin: 0;
   padding: 0;
   background-color: #fff;
@@ -22,6 +22,7 @@ body {
   height: calc(100% - 120px);
   left: 30px;
   top: 30px;
+  font-family: "Cormorant Garamond", serif;
 }
 
 .logo {

@@ -1,21 +1,24 @@
 //edit individual listing
-import React from 'react';
-import styles from './styles/editlisting.module.css';
+import React from "react";
+import styles from "./editlisting.module.css";
 // import profilepic from '../assets//images/profilepic.jpeg';
 // import bike from '../assets//images/bike.jpg';
-import book from '../assets//images/book.webp';
-import logo from '../assets//images/logo.png';
-import { Button, Input, Upload, Radio } from 'antd';
-import { PlusOutlined } from '@ant-design/icons';
-import { useAuth0 } from '@auth0/auth0-react';
+import book from "../../assets/images/book.webp";
+import logo from "../../assets/images/logo.png";
+
+import { Button, Input, Upload, Radio } from "antd";
+import { PlusOutlined } from "@ant-design/icons";
+import { useAuth0 } from "@auth0/auth0-react";
 
 export function EditListing() {
   const { logout } = useAuth0();
   const [editing, setEditing] = React.useState(false);
   const [editingBio, setEditingBio] = React.useState(false);
-  const [listingName, setListingName] = React.useState('Not Without Us book (Original)');
+  const [listingName, setListingName] = React.useState(
+    "Not Without Us book (Original)"
+  );
   const [bio, setBio] = React.useState(
-    'book has browning on top part other than that very good condition.'
+    "book has browning on top part other than that very good condition."
   );
 
   function handleEdit() {
@@ -111,7 +114,7 @@ export function EditListing() {
                   <Input
                     value={bio}
                     onChange={handleBioChange}
-                    style={{ width: 500, height: 100, whiteSpace: 'normal' }}
+                    style={{ width: 500, height: 100, whiteSpace: "normal" }}
                   />
                   <Button onClick={handleBioSave}>Save</Button>
                 </div>

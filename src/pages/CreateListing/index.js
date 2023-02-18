@@ -5,7 +5,7 @@ import { Layout, Button, Input, ConfigProvider, Row, Col } from "antd";
 import TextArea from "antd/es/input/TextArea";
 import { PlusOutlined, InboxOutlined } from "@ant-design/icons";
 
-export default function CreateListingPage() {
+export default function CreateListing() {
   const [form] = Form.useForm();
   const [requiredMark, setRequiredMarkType] = useState("optional");
 

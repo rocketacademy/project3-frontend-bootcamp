@@ -1,31 +1,45 @@
 import React from "react";
-import { Layout, Button, Input, ConfigProvider, Row, Col } from "antd";
+import { Layout, Button, Input, ConfigProvider, Row, Col, Menu } from "antd";
 import CarouselBanner from "./components/CarouselBanner";
 import ListingCards from "./components/ListingCards";
 import { Pagination } from "antd";
 import CategorySlider from "./components/CategorySlider";
+import { Navbar } from "../../commoncomponents/Navbar/Navbar";
+import SearchBar from "./components/SearchBar";
 
-const { Header, Footer, Content } = Layout;
+const { Header, Footer, Sider, Content } = Layout;
 
-const headerStyle = {
-  textAlign: "center",
-  color: "#ff7e55",
-  minHeight: 80,
-  paddingInline: 50,
-  lineHeight: "64px",
-  backgroundColor: "#eeeeee",
+// const headerStyle = {
+//   textAlign: "center",
+//   color: "#ff7e55",
+//   minHeight: 80,
+//   paddingInline: 50,
+//   lineHeight: "64px",
+//   backgroundColor: "#eeeeee",
+// };
+const siderStyle = {
+  backgroundColor: "white",
 };
+
+const contentStyle = {
+  backgroundColor: "white",
+};
+
 const footerStyle = {
   textAlign: "center",
   color: "#fff",
   backgroundColor: "#303841",
 };
 
+const replicateFooterStyle = {
+  left: 0,
+  bottom: 0,
+  width: "100%",
+  position: "absolute",
+  backgroundColor: "#303841",
+};
+
 export default function HomePage() {
-  // search bar + button
-
-  const { Search } = Input;
-
   return (
     <div>
       {/* Change theme primary */}
@@ -37,46 +51,29 @@ export default function HomePage() {
         }}
       >
         <Layout>
-          <Header style={headerStyle}>
-            <Row>
-              <Col span={20}>
-                <Search
-                  placeholder="What are you looking for?"
-                  allowClear
-                  enterButton="Search"
-                  size="large"
-                  style={{ margin: "20px 0px" }}
-                  // onSearch={onSearch}
-                />
-              </Col>
+          <Sider width={250} style={siderStyle}>
+            <Navbar />
+            <Footer style={replicateFooterStyle}>{" yo "}</Footer>
+          </Sider>
 
-              <Col span={4}>
-                <Button
-                  size="large"
-                  type="primary"
-                  style={{
-                    color: "white",
-                    margin: "20px 0px",
-                  }}
-                >
-                  Create Listing
-                </Button>
-              </Col>
-            </Row>
-          </Header>
-          <Content>
-            {/* banner  */}
-            <CarouselBanner />
-            <CategorySlider />
-            {/* Listing cards */}
-            <ListingCards />
-            <Pagination
-              style={{ margin: "auto", padding: "20px 0px", width: 1400 }}
-              defaultCurrent={1}
-              total={50}
-            />
-          </Content>
-          <Footer style={footerStyle}> Copyright G&T 2023</Footer>
+          <Layout>
+            <Content style={contentStyle}>
+              {/* banner  */}
+              <CarouselBanner />
+
+              <SearchBar />
+
+              <CategorySlider />
+              {/* Listing cards */}
+              <ListingCards />
+              <Pagination
+                style={{ margin: "auto", padding: "20px 0px" }}
+                defaultCurrent={1}
+                total={50}
+              />
+            </Content>
+            <Footer style={footerStyle}> Copyright© G&T 2023</Footer>
+          </Layout>
         </Layout>
       </ConfigProvider>
     </div>

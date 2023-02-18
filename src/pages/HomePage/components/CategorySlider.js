@@ -16,7 +16,7 @@ export default function CategorySlider() {
   return (
     <div>
       <h1 className="categories-title">Categories</h1>
-      <Row gutter={[2, 2]} style={{ width: 1400, margin: "0 50px" }}>
+      <Row gutter={[2, 2]} style={{ margin: "0 50px" }}>
         {categories.map((category) => (
           <Col span={3.8}>
             <Button size="large" style={{ width: 190 }}>
