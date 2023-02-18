@@ -1,24 +1,22 @@
 //edit individual listing
-import React from "react";
-import styles from "./editlisting.module.css";
+import React from 'react';
+import './editlisting.css';
 // import profilepic from '../assets//images/profilepic.jpeg';
 // import bike from '../assets//images/bike.jpg';
-import book from "../../assets/images/book.webp";
-import logo from "../../assets/images/logo.png";
+import book from '../../assets/images/book.webp';
+import logo from '../../assets/images/logo.png';
 
-import { Button, Input, Upload, Radio } from "antd";
-import { PlusOutlined } from "@ant-design/icons";
-import { useAuth0 } from "@auth0/auth0-react";
+import { Button, Input, Upload, Radio } from 'antd';
+import { PlusOutlined } from '@ant-design/icons';
+import { useAuth0 } from '@auth0/auth0-react';
 
 export function EditListing() {
   const { logout } = useAuth0();
   const [editing, setEditing] = React.useState(false);
   const [editingBio, setEditingBio] = React.useState(false);
-  const [listingName, setListingName] = React.useState(
-    "Not Without Us book (Original)"
-  );
+  const [listingName, setListingName] = React.useState('Not Without Us book (Original)');
   const [bio, setBio] = React.useState(
-    "book has browning on top part other than that very good condition."
+    'book has browning on top part other than that very good condition.'
   );
 
   function handleEdit() {
@@ -51,11 +49,11 @@ export function EditListing() {
 
   return (
     <>
-      <div className={styles.container}>
-        <div className={styles.menu}>
+      <div className="container">
+        <div className="menu">
           <ul>
-            <div className={styles.profile}>
-              <div className={styles.logo}>
+            <div className="profile">
+              <div className="logo">
                 <img src={logo} alt="logo" />
               </div>
             </div>
@@ -73,12 +71,11 @@ export function EditListing() {
             </li>
           </ul>
         </div>
-        <div className={styles.content}>
-          <div className={styles.userName}>
-            {/* <div className={styles.userName}> */}
-            <div className={styles.userDescription}>
-              <div className={styles.profile}>
-                <div className={styles.photo}>
+        <div className="content">
+          <div className="userName">
+            <div className="userDescription">
+              <div className="profile">
+                <div className="photo">
                   <img src={book} alt="book" />
 
                   <Upload action="/upload.do" listType="picture-card">
@@ -102,31 +99,31 @@ export function EditListing() {
                 <Radio.Button value="a">To Give</Radio.Button>
                 <Radio.Button value="b">To Request</Radio.Button>
               </Radio.Group>
-              <div className={styles.filterHeader}>Condition:</div>
+              <div className="filterHeader">Condition:</div>
               <Radio.Group onChange={onChange} defaultValue="a">
                 <Radio.Button value="a">Brand new</Radio.Button>
                 <Radio.Button value="b">Like new</Radio.Button>
                 <Radio.Button value="c">Well used</Radio.Button>
               </Radio.Group>
-              <div className={styles.filterHeader}>Bio:</div>
+              <div className="filterHeader">Bio:</div>
               {editingBio ? (
                 <div>
                   <Input
                     value={bio}
                     onChange={handleBioChange}
-                    style={{ width: 500, height: 100, whiteSpace: "normal" }}
+                    style={{ width: 500, height: 100, whiteSpace: 'normal' }}
                   />
                   <Button onClick={handleBioSave}>Save</Button>
                 </div>
               ) : (
                 <div onClick={handleEditBio}>{bio}</div>
               )}
-              <div className={styles.filterHeader}>Status:</div>
+              <div className="filterHeader">Status:</div>
               <Radio.Group onChange={onChange} defaultValue="a">
                 <Radio.Button value="a">Available</Radio.Button>
                 <Radio.Button value="b">Taken</Radio.Button>
               </Radio.Group>
-              <div className={styles.filterHeader}></div>
+              <div className="filterHeader"></div>
               <Button type="primary">Save</Button>
               <Button>Cancel</Button>
             </div>
