@@ -22,9 +22,11 @@ export function HomePage() {
           backgroundColor: "#ADD8E6",
         }}
       >
-        {logIn && <>{user.name}</>}
-        {logIn && <SearchIcon />}
-        {logIn && <Avatar />}
+        {logIn && (
+          <>
+            {user.name} && <SearchIcon /> && <Avatar />
+          </>
+        )}
         {!logIn && <AuthButton login={logIn} />}
       </nav>
       <img

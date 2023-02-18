@@ -4,7 +4,7 @@ function PrivateRoute({ element, isAuthenticated, ...rest }) {
   return (
     <Route
       {...rest}
-      element={isAuthenticated ? element : <Navigate to="/auth" />}
+      element={isAuthenticated ? element : <Navigate to="/" />}
     />
   );
 }
