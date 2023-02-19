@@ -12,6 +12,15 @@ import { Navbar } from "../../commoncomponents/Navbar/Navbar";
 import "./viewlisting.css";
 import axios from "axios";
 import { useParams } from "react-router-dom";
+import {
+  Sider,
+  Footer,
+  Content,
+  siderStyle,
+  contentStyle,
+  footerStyle,
+  replicateFooterStyle,
+} from "../globalstyles.js";
 
 export default function ViewListing() {
   const { Meta } = Card;
@@ -22,11 +31,11 @@ export default function ViewListing() {
   );
   const [condition, setCondition] = useState("Like New");
 
-  let { userId, listingId } = useParams();
+  let { user_id, listing_id } = useParams();
 
   useEffect(() => {
     axios
-      .get("http://localhost:3000/:userId/listings/:listingId")
+      .get("http://localhost:3000/:user_id/listings/:listing_id")
       .then(function (response) {
         console.log(response.data);
       })
@@ -34,27 +43,6 @@ export default function ViewListing() {
         console.log(error);
       });
   }, []);
-
-  const { Footer, Sider, Content } = Layout;
-
-  const siderStyle = {
-    backgroundColor: "white",
-  };
-  const contentStyle = {
-    backgroundColor: "white",
-  };
-  const footerStyle = {
-    textAlign: "center",
-    color: "#fff",
-    backgroundColor: "#303841",
-  };
-  const replicateFooterStyle = {
-    left: 0,
-    bottom: 0,
-    width: "100%",
-    position: "fixed",
-    backgroundColor: "#303841",
-  };
 
   return (
     <div>

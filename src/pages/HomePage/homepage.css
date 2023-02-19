@@ -21,6 +21,12 @@
 }
 
 .categories-title {
-  margin: 20px 50px;
   color: #ff7e55;
+  margin: 5 0;
+}
+
+.homepage-categories {
+  margin: 20px 50px;
+  font-weight: 500;
+  font-size: 2em;
 }

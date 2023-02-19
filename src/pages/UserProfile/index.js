@@ -1,43 +1,31 @@
 // user profile page
-import React from 'react';
-import './userprofile.css';
-import { UsersProfile } from './UsersProfile.js';
-import { UserListings } from './UserListings';
-import profilepic from '../../assets/images/profilepic.jpeg';
-import { EditOutlined, DeleteOutlined } from '@ant-design/icons';
+import React from "react";
+import "./userprofile.css";
+import { UsersProfile } from "./UsersProfile.js";
+import { UserListings } from "./UserListings";
+import profilepic from "../../assets/images/profilepic.jpeg";
+import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
 // import bike from '../assets//images/bike.jpg';
-import book from '../../assets/images/book.webp';
-import logo from '../../assets/images/logo.png';
-import { Card, Button, Tag } from 'antd';
+import book from "../../assets/images/book.webp";
+import logo from "../../assets/images/logo.png";
+import { Card, Button, Tag } from "antd";
+import {
+  Sider,
+  Footer,
+  Content,
+  siderStyle,
+  contentStyle,
+  footerStyle,
+  replicateFooterStyle,
+} from "../globalstyles.js";
+import { Navbar } from "../../commoncomponents/Navbar/Navbar";
 
 const { Meta } = Card;
 
 export function UserProfile() {
   return (
     <>
-      <div className="container">
-        <div className="menu">
-          <ul>
-            <div className="profile">
-              <div className="logo">
-                <img src={logo} alt="logo" />
-              </div>
-            </div>
-            <li>
-              <a href="homepage">Home</a>
-            </li>
-            <li>
-              <a href="profile">Profile</a>
-            </li>
-            <li>
-              <a href="createlisting">Create Listing</a>
-            </li>
-            <li>
-              <a href="logout">Logout</a>
-            </li>
-          </ul>
-        </div>
-      </div>
+      <Navbar />
 
       <div className="content">
         {UsersProfile.map((item, index) => {
@@ -102,14 +90,18 @@ export function UserProfile() {
                   width: 300,
                   marginRight: 10,
                   marginBottom: 20,
-                  display: 'inline-block',
-                  wordWrap: 'break-word'
+                  display: "inline-block",
+                  wordWrap: "break-word",
                 }}
                 // cover={<img alt={listing.alt} src={listing.photo} />}
                 cover={<img alt={listing.alt} src={book} />}
-                actions={[<EditOutlined key="edit" />, <DeleteOutlined key="delete" />]}>
+                actions={[
+                  <EditOutlined key="edit" />,
+                  <DeleteOutlined key="delete" />,
+                ]}
+              >
                 <Meta
-                  style={{ wordWrap: 'break-word' }}
+                  style={{ wordWrap: "break-word" }}
                   title={listing.title}
                   description={listing.description}
                 />

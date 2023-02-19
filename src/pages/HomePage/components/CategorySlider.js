@@ -14,17 +14,19 @@ export default function CategorySlider() {
     "View All Categories",
   ];
   return (
-    <div>
-      <h1 className="categories-title">Categories</h1>
-      <Row gutter={[2, 2]} style={{ margin: "0 50px" }}>
-        {categories.map((category) => (
-          <Col span={3.8}>
-            <Button size="large" style={{ width: 190 }}>
-              {category}
-            </Button>
-          </Col>
-        ))}
-      </Row>
+    <div className="homepage-categories">
+      <p className="categories-title">Categories</p>
+      <div>
+        <Row gutter={[2, 2]}>
+          {categories.map((category, index) => (
+            <Col span={3.8} key={index}>
+              <Button size="large" style={{ width: 190 }}>
+                {category}
+              </Button>
+            </Col>
+          ))}
+        </Row>
+      </div>
     </div>
   );
 }

@@ -6,38 +6,15 @@ import { Pagination } from "antd";
 import CategorySlider from "./components/CategorySlider";
 import { Navbar } from "../../commoncomponents/Navbar/Navbar";
 import SearchBar from "./components/SearchBar";
-
-const { Header, Footer, Sider, Content } = Layout;
-
-// const headerStyle = {
-//   textAlign: "center",
-//   color: "#ff7e55",
-//   minHeight: 80,
-//   paddingInline: 50,
-//   lineHeight: "64px",
-//   backgroundColor: "#eeeeee",
-// };
-const siderStyle = {
-  backgroundColor: "white",
-};
-
-const contentStyle = {
-  backgroundColor: "white",
-};
-
-const footerStyle = {
-  textAlign: "center",
-  color: "#fff",
-  backgroundColor: "#303841",
-};
-
-const replicateFooterStyle = {
-  left: 0,
-  bottom: 0,
-  width: "100%",
-  position: "absolute",
-  backgroundColor: "#303841",
-};
+import {
+  Sider,
+  Footer,
+  Content,
+  siderStyle,
+  contentStyle,
+  footerStyle,
+  replicateFooterStyle,
+} from "../globalstyles.js";
 
 export default function HomePage() {
   return (

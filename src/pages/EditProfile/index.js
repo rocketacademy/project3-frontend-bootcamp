@@ -1,10 +1,10 @@
 // users can edit the details of their profile on this page
-import { React, useState, useEffect } from 'react';
-import './editprofile.css';
-import { Navbar } from '../../commoncomponents/Navbar/Navbar';
-import { PlusOutlined } from '@ant-design/icons';
-import { Button, Form, Input, TreeSelect, Upload, Select } from 'antd';
-import { useAuth0 } from '@auth0/auth0-react';
+import { React, useState, useEffect } from "react";
+import "./editprofile.css";
+import { Navbar } from "../../commoncomponents/Navbar/Navbar";
+import { PlusOutlined } from "@ant-design/icons";
+import { Button, Form, Input, TreeSelect, Upload, Select } from "antd";
+import { useAuth0 } from "@auth0/auth0-react";
 // import { MRTstations } from './MRTstations';
 // import { useState } from 'react';
 
@@ -39,25 +39,27 @@ export function EditProfile() {
         {/* className={styles.formBody}> */}
         <Form
           labelCol={{
-            span: 8
+            span: 8,
           }}
           wrapperCol={{
-            span: 20
+            span: 20,
           }}
           layout="horizontal"
           // onValuesChange={onFormLayoutChange}
           // disabled={componentDisabled}
           style={{
-            maxWidth: 800
-          }}>
+            maxWidth: 800,
+          }}
+        >
           <Form.Item label="Profile" valuePropName="fileList">
             <Upload action="/upload.do" listType="picture-card">
               <div>
                 <PlusOutlined />
                 <div
                   style={{
-                    marginTop: 8
-                  }}></div>
+                    marginTop: 8,
+                  }}
+                ></div>
               </div>
             </Upload>
           </Form.Item>
@@ -67,34 +69,38 @@ export function EditProfile() {
           <Form.Item
             label="Password"
             name="password"
-            rules={[{ required: true, message: 'Please input your password!' }]}>
+            rules={[{ required: true, message: "Please input your password!" }]}
+          >
             <Input.Password />
           </Form.Item>
 
           <Form.Item
             name="phone"
             label="Phone Number"
-            rules={[{ required: true, message: 'Please input your phone number!' }]}>
-            <Input addonBefore={prefixSelector} style={{ width: '100%' }} />
+            rules={[
+              { required: true, message: "Please input your phone number!" },
+            ]}
+          >
+            <Input addonBefore={prefixSelector} style={{ width: "100%" }} />
           </Form.Item>
 
           <Form.Item label="Nearest MRT station">
             <TreeSelect
               treeData={[
                 {
-                  title: 'North',
-                  value: 'north',
+                  title: "North",
+                  value: "north",
                   children: [
                     {
-                      title: 'Woodlands',
-                      value: 'woodlands'
+                      title: "Woodlands",
+                      value: "woodlands",
                     },
                     {
-                      title: 'Bishan',
-                      value: 'bishan'
-                    }
-                  ]
-                }
+                      title: "Bishan",
+                      value: "bishan",
+                    },
+                  ],
+                },
               ]}
             />
           </Form.Item>
