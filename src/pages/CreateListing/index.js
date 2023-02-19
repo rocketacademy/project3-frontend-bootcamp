@@ -23,20 +23,27 @@ import {
   contentStyle,
 } from "../globalstyles";
 
-import { SmileOutlined, FrownOutlined, UserOutlined } from "@ant-design/icons";
+import {
+  SmileOutlined,
+  FrownOutlined,
+  UserOutlined,
+  LeftOutlined,
+} from "@ant-design/icons";
 
 import TextArea from "antd/es/input/TextArea";
 import { PlusOutlined, InboxOutlined } from "@ant-design/icons";
 import { Navbar } from "../../commoncomponents/Navbar/Navbar";
 import axios from "axios";
+import "./createlisting.css";
 
 //Cloudinary states
 // import { UploadWidget } from "./UploadWidget";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 
 export default function CreateListing() {
   const [form] = Form.useForm();
   const { user_id } = useParams();
+  const navigate = useNavigate();
 
   const [formValues, setFormValues] = useState({
     user_id: user_id,
@@ -109,18 +116,8 @@ export default function CreateListing() {
     setFormValues({ ...formValues, condition: e });
   };
 
-  const [requiredMark, setRequiredMarkType] = useState("optional");
-
-  const onRequiredTypeChange = ({ requiredMarkValue }) => {
-    setRequiredMarkType(requiredMarkValue);
-  };
-
-  const normFile = (e) => {
-    console.log("Upload event:", e);
-    if (Array.isArray(e)) {
-      return e;
-    }
-    return e?.fileList;
+  const handleBackButtonClick = () => {
+    navigate(-1);
   };
 
   const footerStyle = {
@@ -160,8 +157,13 @@ export default function CreateListing() {
             <Content style={contentStyle}>
               <>
                 {contextHolder}
+
                 <Row style={{ margin: 50 }}>
                   <Col span={12} style={{ padding: 20 }}>
+                    <Button type="link" onClick={handleBackButtonClick}>
+                      {"< "}Back
+                    </Button>
+
                     {/* <UploadWidget
                       setFormValues={setFormValues}
                       formValues={formValues}

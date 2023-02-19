@@ -14,10 +14,12 @@ import {
   siderStyle,
   contentStyle,
 } from "../globalstyles";
+import { useNavigate } from "react-router-dom";
 
 export function EditProfile() {
   const { TextArea } = Input;
   const { Option } = Select;
+  const navigate = useNavigate();
 
   const prefixSelector = (
     <Form.Item name="prefix" noStyle>
@@ -55,6 +57,10 @@ export function EditProfile() {
     }
   }, [user, accessToken]);
   console.log(accessToken);
+
+  const handleBackButtonClick = () => {
+    navigate(-1);
+  };
 
   return (
     <div>
@@ -147,7 +153,7 @@ export function EditProfile() {
 
                 <Form.Item>
                   <Button>Save</Button>
-                  <Button>Cancel</Button>
+                  <Button onClick={handleBackButtonClick}>Cancel</Button>
                 </Form.Item>
               </Form>
               {/* <Logout /> */}

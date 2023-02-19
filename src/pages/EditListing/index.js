@@ -6,6 +6,7 @@ import "./editlisting.css";
 import { Navbar } from "../../commoncomponents/Navbar/Navbar";
 import book from "../../assets/images/book.webp";
 import logo from "../../assets/images/logo.png";
+import { useNavigate } from "react-router-dom";
 
 import { Button, Input, Upload, Radio, ConfigProvider, Layout } from "antd";
 import { PlusOutlined } from "@ant-design/icons";
@@ -29,6 +30,7 @@ export function EditListing() {
   const [bio, setBio] = React.useState(
     "book has browning on top part other than that very good condition."
   );
+  const navigate = useNavigate();
 
   function handleEdit() {
     setEditing(true);
@@ -58,6 +60,9 @@ export function EditListing() {
     console.log(`radio checked:${e.target.value}`);
   };
 
+  const handleBackButtonClick = () => {
+    navigate(-1);
+  };
   const footerStyle = {
     textAlign: "center",
     color: "#fff",
@@ -152,7 +157,7 @@ export function EditListing() {
                     </Radio.Group>
                     <div className="filterHeader"></div>
                     <Button type="primary">Save</Button>
-                    <Button>Cancel</Button>
+                    <Button onClick={handleBackButtonClick}>Cancel</Button>
                   </div>
                 </div>
               </div>
