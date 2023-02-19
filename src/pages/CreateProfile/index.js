@@ -7,8 +7,6 @@ import {
   Content,
   siderStyle,
   contentStyle,
-  footerStyle,
-  replicateFooterStyle,
 } from "../globalstyles.js";
 import { Navbar } from "../../commoncomponents/Navbar/Navbar";
 import { PlusOutlined } from "@ant-design/icons";
@@ -40,12 +38,30 @@ export function CreateProfile() {
   }, [user, accessToken]);
   console.log(accessToken);
 
+  const footerStyle = {
+    textAlign: "center",
+    color: "#fff",
+    backgroundColor: "#303841",
+    position: "fixed",
+    bottom: 0,
+    width: "100%",
+  };
+
+  const replicateFooterStyle = {
+    left: 0,
+    bottom: 0,
+    width: "100%",
+    // position: 'absolute',
+    backgroundColor: "#303841",
+    position: "fixed",
+  };
+
   return (
     <div>
       <Layout>
-        <Sider style={siderStyle}>
+        <Sider width={300} style={siderStyle}>
           <Navbar />
-          <Footer style={replicateFooterStyle}>{"yo"}</Footer>
+          <Footer style={replicateFooterStyle}></Footer>
         </Sider>
         <Layout>
           <Content style={contentStyle}>
