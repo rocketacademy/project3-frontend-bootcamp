@@ -1,5 +1,5 @@
 body {
-  font-family: "Cormorant Garamond", serif;
+  font-family: 'Cormorant Garamond', serif;
   margin: 0;
   padding: 0;
   background-color: #fff;
@@ -22,7 +22,7 @@ body {
   height: calc(100% - 120px);
   left: 30px;
   top: 30px;
-  font-family: "Cormorant Garamond", serif;
+  font-family: 'Cormorant Garamond', serif;
 }
 
 .logo {
@@ -96,11 +96,15 @@ a {
   color: #ff7e55;
 }
 
-.content {
+/* .content {
   width: 70%;
   margin-left: 30%;
   box-sizing: border-box;
-  /* padding: 20px 0; */
+} */
+
+.content {
+  padding-top: 30px;
+  /* width: 90%; */
 }
 
 .header {
@@ -127,7 +131,7 @@ a {
 }
 
 .userName {
-  width: 90%;
+  width: 100%;
   display: flex;
   padding: 30px;
   background-color: #eeeeee;
