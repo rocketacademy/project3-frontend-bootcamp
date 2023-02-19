@@ -1,13 +1,11 @@
 import React, { useEffect, useState } from "react";
-import Avatar from "@mui/material/Avatar";
-import SearchIcon from "@mui/icons-material/Search";
-import { AuthButton } from "./AuthButton";
+import { NavBar } from "./NavBar";
 import { useAuth0 } from "@auth0/auth0-react";
 
 export function HomePage() {
-  const [logIn, setLogIn] = useState(false); //default will be false, use a useEffect to change later on.
+  const [logIn, setLogIn] = useState(true);
   const [avatar, setAvatar] = useState(process.env.REACT_APP_AVATAR);
-  const { isAuthenticated, user } = useAuth0();
+  const { isAuthenticated } = useAuth0();
 
   useEffect(() => {
     isAuthenticated ? setLogIn(true) : setLogIn(false);
@@ -15,34 +13,23 @@ export function HomePage() {
 
   return (
     <>
-      <nav
-        style={{
-          display: "flex",
-          justifyContent: "space-between",
-          backgroundColor: "#ADD8E6",
-        }}
-      >
-        {logIn && (
-          <>
-            {user.name} && <SearchIcon /> && <Avatar />
-          </>
-        )}
-        {!logIn && <AuthButton login={logIn} />}
-      </nav>
-      <img
-        alt="placeholder banner"
-        src="https://previews.123rf.com/images/virinka/virinka1901/virinka190100053/114916618-vector-banner-with-the-group-of-happy-people.jpg"
-        style={{
-          display: "flex",
-          width: "99%",
-          height: "30%",
-          padding: "10px",
-          alignItems: "center",
-          justifyContent: "center",
-        }}
-      />
-      <section className="about">
-        <div>
+      <NavBar login={logIn} />
+      <div>
+        <img
+          alt="placeholder banner"
+          src="https://images.unsplash.com/photo-1590650423710-ffa6e7f63440?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8"
+          style={{
+            width: "50%",
+            height: "1000px",
+            padding: "10px",
+            alignItems: "center",
+            justifyContent: "center",
+          }}
+        />
+      </div>
+
+      <section>
+        <div className="about">
           Welcome to Work Pal, the platform where you can rate and review your
           co-workers, and learn about the experiences of others in the
           workplace. Our mission is to create a space where employees can

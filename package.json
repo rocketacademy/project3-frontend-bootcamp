@@ -9,8 +9,11 @@
     "@mui/icons-material": "^5.11.0",
     "@mui/material": "^5.11.8",
     "axios": "^1.3.3",
+<<<<<<< HEAD
     "dotenv": "^16.0.3",
     "env-cmd": "^10.1.0",
+=======
+>>>>>>> 2c68f750ef445a14eafa76314a7fe275dd556fef
     "mui": "^0.0.1",
     "react": "^18.1.0",
     "react-dom": "^18.1.0",

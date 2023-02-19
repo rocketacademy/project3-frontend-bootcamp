@@ -47,21 +47,17 @@ const UserReviews = (props) => {
 };
 
 export function User() {
+  const params = useParams();
   const [accessToken, setAccessToken] = useState("");
   const { isAuthenticated, getAccessTokenSilently, loginWithRedirect } =
     useAuth0();
   const [user, setUser] = useState(null);
   const [userIndex, setUserIndex] = useState();
   const [userReviews, setUserReviews] = useState();
+  const [user, setUser] = useState(null);
+  const [userIndex, setUserIndex] = useState();
+  const [userReviews, setUserReviews] = useState();
 
-  const checkUser = async () => {
-    if (isAuthenticated) {
-      let token = getAccessTokenSilently();
-      setAccessToken(token);
-    } else {
-      loginWithRedirect();
-    }
-  };
   useEffect(() => {
     checkUser();
   }, []);
