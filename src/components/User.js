@@ -2,7 +2,50 @@ import React, { useEffect, useState } from "react";
 import { useAuth0 } from "@auth0/auth0-react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
-import { Profile } from "./User Pages/Profile";
+
+const ReviewForm = (props) => {
+  const [review, setReview] = useState("");
+  const handleChange = (event) => {
+    setReview(event.target.value);
+  };
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    const userIndex = props.userIndex;
+    const reviewData = {
+      revieweeId: userIndex,
+      reviewerId: 4,
+      description: review,
+      rating: 3,
+    };
+    axios.post(`${process.env.REACT_APP_API_SERVER}`, reviewData);
+  };
+  return (
+    <form onSubmit={handleSubmit}>
+      <label>
+        Enter your review of {props.user} here:{" "}
+        <input
+          key="reviewInput"
+          type="text"
+          name="review"
+          value={review}
+          onChange={handleChange}
+        />
+      </label>
+      <input type="submit" value="submit" />
+    </form>
+  );
+};
+
+const UserReviews = (props) => {
+  return (
+    <div>
+      {props.userReviews &&
+        props.userReviews.map((review) => (
+          <p key={review.id}>Review: {review.description}</p>
+        ))}
+    </div>
+  );
+};
 
 export function User() {
   const params = useParams();
@@ -12,37 +55,53 @@ export function User() {
   const [user, setUser] = useState(null);
   const [userIndex, setUserIndex] = useState();
   const [userReviews, setUserReviews] = useState();
-
-  useEffect(() => {
-    if (userIndex) {
-      axios.get(`http://localhost:3000/users/${userIndex}`).then((response) => {
-        setUser(response.data);
-      });
-      axios
-        .get(`http://localhost:3000/users/${userIndex}/reviews`)
-        .then((response) => {
-          setUserReviews(response.data);
-        });
-    }
-  }, [userIndex]);
+  const [userFullName, setUserFullName] = useState("");
 
   if (userIndex !== params.id) {
     setUserIndex(params.id);
   }
 
+  useEffect(() => {
+    if (userIndex) {
+      axios
+        .get(`${process.env.REACT_APP_API_SERVER}/users/${userIndex}`)
+        .then((response) => {
+          setUser(response.data);
+        });
+    }
+  }, [userIndex]);
+
+  useEffect(() => {
+    axios
+      .get(`${process.env.REACT_APP_API_SERVER}/users/${userIndex}/reviews`)
+      .then((response) => {
+        setUserReviews(response.data);
+      });
+  }, [userReviews, userIndex]);
+
+  useEffect(() => {
+    if (user) {
+      setUserFullName(`${user.firstName} ${user.lastName}`);
+    }
+  }, [user]);
+
   return (
     <div>
       {user ? (
         <div>
-          <Profile user={user} />
           <p>
+            <b>Name:</b> {user.firstName} {user.lastName}
+          </p>
+          <p>
+            <b>Company:</b> {user.company}
+          </p>
+          <div>
             <u>
               <b>Reviews</b>
             </u>
-            {userReviews.map((review) => (
-              <p>Review: {review.description}</p>
-            ))}
-          </p>
+            <UserReviews userReviews={userReviews} />
+          </div>
+          <ReviewForm userIndex={userIndex} user={userFullName} />
         </div>
       ) : (
         "Error: User not found"
