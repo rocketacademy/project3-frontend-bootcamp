@@ -3,18 +3,17 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { HomePage } from "./components/HomePage";
 import { User } from "./components/User";
 import { EditUser } from "./components/EditUser";
-import { useAuth0 } from "@auth0/auth0-react";
 import PrivateRoute from "./components/PrivateRoutes";
 
 function App() {
-  const { isAuthenticated } = useAuth0();
+  const { isAuthenticated } = true;
 
   return (
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route
-          path="user/:id"
+          path="/users/:id"
           element={
             <PrivateRoute
               isAuthenticated={isAuthenticated}
@@ -23,7 +22,7 @@ function App() {
           }
         />
         <Route
-          path="user/edit"
+          path="/users/edit"
           element={
             <PrivateRoute
               isAuthenticated={isAuthenticated}
