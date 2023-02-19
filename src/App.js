@@ -13,15 +13,7 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<HomePage />} />
-        <Route
-          path="user/:id"
-          element={
-            <PrivateRoute
-              isAuthenticated={isAuthenticated}
-              component={<User />}
-            />
-          }
-        />
+        <Route path="user/:id" element={<User />} />
         <Route
           path="user/edit"
           element={
