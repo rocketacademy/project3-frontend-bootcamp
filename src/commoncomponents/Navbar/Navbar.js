@@ -1,9 +1,9 @@
 // user profile page
-import React from "react";
+import React from 'react';
 // import styles from "../pages/ProfilePage/profile.module.css";
-import logo from "../../assets/images/logo.png";
-import styles from "./navbar.module.css";
-import { useAuth0 } from "@auth0/auth0-react";
+import logo from '../../assets/images/logo.png';
+import styles from './navbar.module.css';
+import { useAuth0 } from '@auth0/auth0-react';
 
 export function Navbar() {
   const { logout } = useAuth0();
@@ -13,9 +13,11 @@ export function Navbar() {
         <div className={styles.menu}>
           <ul>
             <div className={styles.profile}>
-              <div className={styles.logo}>
-                <img src={logo} alt="logo" />
-              </div>
+              <a href="homepage">
+                <div className={styles.logo}>
+                  <img src={logo} alt="logo" />
+                </div>
+              </a>
             </div>
             <li>
               <a href="homepage">Home</a>
@@ -27,8 +29,8 @@ export function Navbar() {
               <a href="createlisting">Create Listing</a>
             </li>
             <li>
-              <a href="/" onClick={logout}>
-                Logout
+              <a href="/">
+                <div onClick={logout}>Logout</div>
               </a>
             </li>
           </ul>
