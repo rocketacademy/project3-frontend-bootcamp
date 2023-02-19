@@ -55,6 +55,7 @@ export function User() {
   const [user, setUser] = useState(null);
   const [userIndex, setUserIndex] = useState();
   const [userReviews, setUserReviews] = useState();
+  const [userFullName, setUserFullName] = useState("");
 
   if (userIndex !== params.id) {
     setUserIndex(params.id);
@@ -78,6 +79,12 @@ export function User() {
       });
   }, [userReviews, userIndex]);
 
+  useEffect(() => {
+    if (user) {
+      setUserFullName(`${user.firstName} ${user.lastName}`);
+    }
+  }, [user]);
+
   return (
     <div>
       {user ? (
@@ -94,7 +101,7 @@ export function User() {
             </u>
             <UserReviews userReviews={userReviews} />
           </div>
-          <ReviewForm userIndex={userIndex} />
+          <ReviewForm userIndex={userIndex} user={userFullName} />
         </div>
       ) : (
         "Error: User not found"
