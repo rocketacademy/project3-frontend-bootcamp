@@ -1,9 +1,9 @@
 // user profile page
-import React from 'react';
+import React from "react";
 // import styles from "../pages/ProfilePage/profile.module.css";
-import logo from '../../assets/images/logo.png';
-import styles from './navbar.module.css';
-import { useAuth0 } from '@auth0/auth0-react';
+import logo from "../../assets/images/logo.png";
+import styles from "./navbar.module.css";
+import { useAuth0 } from "@auth0/auth0-react";
 
 export function Navbar() {
   const { logout } = useAuth0();
