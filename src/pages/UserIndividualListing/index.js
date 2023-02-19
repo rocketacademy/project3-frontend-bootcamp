@@ -22,7 +22,7 @@ import { Navbar } from "../../commoncomponents/Navbar/Navbar";
 import "./userindividuallisting.css";
 import axios from "axios";
 import book from "../../assets/images/book.webp";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 export default function ViewListing() {
   const { Meta } = Card;
@@ -40,7 +40,8 @@ export default function ViewListing() {
   );
   const [condition, setCondition] = useState("Like New");
 
-  let { userId, listingId } = useParams();
+  let { user_id, listing_id } = useParams();
+  const navigate = useNavigate();
 
   useEffect(() => {
     axios
@@ -53,6 +54,9 @@ export default function ViewListing() {
       });
   }, []);
 
+  const handleBackButtonClick = () => {
+    navigate(`/${user_id}/profile`);
+  };
   const { Footer, Sider, Content } = Layout;
 
   const siderStyle = {
@@ -97,6 +101,14 @@ export default function ViewListing() {
 
           {/* <Layout> */}
           <Content style={contentStyle}>
+            <Button
+              type="link"
+              style={{ marginLeft: 50 }}
+              onClick={handleBackButtonClick}
+            >
+              {"< "}Back
+            </Button>
+
             <div className="listingInfo">
               <Row gutter={10}>
                 <Col span={6}>

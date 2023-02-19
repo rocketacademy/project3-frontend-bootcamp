@@ -1,0 +1,11 @@
+.ant-btn-link {
+  color: #ff5722;
+  padding: 0px 0px;
+  line-height: 0;
+  margin: 14px 0px;
+  transition: none;
+}
+
+.ant-btn-link:not(:disabled):hover {
+  color: #ff7e55;
+}

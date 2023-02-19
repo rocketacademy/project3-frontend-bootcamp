@@ -11,19 +11,18 @@ import {
 import { Navbar } from "../../commoncomponents/Navbar/Navbar";
 import "./viewlisting.css";
 import axios from "axios";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import {
   Sider,
   Footer,
   Content,
   siderStyle,
   contentStyle,
-  footerStyle,
-  replicateFooterStyle,
 } from "../globalstyles.js";
 
 export default function ViewListing() {
   const { Meta } = Card;
+  const navigate = useNavigate();
 
   const [listingName, setListingName] = useState("Used Canon 24GB Camera");
   const [description, setDescription] = useState(
@@ -32,6 +31,10 @@ export default function ViewListing() {
   const [condition, setCondition] = useState("Like New");
 
   let { user_id, listing_id } = useParams();
+
+  const handleBackButtonClick = () => {
+    navigate(-1);
+  };
 
   useEffect(() => {
     axios
@@ -43,6 +46,24 @@ export default function ViewListing() {
         console.log(error);
       });
   }, []);
+
+  const footerStyle = {
+    textAlign: "center",
+    color: "#fff",
+    backgroundColor: "#303841",
+    position: "fixed",
+    bottom: 0,
+    width: "100%",
+  };
+
+  const replicateFooterStyle = {
+    left: 0,
+    bottom: 0,
+    width: "100%",
+    // position: 'absolute',
+    backgroundColor: "#303841",
+    position: "fixed",
+  };
 
   return (
     <div>
@@ -56,10 +77,17 @@ export default function ViewListing() {
         <Layout>
           <Sider width={250} style={siderStyle}>
             <Navbar />
-            <Footer style={replicateFooterStyle}>{" yo "}</Footer>
+            <Footer style={replicateFooterStyle}></Footer>
           </Sider>
           <Layout>
             <Content style={contentStyle}>
+              <Button
+                type="link"
+                style={{ marginLeft: 50, marginTop: 50 }}
+                onClick={handleBackButtonClick}
+              >
+                {"< "}Back
+              </Button>
               <div className="listing-right">
                 <Image.PreviewGroup>
                   <Carousel
@@ -126,7 +154,7 @@ export default function ViewListing() {
                 </Row>
               </div>
             </Content>
-            {/* <Footer style={footerStyle}> Copyright© G&T 2023</Footer> */}
+            <Footer style={footerStyle}></Footer>
           </Layout>
         </Layout>
       </ConfigProvider>
