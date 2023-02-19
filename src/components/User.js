@@ -39,9 +39,10 @@ const ReviewForm = (props) => {
 const UserReviews = (props) => {
   return (
     <div>
-      {props.userReviews.map((review) => (
-        <p key={review.id}>Review: {review.description}</p>
-      ))}
+      {props.userReviews &&
+        props.userReviews.map((review) => (
+          <p key={review.id}>Review: {review.description}</p>
+        ))}
     </div>
   );
 };
@@ -54,15 +55,7 @@ export function User() {
   const [user, setUser] = useState(null);
   const [userIndex, setUserIndex] = useState();
   const [userReviews, setUserReviews] = useState();
-  const [user, setUser] = useState(null);
-  const [userIndex, setUserIndex] = useState();
-  const [userReviews, setUserReviews] = useState();
 
-  useEffect(() => {
-    checkUser();
-  }, []);
-
-  const params = useParams();
   if (userIndex !== params.id) {
     setUserIndex(params.id);
   }

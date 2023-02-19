@@ -13,14 +13,12 @@ export function HomePage() {
 
   return (
     <>
-      <NavBar login={logIn} />
       <div>
         <img
           alt="placeholder banner"
-          src="https://images.unsplash.com/photo-1590650423710-ffa6e7f63440?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8"
+          src={process.env.PUBLIC_URL + "/banner-image.jpg"}
           style={{
-            width: "50%",
-            height: "1000px",
+            width: "70%",
             padding: "10px",
             alignItems: "center",
             justifyContent: "center",

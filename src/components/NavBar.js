@@ -9,7 +9,7 @@ export function NavBar({ login }) {
     <>
       <nav className="nav">
         <img className="logo" alt="logo" src={AppLogo}></img>
-        {login ? (
+        {!login ? (
           <div>
             <input className="search-bar" placeholder="Search for people" />
             <Avatar />
