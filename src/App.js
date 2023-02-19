@@ -1,23 +1,18 @@
-import React from "react";
-import { useEffect } from "react";
-import {
-  BrowserRouter,
-  Navigate,
-  Route,
-  Routes,
-  useParams,
-} from "react-router-dom";
+import React from 'react';
+import { useEffect } from 'react';
+import { BrowserRouter, Navigate, Route, Routes, useParams } from 'react-router-dom';
 
-import "./App.css";
-import "./assets//fonts/font.css";
-import { EditProfile } from "./pages/EditProfile";
-import WelcomePage from "./pages/WelcomePage";
-import Profile from "./pages/UserProfile";
-import EditListing from "./pages/EditListing";
+import './App.css';
+import './assets//fonts/font.css';
+import { EditProfile } from './pages/EditProfile';
+import WelcomePage from './pages/WelcomePage';
+import Profile from './pages/UserProfile';
+import EditListing from './pages/EditListing';
 
-import HomePage from "./pages/HomePage";
-import ViewListing from "./pages/ViewListing";
-import CreateListing from "./pages/CreateListing";
+import HomePage from './pages/HomePage';
+import ViewListing from './pages/ViewListing';
+import UserIndividualListing from './pages/UserIndividualListing';
+import CreateListing from './pages/CreateListing';
 
 function App() {
   let { user_id } = useParams();
@@ -30,6 +25,7 @@ function App() {
           <Route path="homepage" element={<HomePage />} />
           {/* listings page URL to be confirmed */}
           <Route path="listings/1" element={<ViewListing />} />
+          <Route path="listings/2" element={<UserIndividualListing />} />
           <Route path="createlisting" element={<CreateListing />} />
           <Route path="settings" element={<EditProfile />} />
           <Route path="profile" element={<Profile />} />

@@ -1,0 +1,94 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400&display=swap');
+
+body {
+  font-family: 'Cormorant Garamond', serif;
+  margin: 0;
+  padding: 0;
+  background-color: #fff;
+}
+
+.listingInfo {
+  background-color: #eeeeee;
+  max-width: 90%;
+  margin-left: 40px;
+  padding: 20px;
+  border-radius: 20px;
+  box-shadow: 0 0 5px 1px #dddddd;
+  max-height: 100%;
+}
+
+.content {
+  padding-top: 30px;
+  width: 100%;
+  margin-left: 5%;
+  box-sizing: border-box;
+  /* display: flex;
+  flex-wrap: wrap; */
+}
+
+.userName {
+  /* width: 90%; */
+  /* display: flex; */
+  /* flex-wrap: wrap; */
+  /* padding: 30px; */
+  background-color: #eeeeee;
+  border-radius: 20px;
+  box-shadow: 0 0 5px 1px #dddddd;
+  box-sizing: border-box;
+  /* margin: 0 0 10px; */
+  max-height: 100%;
+}
+
+/* .Row {
+  display: flex !important;
+  flex-wrap: wrap !important;
+} */
+
+/* .userDescription {
+  width: 0%;
+} */
+
+/* h1 {
+  color: #303841;
+  margin-top: 0;
+  margin-left: 20px;
+} */
+
+.userDescription p {
+  color: #999;
+  font-size: 14px;
+  line-height: 20px;
+  margin-bottom: 40px;
+}
+
+.listingFilters {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.profile {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+}
+
+.photo {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  overflow: hidden;
+  display: block;
+}
+
+.photo img {
+  width: 100%;
+}
+
+.button {
+  margin: 10px;
+  position: relative;
+  top: 5;
+  right: 5;
+  align-content: right;
+}

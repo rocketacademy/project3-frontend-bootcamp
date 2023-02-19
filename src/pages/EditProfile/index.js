@@ -35,8 +35,7 @@ export function EditProfile() {
     <div>
       <Navbar />
 
-      <div>
-        {/* className={styles.formBody}> */}
+      <div className="">
         <Form
           labelCol={{
             span: 8
