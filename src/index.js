@@ -8,9 +8,13 @@ root.render(
   <Auth0Provider
     domain={process.env.REACT_APP_DOMAIN}
     clientId={process.env.REACT_APP_CLIENT_ID}
-    redirect_uri={process.env.REACT_APP_REDIRECT_URI}
+    authorizationParams={{
+      redirect_uri: process.env.REACT_APP_REDIRECT_URI,
+    }}
     audience={process.env.REACT_APP_AUDIENCE}
     scope={process.env.REACT_APP_SCOPE}
+    useRefreshTokens={true}
+    cacheLocation="localstorage"
   >
     <App />
   </Auth0Provider>

@@ -3,7 +3,7 @@ import { NavBar } from "./NavBar";
 import { useAuth0 } from "@auth0/auth0-react";
 
 export function HomePage() {
-  const [logIn, setLogIn] = useState(true);
+  const [logIn, setLogIn] = useState(false);
   const [avatar, setAvatar] = useState(process.env.REACT_APP_AVATAR);
   const { isAuthenticated } = useAuth0();
 
