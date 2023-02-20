@@ -31,15 +31,13 @@ function App() {
         <Route path="/" element={<WelcomePage />} />
         <Route path=":user_id">
           <Route path="homepage" element={<HomePage />} />
-
-          <Route path="listings/1" element={<ViewListing />} />
-          <Route path="listings/2" element={<UserIndividualListing />} />
+          {/* listings page URL to be confirmed */}
+          <Route path="listings/:listing_id" element={<ViewListing />} />
+          <Route path="userlistings/:listing_id" element={<UserIndividualListing />} />
           <Route path="createlisting" element={<CreateListing />} />
-          <Route path="editlisting" element={<EditListing />} />
-
-          <Route path="profile" element={<Profile />} />
-          <Route path="createprofile" element={<CreateProfile />} />
           <Route path="settings" element={<EditProfile />} />
+          <Route path="profile" element={<Profile />} />
+          <Route path="editlisting/:listing_id" element={<EditListing />} />
         </Route>
       </Routes>
     </BrowserRouter>

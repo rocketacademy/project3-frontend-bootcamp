@@ -1,62 +1,165 @@
-// view 1 listing (with delete/edit button for logged in user)
+// specific listing
 import React from "react";
 import { useState, useEffect } from "react";
-import { Avatar, Card, Image } from "antd";
-import profilepic from "../../assets/images/profilepic.jpeg";
 import {
+  Card,
+  Carousel,
+  Image,
+  Empty,
   Layout,
   Button,
-  Input,
   Row,
   Col,
   ConfigProvider,
-  Popconfirm,
+  notification,
+  Space,
 } from "antd";
 import {
-  EditOutlined,
-  DeleteOutlined,
+  LikeOutlined,
+  WhatsAppOutlined,
   EnvironmentOutlined,
+  WarningOutlined,
+  DeleteOutlined,
+  EditOutlined,
+  SmileOutlined,
+  FrownOutlined,
 } from "@ant-design/icons";
-
 import { Navbar } from "../../commoncomponents/Navbar/Navbar";
 import "./userindividuallisting.css";
 import axios from "axios";
-import book from "../../assets/images/book.webp";
 import { useNavigate, useParams } from "react-router-dom";
+import { useAuth0 } from "@auth0/auth0-react";
 
-export default function ViewListing() {
+export default function UserIndividualListing() {
   const { Meta } = Card;
+
+  const [listingReturned, setListingReturned] = useState([]);
+  const [data, setData] = useState(null);
+  const { getAccessTokenSilently, user } = useAuth0();
+  const [accessToken, setAccessToken] = useState(null);
+  let { user_id, listing_id } = useParams();
+  const [api, contextHolder] = notification.useNotification();
   const [visible, setVisible] = useState(false);
   const [confirmVisible, setConfirmVisible] = useState(false);
+  const navigate = useNavigate();
   const handleConfirm = () => {
     setConfirmVisible(false);
   };
   const handleCancel = () => {
     setConfirmVisible(false);
   };
-  const [listingName, setListingName] = useState("Used Canon 24GB Camera");
-  const [description, setDescription] = useState(
-    "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla consectetur varius nunc, sed tempor dui volutpat fringilla. Vivamus a tortor nunc. "
-  );
-  const [condition, setCondition] = useState("Like New");
+  const openNotificationWithIcon = (placement) => {
+    const key = `open${Date.now()}`;
+    const btn = (
+      <Space>
+        <Button
+          type="primary"
+          size="small"
+          style={{ backgroundColor: "#ff7e55" }}
+          onClick={() => {
+            axios
+              .delete(`http://localhost:3000/delete/${listing_id}`, configs)
+              .then(function (response) {
+                console.log(response.data);
+                openDeleteSuccessNotification("top");
+              })
+              .catch(function (error) {
+                console.log(error);
+                openDeleteFailureNotification("top");
+              });
+            api.destroy();
+          }}
+        >
+          Confirm
+        </Button>
+        <Button
+          type="primary"
+          size="small"
+          style={{ backgroundColor: "#ff7e55" }}
+          onClick={() => api.destroy(key)}
+        >
+          Cancel
+        </Button>
+      </Space>
+    );
+    api.open({
+      message: "Are you sure?",
+      description: "Clicking 'Confirm' will delete this listing permanently!",
+      placement,
+      icon: <WarningOutlined style={{ color: "red" }} />,
+      duration: 0,
+      btn,
+      key,
+    });
+  };
+  const openDeleteSuccessNotification = (placement) => {
+    api.info({
+      message: `Yippee!`,
+      description: "Delete listing successful!",
+      placement,
+      icon: (
+        <SmileOutlined
+          style={{
+            color: "green",
+          }}
+        />
+      ),
+    });
+  };
+  const openDeleteFailureNotification = (placement) => {
+    api.info({
+      message: `Oh no!`,
+      description: "Delete listing unsuccessful!",
+      placement,
+      icon: (
+        <FrownOutlined
+          style={{
+            color: "red",
+          }}
+        />
+      ),
+    });
+  };
 
-  let { user_id, listing_id } = useParams();
-  const navigate = useNavigate();
+  useEffect(() => {
+    if (user && !accessToken) {
+      getAccessTokenSilently().then((jwt) => setAccessToken(jwt));
+    }
+  }, [user]);
+  console.log(accessToken);
+
+  const configs = {};
+  if (accessToken) configs.headers = { Authorization: `Bearer ${accessToken}` };
 
   useEffect(() => {
     axios
-      .get("http://localhost:3000/:userId/listings/:listingId")
+      .get(`http://localhost:3000/listings`, configs)
       .then(function (response) {
         console.log(response.data);
+        setListingReturned(response.data);
       })
       .catch(function (error) {
         console.log(error);
       });
-  }, []);
+  }, [accessToken]);
 
   const handleBackButtonClick = () => {
     navigate(`/${user_id}/profile`);
   };
+
+  useEffect(() => {
+    for (let i = 0; i < listingReturned.length; i++) {
+      if (
+        listingReturned[i].user_id === +user_id &&
+        listingReturned[i].id === +listing_id
+      ) {
+        console.log(listingReturned[i]);
+        setData(listingReturned[i]);
+        return;
+      }
+    }
+  }, [listingReturned]);
+
   const { Footer, Sider, Content } = Layout;
 
   const siderStyle = {
@@ -86,6 +189,7 @@ export default function ViewListing() {
 
   return (
     <div>
+      {contextHolder}
       <ConfigProvider
         theme={{
           token: {
@@ -96,99 +200,51 @@ export default function ViewListing() {
         <Layout>
           <Sider width={250} style={siderStyle}>
             <Navbar />
-            <Footer style={replicateFooterStyle}>{" -- "}</Footer>
+            <Footer style={replicateFooterStyle}>{" yo "}</Footer>
           </Sider>
-
-          {/* <Layout> */}
-          <Content style={contentStyle}>
-            <Button
-              type="link"
-              style={{ marginLeft: 50 }}
-              onClick={handleBackButtonClick}
-            >
-              {"< "}Back
-            </Button>
-
-            <div className="listingInfo">
-              <Row gutter={10}>
-                <Col span={6}>
-                  <Image
-                    preview={{
-                      visible: false,
-                    }}
-                    width={200}
-                    src={book}
-                    onClick={() => setVisible(true)}
-                    style={{ maxWidth: "100%", objectFit: "cover" }}
-                  />
-                  <div
-                    style={{
-                      display: "none",
-                    }}
-                  >
-                    <Image.PreviewGroup
-                      preview={{
-                        visible,
-                        onVisibleChange: (vis) => setVisible(vis),
-                      }}
+          <Layout>
+            <Content style={contentStyle}>
+              {data === null ? (
+                <div>
+                  <h1>Sorry, information not found in database</h1>
+                  <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} />
+                </div>
+              ) : (
+                <div className="listing-right">
+                  <Image.PreviewGroup>
+                    <Carousel
+                      dotPosition="bottom"
+                      infinite={false}
+                      slidesToShow={1}
                     >
-                      <Image src={book} />
-                    </Image.PreviewGroup>
-                  </div>
-                </Col>
-                <Col span={18} style={{ alignItems: "center" }}>
-                  <Row>
-                    <Col span={6} style={{ padding: 0 }}>
-                      <Avatar
-                        size={{ xl: 80 }}
-                        style={{ margin: 0 }}
-                        src={profilepic}
-                      />
-                    </Col>
-                    <Col
-                      span={12}
-                      style={{ padding: 0, justifyContent: "center" }}
-                    >
-                      <h1>username</h1>
-                    </Col>
-                    <Col span={6}>
-                      <Button type="primary">
-                        <EditOutlined />
-                        Edit
+                      <Image width={300} src={data.photo_url} />
+                    </Carousel>
+                  </Image.PreviewGroup>
+
+                  <Row gutter={10}>
+                    <Col span={18}>
+                      <h1>{data.item_name}</h1>
+                      <p>{data.description}</p>
+                      <p>{data.condition}</p>
+                      <Button type="primary" icon={<EditOutlined />}>
+                        Editing
                       </Button>
-                      <br></br>
-                      <Popconfirm
-                        title="Are you sure you want to delete this listing?"
-                        visible={confirmVisible}
-                        onConfirm={handleConfirm}
-                        onCancel={handleCancel}
+                      &nbsp;
+                      <Button
+                        type="primary"
+                        onClick={() => openNotificationWithIcon("top")}
+                        icon={<DeleteOutlined />}
                       >
-                        <Button
-                          type="primary"
-                          danger
-                          onClick={() => setConfirmVisible(true)}
-                        >
-                          <DeleteOutlined />
-                          Delete
-                        </Button>
-                      </Popconfirm>
+                        Delete
+                      </Button>
                     </Col>
                   </Row>
-
-                  <h2>item name</h2>
-                  <b>
-                    <EnvironmentOutlined /> Bishan
-                  </b>
-                  <h2>Condition</h2>
-                  <p>Item description</p>
-                </Col>
-              </Row>
-            </div>
-
-            <Footer style={footerStyle}> Copyright© G&T 2023</Footer>
-          </Content>
+                </div>
+              )}
+            </Content>
+            {/* <Footer style={footerStyle}> Copyright© G&T 2023</Footer> */}
+          </Layout>
         </Layout>
-        {/* </Layout> */}
       </ConfigProvider>
     </div>
   );

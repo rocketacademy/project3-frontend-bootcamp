@@ -1,11 +1,7 @@
 //edit individual listing
 import React from "react";
 import "./editlisting.css";
-// import profilepic from '../assets//images/profilepic.jpeg';
-// import bike from '../assets//images/bike.jpg';
 import { Navbar } from "../../commoncomponents/Navbar/Navbar";
-import book from "../../assets/images/book.webp";
-import logo from "../../assets/images/logo.png";
 import { useNavigate } from "react-router-dom";
 
 import { Button, Input, Upload, Radio, ConfigProvider, Layout } from "antd";
@@ -101,7 +97,7 @@ export function EditListing() {
                   <div className="userDescription">
                     <div className="profile">
                       <div className="photo">
-                        <img src={book} alt="book" />
+                        <img src="" alt="book" />
 
                         <Upload action="/upload.do" listType="picture-card">
                           <div>

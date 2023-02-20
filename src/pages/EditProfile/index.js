@@ -3,10 +3,9 @@ import { React, useState, useEffect } from "react";
 import "./editprofile.css";
 import { Navbar } from "../../commoncomponents/Navbar/Navbar";
 import { PlusOutlined } from "@ant-design/icons";
-import { Button, Form, Input, TreeSelect, Upload, Select, Layout } from "antd";
+import { Button, Form, Input, TreeSelect, Upload, Select, Layout, notification } from "antd";
 import { useAuth0 } from "@auth0/auth0-react";
-// import { MRTstations } from './MRTstations';
-// import { useState } from 'react';
+
 import {
   Footer,
   Sider,
@@ -15,6 +14,11 @@ import {
   contentStyle,
 } from "../globalstyles";
 import { useNavigate } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
+import "./editprofile.css";
+import axios from "axios";
+import { UploadWidget } from "./UploadWidget";
+import { SmileOutlined, FrownOutlined } from "@ant-design/icons";
 
 export function EditProfile() {
   const { TextArea } = Input;
@@ -24,8 +28,7 @@ export function EditProfile() {
   const prefixSelector = (
     <Form.Item name="prefix" noStyle>
       <Select style={{ width: 70 }}>
-        <Option value="65">+65</Option>
-        <Option value="66">+66</Option>
+        <Option defaultValue="65">+65</Option>
       </Select>
     </Form.Item>
   );
@@ -49,14 +52,77 @@ export function EditProfile() {
   };
 
   const { getAccessTokenSilently, user } = useAuth0();
-  const { accessToken, setAccessToken } = useState(null);
+  const [accessToken, setAccessToken] = useState(null);
+  const [formValues, setFormValues] = useState({});
+  let { user_id } = useParams();
+  const [api, contextHolder] = notification.useNotification();
+  const openSuccessNotification = (placement) => {
+    api.info({
+      message: `Yippee!`,
+      description: "Edit profile successful!",
+      placement,
+      icon: (
+        <SmileOutlined
+          style={{
+            color: "green",
+          }}
+        />
+      ),
+    });
+  };
+  const openFailureNotification = (placement) => {
+    api.info({
+      message: `Oh no!`,
+      description: "Edit profile unsuccessful!",
+      placement,
+      icon: (
+        <FrownOutlined
+          style={{
+            color: "red",
+          }}
+        />
+      ),
+    });
+  };
+
+  const handleInputChange = (e) => {
+    setFormValues({ ...formValues, [e.target.id]: e.target.value });
+    console.log(formValues);
+  };
 
   useEffect(() => {
     if (user && !accessToken) {
       getAccessTokenSilently().then((jwt) => setAccessToken(jwt));
     }
-  }, [user, accessToken]);
-  console.log(accessToken);
+  }, [user]);
+
+  const configs = {};
+  if (accessToken) configs.headers = { Authorization: `Bearer ${accessToken}` };
+
+  useEffect(() => {
+    axios
+      .get(`http://localhost:3000/${user_id}/editprofile`, configs)
+      .then(function (response) {
+        setFormValues(response.data);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  }, [accessToken]);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    axios
+      .put(`http://localhost:3000/${user_id}/settings`, formValues, configs)
+      .then(function (response) {
+        console.log(response);
+        openSuccessNotification("top");
+      })
+      .catch(function (error) {
+        console.log(error);
+        openFailureNotification("top");
+      });
+  };
 
   const handleBackButtonClick = () => {
     navigate(-1);
@@ -64,6 +130,7 @@ export function EditProfile() {
 
   return (
     <div>
+      {contextHolder}
       <Layout>
         <Sider width={300} style={siderStyle}>
           <Navbar />
@@ -72,6 +139,7 @@ export function EditProfile() {
         <Layout>
           <Content style={contentStyle}>
             <div>
+              {/* className={styles.formBody}> */}
               <Form
                 labelCol={{
                   span: 8,
@@ -86,33 +154,45 @@ export function EditProfile() {
                   maxWidth: 800,
                 }}
               >
-                <Form.Item label="Profile" valuePropName="fileList">
-                  <Upload action="/upload.do" listType="picture-card">
-                    <div>
-                      <PlusOutlined />
-                      <div
-                        style={{
-                          marginTop: 8,
-                        }}
-                      ></div>
-                    </div>
-                  </Upload>
-                </Form.Item>
-                <Form.Item label="Username">
-                  <Input />
+                <Form.Item label="Current Profile Photo" name="profile_photo">
+                  <img alt="" src={formValues.profile_photo} width="200" />
+                  <br></br>
+                  <UploadWidget
+                    setFormValues={setFormValues}
+                    formValues={formValues}
+                  />
                 </Form.Item>
                 <Form.Item
-                  label="Password"
-                  name="password"
-                  rules={[
-                    { required: true, message: "Please input your password!" },
-                  ]}
+                  label="Username"
+                  name="username"
+                  onChange={handleInputChange}
                 >
-                  <Input.Password />
+                  <Input placeholder={formValues.username} />
+                </Form.Item>
+                <Form.Item
+                  label="First Name"
+                  name="first_name"
+                  onChange={handleInputChange}
+                >
+                  <Input placeholder={formValues.first_name} />
+                </Form.Item>
+                <Form.Item
+                  label="Last Name"
+                  name="last_name"
+                  onChange={handleInputChange}
+                >
+                  <Input placeholder={formValues.last_name} />
+                </Form.Item>
+                <Form.Item
+                  label="Email"
+                  name="email"
+                  onChange={handleInputChange}
+                >
+                  <Input placeholder={formValues.email} />
                 </Form.Item>
 
                 <Form.Item
-                  name="phone"
+                  name="phone_number"
                   label="Phone Number"
                   rules={[
                     {
@@ -120,40 +200,44 @@ export function EditProfile() {
                       message: "Please input your phone number!",
                     },
                   ]}
+                  onChange={handleInputChange}
                 >
                   <Input
-                    addonBefore={prefixSelector}
-                    style={{ width: "100%" }}
+                    addonBefore="+65"
+                    placeholder={formValues.phone_number}
                   />
                 </Form.Item>
-
-                <Form.Item label="Nearest MRT station">
-                  <TreeSelect
-                    treeData={[
-                      {
-                        title: "North",
-                        value: "north",
-                        children: [
-                          {
-                            title: "Woodlands",
-                            value: "woodlands",
-                          },
-                          {
-                            title: "Bishan",
-                            value: "bishan",
-                          },
-                        ],
-                      },
-                    ]}
-                  />
+                <Form.Item
+                  label="Address"
+                  name="address"
+                  onChange={handleInputChange}
+                >
+                  <Input placeholder={formValues.address} />
                 </Form.Item>
-                <Form.Item label="Bio">
-                  <TextArea rows={4} />
+                <Form.Item
+                  label="Postal Code"
+                  name="postal_code"
+                  onChange={handleInputChange}
+                >
+                  <Input placeholder={formValues.postal_code} />
+                </Form.Item>
+                <Form.Item
+                  label="Nearest MRT"
+                  name="mrt"
+                  onChange={handleInputChange}
+                >
+                  <Input placeholder={formValues.mrt} />
                 </Form.Item>
 
                 <Form.Item>
-                  <Button>Save</Button>
-                  <Button onClick={handleBackButtonClick}>Cancel</Button>
+                  <Button
+                    type="primary"
+                    htmlType="submit"
+                    onClick={handleSubmit}
+                  >
+                    Save Changes
+                  </Button>
+                  <Link to={`/${user_id}/profile`}>Back to Profile</Link>
                 </Form.Item>
               </Form>
               {/* <Logout /> */}
