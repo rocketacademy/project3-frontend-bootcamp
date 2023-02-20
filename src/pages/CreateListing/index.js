@@ -37,7 +37,7 @@ import axios from "axios";
 import "./createlisting.css";
 
 //Cloudinary states
-// import { UploadWidget } from "./UploadWidget";
+import { UploadWidget } from "./UploadWidget";
 import { useParams, useNavigate } from "react-router-dom";
 
 export default function CreateListing() {
@@ -140,6 +140,7 @@ export default function CreateListing() {
 
   return (
     <div>
+      {contextHolder}
       <ConfigProvider
         theme={{
           token: {
@@ -164,10 +165,10 @@ export default function CreateListing() {
                       {"< "}Back
                     </Button>
 
-                    {/* <UploadWidget
+                    <UploadWidget
                       setFormValues={setFormValues}
                       formValues={formValues}
-                    /> */}
+                    />
                     <Form form={form} layout="vertical">
                       <Form.Item
                         label="Item name"
@@ -300,4 +301,4 @@ export default function CreateListing() {
       </ConfigProvider>
     </div>
   );
-}
+                      }

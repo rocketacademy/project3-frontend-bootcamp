@@ -1,11 +1,7 @@
 // user profile page
-import React from 'react';
+import React, { useState } from 'react';
 import './userprofile.css';
-import { UsersProfile } from './UsersProfile.js';
-import { UserListings } from './UserListings';
-import profilepic from '../../assets/images/profilepic.jpeg';
 import { EditOutlined, DeleteOutlined } from '@ant-design/icons';
-import book from '../../assets/images/book.webp';
 import { Card, Button, Tag, Layout } from 'antd';
 import {
   Sider,
@@ -21,6 +17,8 @@ import { Navbar } from '../../commoncomponents/Navbar/Navbar';
 const { Meta } = Card;
 
 export function UserProfile() {
+  const [userProfile, setUserProfile] = useState({});
+  const [userListings, setUserListings] = useState([]);
   return (
     <>
       <Layout>
@@ -33,14 +31,14 @@ export function UserProfile() {
             {/* @val I removed this to standardize the navbar + remove the space between the navbar & content container */}
             {/* <div className="content"> */}
             <div className="content">
-              {UsersProfile.map((item, index) => {
+              {userProfile.map((item, index) => {
                 return (
                   <div className="userName" key={index}>
                     <div className="userDescription">
                       <div className="profile">
                         <div className="photo">
                           {/* <img src={item.photo} alt={item.alt} /> */}
-                          <img src={profilepic} alt={item.alt} />
+                          <img src="" alt={item.alt} />
                         </div>
                         <h1>{item.username}</h1>
                       </div>
@@ -67,7 +65,7 @@ export function UserProfile() {
               </Button>
             </div>
             <div className="listings">
-              {UserListings.map((listing, index) => {
+              {userListings.map((listing, index) => {
                 return (
                   <Card
                     key={index}
@@ -79,7 +77,7 @@ export function UserProfile() {
                       display: 'inline-block',
                       wordWrap: 'break-word'
                     }}
-                    cover={<img alt={listing.alt} src={book} />}
+                    cover={<img alt={listing.alt} src="" />}
                     actions={[<EditOutlined key="edit" />, <DeleteOutlined key="delete" />]}>
                     <Meta
                       style={{ wordWrap: 'break-word' }}
