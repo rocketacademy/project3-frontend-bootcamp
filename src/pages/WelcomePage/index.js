@@ -1,10 +1,10 @@
 // welcome page with short intro, login and sign up buttons
 
-import React from 'react';
-import { Layout, Space, Menu, Button, Card, Col, Row, Avatar } from 'antd';
-import intropage from '../../assets/images/intropage.jpg';
-import logo from '../../assets/images/logo.png';
-import banner from '../../assets/images/banner.png';
+import React from "react";
+import { Layout, Space, Menu, Button, Card, Col, Row, Avatar } from "antd";
+import intropage from "../../assets/images/intropage.jpg";
+import logo from "../../assets/images/logo.png";
+import banner from "../../assets/images/banner.png";
 
 import "./welcomepage.css";
 import { MessageOutlined, LikeOutlined } from "@ant-design/icons";
@@ -38,9 +38,9 @@ const footerStyle = {
 };
 export default function WelcomePage() {
   const [listingsReturned, setListingsReturned] = useState([]);
-  const { getAccessTokenSilently, user, loginWithRedirect, logout } = useAuth0();
-  const [ accessToken, setAccessToken ] = useState(null);
-
+  const { getAccessTokenSilently, user, loginWithRedirect, logout } =
+    useAuth0();
+  const [accessToken, setAccessToken] = useState(null);
 
   useEffect(() => {
     axios
@@ -53,7 +53,7 @@ export default function WelcomePage() {
         console.log(error);
       });
   }, []);
-  
+
   useEffect(() => {
     if (user && !accessToken) {
       getAccessTokenSilently().then((jwt) => {
@@ -62,6 +62,18 @@ export default function WelcomePage() {
     }
   }, [user, accessToken]);
   console.log(accessToken);
+
+  const handleSignUp = () => {
+    const redirectUri = "http://localhost:3001/*/homepage";
+    const clientId = process.env.REACT_APP_AUTH0_CLIENT_ID;
+    const queryParams = {
+      client_id: clientId,
+      redirect_uri: redirectUri,
+      // response_type: 'code',
+      scope: "openid profile email",
+      screen_hint: "signup",
+    };
+  };
 
   return (
     <Space
@@ -85,8 +97,16 @@ export default function WelcomePage() {
             <Space wrap>
               <Button
                 type="primary"
-                style={{ backgroundColor: '#ff7e55', color: 'white' }}
-                onClick={loginWithRedirect}>
+                style={{ backgroundColor: "#ff7e55", color: "white" }}
+                onClick={handleSignUp}
+              >
+                Sign Up
+              </Button>
+              <Button
+                type="primary"
+                style={{ backgroundColor: "#ff7e55", color: "white" }}
+                onClick={loginWithRedirect}
+              >
                 Sign Up / Login
               </Button>
               <Button
@@ -113,28 +133,51 @@ export default function WelcomePage() {
           <h2>These are some listings you might be interested in:</h2>
 
           <Row gutter={16}>
-            {listingsReturned.map(({ category, item_name, photo_url }) => (
-              <Col span={6}>
-                <Card
-                  hoverable
-                  style={{ width: 300, margin: 20 }}
-                  cover={
-                    <img
-                      alt=""
-                      src={photo_url}
-                      style={{ width: 300, height: 300, objectFit: "contain" }}
-                    />
-                  }
-                  actions={[
-                    <MessageOutlined key="message" />,
-                    <LikeOutlined key="like" />,
-                  ]}
-                >
-                  <Meta title={item_name} description={category} />
-                </Card>
-              </Col>
-            ))}
+            {listingsReturned.map(
+              ({ category, item_name, photo_url }, index) => (
+                <Col span={6} key={index}>
+                  <Card
+                    hoverable
+                    style={{ width: 300, margin: 20 }}
+                    cover={
+                      <img
+                        alt=""
+                        src={photo_url}
+                        style={{
+                          width: 300,
+                          height: 300,
+                          objectFit: "contain",
+                        }}
+                      />
+                    }
+                    actions={[
+                      <MessageOutlined key="message" />,
+                      <LikeOutlined key="like" />,
+                    ]}
+                  >
+                    <Meta title={item_name} description={category} />
+                  </Card>
+                </Col>
+              )
+            )}
           </Row>
+
+          <Space wrap>
+            <Button
+              type="primary"
+              style={{ backgroundColor: "#ff7e55", color: "white" }}
+              onClick={handleSignUp}
+            >
+              Sign Up
+            </Button>
+            <Button
+              type="primary"
+              style={{ backgroundColor: "#ff7e55", color: "white" }}
+              onClick={loginWithRedirect}
+            >
+              Login
+            </Button>
+          </Space>
         </Content>
         <Footer style={footerStyle}>Copyright(c) Give and Take 2023. </Footer>
       </Layout>
