@@ -3,11 +3,8 @@ import { Avatar } from "@mui/material";
 import { AuthButton } from "./AuthButton";
 import "../css/Navbar.css";
 import AppLogo from "../components/applogo.png";
-import { useAuth0 } from "@auth0/auth0-react";
 
 export function NavBar({ login }) {
-  const { isAuthenticated } = useAuth0();
-  console.log(isAuthenticated);
   return (
     <>
       <nav className="nav">
@@ -17,11 +14,11 @@ export function NavBar({ login }) {
             <input className="search-bar" placeholder="Search for people" />
             <Avatar />
 
-            <AuthButton login={isAuthenticated} />
+            <AuthButton login={login} />
           </div>
         ) : (
           <>
-            <AuthButton login={isAuthenticated} />
+            <AuthButton login={login} />
           </>
         )}
       </nav>
