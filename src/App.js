@@ -11,6 +11,7 @@ import { NavBar } from "./components/NavBar";
 import { User } from "./components/User";
 import PrivateRoute from "./components/PrivateRoutes";
 import { useAuth0 } from "@auth0/auth0-react";
+import "../src/css/App.css";
 
 function RequireAuth({ isAuthenticated, children }) {
   const location = useLocation();
@@ -25,7 +26,7 @@ function App() {
   console.log(isAuthenticated);
 
   return (
-    <>
+    <div className="main">
       <NavBar login={isAuthenticated} />
       <BrowserRouter>
         <Routes>
@@ -41,7 +42,7 @@ function App() {
           />
         </Routes>
       </BrowserRouter>
-    </>
+    </div>
   );
 }
 
