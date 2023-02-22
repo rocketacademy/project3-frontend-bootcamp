@@ -1,12 +1,6 @@
 import React from "react";
 import { useEffect } from "react";
-import {
-  BrowserRouter,
-  Navigate,
-  Route,
-  Routes,
-  useParams,
-} from "react-router-dom";
+import { BrowserRouter, Route, Routes, useParams } from "react-router-dom";
 
 import "./App.css";
 import "./assets//fonts/font.css";
@@ -34,6 +28,7 @@ function App() {
         <Route path="/createprofile" element={<CreateProfile />} />
         <Route path=":user_id">
           <Route path="homepage" element={<HomePage />} />
+
           {/* listings page URL to be confirmed */}
           <Route path="listings/:listing_id" element={<ViewListing />} />
           <Route
