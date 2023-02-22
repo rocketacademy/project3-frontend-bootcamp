@@ -7,7 +7,11 @@ export const AuthButton = ({ login }) => {
   const { loginWithRedirect, logout } = useAuth0();
 
   return (
-    <Button variant="Contained" onClick={login ? logout : loginWithRedirect}>
+    <Button
+      variant="Contained"
+      sx={{ bgcolor: "#1E90FF", color: "#FFFFFF" }}
+      onClick={login ? logout : loginWithRedirect}
+    >
       {login ? "Sign Out" : "Log In"}
     </Button>
   );

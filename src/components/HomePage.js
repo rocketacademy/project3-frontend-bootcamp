@@ -18,7 +18,7 @@ export function HomePage() {
           alt="placeholder banner"
           src={process.env.PUBLIC_URL + "/banner-image.jpg"}
           style={{
-            margin: "80px 0px 0px",
+            margin: "70px 0px 0px",
             width: "100%",
             alignItems: "center",
             justifyContent: "center",
