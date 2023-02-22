@@ -1,13 +1,14 @@
 import React from "react";
 import { useAuth0 } from "@auth0/auth0-react";
-import "../css/Button.css";
+import "../css/App.css";
+import { Button } from "@mui/material";
 
 export const AuthButton = ({ login }) => {
   const { loginWithRedirect, logout } = useAuth0();
 
   return (
-    <button className="button" onClick={login ? logout : loginWithRedirect}>
-      {login ? "Sign Out" : "Sign In/Up!"}
-    </button>
+    <Button variant="Contained" onClick={login ? logout : loginWithRedirect}>
+      {login ? "Sign Out" : "Log In"}
+    </Button>
   );
 };

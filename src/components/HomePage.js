@@ -13,13 +13,13 @@ export function HomePage() {
 
   return (
     <>
-      <div>
+      <div className="main">
         <img
           alt="placeholder banner"
           src={process.env.PUBLIC_URL + "/banner-image.jpg"}
           style={{
-            width: "70%",
-            padding: "10px",
+            margin: "80px 0px 0px",
+            width: "100%",
             alignItems: "center",
             justifyContent: "center",
           }}

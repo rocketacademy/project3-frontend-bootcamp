@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { NavBar } from "./NavBar";
 import { useAuth0 } from "@auth0/auth0-react";
 import { Outlet } from "react-router";
+import "../css/App.css";
 
 export function BasePage() {
   const [logIn, setLogIn] = useState(true);
@@ -13,9 +14,9 @@ export function BasePage() {
   }, [isAuthenticated]);
 
   return (
-    <>
+    <div>
       <NavBar login={logIn} />
       <Outlet />
-    </>
+    </div>
   );
 }
