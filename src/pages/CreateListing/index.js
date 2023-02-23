@@ -164,11 +164,13 @@ export default function CreateListing() {
                     <Button type="link" onClick={handleBackButtonClick}>
                       {"< "}Back
                     </Button>
-
+                    <br></br>
                     <UploadWidget
                       setFormValues={setFormValues}
                       formValues={formValues}
                     />
+                    <br></br>
+                    <br></br>
                     <Form form={form} layout="vertical">
                       <Form.Item
                         label="Item name"
