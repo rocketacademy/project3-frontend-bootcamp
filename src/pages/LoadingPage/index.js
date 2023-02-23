@@ -1,4 +1,5 @@
 import { useAuth0 } from "@auth0/auth0-react";
+import { Alert, Spin } from "antd";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -44,7 +45,15 @@ export default function LoadingPage (){
   if (accessToken) configs.headers = { Authorization: `Bearer ${accessToken}` };
 
 
-  return(
-    <div>Loading...Checking for your existence...</div>
+  return (
+    <div>
+      <Spin tip="Loading...">
+        <Alert
+          message="Please wait..."
+          description="Checking for your existence..."
+          type="info"
+        />
+      </Spin>
+    </div>
   );
 }

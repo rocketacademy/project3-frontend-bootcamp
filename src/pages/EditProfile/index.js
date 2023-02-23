@@ -3,7 +3,19 @@ import { React, useState, useEffect } from "react";
 import "./editprofile.css";
 import { Navbar } from "../../commoncomponents/Navbar/Navbar";
 import { PlusOutlined } from "@ant-design/icons";
-import { Button, Form, Input, TreeSelect, Upload, Select, Layout, notification } from "antd";
+import {
+  Button,
+  Form,
+  Input,
+  TreeSelect,
+  Upload,
+  Select,
+  Layout,
+  notification,
+  Space,
+  Spin,
+  Alert,
+} from "antd";
 import { useAuth0 } from "@auth0/auth0-react";
 
 import {
@@ -53,7 +65,7 @@ export function EditProfile() {
 
   const { getAccessTokenSilently, user } = useAuth0();
   const [accessToken, setAccessToken] = useState(null);
-  const [formValues, setFormValues] = useState({});
+  const [formValues, setFormValues] = useState(null);
   let { user_id } = useParams();
   const [api, contextHolder] = notification.useNotification();
   const openSuccessNotification = (placement) => {
@@ -131,6 +143,7 @@ export function EditProfile() {
   return (
     <div>
       {contextHolder}
+      <br></br>
       <Layout>
         <Sider width={300} style={siderStyle}>
           <Navbar />
@@ -139,7 +152,6 @@ export function EditProfile() {
         <Layout>
           <Content style={contentStyle}>
             <div>
-              {/* className={styles.formBody}> */}
               <Form
                 labelCol={{
                   span: 8,
@@ -148,99 +160,112 @@ export function EditProfile() {
                   span: 20,
                 }}
                 layout="horizontal"
-                // onValuesChange={onFormLayoutChange}
-                // disabled={componentDisabled}
                 style={{
                   maxWidth: 800,
                 }}
               >
-                <Form.Item label="Current Profile Photo" name="profile_photo">
-                  <img alt="" src={formValues.profile_photo} width="200" />
-                  <br></br>
-                  <UploadWidget
-                    setFormValues={setFormValues}
-                    formValues={formValues}
-                  />
-                </Form.Item>
-                <Form.Item
-                  label="Username"
-                  name="username"
-                  onChange={handleInputChange}
-                >
-                  <Input placeholder={formValues.username} />
-                </Form.Item>
-                <Form.Item
-                  label="First Name"
-                  name="first_name"
-                  onChange={handleInputChange}
-                >
-                  <Input placeholder={formValues.first_name} />
-                </Form.Item>
-                <Form.Item
-                  label="Last Name"
-                  name="last_name"
-                  onChange={handleInputChange}
-                >
-                  <Input placeholder={formValues.last_name} />
-                </Form.Item>
-                <Form.Item
-                  label="Email"
-                  name="email"
-                  onChange={handleInputChange}
-                >
-                  <Input placeholder={formValues.email} />
-                </Form.Item>
+                {formValues === null ? (
+                  <Spin tip="Loading...">
+                    <Alert
+                      message="Please wait..."
+                      description="Loading user profile..."
+                      type="info"
+                      style={{ backgroundColor: "white"}}
+                    />
+                  </Spin>
+                ) : (
+                  <>
+                    <Form.Item
+                      label="Current Profile Photo"
+                      name="profile_photo"
+                    >
+                      <img alt="" src={formValues.profile_photo} width="200" />
+                      <br></br>
+                      <UploadWidget
+                        setFormValues={setFormValues}
+                        formValues={formValues}
+                      />
+                    </Form.Item>
+                    <Form.Item
+                      label="Username"
+                      name="username"
+                      onChange={handleInputChange}
+                    >
+                      <Input placeholder={formValues.username} />
+                    </Form.Item>
+                    <Form.Item
+                      label="First Name"
+                      name="first_name"
+                      onChange={handleInputChange}
+                    >
+                      <Input placeholder={formValues.first_name} />
+                    </Form.Item>
+                    <Form.Item
+                      label="Last Name"
+                      name="last_name"
+                      onChange={handleInputChange}
+                    >
+                      <Input placeholder={formValues.last_name} />
+                    </Form.Item>
+                    <Form.Item
+                      label="Email"
+                      name="email"
+                      onChange={handleInputChange}
+                    >
+                      <Input placeholder={formValues.email} />
+                    </Form.Item>
 
-                <Form.Item
-                  name="phone_number"
-                  label="Phone Number"
-                  rules={[
-                    {
-                      required: true,
-                      message: "Please input your phone number!",
-                    },
-                  ]}
-                  onChange={handleInputChange}
-                >
-                  <Input
-                    addonBefore="+65"
-                    placeholder={formValues.phone_number}
-                  />
-                </Form.Item>
-                <Form.Item
-                  label="Address"
-                  name="address"
-                  onChange={handleInputChange}
-                >
-                  <Input placeholder={formValues.address} />
-                </Form.Item>
-                <Form.Item
-                  label="Postal Code"
-                  name="postal_code"
-                  onChange={handleInputChange}
-                >
-                  <Input placeholder={formValues.postal_code} />
-                </Form.Item>
-                <Form.Item
-                  label="Nearest MRT"
-                  name="mrt"
-                  onChange={handleInputChange}
-                >
-                  <Input placeholder={formValues.mrt} />
-                </Form.Item>
+                    <Form.Item
+                      name="phone_number"
+                      label="Phone Number"
+                      rules={[
+                        {
+                          required: true,
+                          message: "Please input your phone number!",
+                        },
+                      ]}
+                      onChange={handleInputChange}
+                    >
+                      <Input
+                        addonBefore="+65"
+                        placeholder={formValues.phone_number}
+                      />
+                    </Form.Item>
+                    <Form.Item
+                      label="Address"
+                      name="address"
+                      onChange={handleInputChange}
+                    >
+                      <Input placeholder={formValues.address} />
+                    </Form.Item>
+                    <Form.Item
+                      label="Postal Code"
+                      name="postal_code"
+                      onChange={handleInputChange}
+                    >
+                      <Input placeholder={formValues.postal_code} />
+                    </Form.Item>
+                    <Form.Item
+                      label="Nearest MRT"
+                      name="mrt"
+                      onChange={handleInputChange}
+                    >
+                      <Input placeholder={formValues.mrt} />
+                    </Form.Item>
 
-                <Form.Item>
-                  <Button
-                    type="primary"
-                    htmlType="submit"
-                    onClick={handleSubmit}
-                  >
-                    Save Changes
-                  </Button>
-                  <Link to={`/${user_id}/profile`}>Back to Profile</Link>
-                </Form.Item>
+                    <Form.Item>
+                      <Button
+                        type="primary"
+                        htmlType="submit"
+                        onClick={handleSubmit}
+                        style={{ marginLeft: 266 }}
+                      >
+                        Save Changes
+                      </Button>
+                    </Form.Item>
+                  </>
+                )}
               </Form>
-              {/* <Logout /> */}
             </div>
           </Content>
           <Footer style={footerStyle}></Footer>

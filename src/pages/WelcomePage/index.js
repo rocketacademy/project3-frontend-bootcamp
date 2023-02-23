@@ -63,18 +63,6 @@ export default function WelcomePage() {
   }, [user, accessToken]);
   console.log(accessToken);
 
-  const handleSignUp = () => {
-    const redirectUri = "http://localhost:3001/*/homepage";
-    const clientId = process.env.REACT_APP_AUTH0_CLIENT_ID;
-    const queryParams = {
-      client_id: clientId,
-      redirect_uri: redirectUri,
-      // response_type: 'code',
-      scope: "openid profile email",
-      screen_hint: "signup",
-    };
-  };
-
   return (
     <Space
       direction="vertical"
@@ -95,13 +83,7 @@ export default function WelcomePage() {
             <Menu.Item key="1">Press</Menu.Item>
             <Menu.Item key="2">Contact Us</Menu.Item>
             <Space wrap>
-              <Button
-                type="primary"
-                style={{ backgroundColor: "#ff7e55", color: "white" }}
-                onClick={handleSignUp}
-              >
-                Sign Up
-              </Button>
+
               <Button
                 type="primary"
                 style={{ backgroundColor: "#ff7e55", color: "white" }}
@@ -124,7 +106,7 @@ export default function WelcomePage() {
           <div className="container">
             <img width="100%" src={intropage} alt="intropage" />
             <div className="top-left">
-              <h3>Give and Take</h3>
+              <h3>Give & Take</h3>
               <p>Your local app for giving and requesting things.</p>
             </div>
           </div>
@@ -162,24 +144,8 @@ export default function WelcomePage() {
             )}
           </Row>
 
-          <Space wrap>
-            <Button
-              type="primary"
-              style={{ backgroundColor: "#ff7e55", color: "white" }}
-              onClick={handleSignUp}
-            >
-              Sign Up
-            </Button>
-            <Button
-              type="primary"
-              style={{ backgroundColor: "#ff7e55", color: "white" }}
-              onClick={loginWithRedirect}
-            >
-              Login
-            </Button>
-          </Space>
         </Content>
-        <Footer style={footerStyle}>Copyright(c) Give and Take 2023. </Footer>
+        <Footer style={footerStyle}>Copyright © Give & Take 2023 </Footer>
       </Layout>
     </Space>
   );
