@@ -9,7 +9,7 @@ import rocket from '../../assets/images/rocket.png';
 import cloudinary from '../../assets/images/cloudinary.png';
 import postgres from '../../assets/images/postgres.png';
 import sendgrid from '../../assets/images/sendgrid.png';
-import react from '../../assets/images/react.webp';
+import react from '../../assets/images/react.png';
 import antdesign from '../../assets/images/ant-design.png';
 
 import './welcomepage.css';
