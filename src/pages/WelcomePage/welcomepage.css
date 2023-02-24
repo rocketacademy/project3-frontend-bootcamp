@@ -5,9 +5,29 @@ body {
   font-family: 'Cormorant Garamond', serif;
 }
 
+.header {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1;
+}
+
+.navbar {
+  font-family: 'Cormorant Garamond', serif;
+}
+
+.navbar a {
+  font-size: large;
+}
+
+.navbar a:active {
+  color: #303841;
+}
+
 .container {
   position: relative;
   text-align: left;
+  font-family: 'Cormorant Garamond', serif;
 }
 
 .top-left {
@@ -21,4 +41,58 @@ body {
 .banner {
   width: 60%;
   height: auto;
+}
+
+.press {
+  background-color: white;
+  /* height: 600px; */
+}
+
+.slide img {
+  max-width: 50%;
+  /* width: 200px; */
+  height: auto;
+  padding-bottom: 20px;
+  max-height: 50%;
+  vertical-align: middle;
+}
+.slide {
+  display: flex;
+  justify-content: center;
+  height: 200px;
+}
+
+.contact h2 {
+  text-align: center;
+  padding: 0;
+  margin: 0 auto;
+  height: 30px;
+}
+
+.contact p {
+  text-align: center;
+  padding: 0;
+  margin: 0 auto;
+}
+
+.button span {
+  font-family: 'Cormorant Garamond', serif;
+  /* font-size: large; */
+  /* align-items: center; */
+}
+
+.contactfields {
+  max-width: 1170px;
+  margin: auto auto;
+  padding: 0;
+  align-items: center;
+}
+
+.email {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-weight: bold;
+  font-size: large;
+  position: relative;
+  bottom: 50px;
 }
