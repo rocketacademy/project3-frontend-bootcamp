@@ -24,7 +24,9 @@ import {
   Content,
   siderStyle,
   contentStyle,
-} from "../globalstyles";
+  footerStyle,
+  replicateFooterStyle
+} from '../globalstyles';
 import { useNavigate } from "react-router-dom";
 import { Link, useParams } from "react-router-dom";
 import "./editprofile.css";
@@ -37,32 +39,15 @@ export function EditProfile() {
   const { Option } = Select;
   const navigate = useNavigate();
 
-  const prefixSelector = (
-    <Form.Item name="prefix" noStyle>
-      <Select style={{ width: 70 }}>
-        <Option defaultValue="65">+65</Option>
-      </Select>
-    </Form.Item>
-  );
+  // const prefixSelector = (
+  //   <Form.Item name="prefix" noStyle>
+  //     <Select style={{ width: 70 }}>
+  //       <Option defaultValue="65">+65</Option>
+  //     </Select>
+  //   </Form.Item>
+  // );
 
-  const footerStyle = {
-    textAlign: "center",
-    color: "#fff",
-    backgroundColor: "#303841",
-    position: "fixed",
-    bottom: 0,
-    width: "100%",
-  };
-
-  const replicateFooterStyle = {
-    left: 0,
-    bottom: 0,
-    width: "100%",
-    // position: 'absolute',
-    backgroundColor: "#303841",
-    position: "fixed",
-  };
-
+  
   const { getAccessTokenSilently, user } = useAuth0();
   const [accessToken, setAccessToken] = useState(null);
   const [formValues, setFormValues] = useState(null);
@@ -151,7 +136,9 @@ export function EditProfile() {
         </Sider>
         <Layout>
           <Content style={contentStyle}>
-            <div>
+            <div className="container">
+              <div className="content">
+            
               <Form
                 labelCol={{
                   span: 8,
@@ -258,7 +245,8 @@ export function EditProfile() {
                         type="primary"
                         htmlType="submit"
                         onClick={handleSubmit}
-                        style={{ marginLeft: 266 }}
+                        style={{ backgroundColor: 'white', color: '#ff7e55', marginRight: '20px' }}
+                        // style={{ marginLeft: 266 }}
                       >
                         Save Changes
                       </Button>
@@ -266,6 +254,7 @@ export function EditProfile() {
                   </>
                 )}
               </Form>
+            </div>
             </div>
           </Content>
           <Footer style={footerStyle}></Footer>
