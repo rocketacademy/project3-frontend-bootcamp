@@ -1,7 +1,15 @@
 // val to populate
 import { React, useState, useEffect } from 'react';
 import './createprofile.css';
-import { Sider, Footer, Content, siderStyle, contentStyle } from '../globalstyles.js';
+import {
+  Sider,
+  Footer,
+  Content,
+  siderStyle,
+  contentStyle,
+  footerStyle,
+  replicateFooterStyle
+} from '../globalstyles.js';
 import { Navbar } from '../../commoncomponents/Navbar/Navbar';
 import { PlusOutlined } from '@ant-design/icons';
 import { Button, Form, Input, TreeSelect, Upload, Select, Layout, notification } from 'antd';
@@ -125,106 +133,92 @@ export function CreateProfile() {
   const configs = {};
   if (accessToken) configs.headers = { Authorization: `Bearer ${accessToken}` };
 
-  const footerStyle = {
-    textAlign: 'center',
-    color: '#fff',
-    backgroundColor: '#303841',
-    position: 'fixed',
-    bottom: 0,
-    width: '100%'
-  };
-
-  const replicateFooterStyle = {
-    left: 0,
-    bottom: 0,
-    width: '100%',
-    // position: 'absolute',
-    backgroundColor: '#303841',
-    position: 'fixed'
-  };
-
   return (
     <div>
       {contextHolder}
       <br></br>
       <Layout>
         <Sider width={300} style={siderStyle}>
-          {/* <Navbar /> */}
+          <Navbar />
           <Footer style={replicateFooterStyle}>--</Footer>
         </Sider>
         <Layout>
           <Content style={contentStyle}>
-            <div>
-              {user && (
-                <Form
-                  labelCol={{
-                    span: 8
-                  }}
-                  wrapperCol={{
-                    span: 20
-                  }}
-                  layout="horizontal"
-                  style={{
-                    maxWidth: 800
-                  }}>
-                  <Form.Item label="Current Profile Photo" name="profile_photo">
-                    <img alt="" src={formValues.profile_photo} width="200" />
-                    <br></br>
-                    <UploadWidget setFormValues={setFormValues} formValues={formValues} />
-                  </Form.Item>
-                  <Form.Item
-                    label="Username"
-                    name="username"
-                    onChange={handleInputChange}
-                    defaultValue={user.nickname}>
-                    <Input
-                      placeholder={user.nickname}
-                      // defaultValue={user.nickname}
-                    />
-                  </Form.Item>
-                  <Form.Item label="First Name" name="first_name" onChange={handleInputChange}>
-                    <Input placeholder={formValues.first_name} />
-                  </Form.Item>
-                  <Form.Item label="Last Name" name="last_name" onChange={handleInputChange}>
-                    <Input placeholder={formValues.last_name} />
-                  </Form.Item>
-                  <Form.Item label="Email" name="email" onChange={handleInputChange}>
-                    <Input placeholder={formValues.email} />
-                  </Form.Item>
+            <div className="container">
+              <div className="content">
+                {user && (
+                  <Form
+                    labelCol={{
+                      span: 8
+                    }}
+                    wrapperCol={{
+                      span: 20
+                    }}
+                    layout="horizontal"
+                    style={{
+                      maxWidth: 800
+                    }}>
+                    <Form.Item label="Current Profile Photo" name="profile_photo">
+                      <img alt="" src={formValues.profile_photo} width="200" />
+                      <br></br>
+                      <UploadWidget setFormValues={setFormValues} formValues={formValues} />
+                    </Form.Item>
+                    <Form.Item
+                      label="Username"
+                      name="username"
+                      onChange={handleInputChange}
+                      defaultValue={user.nickname}>
+                      <Input
+                        placeholder={user.nickname}
+                        // defaultValue={user.nickname}
+                      />
+                    </Form.Item>
+                    <Form.Item label="First Name" name="first_name" onChange={handleInputChange}>
+                      <Input placeholder={formValues.first_name} />
+                    </Form.Item>
+                    <Form.Item label="Last Name" name="last_name" onChange={handleInputChange}>
+                      <Input placeholder={formValues.last_name} />
+                    </Form.Item>
+                    <Form.Item label="Email" name="email" onChange={handleInputChange}>
+                      <Input placeholder={formValues.email} />
+                    </Form.Item>
 
-                  <Form.Item
-                    name="phone_number"
-                    label="Phone Number"
-                    rules={[
-                      {
-                        required: true,
-                        message: 'Please input your phone number!'
-                      }
-                    ]}
-                    onChange={handleInputChange}>
-                    <Input addonBefore="+65" placeholder={formValues.phone_number} />
-                  </Form.Item>
-                  <Form.Item label="Address" name="address" onChange={handleInputChange}>
-                    <Input placeholder={formValues.address} />
-                  </Form.Item>
-                  <Form.Item label="Postal Code" name="postal_code" onChange={handleInputChange}>
-                    <Input placeholder={formValues.postal_code} />
-                  </Form.Item>
-                  <Form.Item label="Nearest MRT" name="mrt" onChange={handleInputChange}>
-                    <Input placeholder={formValues.mrt} />
-                  </Form.Item>
+                    <Form.Item
+                      name="phone_number"
+                      label="Phone Number"
+                      rules={[
+                        {
+                          required: true,
+                          message: 'Please input your phone number!'
+                        }
+                      ]}
+                      onChange={handleInputChange}>
+                      <Input addonBefore="+65" placeholder={formValues.phone_number} />
+                    </Form.Item>
+                    <Form.Item label="Address" name="address" onChange={handleInputChange}>
+                      <Input placeholder={formValues.address} />
+                    </Form.Item>
+                    <Form.Item label="Postal Code" name="postal_code" onChange={handleInputChange}>
+                      <Input placeholder={formValues.postal_code} />
+                    </Form.Item>
+                    <Form.Item label="Nearest MRT" name="mrt" onChange={handleInputChange}>
+                      <Input placeholder={formValues.mrt} />
+                    </Form.Item>
 
-                  <Form.Item>
-                    <Button
-                      type="primary"
-                      htmlType="submit"
-                      onClick={handleSubmit}
-                      style={{ marginLeft: 266 }}>
-                      Save Changes
-                    </Button>
-                  </Form.Item>
-                </Form>
-              )}
+                    <Form.Item>
+                      <Button
+                        type="primary"
+                        htmlType="submit"
+                        style={{ backgroundColor: 'white', color: '#ff7e55', marginRight: '20px' }}
+                        onClick={handleSubmit}
+                        // style={{ marginLeft: 266 }}
+                      >
+                        Save Changes
+                      </Button>
+                    </Form.Item>
+                  </Form>
+                )}
+              </div>
             </div>
           </Content>
           <Footer style={footerStyle}>Copyright(c) Give and Take 2023.</Footer>

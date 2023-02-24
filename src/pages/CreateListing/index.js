@@ -195,7 +195,13 @@ export default function CreateListing() {
                         </Form.Item>
 
                         <Form.Item>
-                          <Button type="primary" htmlType="submit" onClick={handleSubmit}>
+                          <Button
+                            type="primary"
+                            htmlType="submit"
+                            onClick={handleSubmit}
+                            style={{
+                              marginRight: '20px'
+                            }}>
                             List item!
                           </Button>
                           <Button type="link" onClick={handleBackButtonClick}>

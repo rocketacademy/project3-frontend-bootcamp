@@ -83,7 +83,9 @@ export default function WelcomePage() {
             style={{ backgroundColor: '#eeeeee', color: '#ff7e55' }}
             mode="horizontal"
             defaultSelectedKeys={['0']}>
-            <img height={60} src={logo} alt="logo" />
+            <a href="/">
+              <img height={60} src={logo} alt="logo" />
+            </a>
             <Menu.Item key="0">
               <a href="#about">How it works</a>
             </Menu.Item>
@@ -96,6 +98,7 @@ export default function WelcomePage() {
             <Space wrap>
               <Button
                 type="primary"
+                className="signupbtn"
                 style={{ backgroundColor: '#ff7e55', color: 'white' }}
                 onClick={loginWithRedirect}>
                 Sign Up / Login
