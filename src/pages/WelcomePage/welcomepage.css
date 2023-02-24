@@ -14,10 +14,15 @@ body {
 
 .navbar {
   font-family: 'Cormorant Garamond', serif;
+  position: relative;
 }
 
 .navbar a {
   font-size: large;
+}
+
+.navbar img {
+  cursor: pointer;
 }
 
 .navbar a:active {
@@ -77,15 +82,6 @@ body {
 
 .button span {
   font-family: 'Cormorant Garamond', serif;
-  /* font-size: large; */
-  /* align-items: center; */
-}
-
-.contactfields {
-  max-width: 1170px;
-  margin: auto auto;
-  padding: 0;
-  align-items: center;
 }
 
 .email {
@@ -95,4 +91,10 @@ body {
   font-size: large;
   position: relative;
   bottom: 50px;
+}
+
+.signupbtn {
+  position: 'absolute';
+  top: 0;
+  right: 0;
 }

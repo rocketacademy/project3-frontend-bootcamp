@@ -141,15 +141,16 @@ export function EditProfile() {
                     maxWidth: 800
                   }}>
                   {formValues === null ? (
-                    <Spin tip="Loading...">
-                      <Alert
-                        message="Please wait..."
-                        description="Loading user profile..."
-                        type="info"
-                        style={{ backgroundColor: 'white' }}
-                      />
-                    </Spin>
+                    <div className="loading"></div>
                   ) : (
+                    // <Spin tip="Loading...">
+                    //   <Alert
+                    //     message="Please wait..."
+                    //     description="Loading user profile..."
+                    //     type="info"
+                    //     style={{ backgroundColor: 'white' }}
+                    //   />
+                    // </Spin>
                     <>
                       <Form.Item label="Current Profile Photo" name="profile_photo">
                         <img alt="" src={formValues.profile_photo} width="200" />
