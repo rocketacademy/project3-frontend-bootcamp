@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-
+import { Button } from 'antd';
 export function UploadWidget({ setFormValues, formValues }) {
   const cloudinaryRef = useRef();
   const widgetRef = useRef();
@@ -30,12 +30,11 @@ export function UploadWidget({ setFormValues, formValues }) {
   }, []);
 
   return (
-    <button
+    <Button
       onClick={() => {
         widgetRef.current.open();
-      }}
-    >
+      }}>
       Upload & replace photo?
-    </button>
+    </Button>
   );
 }
