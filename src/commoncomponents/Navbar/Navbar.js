@@ -6,7 +6,7 @@ import { useAuth0 } from '@auth0/auth0-react';
 import { Link, useParams } from 'react-router-dom';
 
 export function Navbar() {
-  let { user_id } = useParams();
+  let { original_id } = useParams();
   const { logout } = useAuth0();
 
   return (
@@ -22,13 +22,18 @@ export function Navbar() {
               </div>
             </div>
             <li>
-              <Link to={`../../${user_id}/homepage`}>Home</Link>
+              <Link to={`../../${original_id}/homepage`}>Home</Link>
+              {/* <a href="homepage">Home</a> */}
             </li>
             <li>
-              <Link to={`../../${user_id}/profile`}>Profile</Link>
+              {/* <a href="profile">Profile</a> */}
+              <Link to={`../../${original_id}/profile`}>Profile</Link>
             </li>
             <li>
-              <Link to={`../../${user_id}/createlisting`}>Create Listing</Link>
+              {/* <a href="createlisting">Create Listing</a> */}
+              <Link to={`../../${original_id}/createlisting`}>
+                Create Listing
+              </Link>
             </li>
             <li>
               <button className={styles.logout} onClick={logout}>

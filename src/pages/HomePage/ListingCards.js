@@ -24,6 +24,7 @@ export default function ListingCards({ configs }) {
   const [pageListings, setPageListings] = useState([]);
 
   const [listingTypeFilter, setListingTypeFilter] = useState();
+  const { original_id } = useParams();
 
   const items = [
     {
@@ -197,7 +198,9 @@ export default function ListingCards({ configs }) {
                       />
                     }
                     actions={[
-                      <Link to={`http://localhost:3001/${user_id}/listings/${id}`}>
+                      <Link
+                        to={`http://localhost:3001/${original_id}/listings/${user_id}/${id}`}
+                      >
                         <EyeOutlined key="view" />
                       </Link>,
                       <a href={`https://wa.me/65${phone_number}`}>

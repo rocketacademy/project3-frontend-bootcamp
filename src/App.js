@@ -28,13 +28,16 @@ function App() {
         <Route path="/" element={<WelcomePage />} />
         <Route path="/loading" element={<LoadingPage />} />
         <Route path="/createprofile" element={<CreateProfile />} />
-        <Route path=":user_id">
+        <Route path=":original_id">
           <Route path="homepage" element={<HomePage />} />
           <Route path="search" element={<SearchResultsPage />} />
 
           {/* listings page URL to be confirmed */}
-          <Route path="listings/:listing_id" element={<ViewListing />} />
-          <Route path="userlistings/:listing_id" element={<UserIndividualListing />} />
+          <Route path="listings/:user_id/:listing_id" element={<ViewListing />} />
+          <Route
+            path="userlistings/:listing_id"
+            element={<UserIndividualListing />}
+          />
           <Route path="createlisting" element={<CreateListing />} />
           <Route path="settings" element={<EditProfile />} />
           <Route path="profile" element={<UserProfile />} />
