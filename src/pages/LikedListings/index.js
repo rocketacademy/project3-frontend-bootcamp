@@ -1,10 +1,7 @@
 import React from 'react';
-import { Layout, Button, Input, ConfigProvider, Row, Col, Menu, Typography } from 'antd';
-import { Navbar } from '../../commoncomponents/Navbar/Navbar';
-import { useNavigate, useSearchParams } from 'react-router-dom';
-import SearchBar from '../HomePage/SearchBar';
-import SearchedListingCards from './SearchedListingCards';
-
+import { Layout, Button, Input, ConfigProvider, Row, Col, Menu } from 'antd';
+import { useNavigate, useParams } from 'react-router-dom';
+import { useEffect, useState } from 'react';
 import {
   Sider,
   Footer,
@@ -14,15 +11,13 @@ import {
   footerStyle,
   replicateFooterStyle
 } from '../globalstyles.js';
-import { useEffect, useState } from 'react';
 import { useAuth0 } from '@auth0/auth0-react';
-import { left } from '@cloudinary/url-gen/qualifiers/textAlignment';
+import { Navbar } from '../../commoncomponents/Navbar/Navbar';
 
-const { Header } = Layout;
-const { Title } = Typography;
-
-export default function SearchResultsPage() {
+export default function LikedListings() {
   const navigate = useNavigate();
+  const { user_id } = useParams();
+
   const { getAccessTokenSilently, user, loginWithRedirect, logout } = useAuth0();
   const [accessToken, setAccessToken] = useState(null);
 
@@ -37,12 +32,8 @@ export default function SearchResultsPage() {
 
   const configs = {};
   if (accessToken) configs.headers = { Authorization: `Bearer ${accessToken}` };
-
-  const [searchParams, setSearchParams] = useSearchParams();
-
   return (
     <div>
-      {/* Change theme primary */}
       <ConfigProvider
         theme={{
           token: {
@@ -56,16 +47,7 @@ export default function SearchResultsPage() {
             <Footer style={replicateFooterStyle}>{' _'}</Footer>
           </Sider>
           <Layout>
-            <Content style={contentStyle}>
-              <SearchBar
-                searchParams={searchParams}
-                handleSearchParams={(value) => setSearchParams(value)}
-              />
-              <Title style={{ marginLeft: 50 }}>
-                {'Results found for `' + searchParams.get('search') + '`'}
-              </Title>
-              <SearchedListingCards configs={configs} searchParams={searchParams} />
-            </Content>
+            <Content style={contentStyle}></Content>
             <Footer style={footerStyle}>Copyright © Give & Take 2023</Footer>
           </Layout>
         </Layout>

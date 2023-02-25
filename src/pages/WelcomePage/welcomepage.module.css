@@ -8,13 +8,16 @@ body {
 .header {
   position: fixed;
   top: 0;
-  width: 100%;
+  /* width: 100%; */
   z-index: 1;
 }
 
 .navbar {
   font-family: 'Cormorant Garamond', serif;
   position: relative;
+  width: 100%;
+  background-color: #eeeeee;
+  height: 80px;
 }
 
 .navbar a {
@@ -35,12 +38,13 @@ body {
   font-family: 'Cormorant Garamond', serif;
 }
 
-.top-left {
+.topLeft {
   position: absolute;
   top: 8px;
   left: 46px;
   font-size: 40px;
   line-height: 0.8;
+  padding-top: 50px;
 }
 
 .banner {
@@ -60,6 +64,8 @@ body {
   padding-bottom: 20px;
   max-height: 50%;
   vertical-align: middle;
+  margin-left: auto;
+  margin-right: auto;
 }
 .slide {
   display: flex;

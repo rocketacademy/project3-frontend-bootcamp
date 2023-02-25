@@ -8,10 +8,10 @@
 }
 
 .content {
+  padding-top: 30px;
   padding-left: 30px;
   width: 100%;
   display: flex;
-  /* padding: 30px; */
   background-color: #eeeeee;
   border-radius: 20px;
   box-shadow: 0 0 5px 1px #dddddd;
@@ -26,16 +26,16 @@
   left: 50%;
   top: 50%;
   margin: -60px 0 0 -60px;
-  background: #eeeeee;
-  width: 30px;
-  height: 30px;
+  background: transparent;
+  width: 70px;
+  height: 70px;
   border-radius: 100%;
   border: 10px solid #ff7e55;
 }
 
 .loading:after {
   content: '';
-  background: trasparent;
+  background: transparent;
   width: 140%;
   height: 140%;
   position: absolute;
@@ -54,4 +54,10 @@
   100% {
     transform: rotateZ(360deg);
   }
+}
+
+.loadingText {
+  position: absolute;
+  left: 46.5%;
+  top: 53%;
 }

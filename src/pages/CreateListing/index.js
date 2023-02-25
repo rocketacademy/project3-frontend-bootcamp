@@ -27,13 +27,20 @@ import {
   replicateFooterStyle
 } from '../globalstyles';
 
-import { SmileOutlined, FrownOutlined, UserOutlined, LeftOutlined } from '@ant-design/icons';
+import {
+  SmileOutlined,
+  FrownOutlined,
+  UserOutlined,
+  // LeftOutlined,
+  RollbackOutlined,
+  TagOutlined
+} from '@ant-design/icons';
 
 import TextArea from 'antd/es/input/TextArea';
 import { PlusOutlined, InboxOutlined } from '@ant-design/icons';
 import { Navbar } from '../../commoncomponents/Navbar/Navbar';
 import axios from 'axios';
-import './createlisting.css';
+import styles from './createlisting.module.css';
 
 //Cloudinary states
 import { UploadWidget } from './UploadWidget';
@@ -140,8 +147,8 @@ export default function CreateListing() {
               <>
                 {contextHolder}
 
-                <Row style={{ margin: 50, padding: 0 }}>
-                  <div className="fill">
+                <Row style={{ marginLeft: 50, marginTop: 30 }}>
+                  <div className={styles.fill}>
                     <Col span={12} style={{ padding: 20 }}>
                       <br></br>
                       <UploadWidget setFormValues={setFormValues} formValues={formValues} />
@@ -166,9 +173,13 @@ export default function CreateListing() {
                         </Form.Item>
                         <Form.Item label="Category" required tooltip="This is a required field">
                           <Select placeholder="Select a category" onChange={handleCategoryChange}>
-                            <Select.Option value="Shoes">Shoes</Select.Option>
-                            <Select.Option value="Books">Books</Select.Option>
+                            <Select.Option value="Sports">Sports</Select.Option>
+                            <Select.Option value="Appliances">Appliances</Select.Option>
+                            <Select.Option value="Furniture">Furniture</Select.Option>
                             <Select.Option value="Clothes">Clothes</Select.Option>
+                            <Select.Option value="Shoes">Shoes</Select.Option>
+                            <Select.Option value="Games">Games</Select.Option>
+                            <Select.Option value="Photography">Photography</Select.Option>
                           </Select>
                         </Form.Item>
 
@@ -205,17 +216,23 @@ export default function CreateListing() {
                             List item!
                           </Button>
                           <Button type="link" onClick={handleBackButtonClick}>
-                            {'< '}Back
+                            <RollbackOutlined />
+                            Back
                           </Button>
                         </Form.Item>
                       </Form>
                     </Col>
                   </div>
-                  <Col span={12} style={{ padding: 0, marginLeft: '25px' }}>
+                  <Col span={12} style={{ marginLeft: 30 }}>
                     <Space direction="vertical" size={8}>
                       <h1>Listing Preview</h1>
                       <Card
-                        style={{ width: 300, padding: '20px', background: '#eeeeee' }}
+                        style={{
+                          width: 300,
+                          padding: '20px',
+                          background: '#eeeeee',
+                          justifyContent: 'center'
+                        }}
                         hoverable
                         cover={<Avatar size={128} icon={<UserOutlined />} />}>
                         {' '}
@@ -224,8 +241,21 @@ export default function CreateListing() {
                         ) : (
                           <p></p>
                         )}
-                        {formValues.item_name ? <Meta title={formValues.item_name} /> : <></>}
-                        {formValues.listing_type ? <p>{formValues.listing_type}</p> : <></>}
+                        {formValues.item_name ? (
+                          <p className={styles.itemName}>{formValues.item_name}</p>
+                        ) : (
+                          <></>
+                        )}
+                        <br></br>
+                        {formValues.listing_type ? (
+                          <>
+                            <TagOutlined style={{ color: '#ff7e55' }} />
+                            <></> {formValues.listing_type}
+                          </>
+                        ) : (
+                          <></>
+                        )}
+                        <br></br>
                         {formValues.category ? (
                           <Tag color="volcano">{formValues.category}</Tag>
                         ) : (
@@ -246,7 +276,7 @@ export default function CreateListing() {
                   </Col>
                 </Row>
               </>
-              <Footer style={footerStyle}>Copyright(c) Give and Take 2023.</Footer>
+              <Footer style={footerStyle}>Copyright © Give & Take 2023</Footer>
             </Content>
           </Layout>
         </Layout>
