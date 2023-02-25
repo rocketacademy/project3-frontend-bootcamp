@@ -7,12 +7,10 @@ import {
   EnvironmentOutlined,
   TagOutlined,
 } from "@ant-design/icons";
-import "./homepage.css";
 import { Col, Row } from "antd";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { Link, useNavigate } from "react-router-dom";
-import CategorySlider from "./CategorySlider";
+import { Link, useNavigate, useSearchParams } from "react-router-dom";
 const { Meta } = Card;
 
 export default function ListingCards({ configs }) {
@@ -22,8 +20,9 @@ export default function ListingCards({ configs }) {
   const [incomingConfig, setIncomingConfig] = useState({});
   const [currentPage, setCurrentPage] = useState(1);
   const [pageListings, setPageListings] = useState([]);
-
   const [listingTypeFilter, setListingTypeFilter] = useState();
+
+  const [searchParams, setSearchParams] = useSearchParams();
 
   const items = [
     {
@@ -45,15 +44,11 @@ export default function ListingCards({ configs }) {
     }
   };
 
-  const [category, setCategory] = useState();
   const navigate = useNavigate();
-
-  const handleCategoryChange = (value) => {
-    setCategory(value);
-  };
 
   const handleFilterRemoval = () => {
     setListingTypeFilter(null);
+    console.log("filter cleared");
   };
 
   const onPageChange = (page) => {
@@ -68,30 +63,30 @@ export default function ListingCards({ configs }) {
     axios
       .get(`http://localhost:3000/listings`, incomingConfig)
       .then(function (response) {
-        if (category && category !== "View All Categories") {
-          let filteredCategoryListings = response.data.filter((listing) => {
-            return listing.category === category;
+        console.log(searchParams.get("search"));
+        if (searchParams.get("search")) {
+          let searchQuery = searchParams.get("search").toLowerCase();
+          let searchedListings = response.data.filter((listing) => {
+            return listing.item_name.toLowerCase().includes(searchQuery);
           });
 
           if (listingTypeFilter) {
-            filteredCategoryListings = filteredCategoryListings.filter(
-              (listing) => {
-                return listing.listing_type === listingTypeFilter;
-              }
-            );
-          }
-          setListingsReturned(filteredCategoryListings);
-          console.log(filteredCategoryListings);
-        } else {
-          let filteredCategoryListings = response.data;
-
-          if (listingTypeFilter) {
-            filteredCategoryListings = response.data.filter((listing) => {
+            searchedListings = searchedListings.filter((listing) => {
               return listing.listing_type === listingTypeFilter;
             });
           }
-          setListingsReturned(filteredCategoryListings);
-          console.log(response.data);
+          setListingsReturned(searchedListings);
+          console.log(searchedListings);
+        } else {
+          let searchedListings = response.data;
+
+          if (listingTypeFilter) {
+            searchedListings = searchedListings.filter((listing) => {
+              return listing.listing_type === listingTypeFilter;
+            });
+          }
+          setListingsReturned(searchedListings);
+          console.log(searchedListings);
         }
       })
       .catch(function (error) {
@@ -106,7 +101,7 @@ export default function ListingCards({ configs }) {
       .catch(function (error) {
         console.log(error);
       });
-  }, [incomingConfig, category, listingTypeFilter]);
+  }, [incomingConfig, searchParams, listingTypeFilter]);
 
   useEffect(() => {
     setCombinedData([]);
@@ -135,15 +130,10 @@ export default function ListingCards({ configs }) {
 
   return (
     <div>
-      <CategorySlider
-        category={category}
-        handleCategoryChange={(value) => handleCategoryChange(value)}
-      />
-
       <div className="all-listing">
         <Row>
           <Col span={19}>
-            <h2>Listings You May Want</h2>
+            <h2>Listings found</h2>
           </Col>
           <Col span={5} style={{ alignItems: "center", margin: "auto" }}>
             <Dropdown

@@ -1,9 +1,9 @@
-import { useAuth0 } from '@auth0/auth0-react';
-import { Alert, Spin } from 'antd';
-import axios from 'axios';
-import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import './loading.css';
+import { useAuth0 } from "@auth0/auth0-react";
+import { Alert, Spin } from "antd";
+import axios from "axios";
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import "./loading.css";
 
 export default function LoadingPage() {
   const navigate = useNavigate();
@@ -21,7 +21,7 @@ export default function LoadingPage() {
       .then(function (response) {
         console.log(response.data);
         let userFoundInDatabase = false;
-        let retrievedUserId = '';
+        let retrievedUserId = "";
         for (let i = 0; i < response.data.length; i++) {
           if (response.data[i].email === user.email) {
             userFoundInDatabase = true;
@@ -29,7 +29,7 @@ export default function LoadingPage() {
           }
         }
         if (!userFoundInDatabase) {
-          navigate('/createprofile');
+          navigate("/createprofile");
         } else {
           navigate(`/${retrievedUserId}/homepage`);
         }

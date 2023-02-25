@@ -16,6 +16,7 @@ import CreateListing from "./pages/CreateListing";
 import ViewListing from "./pages/ViewListing";
 import EditListing from "./pages/EditListing";
 import LoadingPage from "./pages/LoadingPage";
+import SearchResultsPage from "./pages/SearchResultsPage";
 
 function App() {
   let { user_id } = useParams();
@@ -28,6 +29,7 @@ function App() {
         <Route path="/createprofile" element={<CreateProfile />} />
         <Route path=":user_id">
           <Route path="homepage" element={<HomePage />} />
+          <Route path="search" element={<SearchResultsPage />} />
 
           {/* listings page URL to be confirmed */}
           <Route path="listings/:listing_id" element={<ViewListing />} />

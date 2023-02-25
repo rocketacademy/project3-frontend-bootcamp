@@ -1,10 +1,18 @@
 import React from "react";
-import { Layout, Button, Input, ConfigProvider, Row, Col, Menu } from "antd";
-import CarouselBanner from "./CarouselBanner";
-import ListingCards from "./ListingCards";
+import {
+  Layout,
+  Button,
+  Input,
+  ConfigProvider,
+  Row,
+  Col,
+  Menu,
+  Typography,
+} from "antd";
 import { Navbar } from "../../commoncomponents/Navbar/Navbar";
-import { useNavigate, useParams, useSearchParams } from "react-router-dom";
-import SearchBar from "./SearchBar";
+import { useNavigate, useSearchParams } from "react-router-dom";
+import SearchBar from "../HomePage/SearchBar";
+import SearchedListingCards from "./SearchedListingCards";
 
 import {
   Sider,
@@ -15,17 +23,15 @@ import {
   footerStyle,
   replicateFooterStyle,
 } from "../globalstyles.js";
-import Search from "antd/es/input/Search";
 import { useEffect, useState } from "react";
 import { useAuth0 } from "@auth0/auth0-react";
-import axios from "axios";
+import { left } from "@cloudinary/url-gen/qualifiers/textAlignment";
 
 const { Header } = Layout;
+const { Title } = Typography;
 
-export default function HomePage() {
+export default function SearchResultsPage() {
   const navigate = useNavigate();
-  const { user_id } = useParams();
-
   const { getAccessTokenSilently, user, loginWithRedirect, logout } =
     useAuth0();
   const [accessToken, setAccessToken] = useState(null);
@@ -42,14 +48,7 @@ export default function HomePage() {
   const configs = {};
   if (accessToken) configs.headers = { Authorization: `Bearer ${accessToken}` };
 
-  const [searchParams, setSearchParams] = useState("");
-
-  useEffect(() => {
-    if (searchParams) {
-      console.log(searchParams);
-      navigate(`/${user_id}/search?search=${searchParams}`);
-    }
-  }, [searchParams]);
+  const [searchParams, setSearchParams] = useSearchParams();
 
   return (
     <div>
@@ -69,12 +68,17 @@ export default function HomePage() {
           </Sider>
           <Layout>
             <Content style={contentStyle}>
-              <CarouselBanner />
               <SearchBar
                 searchParams={searchParams}
                 handleSearchParams={(value) => setSearchParams(value)}
               />
-              <ListingCards configs={configs} />
+              <Title style={{ marginLeft: 50 }}>
+                {"Results found for `" + searchParams.get("search") + "`"}
+              </Title>
+              <SearchedListingCards
+                configs={configs}
+                searchParams={searchParams}
+              />
             </Content>
             <Footer style={footerStyle}> Copyright © Give & Take 2023</Footer>
           </Layout>
