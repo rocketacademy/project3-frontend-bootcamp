@@ -86,3 +86,7 @@
 .logout:hover {
   color: #ff7e55;
 }
+
+.btn {
+  border: none;
+}
