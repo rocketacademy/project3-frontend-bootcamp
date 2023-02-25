@@ -16,13 +16,6 @@ export default function SearchBar({ handleSearchParams }) {
     setSearchParams({ search: value });
   };
 
-  useEffect(() => {
-    if (searchParams) {
-      console.log(searchParams);
-      console.log(searchParams.get("search"));
-    }
-  }, [searchParams]);
-
   return (
     <Search
       placeholder="What are you looking for?"

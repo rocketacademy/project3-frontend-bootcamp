@@ -13,7 +13,7 @@ import axios from "axios";
 import { Link, useNavigate, useSearchParams } from "react-router-dom";
 const { Meta } = Card;
 
-export default function ListingCards({ configs }) {
+export default function SearchedListingCards({ configs, liftNumberOfResults }) {
   const [listingsReturned, setListingsReturned] = useState([]);
   const [usersReturned, setUsersReturned] = useState([]);
   const [combinedData, setCombinedData] = useState([]);
@@ -121,6 +121,10 @@ export default function ListingCards({ configs }) {
       }
     }
   }, [listingsReturned, usersReturned]);
+
+  useEffect(() => {
+    liftNumberOfResults(combinedData.length);
+  }, [combinedData]);
 
   useEffect(() => {
     setPageListings(
