@@ -45,7 +45,7 @@ export function UserProfile() {
   const [userListings, setUserListings] = useState([]);
   const [dateSlicer, setDateSlicer] = useState('');
   const [api, contextHolder] = notification.useNotification();
-  let { user_id } = useParams();
+  let { original_id } = useParams();
 
   const openNotificationWithIcon = (placement, listingIdToBeDeleted) => {
     const key = `open${Date.now()}`;
@@ -95,7 +95,7 @@ export function UserProfile() {
   };
   const openDeleteSuccessNotification = (placement) => {
     axios
-      .get(`http://localhost:3000/${user_id}/editprofile`, configs)
+      .get(`http://localhost:3000/${original_id}/editprofile`, configs)
       .then(function (response) {
         setUserProfile(response.data);
         setDateSlicer(response.data.createdAt.slice(0, 10));
@@ -104,7 +104,7 @@ export function UserProfile() {
         console.log(error);
       });
     axios
-      .get(`http://localhost:3000/${user_id}/profile`, configs)
+      .get(`http://localhost:3000/${original_id}/profile`, configs)
       .then(function (response) {
         setUserListings(response.data);
         console.log(response.data);
@@ -151,7 +151,7 @@ export function UserProfile() {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:3000/${user_id}/editprofile`, configs)
+      .get(`http://localhost:3000/${original_id}/editprofile`, configs)
       .then(function (response) {
         setUserProfile(response.data);
         setDateSlicer(response.data.createdAt.slice(0, 10));
@@ -160,7 +160,7 @@ export function UserProfile() {
         console.log(error);
       });
     axios
-      .get(`http://localhost:3000/${user_id}/profile`, configs)
+      .get(`http://localhost:3000/${original_id}/profile`, configs)
       .then(function (response) {
         setUserListings(response.data);
         console.log(response.data);
@@ -251,10 +251,14 @@ export function UserProfile() {
                         }}
                         cover={<img alt="" src={photo_url} />}
                         actions={[
-                          <Link to={`http://localhost:3001/${user_id}/listings/${id}`}>
+                          <Link
+                            to={`http://localhost:3001/${original_id}/listings/${id}`}
+                          >
                             <EyeOutlined key="view" />
                           </Link>,
-                          <Link to={`http://localhost:3001/${user_id}/editlisting/${id}`}>
+                          <Link
+                            to={`http://localhost:3001/${original_id}/editlisting/${id}`}
+                          >
                             <EditOutlined key="edit" />
                           </Link>,
                           <DeleteOutlined

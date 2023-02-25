@@ -42,7 +42,7 @@ export function EditProfile() {
   const { getAccessTokenSilently, user } = useAuth0();
   const [accessToken, setAccessToken] = useState(null);
   const [formValues, setFormValues] = useState(null);
-  let { user_id } = useParams();
+  let { original_id } = useParams();
   const [api, contextHolder] = notification.useNotification();
   const openSuccessNotification = (placement) => {
     api.info({
@@ -89,7 +89,7 @@ export function EditProfile() {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:3000/${user_id}/editprofile`, configs)
+      .get(`http://localhost:3000/${original_id}/editprofile`, configs)
       .then(function (response) {
         setFormValues(response.data);
       })
@@ -101,14 +101,14 @@ export function EditProfile() {
   const handleSubmit = (e) => {
     e.preventDefault();
     axios
-      .put(`http://localhost:3000/${user_id}/settings`, formValues, configs)
+      .put(`http://localhost:3000/${original_id}/settings`, formValues, configs)
       .then(function (response) {
         console.log(response);
-        openSuccessNotification('top');
+        openSuccessNotification("top");
       })
       .catch(function (error) {
         console.log(error);
-        openFailureNotification('top');
+        openFailureNotification("top");
       });
   };
 

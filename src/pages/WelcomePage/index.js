@@ -59,7 +59,7 @@ export default function WelcomePage() {
       .catch(function (error) {
         console.log(error);
       });
-  }, []);
+  }, [accessToken]);
 
   useEffect(() => {
     if (user && !accessToken) {
@@ -191,7 +191,7 @@ export default function WelcomePage() {
             <p className={styles.email}>hello@giveandtake.sg</p>
           </div>
         </Content>
-        <Footer style={footerStyle}>Copyright(c) Give and Take 2023. </Footer>
+        <Footer style={footerStyle}>Copyright © Give & Take 2023. </Footer>
       </Layout>
     </Space>
   );
