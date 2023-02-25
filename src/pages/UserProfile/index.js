@@ -20,6 +20,7 @@ import {
   SmileOutlined,
   FrownOutlined,
 } from "@ant-design/icons";
+
 import {
   Sider,
   Footer,
@@ -179,6 +180,7 @@ export function UserProfile() {
       <Layout>
         <Sider width={300} style={siderStyle}>
           <Navbar />
+          <Footer style={replicateFooterStyle}>-</Footer>
         </Sider>
 
         <Layout>
@@ -219,13 +221,17 @@ export function UserProfile() {
                     <div>{userProfile.mrt}</div>
                   </div>
                   {userProfile.email === user.email && (
-                    <Button className="btn">
-                      <a href="settings">Update Profile</a>
-                    </Button>
+                    <>
+                      <Button className="btn">
+                        <a href="settings">Update Profile</a>
+                      </Button>
+                      <Button className="btn">Liked Listings</Button>
+                    </>
                   )}
                 </div>
               )}
             </div>
+
             <h3 className="content">Personal Listings</h3>
             <div className="listings">
               {userListings.length > 0 ? (

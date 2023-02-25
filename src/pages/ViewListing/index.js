@@ -74,6 +74,20 @@ export default function ViewListing() {
     }
   }, [listingReturned, userReturned]);
 
+  // const handleLikeButtonClick = () => {
+  //   axios
+  //     .post(`http://localhost:3000/${user_id}/listings/${listing_id}/likes`, {
+  //       user_id: user_id,
+  //       listing_id: listing_id,
+  //     })
+  //     .then(function (response) {
+  //       console.log(response);
+  //     })
+  //     .catch(function (error) {
+  //       console.log(error);
+  //     });
+  // };
+
   const footerStyle = {
     textAlign: "center",
     color: "#fff",
@@ -155,7 +169,10 @@ export default function ViewListing() {
                                 Chat Now
                               </a>
                             </Button>
-                            <Button type="default">
+                            <Button
+                              type="default"
+                              // onClick={handleLikeButtonClick}
+                            >
                               <LikeOutlined />
                               Like Listing
                             </Button>

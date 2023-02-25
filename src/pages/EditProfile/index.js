@@ -1,8 +1,8 @@
 // users can edit the details of their profile on this page
-import { React, useState, useEffect } from 'react';
-import './editprofile.css';
-import { Navbar } from '../../commoncomponents/Navbar/Navbar';
-import { PlusOutlined } from '@ant-design/icons';
+import { React, useState, useEffect } from "react";
+import "./editprofile.css";
+import { Navbar } from "../../commoncomponents/Navbar/Navbar";
+import { PlusOutlined } from "@ant-design/icons";
 import {
   Button,
   Form,
@@ -14,9 +14,9 @@ import {
   notification,
   Space,
   Spin,
-  Alert
-} from 'antd';
-import { useAuth0 } from '@auth0/auth0-react';
+  Alert,
+} from "antd";
+import { useAuth0 } from "@auth0/auth0-react";
 
 import {
   Footer,
@@ -25,14 +25,14 @@ import {
   siderStyle,
   contentStyle,
   footerStyle,
-  replicateFooterStyle
-} from '../globalstyles';
-import { useNavigate } from 'react-router-dom';
-import { Link, useParams } from 'react-router-dom';
-import './editprofile.css';
-import axios from 'axios';
-import { UploadWidget } from './UploadWidget';
-import { SmileOutlined, FrownOutlined } from '@ant-design/icons';
+  replicateFooterStyle,
+} from "../globalstyles";
+import { useNavigate } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
+import "./editprofile.css";
+import axios from "axios";
+import { UploadWidget } from "./UploadWidget";
+import { SmileOutlined, FrownOutlined } from "@ant-design/icons";
 
 export function EditProfile() {
   const { TextArea } = Input;
@@ -47,29 +47,29 @@ export function EditProfile() {
   const openSuccessNotification = (placement) => {
     api.info({
       message: `Yippee!`,
-      description: 'Edit profile successful!',
+      description: "Edit profile successful!",
       placement,
       icon: (
         <SmileOutlined
           style={{
-            color: 'green'
+            color: "green",
           }}
         />
-      )
+      ),
     });
   };
   const openFailureNotification = (placement) => {
     api.info({
       message: `Oh no!`,
-      description: 'Edit profile unsuccessful!',
+      description: "Edit profile unsuccessful!",
       placement,
       icon: (
         <FrownOutlined
           style={{
-            color: 'red'
+            color: "red",
           }}
         />
-      )
+      ),
     });
   };
 
@@ -104,11 +104,11 @@ export function EditProfile() {
       .put(`http://localhost:3000/${user_id}/settings`, formValues, configs)
       .then(function (response) {
         console.log(response);
-        openSuccessNotification('top');
+        openSuccessNotification("top");
       })
       .catch(function (error) {
         console.log(error);
-        openFailureNotification('top');
+        openFailureNotification("top");
       });
   };
 
@@ -131,15 +131,16 @@ export function EditProfile() {
               <div className="content">
                 <Form
                   labelCol={{
-                    span: 8
+                    span: 8,
                   }}
                   wrapperCol={{
-                    span: 20
+                    span: 20,
                   }}
                   layout="horizontal"
                   style={{
-                    maxWidth: 800
-                  }}>
+                    maxWidth: 800,
+                  }}
+                >
                   {formValues === null ? (
                     <div className="loading"></div>
                   ) : (
@@ -152,21 +153,47 @@ export function EditProfile() {
                     //   />
                     // </Spin>
                     <>
-                      <Form.Item label="Current Profile Photo" name="profile_photo">
-                        <img alt="" src={formValues.profile_photo} width="200" />
+                      <Form.Item
+                        label="Current Profile Photo"
+                        name="profile_photo"
+                      >
+                        <img
+                          alt=""
+                          src={formValues.profile_photo}
+                          width="200"
+                        />
                         <br></br>
-                        <UploadWidget setFormValues={setFormValues} formValues={formValues} />
+                        <UploadWidget
+                          setFormValues={setFormValues}
+                          formValues={formValues}
+                        />
                       </Form.Item>
-                      <Form.Item label="Username" name="username" onChange={handleInputChange}>
+                      <Form.Item
+                        label="Username"
+                        name="username"
+                        onChange={handleInputChange}
+                      >
                         <Input placeholder={formValues.username} />
                       </Form.Item>
-                      <Form.Item label="First Name" name="first_name" onChange={handleInputChange}>
+                      <Form.Item
+                        label="First Name"
+                        name="first_name"
+                        onChange={handleInputChange}
+                      >
                         <Input placeholder={formValues.first_name} />
                       </Form.Item>
-                      <Form.Item label="Last Name" name="last_name" onChange={handleInputChange}>
+                      <Form.Item
+                        label="Last Name"
+                        name="last_name"
+                        onChange={handleInputChange}
+                      >
                         <Input placeholder={formValues.last_name} />
                       </Form.Item>
-                      <Form.Item label="Email" name="email" onChange={handleInputChange}>
+                      <Form.Item
+                        label="Email"
+                        name="email"
+                        onChange={handleInputChange}
+                      >
                         <Input placeholder={formValues.email} />
                       </Form.Item>
 
@@ -176,22 +203,35 @@ export function EditProfile() {
                         rules={[
                           {
                             required: true,
-                            message: 'Please input your phone number!'
-                          }
+                            message: "Please input your phone number!",
+                          },
                         ]}
-                        onChange={handleInputChange}>
-                        <Input addonBefore="+65" placeholder={formValues.phone_number} />
+                        onChange={handleInputChange}
+                      >
+                        <Input
+                          addonBefore="+65"
+                          placeholder={formValues.phone_number}
+                        />
                       </Form.Item>
-                      <Form.Item label="Address" name="address" onChange={handleInputChange}>
+                      <Form.Item
+                        label="Address"
+                        name="address"
+                        onChange={handleInputChange}
+                      >
                         <Input placeholder={formValues.address} />
                       </Form.Item>
                       <Form.Item
                         label="Postal Code"
                         name="postal_code"
-                        onChange={handleInputChange}>
+                        onChange={handleInputChange}
+                      >
                         <Input placeholder={formValues.postal_code} />
                       </Form.Item>
-                      <Form.Item label="Nearest MRT" name="mrt" onChange={handleInputChange}>
+                      <Form.Item
+                        label="Nearest MRT"
+                        name="mrt"
+                        onChange={handleInputChange}
+                      >
                         <Input placeholder={formValues.mrt} />
                       </Form.Item>
 
@@ -201,9 +241,9 @@ export function EditProfile() {
                           htmlType="submit"
                           onClick={handleSubmit}
                           style={{
-                            backgroundColor: 'white',
-                            color: '#ff7e55',
-                            marginRight: '20px'
+                            backgroundColor: "white",
+                            color: "#ff7e55",
+                            marginRight: "20px",
                           }}
                           // style={{ marginLeft: 266 }}
                         >
