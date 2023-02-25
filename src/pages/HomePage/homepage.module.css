@@ -1,0 +1,77 @@
+.ant-carousel .slick-prev,
+.ant-carousel .slick-prev:hover,
+.ant-carousel .slick-prev:focus {
+  font-size: 2em;
+  left: 20px;
+  z-index: 3;
+  color: #ff7e55;
+}
+
+.ant-carousel .slick-next,
+.ant-carousel .slick-next:hover,
+.ant-carousel .slick-next:focus {
+  font-size: 2em;
+  right: 20px;
+  z-index: 3;
+  color: #ff7e55;
+}
+
+.allListing {
+  margin: 50px 50px;
+}
+
+.categoriesTitle {
+  color: #ff7e55;
+  margin: 5 0;
+}
+
+.homepageCategories {
+  margin: 20px 50px;
+  font-weight: 500;
+  font-size: 2em;
+}
+
+.listing-type-icon-color-tag {
+  color: #303841;
+}
+
+.loading {
+  position: absolute;
+  left: 50%;
+  top: 60%;
+  margin: -60px 0 0 -60px;
+  background: transparent;
+  width: 70px;
+  height: 70px;
+  border-radius: 100%;
+  border: 10px solid #ff7e55;
+}
+
+.loading:after {
+  content: '';
+  background: transparent;
+  width: 140%;
+  height: 140%;
+  position: absolute;
+  border-radius: 100%;
+  top: -20%;
+  left: -20%;
+  opacity: 0.7;
+  box-shadow: #ff7e55 -4px -5px 3px -3px;
+  animation: rotate 2s infinite linear;
+}
+
+@keyframes rotate {
+  0% {
+    transform: rotateZ(0deg);
+  }
+  100% {
+    transform: rotateZ(360deg);
+  }
+}
+
+.loadingText {
+  position: absolute;
+  left: 46.5%;
+  top: 62.5%;
+}

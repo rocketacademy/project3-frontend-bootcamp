@@ -1,6 +1,6 @@
 // specific listing
-import React from "react";
-import { useState, useEffect } from "react";
+import React from 'react';
+import { useState, useEffect } from 'react';
 import {
   Card,
   Carousel,
@@ -12,8 +12,8 @@ import {
   Col,
   ConfigProvider,
   notification,
-  Space,
-} from "antd";
+  Space
+} from 'antd';
 import {
   LikeOutlined,
   WhatsAppOutlined,
@@ -22,13 +22,13 @@ import {
   DeleteOutlined,
   EditOutlined,
   SmileOutlined,
-  FrownOutlined,
-} from "@ant-design/icons";
-import { Navbar } from "../../commoncomponents/Navbar/Navbar";
-import "./userindividuallisting.css";
-import axios from "axios";
-import { useNavigate, useParams } from "react-router-dom";
-import { useAuth0 } from "@auth0/auth0-react";
+  FrownOutlined
+} from '@ant-design/icons';
+import { Navbar } from '../../commoncomponents/Navbar/Navbar';
+import './userindividuallisting.css';
+import axios from 'axios';
+import { useNavigate, useParams } from 'react-router-dom';
+import { useAuth0 } from '@auth0/auth0-react';
 
 export default function UserIndividualListing() {
   const { Meta } = Card;
@@ -55,69 +55,67 @@ export default function UserIndividualListing() {
         <Button
           type="primary"
           size="small"
-          style={{ backgroundColor: "#ff7e55" }}
+          style={{ backgroundColor: '#ff7e55' }}
           onClick={() => {
             axios
               .delete(`http://localhost:3000/delete/${listing_id}`, configs)
               .then(function (response) {
                 console.log(response.data);
-                openDeleteSuccessNotification("top");
+                openDeleteSuccessNotification('top');
               })
               .catch(function (error) {
                 console.log(error);
-                openDeleteFailureNotification("top");
+                openDeleteFailureNotification('top');
               });
             api.destroy();
-          }}
-        >
+          }}>
           Confirm
         </Button>
         <Button
           type="primary"
           size="small"
-          style={{ backgroundColor: "#ff7e55" }}
-          onClick={() => api.destroy(key)}
-        >
+          style={{ backgroundColor: '#ff7e55' }}
+          onClick={() => api.destroy(key)}>
           Cancel
         </Button>
       </Space>
     );
     api.open({
-      message: "Are you sure?",
+      message: 'Are you sure?',
       description: "Clicking 'Confirm' will delete this listing permanently!",
       placement,
-      icon: <WarningOutlined style={{ color: "red" }} />,
+      icon: <WarningOutlined style={{ color: 'red' }} />,
       duration: 0,
       btn,
-      key,
+      key
     });
   };
   const openDeleteSuccessNotification = (placement) => {
     api.info({
       message: `Yippee!`,
-      description: "Delete listing successful!",
+      description: 'Delete listing successful!',
       placement,
       icon: (
         <SmileOutlined
           style={{
-            color: "green",
+            color: 'green'
           }}
         />
-      ),
+      )
     });
   };
   const openDeleteFailureNotification = (placement) => {
     api.info({
       message: `Oh no!`,
-      description: "Delete listing unsuccessful!",
+      description: 'Delete listing unsuccessful!',
       placement,
       icon: (
         <FrownOutlined
           style={{
-            color: "red",
+            color: 'red'
           }}
         />
-      ),
+      )
     });
   };
 
@@ -149,10 +147,7 @@ export default function UserIndividualListing() {
 
   useEffect(() => {
     for (let i = 0; i < listingReturned.length; i++) {
-      if (
-        listingReturned[i].user_id === +user_id &&
-        listingReturned[i].id === +listing_id
-      ) {
+      if (listingReturned[i].user_id === +user_id && listingReturned[i].id === +listing_id) {
         console.log(listingReturned[i]);
         setData(listingReturned[i]);
         return;
@@ -163,28 +158,28 @@ export default function UserIndividualListing() {
   const { Footer, Sider, Content } = Layout;
 
   const siderStyle = {
-    backgroundColor: "white",
+    backgroundColor: 'white'
   };
   const contentStyle = {
-    backgroundColor: "white",
-    paddingTop: "30px",
+    backgroundColor: 'white',
+    paddingTop: '30px'
   };
   const footerStyle = {
-    textAlign: "center",
-    color: "#fff",
-    backgroundColor: "#303841",
-    position: "fixed",
+    textAlign: 'center',
+    color: '#fff',
+    backgroundColor: '#303841',
+    position: 'fixed',
     bottom: 0,
-    width: "100%",
+    width: '100%'
   };
 
   const replicateFooterStyle = {
     left: 0,
     bottom: 0,
-    width: "100%",
+    width: '100%',
     // position: 'absolute',
-    backgroundColor: "#303841",
-    position: "fixed",
+    backgroundColor: '#303841',
+    position: 'fixed'
   };
 
   return (
@@ -193,14 +188,13 @@ export default function UserIndividualListing() {
       <ConfigProvider
         theme={{
           token: {
-            colorPrimary: "#ff7e55",
-          },
-        }}
-      >
+            colorPrimary: '#ff7e55'
+          }
+        }}>
         <Layout>
           <Sider width={250} style={siderStyle}>
             <Navbar />
-            <Footer style={replicateFooterStyle}>{" yo "}</Footer>
+            <Footer style={replicateFooterStyle}>{' -- '}</Footer>
           </Sider>
           <Layout>
             <Content style={contentStyle}>
@@ -212,11 +206,7 @@ export default function UserIndividualListing() {
               ) : (
                 <div className="listing-right">
                   <Image.PreviewGroup>
-                    <Carousel
-                      dotPosition="bottom"
-                      infinite={false}
-                      slidesToShow={1}
-                    >
+                    <Carousel dotPosition="bottom" infinite={false} slidesToShow={1}>
                       <Image width={300} src={data.photo_url} />
                     </Carousel>
                   </Image.PreviewGroup>
@@ -232,9 +222,8 @@ export default function UserIndividualListing() {
                       &nbsp;
                       <Button
                         type="primary"
-                        onClick={() => openNotificationWithIcon("top")}
-                        icon={<DeleteOutlined />}
-                      >
+                        onClick={() => openNotificationWithIcon('top')}
+                        icon={<DeleteOutlined />}>
                         Delete
                       </Button>
                     </Col>
@@ -242,7 +231,7 @@ export default function UserIndividualListing() {
                 </div>
               )}
             </Content>
-            {/* <Footer style={footerStyle}> Copyright© G&T 2023</Footer> */}
+            <Footer style={footerStyle}>Copyright © Give & Take 2023</Footer>
           </Layout>
         </Layout>
       </ConfigProvider>
