@@ -1,25 +1,15 @@
 // specific listing
-import React from "react";
-import { useState, useEffect } from "react";
-import { Card, Carousel, Image, Avatar } from "antd";
-import { Layout, Button, Input, Row, Col, ConfigProvider } from "antd";
-import {
-  LikeOutlined,
-  WhatsAppOutlined,
-  EnvironmentOutlined,
-} from "@ant-design/icons";
-import { Navbar } from "../../commoncomponents/Navbar/Navbar";
-import "./viewlisting.css";
-import axios from "axios";
-import { useParams, useNavigate } from "react-router-dom";
-import {
-  Sider,
-  Footer,
-  Content,
-  siderStyle,
-  contentStyle,
-} from "../globalstyles.js";
-import { useAuth0 } from "@auth0/auth0-react";
+import React from 'react';
+import { useState, useEffect } from 'react';
+import { Card, Carousel, Image, Avatar } from 'antd';
+import { Layout, Button, Input, Row, Col, ConfigProvider } from 'antd';
+import { LikeOutlined, WhatsAppOutlined, EnvironmentOutlined } from '@ant-design/icons';
+import { Navbar } from '../../commoncomponents/Navbar/Navbar';
+import './viewlisting.css';
+import axios from 'axios';
+import { useParams, useNavigate } from 'react-router-dom';
+import { Sider, Footer, Content, siderStyle, contentStyle } from '../globalstyles.js';
+import { useAuth0 } from '@auth0/auth0-react';
 
 export default function ViewListing() {
   const { Meta } = Card;
@@ -89,21 +79,21 @@ export default function ViewListing() {
   // };
 
   const footerStyle = {
-    textAlign: "center",
-    color: "#fff",
-    backgroundColor: "#303841",
-    position: "fixed",
+    textAlign: 'center',
+    color: '#fff',
+    backgroundColor: '#303841',
+    position: 'fixed',
     bottom: 0,
-    width: "100%",
+    width: '100%'
   };
 
   const replicateFooterStyle = {
     left: 0,
     bottom: 0,
-    width: "100%",
+    width: '100%',
     // position: 'absolute',
-    backgroundColor: "#303841",
-    position: "fixed",
+    backgroundColor: '#303841',
+    position: 'fixed'
   };
 
   return (
@@ -111,31 +101,25 @@ export default function ViewListing() {
       <ConfigProvider
         theme={{
           token: {
-            colorPrimary: "#ff7e55",
-          },
-        }}
-      >
+            colorPrimary: '#ff7e55'
+          }
+        }}>
         <Layout>
           <Sider width={250} style={siderStyle}>
             <Navbar />
-            <Footer style={replicateFooterStyle}></Footer>
+            <Footer style={replicateFooterStyle}>{' _'}</Footer>
           </Sider>
           <Layout>
             <Content style={contentStyle}>
               <Button
                 type="link"
                 style={{ marginLeft: 50, marginTop: 50 }}
-                onClick={handleBackButtonClick}
-              >
-                {"< "}Back
+                onClick={handleBackButtonClick}>
+                {'< '}Back
               </Button>
               <div className="listing-right">
                 <Image.PreviewGroup>
-                  <Carousel
-                    dotPosition="bottom"
-                    infinite={false}
-                    slidesToShow={1}
-                  >
+                  <Carousel dotPosition="bottom" infinite={false} slidesToShow={1}>
                     <Image src={listingReturned.photo_url} height={300} />
                   </Carousel>
                 </Image.PreviewGroup>
@@ -163,8 +147,7 @@ export default function ViewListing() {
                             <Button type="primary">
                               <a
                                 aria-label="Chat on Whatsapp"
-                                href={`https://wa.me/65${userReturned.phone_number}`}
-                              >
+                                href={`https://wa.me/65${userReturned.phone_number}`}>
                                 <WhatsAppOutlined />
                                 Chat Now
                               </a>
@@ -184,7 +167,7 @@ export default function ViewListing() {
                 </Row>
               </div>
             </Content>
-            <Footer style={footerStyle}></Footer>
+            <Footer style={footerStyle}>Copyright © Give & Take 2023</Footer>
           </Layout>
         </Layout>
       </ConfigProvider>

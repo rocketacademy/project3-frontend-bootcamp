@@ -67,11 +67,11 @@ body {
   flex-wrap: wrap;
 }
 
-.profile {
+/* .profile {
   margin-left: auto;
   display: flex;
   align-items: center;
-}
+} */
 
 .photo {
   width: 100px;

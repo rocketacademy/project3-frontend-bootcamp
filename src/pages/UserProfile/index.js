@@ -1,6 +1,6 @@
 // user profile page
 import React, { useState, useEffect } from "react";
-import "./userprofile.css";
+import styles from "./userprofile.module.css";
 import {
   Card,
   Button,
@@ -9,8 +9,9 @@ import {
   notification,
   Space,
   Empty,
-  Alert,
-  Spin,
+  // Alert,
+  // Spin,
+  ConfigProvider,
 } from "antd";
 import {
   EditOutlined,
@@ -19,8 +20,8 @@ import {
   WarningOutlined,
   SmileOutlined,
   FrownOutlined,
+  HeartOutlined,
 } from "@ant-design/icons";
-
 import {
   Sider,
   Footer,
@@ -44,7 +45,7 @@ export function UserProfile() {
   const [userListings, setUserListings] = useState([]);
   const [dateSlicer, setDateSlicer] = useState("");
   const [api, contextHolder] = notification.useNotification();
-  let { user_id } = useParams();
+  let { original_id } = useParams();
 
   const openNotificationWithIcon = (placement, listingIdToBeDeleted) => {
     const key = `open${Date.now()}`;
@@ -99,7 +100,7 @@ export function UserProfile() {
   };
   const openDeleteSuccessNotification = (placement) => {
     axios
-      .get(`http://localhost:3000/${user_id}/editprofile`, configs)
+      .get(`http://localhost:3000/${original_id}/editprofile`, configs)
       .then(function (response) {
         setUserProfile(response.data);
         setDateSlicer(response.data.createdAt.slice(0, 10));
@@ -108,7 +109,7 @@ export function UserProfile() {
         console.log(error);
       });
     axios
-      .get(`http://localhost:3000/${user_id}/profile`, configs)
+      .get(`http://localhost:3000/${original_id}/profile`, configs)
       .then(function (response) {
         setUserListings(response.data);
         console.log(response.data);
@@ -155,7 +156,7 @@ export function UserProfile() {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:3000/${user_id}/editprofile`, configs)
+      .get(`http://localhost:3000/${original_id}/editprofile`, configs)
       .then(function (response) {
         setUserProfile(response.data);
         setDateSlicer(response.data.createdAt.slice(0, 10));
@@ -164,7 +165,7 @@ export function UserProfile() {
         console.log(error);
       });
     axios
-      .get(`http://localhost:3000/${user_id}/profile`, configs)
+      .get(`http://localhost:3000/${original_id}/profile`, configs)
       .then(function (response) {
         setUserListings(response.data);
         console.log(response.data);
@@ -176,121 +177,129 @@ export function UserProfile() {
 
   return (
     <>
-      {contextHolder}
-      <Layout>
-        <Sider width={300} style={siderStyle}>
-          <Navbar />
-          <Footer style={replicateFooterStyle}>-</Footer>
-        </Sider>
-
+      <ConfigProvider
+        theme={{
+          token: {
+            colorPrimary: "#ff7e55",
+          },
+        }}
+      >
+        {contextHolder}
         <Layout>
-          <Content style={contentStyle}>
-            <div className="content">
-              {Object.keys(userProfile).length === 0 ? (
-                <Spin tip="Loading...">
-                  <Alert
-                    message="Please wait..."
-                    description="Loading user profile..."
-                    type="info"
-                    style={{ backgroundColor: "white" }}
-                  />
-                </Spin>
-              ) : (
-                <div className="userName">
-                  <div className="userDescription">
-                    <div className="profile">
-                      <div className="photo">
-                        <img src={userProfile.profile_photo} alt="" />
-                      </div>
-                      <h1>{userProfile.username}</h1>
-                    </div>
-                    <p className="joineddate" style={{ margin: 0 }}>
-                      Joined since {dateSlicer}
-                    </p>
-                    <h2>Full name:</h2>
-                    <div>
-                      {userProfile.first_name} {userProfile.last_name}
-                    </div>
-                    <h2>Email:</h2>
-                    <div>{userProfile.email}</div>
-                    <h2>Address:</h2>
-                    <div>
-                      {userProfile.address} {userProfile.postal_code}
-                    </div>
-                    <h2>Nearest MRT station:</h2>
-                    <div>{userProfile.mrt}</div>
-                  </div>
-                  {userProfile.email === user.email && (
-                    <>
-                      <Button className="btn">
-                        <a href="settings">Update Profile</a>
-                      </Button>
-                      <Button className="btn">Liked Listings</Button>
-                    </>
-                  )}
-                </div>
-              )}
-            </div>
+          <Sider width={250} style={siderStyle}>
+            <Navbar />
+            <Footer style={replicateFooterStyle}>{" _"}</Footer>
+          </Sider>
 
-            <h3 className="content">Personal Listings</h3>
-            <div className="listings">
-              {userListings.length > 0 ? (
-                userListings.map(
-                  ({ item_name, photo_url, description, condition, id }) => {
-                    return (
-                      <Card
-                        key={description}
-                        hoverable
-                        style={{
-                          width: 300,
-                          marginRight: 10,
-                          marginBottom: 20,
-                          display: "inline-block",
-                          wordWrap: "break-word",
-                        }}
-                        cover={<img alt="" src={photo_url} />}
-                        actions={[
-                          <Link
-                            to={`http://localhost:3001/${user_id}/listings/${id}`}
-                          >
-                            <EyeOutlined key="view" />
-                          </Link>,
-                          <Link
-                            to={`http://localhost:3001/${user_id}/editlisting/${id}`}
-                          >
-                            <EditOutlined key="edit" />
-                          </Link>,
-                          <DeleteOutlined
-                            key="delete"
-                            onClick={() => {
-                              openNotificationWithIcon("top", id);
-                            }}
-                          />,
-                        ]}
-                      >
-                        <Meta
-                          style={{ wordWrap: "break-word" }}
-                          title={item_name}
-                          description={description}
-                        />
-                        <br></br>
-                        <Tag color="orange">{condition}</Tag>
-                      </Card>
-                    );
-                  }
-                )
-              ) : (
-                <div>
-                  <br></br>
-                  <Empty />
-                  <br></br>
-                </div>
-              )}
-            </div>
-            <Footer style={footerStyle}> Copyright© G&T 2023</Footer>
-          </Content>
+          <Layout>
+            <Content style={contentStyle}>
+              <div className={styles.content}>
+                {Object.keys(userProfile).length === 0 ? (
+                  <>
+                    <div className={styles.loading}></div>
+                    <div className={styles.loadingText}>Loading...</div>
+                  </>
+                ) : (
+                  <div className={styles.userName}>
+                    <div className={styles.userDescription}>
+                      <div className={styles.profile}>
+                        <div className={styles.photo}>
+                          <img src={userProfile.profile_photo} alt="" />
+                        </div>
+                        <h1>{userProfile.username}</h1>
+                      </div>
+                      <p className={styles.joineddate} style={{ margin: 0 }}>
+                        Joined since {dateSlicer}
+                      </p>
+                      <h2>Full name:</h2>
+                      <div>
+                        {userProfile.first_name} {userProfile.last_name}
+                      </div>
+                      <h2>Email:</h2>
+                      <div>{userProfile.email}</div>
+                      <h2>Address:</h2>
+                      <div>
+                        {userProfile.address} {userProfile.postal_code}
+                      </div>
+                      <h2>Nearest MRT station:</h2>
+                      <div>{userProfile.mrt}</div>
+                    </div>
+                    {userProfile.email === user.email && (
+                      <>
+                        <Button className={styles.btn}>
+                          <a href="settings">Update Profile</a>
+                        </Button>
+                        <Button className={styles.btn}>
+                          <a href="liked">
+                            <HeartOutlined /> <></>
+                            Liked Listings
+                          </a>
+                        </Button>
+                      </>
+                    )}
+                  </div>
+                )}
+              </div>
+              <h3 className="content">Personal Listings</h3>
+              <div className={styles.listings}>
+                {userListings.length > 0 ? (
+                  userListings.map(
+                    ({ item_name, photo_url, description, condition, id }) => {
+                      return (
+                        <Card
+                          key={description}
+                          hoverable
+                          style={{
+                            width: 300,
+                            marginRight: 10,
+                            marginBottom: 20,
+                            display: "inline-block",
+                            wordWrap: "break-word",
+                          }}
+                          cover={<img alt="" src={photo_url} />}
+                          actions={[
+                            <Link
+                              to={`http://localhost:3001/${original_id}/listings/${id}`}
+                            >
+                              <EyeOutlined key="view" />
+                            </Link>,
+                            <Link
+                              to={`http://localhost:3001/${original_id}/editlisting/${id}`}
+                            >
+                              <EditOutlined key="edit" />
+                            </Link>,
+                            <DeleteOutlined
+                              key="delete"
+                              onClick={() => {
+                                openNotificationWithIcon("top", id);
+                              }}
+                            />,
+                          ]}
+                        >
+                          <Meta
+                            style={{ wordWrap: "break-word" }}
+                            title={item_name}
+                            description={description}
+                          />
+                          <br></br>
+                          <Tag color="orange">{condition}</Tag>
+                        </Card>
+                      );
+                    }
+                  )
+                ) : (
+                  <div>
+                    <br></br>
+                    <Empty />
+                    <br></br>
+                  </div>
+                )}
+              </div>
+              <Footer style={footerStyle}>Copyright © Give & Take 2023</Footer>
+            </Content>
+          </Layout>
         </Layout>
-      </Layout>
+      </ConfigProvider>
     </>
   );
 }

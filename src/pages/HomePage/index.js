@@ -64,11 +64,11 @@ export default function HomePage() {
         <Layout>
           <Sider width={250} style={siderStyle}>
             <Navbar />
-
             <Footer style={replicateFooterStyle}>{" _"}</Footer>
           </Sider>
           <Layout>
             <Content style={contentStyle}>
+              
               <CarouselBanner />
               <SearchBar
                 searchParams={searchParams}
@@ -76,7 +76,7 @@ export default function HomePage() {
               />
               <ListingCards configs={configs} />
             </Content>
-            <Footer style={footerStyle}> Copyright © Give & Take 2023</Footer>
+            <Footer style={footerStyle}>Copyright © Give & Take 2023</Footer>
           </Layout>
         </Layout>
       </ConfigProvider>
