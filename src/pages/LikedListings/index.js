@@ -13,6 +13,7 @@ import {
 } from '../globalstyles.js';
 import { useAuth0 } from '@auth0/auth0-react';
 import { Navbar } from '../../commoncomponents/Navbar/Navbar';
+import styles from './likedlistings.module.css';
 
 export default function LikedListings() {
   const navigate = useNavigate();

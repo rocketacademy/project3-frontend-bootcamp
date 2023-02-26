@@ -1,15 +1,16 @@
 //edit individual listing
 import React, { useState, useEffect } from 'react';
-import './editlisting.css';
+import styles from './editlisting.module.css';
 import { Navbar } from '../../commoncomponents/Navbar/Navbar';
-import { Button, Input, Upload, Radio, ConfigProvider, Layout, Form, notification } from 'antd';
-import { PlusOutlined } from '@ant-design/icons';
+import { Button, Input, Row, Col, Radio, ConfigProvider, Layout, Form, notification } from 'antd';
+// import { PlusOutlined } from '@ant-design/icons';
 import { useAuth0 } from '@auth0/auth0-react';
 import axios from 'axios';
 import { useNavigate, useParams, Link } from 'react-router-dom';
 import { UploadWidget } from './UploadWidget';
 import { SmileOutlined, FrownOutlined, RollbackOutlined } from '@ant-design/icons';
 import { Footer, Sider, Content, siderStyle, contentStyle } from '../globalstyles';
+import TextArea from 'antd/es/input/TextArea';
 
 export function EditListing() {
   const { logout } = useAuth0();
@@ -23,6 +24,10 @@ export function EditListing() {
   const handleInputChange = (e) => {
     setFormValues({ ...formValues, [e.target.id]: e.target.value });
     console.log(formValues);
+  };
+
+  const handleCategoryChange = (e) => {
+    setFormValues({ ...formValues, category: e });
   };
 
   const handleListingTypeChange = (e) => {
@@ -136,67 +141,80 @@ export function EditListing() {
           </Sider>
           <Layout>
             <Content style={contentStyle}>
-              <div className="content">
-                <div className="userName">
-                  <div className="userDescription">
-                    <div className="profile">
+              <Row gutter={10}>
+                <Col span={20}>
+                  <div className={styles.listingRight}>
+                    <div className={styles.card}>
                       <Form.Item label="Current Listing Photo" name="photo_url">
                         <img alt="" src={formValues.photo_url} width="150" />
                         <br></br>
                         <UploadWidget setFormValues={setFormValues} formValues={formValues} />
                       </Form.Item>
+                      <div className={styles.text}>
+                        <Form.Item label="Item name" name="item_name" onChange={handleInputChange}>
+                          <Input placeholder={formValues.item_name} />
+                        </Form.Item>
+
+                        <p>
+                          <Form.Item
+                            label="Description"
+                            name="description"
+                            onChange={handleInputChange}>
+                            {/* <Input
+                              style={{
+                                height: '80px',
+                                width: '300px',
+                                whiteSpace: 'normal',
+                                wordWrap: 'break-word'
+                              }}
+                              placeholder={formValues.description}
+                            /> */}
+                            <TextArea rows={5} placeholder={formValues.description} />
+                          </Form.Item>
+                        </p>
+                        <Form.Item label="Condition" name="condition">
+                          <Radio.Group
+                            onChange={handleConditionChange}
+                            value={formValues.condition}>
+                            <Radio.Button value="Brand New">Brand new</Radio.Button>
+                            <Radio.Button value="Like New">Like new</Radio.Button>
+                            <Radio.Button value="Well Used">Well used</Radio.Button>
+                          </Radio.Group>
+                        </Form.Item>
+
+                        <Form.Item label="Category" name="category" onChange={handleInputChange}>
+                          <Input placeholder={formValues.category} />
+                        </Form.Item>
+
+                        <Form.Item label="Listing Type:" name="listing-type">
+                          <Radio.Group
+                            onChange={handleListingTypeChange}
+                            value={formValues.listing_type}>
+                            <Radio.Button value="Give">To Give</Radio.Button>
+                            <Radio.Button value="Take">To Take</Radio.Button>
+                          </Radio.Group>
+                        </Form.Item>
+                      </div>
                     </div>
-
-                    <Form.Item label="Item name" name="item_name" onChange={handleInputChange}>
-                      <Input placeholder={formValues.item_name} />
-                    </Form.Item>
-
-                    <Form.Item label="Description" name="description" onChange={handleInputChange}>
-                      <Input placeholder={formValues.description} />
-                    </Form.Item>
-
-                    <Form.Item label="Category" name="category" onChange={handleInputChange}>
-                      <Input placeholder={formValues.category} />
-                    </Form.Item>
-                    <div className="filterHeader">Listing type:</div>
-                    <Radio.Group onChange={handleListingTypeChange} value={formValues.listing_type}>
-                      <Radio.Button value="Give">To Give</Radio.Button>
-                      <Radio.Button value="Take">To Take</Radio.Button>
-                    </Radio.Group>
-                    <div className="filterHeader">Condition:</div>
-                    <Radio.Group onChange={handleConditionChange} value={formValues.condition}>
-                      <Radio.Button value="Brand New">Brand new</Radio.Button>
-                      <Radio.Button value="Like New">Like new</Radio.Button>
-                      <Radio.Button value="Well Used">Well used</Radio.Button>
-                    </Radio.Group>
-
-                    {/* <div className="filterHeader">Status:</div>
-                    <Radio.Group
-                      onChange={handleStatusChange}
-                      defaultValue={formValues.status}
-                    >
-                      <Radio.Button value="Available">Available</Radio.Button>
-                      <Radio.Button value="Taken">Taken</Radio.Button>
-                    </Radio.Group> */}
-                    <div className="filterHeader"></div>
-                    <Form.Item>
-                      <Button
-                        type="primary"
-                        htmlType="submit"
-                        onClick={handleSubmit}
-                        style={{
-                          marginRight: '20px'
-                        }}>
-                        Save Changes
-                      </Button>
-                      <Link to={`/${user_id}/profile`}>
-                        {' '}
-                        <RollbackOutlined /> Back to Profile{' '}
-                      </Link>
-                    </Form.Item>
                   </div>
-                </div>
-              </div>
+                </Col>
+              </Row>
+              <Button
+                type="primary"
+                htmlType="submit"
+                onClick={handleSubmit}
+                style={{
+                  marginTop: '20px',
+                  marginLeft: '700px',
+                  marginRight: '20px',
+                  marginBottom: '200px'
+                }}>
+                Save Changes
+              </Button>
+              <Link to={`/${user_id}/profile`} style={{ color: '#ff7e55' }}>
+                {' '}
+                <RollbackOutlined /> Back to Profile{' '}
+              </Link>
             </Content>
             <Footer style={footerStyle}>Copyright © Give & Take 2023</Footer>
           </Layout>
