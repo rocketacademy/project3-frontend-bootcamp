@@ -2,7 +2,7 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
 import { Card, Carousel, Image, Avatar } from 'antd';
-import { Layout, Button, Input, Row, Col, ConfigProvider, Tag } from 'antd';
+import { Layout, Button, Input, Row, Col, ConfigProvider, Tag, Empty } from 'antd';
 import {
   LikeOutlined,
   WhatsAppOutlined,
@@ -34,27 +34,57 @@ export default function ViewListing() {
   const [userReturned, setUserReturned] = useState({});
   const { getAccessTokenSilently, user } = useAuth0();
   const [accessToken, setAccessToken] = useState(null);
-  const [listingLiked, setListingLiked] = useState(false);
   const [dateSlicer, setDateSlicer] = useState('');
-  let { user_id, listing_id } = useParams();
+  const [currentListingLiked, setCurrentListingLiked] = useState(0);
+  let { original_id, user_id, listing_id } = useParams();
 
   const handleBackButtonClick = () => {
     navigate(-1);
   };
 
+    useEffect(() => {
+      if (user && !accessToken) {
+        getAccessTokenSilently().then((jwt) => setAccessToken(jwt));
+      }
+    }, [user]);
+    console.log(accessToken);
+
+    const configs = {};
+    if (accessToken)
+      configs.headers = { Authorization: `Bearer ${accessToken}` };
+
   const handleLike = () => {
-    setListingLiked(!listingLiked);
+    if(currentListingLiked === 0){
+      axios
+      .post(
+        `http://localhost:3000/${original_id}/likes/${listing_id}`,
+        { original_id: original_id, listing_id: listing_id },
+        configs
+      )
+      .then(function (response) {
+        console.log(response);
+        setCurrentListingLiked(1);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+    } else {
+      axios
+        .delete(
+          `http://localhost:3000/${original_id}/likes/${listing_id}`,
+          configs
+        )
+        .then(function (response) {
+          console.log(response);
+          setCurrentListingLiked(0);
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+    }
   };
 
-  useEffect(() => {
-    if (user && !accessToken) {
-      getAccessTokenSilently().then((jwt) => setAccessToken(jwt));
-    }
-  }, [user]);
-  console.log(accessToken);
 
-  const configs = {};
-  if (accessToken) configs.headers = { Authorization: `Bearer ${accessToken}` };
 
   useEffect(() => {
     axios
@@ -86,32 +116,53 @@ export default function ViewListing() {
     }
   }, [listingReturned, userReturned]);
 
-  // const handleLikeButtonClick = () => {
-  //   axios
-  //     .post(`http://localhost:3000/${user_id}/listings/${listing_id}/likes`, {
-  //       user_id: user_id,
-  //       listing_id: listing_id,
-  //     })
-  //     .then(function (response) {
-  //       console.log(response);
-  //     })
-  //     .catch(function (error) {
-  //       console.log(error);
-  //     });
-  // };
+  useEffect(() => {
+    axios
+      .get(`http://localhost:3000/${original_id}/likesfromdatabase`, configs)
+      .then(function (response) {
+        console.log(response.data);
+        for(let i = 0; i < response.data.length; i++){
+          if (response.data[i].user_id === +original_id && response.data[i].listing_id === +listing_id){
+            setCurrentListingLiked(1);
+          }
+        }
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  }, [configs]);
+
+  const footerStyle = {
+    textAlign: "center",
+    color: "#fff",
+    backgroundColor: "#303841",
+    position: "fixed",
+    bottom: 0,
+    width: "100%",
+  };
+
+  const replicateFooterStyle = {
+    left: 0,
+    bottom: 0,
+    width: "100%",
+    // position: 'absolute',
+    backgroundColor: "#303841",
+    position: "fixed",
+  };
 
   return (
     <div>
       <ConfigProvider
         theme={{
           token: {
-            colorPrimary: '#ff7e55'
-          }
-        }}>
+            colorPrimary: "#ff7e55",
+          },
+        }}
+      >
         <Layout>
           <Sider width={250} style={siderStyle}>
             <Navbar />
-            <Footer style={replicateFooterStyle}>{' _'}</Footer>
+            <Footer style={replicateFooterStyle}>{" _"}</Footer>
           </Sider>
           <Layout>
             <Content style={contentStyle}>
@@ -126,17 +177,21 @@ export default function ViewListing() {
                             style={{
                               width: 400,
                               height: 480,
-                              objectFit: 'contain'
+                              objectFit: "contain",
                             }}
                           />
                         </Image.PreviewGroup>
                         <div className={styles.text}>
-                          <p className={styles.listingName}>{listingReturned.item_name}</p>
+                          <p className={styles.listingName}>
+                            {listingReturned.item_name}
+                          </p>
                           <p>{listingReturned.description}</p>
                           <Tag color="cyan">{listingReturned.condition}</Tag>
                           <Tag color="volcano">{listingReturned.category}</Tag>
                           <p className={styles.tag}>
-                            <TagOutlined style={{ color: '#ff7e55', marginRight: '10px' }} />
+                            <TagOutlined
+                              style={{ color: "#ff7e55", marginRight: "10px" }}
+                            />
 
                             {listingReturned.listing_type}
                           </p>
@@ -160,23 +215,36 @@ export default function ViewListing() {
                               <Button type="primary">
                                 <a
                                   aria-label="Chat on Whatsapp"
-                                  href={`https://wa.me/65${userReturned.phone_number}`}>
-                                  <WhatsAppOutlined style={{ marginRight: '10px' }} />
+                                  href={`https://wa.me/65${userReturned.phone_number}`}
+                                >
+                                  <WhatsAppOutlined
+                                    style={{ marginRight: "10px" }}
+                                  />
                                   Chat Now
                                 </a>
                               </Button>
                               <Button
                                 onClick={handleLike}
                                 type="default"
-                                className={listingLiked ? 'clickedBtn' : 'normalBtn'}>
-                                {listingLiked ? (
+                                className={
+                                  currentListingLiked
+                                    ? "clickedBtn"
+                                    : "normalBtn"
+                                }
+                              >
+                                {currentListingLiked ? (
                                   <>
-                                    <LikeOutlined style={{ marginRight: '10px' }} /> Liked
+                                    <LikeOutlined
+                                      style={{ marginRight: "10px" }}
+                                    />{" "}
+                                    Liked!
                                   </>
                                 ) : (
                                   <>
-                                    <LikeOutlined style={{ marginRight: '10px' }} />
-                                    Like
+                                    <LikeOutlined
+                                      style={{ marginRight: "10px" }}
+                                    />
+                                    Like this!
                                   </>
                                 )}
                               </Button>
@@ -192,10 +260,11 @@ export default function ViewListing() {
                       marginLeft: 590,
                       marginTop: 20,
                       marginBottom: 20,
-                      backgroundColor: '#ff7e55',
-                      color: 'white'
+                      backgroundColor: "#ff7e55",
+                      color: "white",
                     }}
-                    onClick={handleBackButtonClick}>
+                    onClick={handleBackButtonClick}
+                  >
                     <RollbackOutlined />
                     Back to more listings
                   </Button>
