@@ -24,7 +24,7 @@ const { Header } = Layout;
 
 export default function HomePage() {
   const navigate = useNavigate();
-  const { user_id } = useParams();
+  const { original_id, user_id } = useParams();
 
   const { getAccessTokenSilently, user, loginWithRedirect, logout } =
     useAuth0();
@@ -47,7 +47,7 @@ export default function HomePage() {
   useEffect(() => {
     if (searchParams) {
       console.log(searchParams);
-      navigate(`/${user_id}/search?search=${searchParams}`);
+      navigate(`/${original_id}/search?search=${searchParams}`);
     }
   }, [searchParams]);
 
@@ -68,7 +68,6 @@ export default function HomePage() {
           </Sider>
           <Layout>
             <Content style={contentStyle}>
-              
               <CarouselBanner />
               <SearchBar
                 searchParams={searchParams}
