@@ -15,9 +15,9 @@ import {
   Space
 } from 'antd';
 import {
-  LikeOutlined,
-  WhatsAppOutlined,
-  EnvironmentOutlined,
+  // LikeOutlined,
+  // WhatsAppOutlined,
+  // EnvironmentOutlined,
   WarningOutlined,
   DeleteOutlined,
   EditOutlined,
@@ -25,7 +25,7 @@ import {
   FrownOutlined
 } from '@ant-design/icons';
 import { Navbar } from '../../commoncomponents/Navbar/Navbar';
-import './userindividuallisting.css';
+import styles from './userindividuallisting.module.css';
 import axios from 'axios';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useAuth0 } from '@auth0/auth0-react';
@@ -204,7 +204,7 @@ export default function UserIndividualListing() {
                   <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} />
                 </div>
               ) : (
-                <div className="listing-right">
+                <div>
                   <Image.PreviewGroup>
                     <Carousel dotPosition="bottom" infinite={false} slidesToShow={1}>
                       <Image width={300} src={data.photo_url} />
