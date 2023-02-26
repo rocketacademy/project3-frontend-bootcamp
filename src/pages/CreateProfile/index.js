@@ -1,6 +1,6 @@
 // val to populate
 import { React, useState, useEffect } from 'react';
-import './createprofile.css';
+import styles from './createprofile.module.css';
 import {
   Sider,
   Footer,
@@ -11,13 +11,13 @@ import {
   replicateFooterStyle
 } from '../globalstyles.js';
 import { Navbar } from '../../commoncomponents/Navbar/Navbar';
-import { PlusOutlined } from '@ant-design/icons';
+// import { PlusOutlined } from '@ant-design/icons';
 import {
   Button,
   Form,
   Input,
-  TreeSelect,
-  Upload,
+  // TreeSelect,
+  // Upload,
   Select,
   Layout,
   notification,
@@ -151,8 +151,8 @@ export function CreateProfile() {
           </Sider>
           <Layout>
             <Content style={contentStyle}>
-              <div className="container">
-                <div className="content">
+              <div className={styles.container}>
+                <div className={styles.content}>
                   {user && (
                     <Form
                       labelCol={{
