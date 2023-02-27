@@ -1,24 +1,29 @@
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400&display=swap');
+.listingRight {
+  margin-top: 30px;
+}
 
 .ant-form-item-label {
-  font-family: 'Cormorant Garamond', serif;
   white-space: normal;
   line-height: normal;
-  width: 300px;
+  /* width: 350px; */
 }
 
 .content {
-  padding-top: 30px;
   padding-left: 30px;
-  width: 100%;
+  padding-top: 30px;
+  padding-right: 20px;
+  width: 90%;
   display: flex;
   background-color: #eeeeee;
   border-radius: 20px;
   box-shadow: 0 0 5px 1px #dddddd;
   box-sizing: border-box;
-  /* margin: 0 0 10px; */
-  max-height: 100%;
-  font-family: 'Cormorant Garamond', serif;
+  /* max-height: 80%; */
+}
+
+.text {
+  margin-left: 15px;
+  margin-right: 40px;
 }
 
 .loading {

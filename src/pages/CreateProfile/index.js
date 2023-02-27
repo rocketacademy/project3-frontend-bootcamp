@@ -11,27 +11,17 @@ import {
   replicateFooterStyle
 } from '../globalstyles.js';
 import { Navbar } from '../../commoncomponents/Navbar/Navbar';
-// import { PlusOutlined } from '@ant-design/icons';
-import {
-  Button,
-  Form,
-  Input,
-  // TreeSelect,
-  // Upload,
-  Select,
-  Layout,
-  notification,
-  ConfigProvider
-} from 'antd';
+import { Button, Form, Input, Select, Layout, notification, ConfigProvider } from 'antd';
 import { useAuth0 } from '@auth0/auth0-react';
 import { SmileOutlined, FrownOutlined } from '@ant-design/icons';
 import { UploadWidget } from './UploadWidget';
 import axios from 'axios';
 import { useParams, Link, Navigate, useNavigate } from 'react-router-dom';
+import MRT from '../EditProfile/MRT';
 
 export function CreateProfile() {
-  const { TextArea } = Input;
-  const { Option } = Select;
+  // const { TextArea } = Input;
+  // const { Option } = Select;
 
   let { user_id } = useParams();
   const navigate = useNavigate();
@@ -98,6 +88,15 @@ export function CreateProfile() {
     console.log(formValues);
   };
 
+  const handleMRTChange = (e) => {
+    setFormValues({ ...formValues, mrt: e });
+    console.log(formValues);
+  };
+
+  const onSearch = (value) => {
+    console.log('search:', value);
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
     axios
@@ -143,7 +142,7 @@ export function CreateProfile() {
             colorPrimary: '#ff7e55'
           }
         }}>
-        <br></br>
+        {/* <br></br> */}
         <Layout>
           <Sider width={300} style={siderStyle}>
             <Navbar />
@@ -212,7 +211,17 @@ export function CreateProfile() {
                         <Input placeholder={formValues.postal_code} />
                       </Form.Item>
                       <Form.Item label="Nearest MRT" name="mrt" onChange={handleInputChange}>
-                        <Input placeholder={formValues.mrt} />
+                        <Select
+                          showSearch
+                          onSearch={onSearch}
+                          onChange={handleMRTChange}
+                          filterOption={(input, option) =>
+                            (option?.label ?? '').toLowerCase().includes(input.toLowerCase())
+                          }
+                          placeholder={formValues.mrt}
+                          options={MRT}
+                        />
+                        {/* <Input placeholder={formValues.mrt} /> */}
                       </Form.Item>
 
                       <Form.Item>
@@ -220,13 +229,9 @@ export function CreateProfile() {
                           type="primary"
                           htmlType="submit"
                           style={{
-                            backgroundColor: 'white',
-                            color: '#ff7e55',
                             marginRight: '20px'
                           }}
-                          onClick={handleSubmit}
-                          // style={{ marginLeft: 266 }}
-                        >
+                          onClick={handleSubmit}>
                           Save Changes
                         </Button>
                       </Form.Item>

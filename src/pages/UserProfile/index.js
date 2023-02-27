@@ -199,25 +199,39 @@ export function UserProfile() {
                     <Row gutter={10}>
                       <div className={styles.card}>
                         <Col span={6}>
-                          <Avatar shape="round" size={100} src={userProfile.profile_photo} />
+                          <div
+                            style={{
+                              display: 'flex',
+                              flexDirection: 'column',
+                              alignItems: 'center'
+                            }}>
+                            <Avatar shape="round" size={100} src={userProfile.profile_photo} />
+                          </div>
                           <h1>{userProfile.username}</h1>
                           <p className={styles.joineddate} style={{ margin: 0 }}>
                             Joined since {dateSlicer}
                           </p>
                         </Col>
                         <Col span={8}>
-                          <h2>Full Name:</h2>
-                          <div>
-                            {userProfile.first_name} {userProfile.last_name}
+                          <div
+                            style={{
+                              display: 'flex',
+                              flexDirection: 'column',
+                              marginLeft: '40px'
+                            }}>
+                            <h2 className={styles.fullname}>Full Name:</h2>
+                            <div>
+                              {userProfile.first_name} {userProfile.last_name}
+                            </div>
+                            <h2>Email:</h2>
+                            <div>{userProfile.email}</div>
+                            <h2>Address:</h2>
+                            <div>
+                              {userProfile.address} {userProfile.postal_code}
+                            </div>
+                            <h2>Nearest MRT station:</h2>
+                            <div>{userProfile.mrt}</div>
                           </div>
-                          <h2>Email:</h2>
-                          <div>{userProfile.email}</div>
-                          <h2>Address:</h2>
-                          <div>
-                            {userProfile.address} {userProfile.postal_code}
-                          </div>
-                          <h2>Nearest MRT station:</h2>
-                          <div>{userProfile.mrt}</div>
                         </Col>
                         <Col span={6}>
                           {userProfile.email === user.email && (
@@ -239,7 +253,7 @@ export function UserProfile() {
                   </div>
                 )}
               </div>
-              <h3 className={styles.content}>Personal Listings</h3>
+              <h3 className={styles.listingHeader}>Personal Listings</h3>
               <div className={styles.listings}>
                 {userListings.length > 0 ? (
                   userListings.map(({ item_name, photo_url, description, condition, id }) => {
@@ -256,7 +270,7 @@ export function UserProfile() {
                         }}
                         cover={<img alt="" src={photo_url} />}
                         actions={[
-                          <Link to={`http://localhost:3001/${original_id}/listings/${id}`}>
+                          <Link to={`http://localhost:3001/${original_id}/userlistings/${id}`}>
                             <EyeOutlined key="view" />
                           </Link>,
                           <Link to={`http://localhost:3001/${original_id}/editlisting/${id}`}>

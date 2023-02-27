@@ -2,7 +2,16 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import { Card, Carousel, Image, Avatar } from "antd";
-import { Layout, Button, Input, Row, Col, ConfigProvider, Tag } from "antd";
+import {
+  Layout,
+  Button,
+  Input,
+  Row,
+  Col,
+  ConfigProvider,
+  Tag,
+  Empty,
+} from "antd";
 import {
   LikeOutlined,
   WhatsAppOutlined,
@@ -36,14 +45,11 @@ export default function ViewListing() {
   const [accessToken, setAccessToken] = useState(null);
   const [listingLiked, setListingLiked] = useState(false);
   const [dateSlicer, setDateSlicer] = useState("");
-  let { user_id, listing_id } = useParams();
+  const [currentListingLiked, setCurrentListingLiked] = useState(0);
+  let { original_id, user_id, listing_id } = useParams();
 
   const handleBackButtonClick = () => {
     navigate(-1);
-  };
-
-  const handleLike = () => {
-    setListingLiked(!listingLiked);
   };
 
   useEffect(() => {
@@ -55,6 +61,37 @@ export default function ViewListing() {
 
   const configs = {};
   if (accessToken) configs.headers = { Authorization: `Bearer ${accessToken}` };
+
+  const handleLike = () => {
+    if (currentListingLiked === 0) {
+      axios
+        .post(
+          `http://localhost:3000/${original_id}/likes/${listing_id}`,
+          { original_id: original_id, listing_id: listing_id },
+          configs
+        )
+        .then(function (response) {
+          console.log(response);
+          setCurrentListingLiked(1);
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+    } else {
+      axios
+        .delete(
+          `http://localhost:3000/${original_id}/likes/${listing_id}`,
+          configs
+        )
+        .then(function (response) {
+          console.log(response);
+          setCurrentListingLiked(0);
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+    }
+  };
 
   useEffect(() => {
     axios
@@ -86,19 +123,42 @@ export default function ViewListing() {
     }
   }, [listingReturned, userReturned]);
 
-  // const handleLikeButtonClick = () => {
-  //   axios
-  //     .post(`http://localhost:3000/${user_id}/listings/${listing_id}/likes`, {
-  //       user_id: user_id,
-  //       listing_id: listing_id,
-  //     })
-  //     .then(function (response) {
-  //       console.log(response);
-  //     })
-  //     .catch(function (error) {
-  //       console.log(error);
-  //     });
-  // };
+  useEffect(() => {
+    axios
+      .get(`http://localhost:3000/${original_id}/likesfromdatabase`, configs)
+      .then(function (response) {
+        console.log(response.data);
+        for (let i = 0; i < response.data.length; i++) {
+          if (
+            response.data[i].user_id === +original_id &&
+            response.data[i].listing_id === +listing_id
+          ) {
+            setCurrentListingLiked(1);
+          }
+        }
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  }, [configs]);
+
+  const footerStyle = {
+    textAlign: "center",
+    color: "#fff",
+    backgroundColor: "#303841",
+    position: "fixed",
+    bottom: 0,
+    width: "100%",
+  };
+
+  const replicateFooterStyle = {
+    left: 0,
+    bottom: 0,
+    width: "100%",
+    // position: 'absolute',
+    backgroundColor: "#303841",
+    position: "fixed",
+  };
 
   return (
     <div>
@@ -177,22 +237,24 @@ export default function ViewListing() {
                                 onClick={handleLike}
                                 type="default"
                                 className={
-                                  listingLiked ? "clickedBtn" : "normalBtn"
+                                  currentListingLiked
+                                    ? "clickedBtn"
+                                    : "normalBtn"
                                 }
                               >
-                                {listingLiked ? (
+                                {currentListingLiked ? (
                                   <>
                                     <LikeOutlined
                                       style={{ marginRight: "10px" }}
                                     />{" "}
-                                    Liked
+                                    Liked!
                                   </>
                                 ) : (
                                   <>
                                     <LikeOutlined
                                       style={{ marginRight: "10px" }}
                                     />
-                                    Like
+                                    Like this!
                                   </>
                                 )}
                               </Button>

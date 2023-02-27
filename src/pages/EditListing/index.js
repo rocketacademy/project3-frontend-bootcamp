@@ -2,7 +2,18 @@
 import React, { useState, useEffect } from 'react';
 import styles from './editlisting.module.css';
 import { Navbar } from '../../commoncomponents/Navbar/Navbar';
-import { Button, Input, Row, Col, Radio, ConfigProvider, Layout, Form, notification } from 'antd';
+import {
+  Button,
+  Input,
+  Row,
+  Col,
+  Radio,
+  ConfigProvider,
+  Layout,
+  Form,
+  notification,
+  Select
+} from 'antd';
 // import { PlusOutlined } from '@ant-design/icons';
 import { useAuth0 } from '@auth0/auth0-react';
 import axios from 'axios';
@@ -31,12 +42,12 @@ export function EditListing() {
   };
 
   const handleListingTypeChange = (e) => {
-    setFormValues({ ...formValues, listing_type: e.target.value });
+    setFormValues({ ...formValues, listing_type: e });
     console.log(formValues);
   };
 
   const handleConditionChange = (e) => {
-    setFormValues({ ...formValues, condition: e.target.value });
+    setFormValues({ ...formValues, condition: e });
     console.log(formValues);
   };
 
@@ -160,39 +171,44 @@ export function EditListing() {
                             label="Description"
                             name="description"
                             onChange={handleInputChange}>
-                            {/* <Input
-                              style={{
-                                height: '80px',
-                                width: '300px',
-                                whiteSpace: 'normal',
-                                wordWrap: 'break-word'
-                              }}
+                            <TextArea
+                              style={{ width: '300px' }}
+                              rows={5}
                               placeholder={formValues.description}
-                            /> */}
-                            <TextArea rows={5} placeholder={formValues.description} />
+                            />
                           </Form.Item>
                         </p>
                         <Form.Item label="Condition" name="condition">
-                          <Radio.Group
-                            onChange={handleConditionChange}
-                            value={formValues.condition}>
-                            <Radio.Button value="Brand New">Brand new</Radio.Button>
-                            <Radio.Button value="Like New">Like new</Radio.Button>
-                            <Radio.Button value="Well Used">Well used</Radio.Button>
-                          </Radio.Group>
+                          <Select
+                            placeholder={formValues.condition}
+                            onChange={handleConditionChange}>
+                            <Select.Option value="Brand New">Brand New</Select.Option>
+                            <Select.Option value="Like New">Like New</Select.Option>
+                            <Select.Option value="Lightly Used">Lightly Used</Select.Option>
+                            <Select.Option value="Heavily Used">Heavily Used</Select.Option>
+                          </Select>
                         </Form.Item>
 
-                        <Form.Item label="Category" name="category" onChange={handleInputChange}>
-                          <Input placeholder={formValues.category} />
+                        <Form.Item label="Category" name="category" onChange={handleCategoryChange}>
+                          <Select placeholder={formValues.category} onChange={handleCategoryChange}>
+                            <Select.Option value="Shoes">Shoes</Select.Option>
+                            <Select.Option value="Appliances">Appliances</Select.Option>
+                            <Select.Option value="Furniture">Furniture</Select.Option>
+                            <Select.Option value="Clothes">Clothes</Select.Option>
+                            <Select.Option value="Sports">Sports</Select.Option>
+                            <Select.Option value="Games">Games</Select.Option>
+                            <Select.Option value="Photography">Photography</Select.Option>
+                          </Select>
+                          {/* <Input placeholder={formValues.category} /> */}
                         </Form.Item>
 
                         <Form.Item label="Listing Type:" name="listing-type">
-                          <Radio.Group
-                            onChange={handleListingTypeChange}
-                            value={formValues.listing_type}>
-                            <Radio.Button value="Give">To Give</Radio.Button>
-                            <Radio.Button value="Take">To Take</Radio.Button>
-                          </Radio.Group>
+                          <Select
+                            placeholder={formValues.listing_type}
+                            onChange={handleListingTypeChange}>
+                            <Select.Option value="Give">Give</Select.Option>
+                            <Select.Option value="Take">Take</Select.Option>
+                          </Select>
                         </Form.Item>
                       </div>
                     </div>
