@@ -228,8 +228,12 @@ export default function UserIndividualListing() {
                       <h1>{data.item_name}</h1>
                       <p>{data.description}</p>
                       <p>{data.condition}</p>
-                      <Button type="primary" icon={<EditOutlined />}>
-                        Edit
+                      <Button type="primary">
+                        <Link
+                          to={`http://localhost:3001/${original_id}/editlisting/${listing_id}`}
+                        >
+                          <EditOutlined /> Edit
+                        </Link>
                       </Button>
                       &nbsp;
                       <Button
