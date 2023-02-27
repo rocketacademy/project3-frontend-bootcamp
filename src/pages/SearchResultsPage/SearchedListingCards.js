@@ -135,7 +135,7 @@ export default function SearchedListingCards({ configs, liftNumberOfResults }) {
   return (
     <div>
       <div className="all-listing">
-        <Row>
+        <Row style={{ marginLeft: 50 }}>
           <Col span={19}>
             <h2>Listings found</h2>
           </Col>
@@ -161,7 +161,12 @@ export default function SearchedListingCards({ configs, liftNumberOfResults }) {
           </Col>
         </Row>
         <Pagination
-          style={{ margin: "auto", padding: "20px 0px", width: 1400 }}
+          style={{
+            margin: "auto",
+            padding: "20px 0px",
+            width: 1400,
+            marginLeft: 50,
+          }}
           defaultCurrent={1}
           total={combinedData ? combinedData.length : 0}
           current={currentPage}
@@ -181,9 +186,9 @@ export default function SearchedListingCards({ configs, liftNumberOfResults }) {
                 profile_photo,
                 listing_type,
               }) => (
-                <Col span={6} key={id}>
+                <Col span={6} key={id} style={{ marginLeft: 50 }}>
                   <Card
-                    style={{ width: 300 }}
+                    style={{ width: 300, margin: "auto" }}
                     hoverable
                     cover={
                       <img

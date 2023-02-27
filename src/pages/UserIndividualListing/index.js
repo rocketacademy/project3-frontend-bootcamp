@@ -23,6 +23,7 @@ import {
   EditOutlined,
   SmileOutlined,
   FrownOutlined,
+  RollbackOutlined,
 } from "@ant-design/icons";
 import { Navbar } from "../../commoncomponents/Navbar/Navbar";
 import styles from "./userindividuallisting.module.css";
@@ -237,6 +238,20 @@ export default function UserIndividualListing() {
                         icon={<DeleteOutlined />}
                       >
                         Delete
+                      </Button>
+                      <Button
+                        type="link"
+                        style={{
+                          marginLeft: 590,
+                          marginTop: 20,
+                          marginBottom: 20,
+                          backgroundColor: "#ff7e55",
+                          color: "white",
+                        }}
+                        onClick={handleBackButtonClick}
+                      >
+                        <RollbackOutlined />
+                        Back to profile page
                       </Button>
                     </Col>
                   </Row>
