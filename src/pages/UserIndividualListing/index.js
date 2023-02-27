@@ -28,7 +28,7 @@ import {
 import { Navbar } from "../../commoncomponents/Navbar/Navbar";
 import styles from "./userindividuallisting.module.css";
 import axios from "axios";
-import { useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { useAuth0 } from "@auth0/auth0-react";
 
 export default function UserIndividualListing() {
@@ -229,7 +229,7 @@ export default function UserIndividualListing() {
                       <p>{data.description}</p>
                       <p>{data.condition}</p>
                       <Button type="primary" icon={<EditOutlined />}>
-                        Editing
+                        Edit
                       </Button>
                       &nbsp;
                       <Button
@@ -239,20 +239,13 @@ export default function UserIndividualListing() {
                       >
                         Delete
                       </Button>
-                      <Button
-                        type="link"
-                        style={{
-                          marginLeft: 590,
-                          marginTop: 20,
-                          marginBottom: 20,
-                          backgroundColor: "#ff7e55",
-                          color: "white",
-                        }}
-                        onClick={handleBackButtonClick}
+                      <Link
+                        to={`/${original_id}/profile`}
+                        style={{ color: "#ff7e55" }}
                       >
-                        <RollbackOutlined />
-                        Back to profile page
-                      </Button>
+                        {" "}
+                        <RollbackOutlined /> Back to Profile{" "}
+                      </Link>
                     </Col>
                   </Row>
                 </div>
