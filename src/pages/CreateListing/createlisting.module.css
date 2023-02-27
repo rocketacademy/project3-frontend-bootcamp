@@ -1,0 +1,61 @@
+/* .filled {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: large;
+  font-weight: bold;
+  color: #ff7e55;
+} */
+
+p {
+  word-wrap: break-word;
+}
+
+.itemName {
+  font-weight: bold;
+  color: #ff7e55;
+}
+
+.ant-btn-link {
+  color: #ff5722;
+  padding: 0px 0px;
+  line-height: 0;
+  margin: 14px 0px;
+  transition: none;
+}
+
+.ant-btn-link:not(:disabled):hover {
+  color: #ff7e55;
+}
+
+.ant-input::placeholder {
+  font-family: 'Cormorant Garamond', serif;
+}
+
+.ant-form-item-label {
+  font-family: 'Cormorant Garamond', serif;
+  white-space: normal;
+  line-height: normal;
+  width: 300px;
+  /* width: 100% */
+}
+
+.ant-form-item {
+  font-family: 'Cormorant Garamond', serif;
+  white-space: normal;
+  line-height: normal;
+  width: 400px;
+}
+
+.fill {
+  /* padding-left: 10px; */
+  /* border-left: 30px; */
+  /* margin-left: 50px; */
+  width: 40%;
+  /* display: flex; */
+  background-color: #eeeeee;
+  border-radius: 20px;
+  box-shadow: 0 0 5px 1px #dddddd;
+  box-sizing: border-box;
+  /* margin: 0 0 10px; */
+  max-height: 100%;
+  /* max-width: 90%; */
+}

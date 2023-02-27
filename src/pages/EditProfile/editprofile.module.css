@@ -1,0 +1,68 @@
+.listingRight {
+  margin-top: 30px;
+}
+
+.ant-form-item-label {
+  white-space: normal;
+  line-height: normal;
+  /* width: 350px; */
+}
+
+.content {
+  padding-left: 30px;
+  padding-top: 30px;
+  padding-right: 20px;
+  width: 90%;
+  display: flex;
+  background-color: #eeeeee;
+  border-radius: 20px;
+  box-shadow: 0 0 5px 1px #dddddd;
+  box-sizing: border-box;
+  /* max-height: 80%; */
+}
+
+.text {
+  margin-left: 15px;
+  margin-right: 40px;
+}
+
+.loading {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  margin: -60px 0 0 -60px;
+  background: transparent;
+  width: 70px;
+  height: 70px;
+  border-radius: 100%;
+  border: 10px solid #ff7e55;
+}
+
+.loading:after {
+  content: '';
+  background: transparent;
+  width: 140%;
+  height: 140%;
+  position: absolute;
+  border-radius: 100%;
+  top: -20%;
+  left: -20%;
+  opacity: 0.7;
+  box-shadow: #ff7e55 -4px -5px 3px -3px;
+  animation: rotate 2s infinite linear;
+}
+
+@keyframes rotate {
+  0% {
+    transform: rotateZ(0deg);
+  }
+  100% {
+    transform: rotateZ(360deg);
+  }
+}
+
+.loadingText {
+  position: absolute;
+  left: 46.5%;
+  top: 53%;
+}

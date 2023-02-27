@@ -1,0 +1,14 @@
+.content {
+  width: 80%;
+  box-sizing: border-box;
+  background-color: #eeeeee;
+  border-radius: 20px;
+  box-shadow: 0 0 5px 1px #dddddd;
+  display: flex;
+  padding: 30px;
+}
+
+.container {
+  margin-top: 30px;
+  margin-left: 50px;
+}
