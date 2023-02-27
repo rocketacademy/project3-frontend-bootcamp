@@ -1,33 +1,14 @@
-/* .ant-form-item-label {
-  font-family: 'Cormorant Garamond', serif;
-  white-space: normal;
-  line-height: normal;
-  width: 300px;
-  padding-right: 150px;
-} */
-
-/* .ant-btn-link:not(:disabled):hover {
-  color: #ff7e55;
-} */
-
 .content {
-  width: 70%;
-  /* padding-left: 50px; */
-  margin-left: 5%;
+  width: 80%;
   box-sizing: border-box;
   background-color: #eeeeee;
-}
-
-.ant-form-item {
- 
-  white-space: normal;
-  line-height: normal;
-  width: 400px;
+  border-radius: 20px;
+  box-shadow: 0 0 5px 1px #dddddd;
+  display: flex;
+  padding: 30px;
 }
 
 .container {
-  width: 100%;
-  box-sizing: border-box;
-  padding: 15px;
-  display: flex;
+  margin-top: 30px;
+  margin-left: 50px;
 }

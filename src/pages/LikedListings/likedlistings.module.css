@@ -1,0 +1,14 @@
+.content {
+  font-size: 24px;
+  margin-bottom: 10px;
+  display: flex;
+  color: #ff7e55;
+}
+
+.listingRight,
+.content {
+  margin-top: 30px;
+  margin-left: 50px;
+  display: flex;
+  flex-wrap: wrap;
+}
