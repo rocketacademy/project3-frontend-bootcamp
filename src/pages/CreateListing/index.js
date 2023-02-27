@@ -166,7 +166,7 @@ export default function CreateListing() {
 
                 <Row style={{ marginLeft: 50, marginTop: 30 }}>
                   <div className={styles.fill}>
-                    <Col span={12} style={{ padding: 20 }}>
+                    <Col span={18} style={{ paddingLeft: 20 }}>
                       <br></br>
                       <UploadWidget setFormValues={setFormValues} formValues={formValues} />
                       <br></br>

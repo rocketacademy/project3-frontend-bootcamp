@@ -144,7 +144,7 @@ export function CreateProfile() {
         }}>
         {/* <br></br> */}
         <Layout>
-          <Sider width={300} style={siderStyle}>
+          <Sider width={250} style={siderStyle}>
             <Navbar />
             <Footer style={replicateFooterStyle}>--</Footer>
           </Sider>
@@ -155,7 +155,7 @@ export function CreateProfile() {
                   {user && (
                     <Form
                       labelCol={{
-                        span: 8
+                        span: 10
                       }}
                       wrapperCol={{
                         span: 20

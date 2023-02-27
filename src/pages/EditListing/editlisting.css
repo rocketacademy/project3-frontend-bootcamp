@@ -1,9 +1,9 @@
-body {
+/* body {
   font-family: "Cormorant Garamond", serif;
   margin: 0;
   padding: 0;
   background-color: #fff;
-}
+} */
 
 /* .container {
   width: 100%;
@@ -11,7 +11,7 @@ body {
   padding: 30px;
   display: flex;
 } */
-
+/* 
 .menu {
   width: 15%;
   background-color: #eeeeee;
@@ -22,8 +22,8 @@ body {
   height: calc(100% - 120px);
   left: 30px;
   top: 30px;
-}
-*/
+} */
+
 /* 
 .logo {
   margin: 0 auto;
@@ -46,12 +46,12 @@ body {
   border-bottom: 1px solid #303841;
 } */
 
-a {
+/* a {
   color: #303841;
   font-size: 14px;
   font-weight: 700;
   text-decoration: none;
-}
+} */
 
 /* .menu ul li {
   padding: 15px 0 15px 40px;
@@ -79,7 +79,7 @@ a {
   /* padding: 20px 0; */
 }
 
-.userName {
+/* .userName {
   width: 90%;
   display: flex;
   padding: 30px;
@@ -89,14 +89,14 @@ a {
   box-sizing: border-box;
   margin: 0 0 10px;
   max-height: auto;
-}
+} */
 
 /* .profile {
   margin-left: auto;
   display: flex;
   align-items: center;
 } */
-
+/* 
 .photo {
   height: auto;
   width: 150px;
@@ -114,7 +114,7 @@ h1 {
   color: #303841;
   margin-top: 0;
   margin-left: 20px;
-}
+} */
 
 h2 {
   font-size: 16px;
@@ -124,11 +124,11 @@ h2 {
   color: #303841;
 }
 
-h3 {
+/* h3 {
   font-size: 24px;
   margin-bottom: 10px;
   display: flex;
-}
+} */
 
 /* .filterHeader {
   padding: 20px 0 5px 0;
