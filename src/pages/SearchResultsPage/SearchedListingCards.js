@@ -13,7 +13,7 @@ import axios from "axios";
 import { Link, useNavigate, useSearchParams } from "react-router-dom";
 const { Meta } = Card;
 
-export default function ListingCards({ configs }) {
+export default function SearchedListingCards({ configs, liftNumberOfResults }) {
   const [listingsReturned, setListingsReturned] = useState([]);
   const [usersReturned, setUsersReturned] = useState([]);
   const [combinedData, setCombinedData] = useState([]);
@@ -123,6 +123,10 @@ export default function ListingCards({ configs }) {
   }, [listingsReturned, usersReturned]);
 
   useEffect(() => {
+    liftNumberOfResults(combinedData.length);
+  }, [combinedData]);
+
+  useEffect(() => {
     setPageListings(
       combinedData.slice(currentPage * 10 - 10, currentPage * 10)
     );
@@ -131,7 +135,7 @@ export default function ListingCards({ configs }) {
   return (
     <div>
       <div className="all-listing">
-        <Row>
+        <Row style={{ marginLeft: 50 }}>
           <Col span={19}>
             <h2>Listings found</h2>
           </Col>
@@ -157,7 +161,12 @@ export default function ListingCards({ configs }) {
           </Col>
         </Row>
         <Pagination
-          style={{ margin: "auto", padding: "20px 0px", width: 1400 }}
+          style={{
+            margin: "auto",
+            padding: "20px 0px",
+            width: 1400,
+            marginLeft: 50,
+          }}
           defaultCurrent={1}
           total={combinedData ? combinedData.length : 0}
           current={currentPage}
@@ -177,9 +186,9 @@ export default function ListingCards({ configs }) {
                 profile_photo,
                 listing_type,
               }) => (
-                <Col span={6} key={id}>
+                <Col span={6} key={id} style={{ marginLeft: 50 }}>
                   <Card
-                    style={{ width: 300 }}
+                    style={{ width: 300, margin: "auto" }}
                     hoverable
                     cover={
                       <img

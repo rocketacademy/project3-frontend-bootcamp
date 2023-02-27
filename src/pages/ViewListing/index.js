@@ -1,20 +1,29 @@
 // specific listing
-import React from 'react';
-import { useState, useEffect } from 'react';
-import { Card, Carousel, Image, Avatar } from 'antd';
-import { Layout, Button, Input, Row, Col, ConfigProvider, Tag, Empty } from 'antd';
+import React from "react";
+import { useState, useEffect } from "react";
+import { Card, Carousel, Image, Avatar } from "antd";
+import {
+  Layout,
+  Button,
+  Input,
+  Row,
+  Col,
+  ConfigProvider,
+  Tag,
+  Empty,
+} from "antd";
 import {
   LikeOutlined,
   WhatsAppOutlined,
   EnvironmentOutlined,
   RollbackOutlined,
-  TagOutlined
-} from '@ant-design/icons';
-import { Navbar } from '../../commoncomponents/Navbar/Navbar';
-import { Loading } from '../../commoncomponents/Loading';
-import styles from './viewlisting.module.css';
-import axios from 'axios';
-import { useParams, useNavigate } from 'react-router-dom';
+  TagOutlined,
+} from "@ant-design/icons";
+import { Navbar } from "../../commoncomponents/Navbar/Navbar";
+import { Loading } from "../../commoncomponents/Loading";
+import styles from "./viewlisting.module.css";
+import axios from "axios";
+import { useParams, useNavigate } from "react-router-dom";
 import {
   Sider,
   Footer,
@@ -22,9 +31,9 @@ import {
   siderStyle,
   contentStyle,
   footerStyle,
-  replicateFooterStyle
-} from '../globalstyles.js';
-import { useAuth0 } from '@auth0/auth0-react';
+  replicateFooterStyle,
+} from "../globalstyles.js";
+import { useAuth0 } from "@auth0/auth0-react";
 
 export default function ViewListing() {
   const { Meta } = Card;
@@ -34,7 +43,8 @@ export default function ViewListing() {
   const [userReturned, setUserReturned] = useState({});
   const { getAccessTokenSilently, user } = useAuth0();
   const [accessToken, setAccessToken] = useState(null);
-  const [dateSlicer, setDateSlicer] = useState('');
+  const [listingLiked, setListingLiked] = useState(false);
+  const [dateSlicer, setDateSlicer] = useState("");
   const [currentListingLiked, setCurrentListingLiked] = useState(0);
   let { original_id, user_id, listing_id } = useParams();
 
@@ -42,32 +52,31 @@ export default function ViewListing() {
     navigate(-1);
   };
 
-    useEffect(() => {
-      if (user && !accessToken) {
-        getAccessTokenSilently().then((jwt) => setAccessToken(jwt));
-      }
-    }, [user]);
-    console.log(accessToken);
+  useEffect(() => {
+    if (user && !accessToken) {
+      getAccessTokenSilently().then((jwt) => setAccessToken(jwt));
+    }
+  }, [user]);
+  console.log(accessToken);
 
-    const configs = {};
-    if (accessToken)
-      configs.headers = { Authorization: `Bearer ${accessToken}` };
+  const configs = {};
+  if (accessToken) configs.headers = { Authorization: `Bearer ${accessToken}` };
 
   const handleLike = () => {
-    if(currentListingLiked === 0){
+    if (currentListingLiked === 0) {
       axios
-      .post(
-        `http://localhost:3000/${original_id}/likes/${listing_id}`,
-        { original_id: original_id, listing_id: listing_id },
-        configs
-      )
-      .then(function (response) {
-        console.log(response);
-        setCurrentListingLiked(1);
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
+        .post(
+          `http://localhost:3000/${original_id}/likes/${listing_id}`,
+          { original_id: original_id, listing_id: listing_id },
+          configs
+        )
+        .then(function (response) {
+          console.log(response);
+          setCurrentListingLiked(1);
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
     } else {
       axios
         .delete(
@@ -83,8 +92,6 @@ export default function ViewListing() {
         });
     }
   };
-
-
 
   useEffect(() => {
     axios
@@ -121,8 +128,11 @@ export default function ViewListing() {
       .get(`http://localhost:3000/${original_id}/likesfromdatabase`, configs)
       .then(function (response) {
         console.log(response.data);
-        for(let i = 0; i < response.data.length; i++){
-          if (response.data[i].user_id === +original_id && response.data[i].listing_id === +listing_id){
+        for (let i = 0; i < response.data.length; i++) {
+          if (
+            response.data[i].user_id === +original_id &&
+            response.data[i].listing_id === +listing_id
+          ) {
             setCurrentListingLiked(1);
           }
         }
