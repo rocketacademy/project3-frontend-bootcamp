@@ -36,6 +36,7 @@
 .menu ul li a {
   font-size: 20px;
   color: #303841;
+  font-weight: bold;
   transition: all 0.3s ease-out;
 }
 
