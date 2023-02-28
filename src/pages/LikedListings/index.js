@@ -168,7 +168,7 @@ export default function LikedListings() {
                             title={item_name}
                             description={
                               <>
-                                <b>
+                                <div>
                                   <Row>
                                     <Col span={8}>
                                       {listing_type === 'Give' ? (
@@ -186,8 +186,8 @@ export default function LikedListings() {
                                       <EnvironmentOutlined /> {mrt}
                                     </Col>
                                   </Row>
-                                </b>
-                                <br />
+                                </div>
+                                {/* <br /> */}
                                 Posted by {username}
                               </>
                             }
@@ -199,12 +199,33 @@ export default function LikedListings() {
                 ) : (
                   <>
                     {loading && <Loading />}
-                    {!displayLikedListings && <Empty />}
+                    {displayLikedListings.length === 0 && <Empty />}
                   </>
                 )}
               </div>
             </Content>
-            <Footer style={footerStyle}>Copyright © Give & Take 2023</Footer>
+            {displayLikedListings.length > 0 ? (
+              <Footer
+                style={{
+                  textAlign: 'center',
+                  color: '#fff',
+                  backgroundColor: '#303841',
+                  marginTop: 400
+                }}>
+                Copyright © Give & Take 2023
+              </Footer>
+            ) : (
+              <Footer
+                style={{
+                  textAlign: 'center',
+                  color: '#fff',
+                  backgroundColor: '#303841',
+                  marginTop: 420
+                }}>
+                Copyright © Give & Take 2023
+              </Footer>
+            )}
+            {/* <Footer style={footerStyle}>Copyright © Give & Take 2023</Footer> */}
           </Layout>
         </Layout>
       </ConfigProvider>

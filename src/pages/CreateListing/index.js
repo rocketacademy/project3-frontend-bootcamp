@@ -266,7 +266,7 @@ export default function CreateListing() {
                         ) : (
                           <></>
                         )}
-                        <br></br>
+                        {/* <br></br> */}
                         {formValues.listing_type ? (
                           <>
                             <TagOutlined style={{ color: '#ff7e55' }} />

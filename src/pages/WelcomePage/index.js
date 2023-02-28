@@ -13,7 +13,7 @@ import react from '../../assets/images/react.png';
 import antdesign from '../../assets/images/ant-design.png';
 
 import styles from './welcomepage.module.css';
-import { MessageOutlined, LikeOutlined } from '@ant-design/icons';
+import { WhatsAppOutlined, EyeOutlined } from '@ant-design/icons';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { useAuth0 } from '@auth0/auth0-react';
@@ -136,7 +136,7 @@ export default function WelcomePage() {
                         }}
                       />
                     }
-                    actions={[<MessageOutlined key="message" />, <LikeOutlined key="like" />]}>
+                    actions={[<EyeOutlined key="view" />, <WhatsAppOutlined key="whatsapp" />]}>
                     <Meta title={item_name} description={category} />
                   </Card>
                 </Col>
@@ -191,7 +191,7 @@ export default function WelcomePage() {
             <p className={styles.email}>hello@giveandtake.sg</p>
           </div>
         </Content>
-        <Footer style={footerStyle}>Copyright(c) Give and Take 2023. </Footer>
+        <Footer style={footerStyle}>Copyright © Give & Take 2023</Footer>
       </Layout>
     </Space>
   );

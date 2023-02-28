@@ -198,9 +198,7 @@ export default function ListingCards({ configs }) {
                       />
                     }
                     actions={[
-                      <Link
-                        to={`http://localhost:3001/${original_id}/listings/${user_id}/${id}`}
-                      >
+                      <Link to={`http://localhost:3001/${original_id}/listings/${user_id}/${id}`}>
                         <EyeOutlined key="view" />
                       </Link>,
                       <a href={`https://wa.me/65${phone_number}`}>
@@ -221,7 +219,7 @@ export default function ListingCards({ configs }) {
                                   </div>
                                 ) : (
                                   <div className={styles.listingTypeIconColorTag}>
-                                    <TagOutlined style={{ color: '#ff7e55' }} /> {listing_type}
+                                    <TagOutlined style={{ color: 'green' }} /> {listing_type}
                                   </div>
                                 )}
                               </Col>

@@ -309,7 +309,7 @@ export function UserProfile() {
                 ) : (
                   <div>
                     <br></br>
-                    {!userProfile && <Empty />}
+                    {userListings.length === 0 && <Empty />}
 
                     <br></br>
                   </div>

@@ -12,3 +12,7 @@
   display: flex;
   flex-wrap: wrap;
 }
+
+.listingRight {
+  margin-bottom: 500px;
+}
