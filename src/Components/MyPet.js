@@ -24,9 +24,9 @@ export default function MyPet() {
 
   const displayHeader = () => {
     if (myPets.length === 1) {
-      return <h1 className="large x-bold">My furry friend</h1>;
+      return <h1 className="x-large x-bold">My furry friend</h1>;
     } else {
-      return <h1 className="large x-bold">My furry friends</h1>;
+      return <h1 className="x-large x-bold">My furry friends</h1>;
     }
   };
 
@@ -39,8 +39,8 @@ export default function MyPet() {
           alt={pet.name}
         />
         <Carousel.Caption>
-          <h5>{pet.name}</h5>
-          <p>{calculateAge(pet)}</p>
+          <h2 className="large bold">{pet.name}</h2>
+          <h3 className="medium">{calculateAge(pet)}</h3>
         </Carousel.Caption>
       </Carousel.Item>
     ));
