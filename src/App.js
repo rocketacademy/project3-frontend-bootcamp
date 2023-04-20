@@ -20,7 +20,7 @@ class App extends React.Component {
           <header className="App-header">
             <Routes>
               <Route path="/" element={<Home />} />
-              <Route path="/profile/:id" element={<Profile />} />
+              <Route path="/profile" element={<Profile />} />
               <Route path="/classes" element={<ClassesList />} />
               <Route path="/classes/:id" element={<Classes />} />
               <Route path="/subjects" element={<SubjectsList />} />
