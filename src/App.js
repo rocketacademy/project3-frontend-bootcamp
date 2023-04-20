@@ -21,10 +21,8 @@ class App extends React.Component {
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/profile" element={<Profile />} />
-              <Route path="/classes" element={<ClassesList />} />
-              <Route path="/classes/:id" element={<Classes />} />
-              <Route path="/subjects" element={<SubjectsList />} />
-              <Route path="/subjects/:id" element={<Subject />} />
+              <Route path="/class" element={<Classes />} />
+              <Route path="/class/:id" element={<ClassesList />} />
               <Route path="/questions" element={<QuestionList />} />
               <Route path="/question/:id" element={<Question />} />
               <Route path="/chatroom/:id" element={<Chatroom />} />
