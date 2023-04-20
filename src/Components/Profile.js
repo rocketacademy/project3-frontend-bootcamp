@@ -20,7 +20,7 @@ export default function Profile() {
   const [lastName, setLastName] = useState("");
   const [status, setStatus] = useState(false);
   const [photoUrl, setPhotoUrl] = useState("");
-  const [profile, setProfile] = useState();
+  const [profile, setProfile] = useState({});
   const [editStatus, setEditStatus] = useState(false);
 
   useEffect(() => {
@@ -48,14 +48,14 @@ export default function Profile() {
         console.log(err);
       });
   };
-
+  console.log(profile);
   const displayProfile = (
     <div>
       <div>
         <img src={`${photoUrl}`} />
       </div>
-      <div>First Name: {firstName}</div>
-      <div>Last Name: {lastName}</div>
+      <div>First Name: {profile.first_name}</div>
+      <div>Last Name: {profile.last_name}</div>
       <div>Email: {user.email}</div>
       <div></div>
     </div>
