@@ -1,7 +1,13 @@
 import React, { useEffect, useState } from "react";
 import ScrollToBottom from "react-scroll-to-bottom";
 
-export default function Chat({ socket, username, chatroomIndex, logout }) {
+export default function Chat({
+  socket,
+  username,
+  chatroomIndex,
+  logout,
+  dbUser_id,
+}) {
   const [currentMessage, setCurrentMessage] = useState("");
   const [messageList, setMessageList] = useState([]);
 
@@ -10,7 +16,7 @@ export default function Chat({ socket, username, chatroomIndex, logout }) {
       const messageData = {
         chatroomIndex: chatroomIndex,
         author: username,
-        user_id: 1, // Need to use Auth0
+        user_id: dbUser_id,
         chatroom_id: chatroomIndex,
         message: currentMessage,
         time:
@@ -27,10 +33,10 @@ export default function Chat({ socket, username, chatroomIndex, logout }) {
 
   useEffect(() => {
     socket.on("load_messages", (data) => {
-      console.log("loaded messages", data);
+      // console.log("loaded messages", data);
       setMessageList((list) => [...list, ...data]);
     });
-    console.log(messageList);
+    // console.log(messageList);
   }, [socket]);
 
   useEffect(() => {
@@ -41,9 +47,9 @@ export default function Chat({ socket, username, chatroomIndex, logout }) {
     console.log(messageList);
   }, [socket]);
 
-  useEffect(() => {
-    console.log("User:", username);
-  });
+  // useEffect(() => {
+  //   console.log("User:", username);
+  // });
 
   return (
     <div className="chat-window">
@@ -57,7 +63,7 @@ export default function Chat({ socket, username, chatroomIndex, logout }) {
               <div
                 key={index}
                 className="message"
-                id={username === messageContent.author ? "other" : "you"}
+                id={username === messageContent.author ? "you" : "other"}
               >
                 <div>
                   <div className="message-content">

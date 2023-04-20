@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import io from "socket.io-client";
 import Chat from "./Chat";
+import { UserAuth } from "../Context/UserContext";
 
 const socket = io.connect("http://localhost:8080");
 
@@ -12,6 +13,15 @@ export default function Chatroom() {
   // To replace with logged in user info after auth settled
   const [username, setUsername] = useState("");
   const [showChat, setShowChat] = useState(false);
+  const { dbUser, loginButton } = UserAuth();
+
+  useEffect(() => {
+    console.log("dbUser", dbUser);
+    if (dbUser !== null) {
+      setUsername(dbUser.first_name);
+      joinRoom();
+    }
+  });
 
   const params = useParams();
   if (chatroomIndex !== params.id) {
@@ -39,8 +49,8 @@ export default function Chatroom() {
       <div>Chatroom {chatroomIndex}</div>
       {!showChat ? (
         <div className="joinChatContainer">
-          <h3>Join a chat</h3>
-          <input
+          <h3>Joining class chat...</h3>
+          {/* <input
             type="text"
             placeholder="Username"
             onChange={(event) => {
@@ -48,7 +58,12 @@ export default function Chatroom() {
             }}
           />
 
-          <button onClick={joinRoom}>Join a room</button>
+          <button onClick={joinRoom}>Join a room</button> */}
+          {/* <div>{dbUser && dbUser.first_name} is online</div> */}
+          <div>
+            {dbUser ? `${dbUser.first_name} is online` : "Loading user..."}
+          </div>
+          <div>{loginButton}</div>
         </div>
       ) : (
         <>
@@ -58,6 +73,7 @@ export default function Chatroom() {
               username={username}
               chatroomIndex={chatroomIndex}
               logout={logout}
+              dbUser_id={dbUser.id}
             />
           </div>
         </>
