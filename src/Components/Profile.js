@@ -32,7 +32,7 @@ export default function Profile() {
       alert("Please Edit Your Profile");
       setEditStatus(true);
     }
-  }, [user.email]);
+  }, []);
 
   const retrieveProfile = async () => {
     if (!isAuthenticated) {
@@ -128,10 +128,6 @@ export default function Profile() {
         <Button onClick={(e) => setEditStatus(true)}>Edit Profile</Button>
       </div>
       {editStatus ? editProfile : displayProfile}
-      <div>Available Classes:</div>
-      <Link to={`/class/${profile.id}`}>
-        <Classes userId={profile.id} />
-      </Link>
     </div>
   );
 }
