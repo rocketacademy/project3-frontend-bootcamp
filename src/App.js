@@ -9,9 +9,10 @@ import Question from "./Components/Question";
 import Chatroom from "./Components/Chatroom";
 import Classes from "./Components/Classes";
 import Subject from "./Components/Subject";
-import ClassesList from "./Components/ClassesList";
 import SubjectsList from "./Components/SubjectsList";
 import { UserProvider } from "./Context/UserContext";
+import "bootstrap/dist/css/bootstrap.min.css";
+import NavBar from "./Components/Navbar";
 
 function App() {
   return (
