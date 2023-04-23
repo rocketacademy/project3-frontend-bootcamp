@@ -1,5 +1,5 @@
 import "./App.css";
-import React from "react";
+import React, { createContext, useContext } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "./Components/Home";
 import Error from "./Components/Error";
@@ -19,12 +19,16 @@ function App() {
     <UserProvider>
       <BrowserRouter>
         <div className="App">
-          <header className="App-header">
-            <NavBar />
+          <header>
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/profile" element={<Profile />} />
+<<<<<<< HEAD
               <Route path="/class/" element={<Classes />} />
+=======
+              <Route path="/classes" element={<ClassesList />} />
+              <Route path="/classes/:id" element={<Classes />} />
+>>>>>>> main
               <Route path="/subjects" element={<SubjectsList />} />
               <Route path="/subjects/:id" element={<Subject />} />
               <Route path="/questions" element={<QuestionList />} />
