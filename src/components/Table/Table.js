@@ -1,17 +1,46 @@
 import React, { useEffect, useState } from "react";
 import { useTable, useSortBy } from "react-table";
 import { allColumns, groupingColumns } from "./columns";
+import Dropdown from "react-dropdown";
+import "react-dropdown/style.css";
 
 import "./Table.css";
 
 const Table = ({ selector = "participants" }) => {
   const [tableColumns, setTableColumns] = useState([]);
+  const [status, setStatus] = useState([]);
+  const statuses = ["Not Contacted", "Contacted", "Confirmed"];
+
+  const handleChange = (e, id) => {
+    console.log("Selected: " + e.value + " at index " + id);
+    setStatus((prevStatus) => ({
+      ...prevStatus,
+      [id]: e.value,
+    }));
+  };
 
   // Selecting table through selector that's passed in
 
   useEffect(() => {
     if (selector === "participants") {
       setTableColumns([...allColumns]);
+    } else if (selector === "eventpage") {
+      setTableColumns([
+        {
+          Header: "Status",
+          Cell: ({ row }) => (
+            <div>
+              <Dropdown
+                id={row.id}
+                options={statuses}
+                onChange={(e) => handleChange(e, row.id)}
+                value={status[row.id]}
+              />
+            </div>
+          ),
+        },
+        ...allColumns,
+      ]);
     } else if (selector === "groupings") {
       setTableColumns([...groupingColumns]);
     }
@@ -101,9 +130,7 @@ const Table = ({ selector = "participants" }) => {
               <tr {...row.getRowProps()}>
                 {row.cells.map((cell) => {
                   return (
-                    <td {...cell.getCellProps()}>
-                      <p>{cell.render("Cell")}</p>
-                    </td>
+                    <td {...cell.getCellProps()}>{cell.render("Cell")}</td>
                   );
                 })}
               </tr>
