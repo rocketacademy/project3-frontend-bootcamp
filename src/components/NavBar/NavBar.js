@@ -1,15 +1,16 @@
 import { useNavigate } from "react-router-dom";
-import "./Header.css";
+import "./NavBar.css";
 
-const Header = () => {
+const NavBar = () => {
   const navigate = useNavigate();
   const handleNavigate = (e) => {
     navigate(`/${e.currentTarget.id}`);
   };
+
   return (
-    <div id="header">
+    <div id="nav">
       <h1>Friendzone</h1>
-      <div id="header-links">
+      <div id="nav-links">
         <button onClick={handleNavigate} id="events">
           <h5>Events</h5>
         </button>
@@ -24,4 +25,4 @@ const Header = () => {
   );
 };
 
-export default Header;
+export default NavBar;

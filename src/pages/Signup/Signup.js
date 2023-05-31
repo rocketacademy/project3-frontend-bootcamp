@@ -1,9 +1,9 @@
-import Header from "../../components/Header/Header";
+import NavBar from "../../components/NavBar/NavBar";
 
 const Signup = () => {
   return (
-    <div>
-      <Header />
+    <div className="contents">
+      <NavBar />
       <h1>Signup Page</h1>
     </div>
   );

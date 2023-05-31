@@ -18,6 +18,10 @@ h5 {
   letter-spacing: 2px;
 }
 
+p {
+  font-weight: 500;
+}
+
 button {
   cursor: pointer;
 }
@@ -29,4 +33,11 @@ button {
   color: black;
   padding: 20px;
   padding-top: 80px;
+}
+
+.contents {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  height: 100%;
 }

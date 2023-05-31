@@ -1,4 +1,4 @@
-#header {
+#nav {
   position: absolute;
   left: 0;
   top: 0;
@@ -13,12 +13,12 @@
   justify-content: space-between;
 }
 
-#header-links {
+#nav-links {
   display: flex;
   gap: 15px;
 }
 
-#header-links button {
+#nav-links button {
   color: white;
   background-color: rgba(0, 0, 0, 0);
   border: none;

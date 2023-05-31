@@ -1,11 +1,11 @@
-import Header from "../../components/Header/Header";
+import NavBar from "../../components/NavBar/NavBar";
 
 const Login = () => {
   return (
-    <>
-      <Header />
+    <div className="contents">
+      <NavBar />
       <h1>Login Page</h1>
-    </>
+    </div>
   );
 };
 

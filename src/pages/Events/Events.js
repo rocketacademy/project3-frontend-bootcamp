@@ -1,9 +1,9 @@
-import Header from "../../components/Header/Header";
+import NavBar from "../../components/NavBar/NavBar";
 
 const Events = () => {
   return (
-    <div>
-      <Header />
+    <div className="contents">
+      <NavBar />
       <h1>Events Page</h1>
     </div>
   );
