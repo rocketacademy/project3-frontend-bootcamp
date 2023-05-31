@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useTable, useSortBy } from "react-table";
 import { allColumns, groupingColumns } from "./columns";
+
 import "./Table.css";
 
 const Table = ({ selector = "participants" }) => {
