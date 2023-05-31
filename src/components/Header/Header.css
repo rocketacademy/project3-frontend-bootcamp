@@ -1,0 +1,25 @@
+#header {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  background-color: black;
+  height: 60px;
+  padding: 20px;
+  color: white;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  justify-content: space-between;
+}
+
+#header-links {
+  display: flex;
+  gap: 15px;
+}
+
+#header-links button {
+  color: white;
+  background-color: rgba(0, 0, 0, 0);
+  border: none;
+}

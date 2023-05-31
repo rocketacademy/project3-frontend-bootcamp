@@ -1,20 +1,35 @@
+//----------- React -----------//
+
 import React from "react";
-import logo from "./logo.png";
+import { Navigate, Route, Routes } from "react-router-dom";
+
+//---------- Pages ----------//
+
+import Events from "./pages/Events/Events";
+import Participants from "./pages/Participants/Participants";
+import Facilitators from "./pages/Facilitators/Facilitators";
+import Login from "./pages/Login/Login";
+import Signup from "./pages/Signup/Signup";
+
+//---------- Others ----------//
+
 import "./App.css";
 
-class App extends React.Component {
-  render() {
-    return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-        </header>
-      </div>
-    );
-  }
-}
+//------------------------------//
+
+const App = () => {
+  return (
+    <div className="App">
+      <Routes>
+        <Route path="/" element={<Navigate to="/events" />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={<Signup />} />
+        <Route path="/events" element={<Events />} />
+        <Route path="/participants" element={<Participants />} />
+        <Route path="/facils" element={<Facilitators />} />
+      </Routes>
+    </div>
+  );
+};
 
 export default App;
