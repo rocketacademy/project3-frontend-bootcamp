@@ -1,8 +1,24 @@
-import React from "react";
-import "./Table.css";
+import React, { useEffect, useState } from "react";
 import { useTable, useSortBy } from "react-table";
+import { allColumns, groupingColumns } from "./columns";
+import "./Table.css";
 
-const Table = () => {
+const Table = ({ selector = "participants" }) => {
+  const [tableColumns, setTableColumns] = useState([]);
+
+  // Selecting table through selector that's passed in
+
+  useEffect(() => {
+    if (selector === "participants") {
+      setTableColumns([...allColumns]);
+    } else if (selector === "groupings") {
+      setTableColumns([...groupingColumns]);
+    }
+    // eslint-disable-next-line
+  }, []);
+
+  // Dummy data for now
+
   const data = React.useMemo(
     () => [
       {
@@ -45,41 +61,11 @@ const Table = () => {
     []
   );
 
-  const columns = React.useMemo(
-    () => [
-      { Header: "Name", accessor: "name" },
-      { Header: "Postal Code", accessor: "postal" },
-      { Header: "Neighbourhood", accessor: "neighbourhood" },
-      {
-        Header: "Age",
-        accessor: "year",
-        Cell: (content) => {
-          return 2023 - content.value;
-        },
-      },
-      { Header: "Phone No.", accessor: "phone" },
-      {
-        Header: "Sex",
-        accessor: "isMale",
-        sortType: "basic",
-        Cell: (content) => {
-          return content.value ? "M" : "F";
-        },
-      },
-      {
-        Header: "First Timer",
-        accessor: "isFirstTime",
-        sortType: "basic",
-        Cell: (content) => {
-          return content.value ? "Yes" : "No";
-        },
-      },
-      { Header: "Nationality", accessor: "nationality" },
-      { Header: "Race", accessor: "race" },
-      { Header: "Marital Status", accessor: "maritalStatus" },
-    ],
-    []
-  );
+  // Defining columns
+
+  const columns = React.useMemo(() => [...tableColumns], [tableColumns]);
+
+  // Initialising table
 
   const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } =
     useTable({ columns, data }, useSortBy);
