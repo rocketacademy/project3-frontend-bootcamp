@@ -19,7 +19,7 @@ const EventPage = () => {
         Back to Events Home
       </button>
       <h1>{eventId} Page</h1>
-      <Table />
+      <Table selector="eventpage" />
     </div>
   );
 };
