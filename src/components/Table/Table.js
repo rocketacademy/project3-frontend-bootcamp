@@ -1,15 +1,24 @@
 import React, { useEffect, useState } from "react";
 import { useTable, useSortBy } from "react-table";
 import { allColumns, groupingColumns } from "./columns";
-import Dropdown from "react-dropdown";
+import Select from "react-select";
 import "react-dropdown/style.css";
 
 import "./Table.css";
 
 const Table = ({ selector = "participants" }) => {
   const [tableColumns, setTableColumns] = useState([]);
-  const [status, setStatus] = useState([]);
-  const statuses = ["Not Contacted", "Contacted", "Confirmed"];
+  const [status, setStatus] = useState({});
+  const statuses = [
+    { value: "not-contacted", label: "Not Contacted" },
+    { value: "contacted", label: "Contacted" },
+    { value: "to-reject", label: "To Reject" },
+    { value: "rejected", label: "Rejected" },
+    { value: "confirmed", label: "Confirmed" },
+    { value: "not-coming", label: "Not Coming" },
+    { value: "prompted", label: "Prompted" },
+    { value: "ghosted", label: "Ghosted" },
+  ];
 
   const handleChange = (e, id) => {
     console.log("Selected: " + e.value + " at index " + id);
@@ -28,16 +37,20 @@ const Table = ({ selector = "participants" }) => {
       setTableColumns([
         {
           Header: "Status",
-          Cell: ({ row }) => (
-            <div>
-              <Dropdown
+          Cell: ({ row }) => {
+            return (
+              <Select
+                menuPortalTarget={document.body}
+                menuPosition={"fixed"}
+                menuPlacement="auto"
+                className="select-status"
                 id={row.id}
                 options={statuses}
                 onChange={(e) => handleChange(e, row.id)}
-                value={status[row.id]}
+                value={statuses.find((item) => item.value === status[row.id])}
               />
-            </div>
-          ),
+            );
+          },
         },
         ...allColumns,
       ]);
@@ -45,7 +58,7 @@ const Table = ({ selector = "participants" }) => {
       setTableColumns([...groupingColumns]);
     }
     // eslint-disable-next-line
-  }, []);
+  }, [status]);
 
   // Dummy data for now
 
