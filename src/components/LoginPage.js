@@ -52,7 +52,7 @@ const LoginPage = () => {
     <Stack alignItems={"center"} justifyContent={"center"} my={5}>
       <Paper sx={{ px: 5, py: 4, my: 7 }} elevation={0}>
         <Typography variant="h1" sx={{ fontFamily: "'Yeseva One', cursive" }}>
-          Reuben & Daniel's Ecommerce Store
+          Reuben & Daniel's Ecommerce Stores
         </Typography>
       </Paper>
       <Typography variant="h2">Join Our Ecommerce Store Today.</Typography>
