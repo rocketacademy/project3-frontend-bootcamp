@@ -1,4 +1,5 @@
 import React, { createContext, useCallback, useEffect, useState } from "react";
+
 import LoginPage from "./components/LoginPage";
 import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
@@ -10,11 +11,7 @@ class App extends React.Component {
   render() {
     return (
       <div className="App">
-        <BrowserRouter>
-          <Routes>
-            <Route path="/" element={<LoginPage />} />
-          </Routes>
-        </BrowserRouter>
+        <LoginPage />
       </div>
     );
   }
