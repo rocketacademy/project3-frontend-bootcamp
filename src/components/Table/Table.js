@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { useTable, useSortBy } from "react-table";
 import { allColumns, groupingColumns } from "./columns";
 import Select from "react-select";
-import "react-dropdown/style.css";
 
 import "./Table.css";
 
