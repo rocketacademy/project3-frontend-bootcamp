@@ -1,12 +1,26 @@
+import { useEffect, useState } from "react";
 import NavBar from "../../components/NavBar/NavBar";
 import Table from "../../components/Table/Table";
+import axios from "axios";
 
 const Participants = () => {
+  const [data, setData] = useState(null);
+
+  useEffect(() => {
+    const getTableData = async () => {
+      const tableData = await axios.get(
+        `${process.env.REACT_APP_BACKEND_URL}/participants`
+      );
+      setData(tableData.data);
+    };
+    getTableData();
+  }, []);
+
   return (
     <div className="contents">
       <NavBar />
       <h1>Participants Page</h1>
-      <Table />
+      {data && <Table tableData={data} />}
     </div>
   );
 };

@@ -23,11 +23,11 @@ const EventComposer = ({ handleToggle }) => {
           // get an array of participant data in JSON format
           const participantJSON = results.data.map((participant) => {
             let {
-              ["Preferred Name"]: name,
-              ["Mobile Number (e.g. 91234567)"]: mobile,
-              ["Postal Code (e.g. 123456)"]: postalCode,
-              ["Year of Birth"]: year,
-              ["Marital Status"]: maritalStatus,
+              "Preferred Name": name,
+              "Mobile Number (e.g. 91234567)": mobile,
+              "Postal Code (e.g. 123456)": postalCode,
+              "Year of Birth": year,
+              "Marital Status": maritalStatus,
               Sex: isMale,
               Nationality: nationality,
               Race: race,

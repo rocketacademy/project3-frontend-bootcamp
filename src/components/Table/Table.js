@@ -5,7 +5,7 @@ import Select from "react-select";
 
 import "./Table.css";
 
-const Table = ({ selector = "participants" }) => {
+const Table = ({ selector = "participants", tableData }) => {
   const [tableColumns, setTableColumns] = useState([]);
   const [status, setStatus] = useState({});
   const statuses = [
@@ -61,47 +61,7 @@ const Table = ({ selector = "participants" }) => {
 
   // Dummy data for now
 
-  const data = React.useMemo(
-    () => [
-      {
-        name: "Anon",
-        postal: 552455,
-        neighbourhood: "SERANGOON CENTRAL",
-        year: 1993,
-        phone: 97654323,
-        isMale: true,
-        isFirstTime: true,
-        nationality: "Singaporean",
-        race: "Chinese",
-        maritalStatus: "Single",
-      },
-      {
-        name: "Bnon",
-        postal: 441244,
-        neighbourhood: "TAMPINES WEST",
-        year: 2000,
-        phone: 98765483,
-        isMale: true,
-        isFirstTime: false,
-        nationality: "Singaporean",
-        race: "Indian",
-        maritalStatus: "Married",
-      },
-      {
-        name: "Cnon",
-        postal: 262322,
-        neighbourhood: "BUKIT BATOK",
-        year: 1997,
-        phone: 88776655,
-        isMale: false,
-        isFirstTime: true,
-        nationality: "PR",
-        race: "Malay",
-        maritalStatus: "Single",
-      },
-    ],
-    []
-  );
+  const data = React.useMemo(() => tableData, [tableData]);
 
   // Defining columns
 
