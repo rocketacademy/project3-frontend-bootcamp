@@ -16,6 +16,25 @@ const EventComposer = ({ handleToggle }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     try {
+      const eventJSON = {
+        name: title,
+        startTime: start,
+        endTime: end,
+        date: date,
+        venue: venue,
+        eventTypeId: 1,
+      };
+      axios
+        .post(`${process.env.REACT_APP_BACKEND_URL}/events`, eventJSON)
+        .then((response) => {
+          console.log(eventJSON);
+          console.log("eventJSON posted to backend");
+        });
+    } catch {
+      console.log("Error: Event JSON could not be posted to the backend");
+    }
+
+    try {
       parse(csv, {
         header: true,
         delimiter: ",",
