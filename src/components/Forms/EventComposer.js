@@ -125,8 +125,6 @@ const EventComposer = ({ handleToggle }) => {
         setVenue(e.currentTarget.value);
         break;
       case "csv":
-        console.log("test");
-        console.log("file: ", e.currentTarget.files[0]);
         setCsv(e.currentTarget.files[0]);
         break;
       default:
