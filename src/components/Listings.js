@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 import { UserContext } from "../App";
 import { Stack, TextField, Typography } from "@mui/material";
 /* import Typography from '@mui/joy/Typography'; */
-import Card from "@mui/joy/Card";
+/* import Card from "@mui/joy/Card"; */
 import { styled } from "@mui/material/styles";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
@@ -38,7 +38,7 @@ const Listings = () => {
 						<Item><strong>Product Title 1</strong></Item>
 						<Item>Price</Item>
 						<Item>Description</Item>
-						<Item>Shipping Cost</Item>
+
 						<Item>Shipping Details</Item>
 						<Item><Button variant="outlined">Add to Cart</Button></Item>
 					</Grid>
@@ -46,7 +46,7 @@ const Listings = () => {
 						<Item><strong>Product Title 2</strong></Item>
 						<Item>Price</Item>
 						<Item>Description</Item>
-						<Item>Shipping Cost</Item>
+
 						<Item>Shipping Details</Item>
 						<Item><Button variant="outlined">Add to Cart</Button></Item>
 					</Grid>
@@ -54,7 +54,7 @@ const Listings = () => {
 						<Item><strong>Product Title 3</strong></Item>
 						<Item>Price</Item>
 						<Item>Description</Item>
-						<Item>Shipping Cost</Item>
+
 						<Item>Shipping Details</Item>
 						<Item><Button variant="outlined">Add to Cart</Button></Item>
 					</Grid>
@@ -62,7 +62,7 @@ const Listings = () => {
 						<Item><strong>Product Title 4</strong></Item>
 						<Item>Price</Item>
 						<Item>Description</Item>
-						<Item>Shipping Cost</Item>
+
 						<Item>Shipping Details</Item>
 						<Item><Button variant="outlined">Add to Cart</Button></Item>
 					</Grid>
@@ -70,7 +70,7 @@ const Listings = () => {
 						<Item><strong>Product Title 5</strong></Item>
 						<Item>Price</Item>
 						<Item>Description</Item>
-						<Item>Shipping Cost</Item>
+
 						<Item>Shipping Details</Item>
 						<Item><Button variant="outlined">Add to Cart</Button></Item>
 					</Grid>
@@ -78,7 +78,7 @@ const Listings = () => {
 						<Item><strong>Product Title 6</strong></Item>
 						<Item>Price</Item>
 						<Item>Description</Item>
-						<Item>Shipping Cost</Item>
+
 						<Item>Shipping Details</Item>
 						<Item><Button variant="outlined">Add to Cart</Button></Item>
 					</Grid>
@@ -86,7 +86,7 @@ const Listings = () => {
 						<Item><strong>Product Title 7</strong></Item>
 						<Item>Price</Item>
 						<Item>Description</Item>
-						<Item>Shipping Cost</Item>
+
 						<Item>Shipping Details</Item>
 						<Item><Button variant="outlined">Add to Cart</Button></Item>
 					</Grid>
@@ -94,7 +94,7 @@ const Listings = () => {
 						<Item><strong>Product Title </strong>8</Item>
 						<Item>Price</Item>
 						<Item>Description</Item>
-						<Item>Shipping Cost</Item>
+
 						<Item>Shipping Details</Item>
 						<Item><Button variant="outlined">Add to Cart</Button></Item>
 					</Grid>
@@ -102,7 +102,7 @@ const Listings = () => {
 						<Item><strong>Product Title 9</strong></Item>
 						<Item>Price</Item>
 						<Item>Description</Item>
-						<Item>Shipping Cost</Item>
+
 						<Item>Shipping Details</Item>
 						<Item><Button variant="outlined">Add to Cart</Button></Item>
 					</Grid>
