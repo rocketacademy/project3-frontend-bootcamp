@@ -10,7 +10,7 @@ import { toast } from "react-toastify";
 const LoginPage = () => {
   const { loginWithRedirect } = useAuth0();
 
-  // sign up button logic to redirect first time users to sign up page on Auth0:
+  // sign up button logic to redirect first time users to sign up on Auth0 and after hitting sign up button to redirect them to /signupinfo page:
   const handleSignUp = () => {
     loginWithRedirect({
       appState: {

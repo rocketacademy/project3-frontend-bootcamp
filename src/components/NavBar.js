@@ -23,7 +23,7 @@ const NavBar = () => {
   //     : "";
 
   const benDanButton = () => {
-    navigate("/");
+    navigate("/listings");
   };
 
   //   const handleProfileClick = () => {
