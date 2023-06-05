@@ -2,7 +2,7 @@
 
 const allColumns = [
   { Header: "Name", accessor: "name" },
-  { Header: "Postal Code", accessor: "postal" },
+  { Header: "Postal Code", accessor: "postalCode" },
   { Header: "Neighbourhood", accessor: "neighbourhood" },
   {
     Header: "Age",
@@ -11,7 +11,7 @@ const allColumns = [
       return 2023 - content.value;
     },
   },
-  { Header: "Phone No.", accessor: "phone" },
+  { Header: "Phone No.", accessor: "mobile" },
   {
     Header: "Sex",
     accessor: "isMale",
