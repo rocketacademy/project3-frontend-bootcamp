@@ -4,12 +4,27 @@ import { useAuth0 } from "@auth0/auth0-react";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { UserContext } from "../App";
-import { Button, Paper, Stack, TextField, Typography } from "@mui/material";
+import { Stack, TextField, Typography } from "@mui/material";
+/* import Typography from '@mui/joy/Typography'; */
+import Card from "@mui/joy/Card";
 import { styled } from "@mui/material/styles";
-import Grid from "@mui/matieral/Grid";
+import Box from "@mui/material/Box";
+import Grid from "@mui/material/Grid";
 import Paper from "@mui/material/Paper";
 
+import Button from "@mui/material/Button";
+
+
 import { toast } from "react-toastify";
+
+
+const Item = styled(Paper)(({ theme }) => ({
+	backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
+	...theme.typography.body2,
+	padding: theme.spacing(1),
+	textAlign: 'center',
+	color: theme.palette.text.secondary,
+}));
 
 const Listings = () => {
 	return (
@@ -17,36 +32,82 @@ const Listings = () => {
 			<h1>Listings</h1>
 			<h2>Welcome! </h2>
 			<br />
-			<Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
-				<Grid item xs={4}>
-					<Item>Product 1</Item>
+			<Box sx={{ width: '100%' }}>
+				<Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
+					<Grid item xs={4}>
+						<Item><strong>Product Title 1</strong></Item>
+						<Item>Price</Item>
+						<Item>Description</Item>
+						<Item>Shipping Cost</Item>
+						<Item>Shipping Details</Item>
+						<Item><Button variant="outlined">Add to Cart</Button></Item>
+					</Grid>
+					<Grid item xs={4}>
+						<Item><strong>Product Title 2</strong></Item>
+						<Item>Price</Item>
+						<Item>Description</Item>
+						<Item>Shipping Cost</Item>
+						<Item>Shipping Details</Item>
+						<Item><Button variant="outlined">Add to Cart</Button></Item>
+					</Grid>
+					<Grid item xs={4}>
+						<Item><strong>Product Title 3</strong></Item>
+						<Item>Price</Item>
+						<Item>Description</Item>
+						<Item>Shipping Cost</Item>
+						<Item>Shipping Details</Item>
+						<Item><Button variant="outlined">Add to Cart</Button></Item>
+					</Grid>
+					<Grid item xs={4}>
+						<Item><strong>Product Title 4</strong></Item>
+						<Item>Price</Item>
+						<Item>Description</Item>
+						<Item>Shipping Cost</Item>
+						<Item>Shipping Details</Item>
+						<Item><Button variant="outlined">Add to Cart</Button></Item>
+					</Grid>
+					<Grid item xs={4}>
+						<Item><strong>Product Title 5</strong></Item>
+						<Item>Price</Item>
+						<Item>Description</Item>
+						<Item>Shipping Cost</Item>
+						<Item>Shipping Details</Item>
+						<Item><Button variant="outlined">Add to Cart</Button></Item>
+					</Grid>
+					<Grid item xs={4}>
+						<Item><strong>Product Title 6</strong></Item>
+						<Item>Price</Item>
+						<Item>Description</Item>
+						<Item>Shipping Cost</Item>
+						<Item>Shipping Details</Item>
+						<Item><Button variant="outlined">Add to Cart</Button></Item>
+					</Grid>
+					<Grid item xs={4}>
+						<Item><strong>Product Title 7</strong></Item>
+						<Item>Price</Item>
+						<Item>Description</Item>
+						<Item>Shipping Cost</Item>
+						<Item>Shipping Details</Item>
+						<Item><Button variant="outlined">Add to Cart</Button></Item>
+					</Grid>
+					<Grid item xs={4}>
+						<Item><strong>Product Title </strong>8</Item>
+						<Item>Price</Item>
+						<Item>Description</Item>
+						<Item>Shipping Cost</Item>
+						<Item>Shipping Details</Item>
+						<Item><Button variant="outlined">Add to Cart</Button></Item>
+					</Grid>
+					<Grid item xs={4}>
+						<Item><strong>Product Title 9</strong></Item>
+						<Item>Price</Item>
+						<Item>Description</Item>
+						<Item>Shipping Cost</Item>
+						<Item>Shipping Details</Item>
+						<Item><Button variant="outlined">Add to Cart</Button></Item>
+					</Grid>
 				</Grid>
-				<Grid item xs={4}>
-					<Item>Product 2</Item>
-				</Grid>
-				<Grid item xs={4}>
-					<Item>Product 3</Item>
-				</Grid>
-				<Grid item xs={4}>
-					<Item>Product 4</Item>
-				</Grid>
-				<Grid item xs={4}>
-					<Item>Product 5</Item>
-				</Grid>
-				<Grid item xs={4}>
-					<Item>Product 6</Item>
-				</Grid>
-				<Grid item xs={4}>
-					<Item>Product 7</Item>
-				</Grid>
-				<Grid item xs={4}>
-					<Item>Product 8</Item>
-				</Grid>
-				<Grid item xs={4}>
-					<Item>Product 9</Item>
-				</Grid>
-			</Grid>
-
+			</Box>
 		</div>
 	)
 }
