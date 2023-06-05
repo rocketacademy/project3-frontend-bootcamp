@@ -32,6 +32,7 @@ const EventComposer = ({ handleToggle }) => {
   };
 
   const handleChange = (e) => {
+    console.log(e.currentTarget.value);
     switch (e.currentTarget.id) {
       case "title":
         setTitle(e.currentTarget.value);
