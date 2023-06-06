@@ -13,7 +13,7 @@ const EventComposer = ({ handleToggle }) => {
   const [venue, setVenue] = useState("");
   const [csv, setCsv] = useState(null);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       const eventJSON = {
@@ -22,85 +22,81 @@ const EventComposer = ({ handleToggle }) => {
         endTime: end,
         date: date,
         venue: venue,
-        eventTypeId: 1,
+        eventType: "Neighbourhood",
       };
-      axios
-        .post(`${process.env.REACT_APP_BACKEND_URL}/events`, eventJSON)
-        .then((response) => {
-          console.log(eventJSON);
-          console.log("eventJSON posted to backend");
+      const event = await axios.post(
+        `${process.env.REACT_APP_BACKEND_URL}/events`,
+        eventJSON
+      );
+      console.log("posted event: ", event);
+      console.log("eventJSON posted to backend");
+      try {
+        parse(csv, {
+          header: true,
+          delimiter: ",",
+          complete: async (results) => {
+            // get an array of participant data in JSON format
+            const participantJSON = results.data.map((participant) => {
+              let {
+                "Preferred Name": name,
+                "Mobile Number (e.g. 91234567)": mobile,
+                "Postal Code (e.g. 123456)": postalCode,
+                "Year of Birth": year,
+                "Marital Status": maritalStatus,
+                Sex: isMale,
+                Nationality: nationality,
+                Race: race,
+              } = participant;
+              // convert 'Male' to true and 'Female' to false
+              if (isMale === "Male") {
+                isMale = true;
+              } else if (isMale === "Female") {
+                isMale = false;
+              } else {
+                console.log(
+                  "Error: Participant isMale variable is neither Male nor Female"
+                );
+              }
+              // remove spaces betweeen numbers such as 8766 9043
+              mobile = mobile.replaceAll(" ", "");
+              // remove elements before mobile number
+              if (mobile.length > 8) {
+                // remove +65
+                if (mobile[0] === "+") {
+                  mobile = mobile.slice(3);
+                } else {
+                  // remove 65
+                  mobile = mobile.slice(2);
+                }
+              }
+              const cleanedParticipant = {
+                name,
+                mobile,
+                postalCode,
+                year,
+                maritalStatus,
+                isMale,
+                nationality,
+                race,
+              };
+              return cleanedParticipant;
+            });
+
+            const response = await axios.post(
+              `${process.env.REACT_APP_BACKEND_URL}/participants`,
+              { eventId: event.data.content.id, participantJSON }
+            );
+            console.log(response);
+            console.log("Posted to backend");
+          },
         });
+      } catch {
+        console.log(
+          "There is an error with parsing the CSV file. Check if the file type you have uploaded is a CSV."
+        );
+      }
     } catch {
       console.log("Error: Event JSON could not be posted to the backend");
-    }
-
-    try {
-      parse(csv, {
-        header: true,
-        delimiter: ",",
-        complete: (results) => {
-          // get an array of participant data in JSON format
-          const participantJSON = results.data.map((participant) => {
-            let {
-              "Preferred Name": name,
-              "Mobile Number (e.g. 91234567)": mobile,
-              "Postal Code (e.g. 123456)": postalCode,
-              "Year of Birth": year,
-              "Marital Status": maritalStatus,
-              Sex: isMale,
-              Nationality: nationality,
-              Race: race,
-            } = participant;
-            // convert 'Male' to true and 'Female' to false
-            if (isMale === "Male") {
-              isMale = true;
-            } else if (isMale === "Female") {
-              isMale = false;
-            } else {
-              console.log(
-                "Error: Participant isMale variable is neither Male nor Female"
-              );
-            }
-            // remove spaces betweeen numbers such as 8766 9043
-            mobile = mobile.replaceAll(" ", "");
-            // remove elements before mobile number
-            if (mobile.length > 8) {
-              // remove +65
-              if (mobile[0] === "+") {
-                mobile = mobile.slice(3);
-              } else {
-                // remove 65
-                mobile = mobile.slice(2);
-              }
-            }
-            const cleanedParticipant = {
-              name,
-              mobile,
-              postalCode,
-              year,
-              maritalStatus,
-              isMale,
-              nationality,
-              race,
-            };
-            return cleanedParticipant;
-          });
-          console.log(`${process.env.REACT_APP_BACKEND_URL}/participants`);
-          axios
-            .post(
-              `${process.env.REACT_APP_BACKEND_URL}/participants`,
-              participantJSON
-            )
-            .then((response) => {
-              console.log(participantJSON);
-              console.log("Posted to backend");
-            });
-        },
-      });
-    } catch {
-      console.log(
-        "There is an error with parsing the CSV file. Check if the file type you have uploaded is a CSV."
-      );
     }
 
     const event = {

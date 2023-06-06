@@ -6,7 +6,7 @@ import Select from "react-select";
 import "./Table.css";
 
 const Table = ({ selector = "participants", tableData }) => {
-  const [tableColumns, setTableColumns] = useState([]);
+  const [columnState, setColumnState] = useState([]);
   const [status, setStatus] = useState({});
   const statuses = [
     { value: "not-contacted", label: "Not Contacted" },
@@ -31,9 +31,9 @@ const Table = ({ selector = "participants", tableData }) => {
 
   useEffect(() => {
     if (selector === "participants") {
-      setTableColumns([...allColumns]);
+      setColumnState([...allColumns]);
     } else if (selector === "eventpage") {
-      setTableColumns([
+      setColumnState([
         {
           Header: "Status",
           Cell: ({ row }) => {
@@ -54,7 +54,7 @@ const Table = ({ selector = "participants", tableData }) => {
         ...allColumns,
       ]);
     } else if (selector === "groupings") {
-      setTableColumns([...groupingColumns]);
+      setColumnState([...groupingColumns]);
     }
     // eslint-disable-next-line
   }, [status]);
@@ -65,7 +65,7 @@ const Table = ({ selector = "participants", tableData }) => {
 
   // Defining columns
 
-  const columns = React.useMemo(() => [...tableColumns], [tableColumns]);
+  const columns = React.useMemo(() => [...columnState], [columnState]);
 
   // Initialising table
 

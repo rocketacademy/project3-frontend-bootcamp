@@ -3,6 +3,7 @@ import NavBar from "../../../components/NavBar/NavBar";
 import Table from "../../../components/Table/Table";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { allColumns } from "../../../components/Table/columns";
 
 const EventPage = () => {
   const navigate = useNavigate();
@@ -32,7 +33,9 @@ const EventPage = () => {
         Back to Events Home
       </button>
       <h1>{eventId} Page</h1>
-      {data && <Table selector="eventpage" tableData={data} />}
+      {data && (
+        <Table tableColumns={allColumns} tableData={data} options="status" />
+      )}
     </div>
   );
 };
