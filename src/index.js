@@ -22,7 +22,7 @@ root.render(
     clientId={process.env.REACT_APP_CLIENT_ID}
     // onRedirectCallback={onRedirectCallback}
     authorizationParams={{
-      redirect_uri: "http://localhost:3000/listings",
+      redirect_uri: process.env.REACT_APP_REDIRECT_URI,
       audience: process.env.REACT_APP_AUDIENCE,
       scope: "read:current_user update:current_user_metadata",
     }}

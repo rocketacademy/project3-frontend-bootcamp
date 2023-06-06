@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 import { UserContext } from "../App";
 import { Stack, TextField, Typography } from "@mui/material";
 /* import Typography from '@mui/joy/Typography'; */
-import Card from "@mui/joy/Card";
+/* import Card from "@mui/joy/Card"; */
 import { styled } from "@mui/material/styles";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
@@ -27,6 +27,8 @@ const Item = styled(Paper)(({ theme }) => ({
 const Listings = () => {
   const { logout, isAuthenticated } = useAuth0();
 
+  // insert UseEffect here to validate if new user has given backend his user data to populate user table, if no, redirect them to /signupinfo page.
+
   return (
     isAuthenticated && (
       <div>
@@ -46,7 +48,7 @@ const Listings = () => {
               </Item>
               <Item>Price</Item>
               <Item>Description</Item>
-              <Item>Shipping Cost</Item>
+
               <Item>Shipping Details</Item>
               <Item>
                 <Button variant="outlined">Add to Cart</Button>
@@ -58,7 +60,7 @@ const Listings = () => {
               </Item>
               <Item>Price</Item>
               <Item>Description</Item>
-              <Item>Shipping Cost</Item>
+
               <Item>Shipping Details</Item>
               <Item>
                 <Button variant="outlined">Add to Cart</Button>
@@ -70,7 +72,7 @@ const Listings = () => {
               </Item>
               <Item>Price</Item>
               <Item>Description</Item>
-              <Item>Shipping Cost</Item>
+
               <Item>Shipping Details</Item>
               <Item>
                 <Button variant="outlined">Add to Cart</Button>
@@ -82,7 +84,7 @@ const Listings = () => {
               </Item>
               <Item>Price</Item>
               <Item>Description</Item>
-              <Item>Shipping Cost</Item>
+
               <Item>Shipping Details</Item>
               <Item>
                 <Button variant="outlined">Add to Cart</Button>
@@ -94,7 +96,7 @@ const Listings = () => {
               </Item>
               <Item>Price</Item>
               <Item>Description</Item>
-              <Item>Shipping Cost</Item>
+
               <Item>Shipping Details</Item>
               <Item>
                 <Button variant="outlined">Add to Cart</Button>
@@ -106,7 +108,7 @@ const Listings = () => {
               </Item>
               <Item>Price</Item>
               <Item>Description</Item>
-              <Item>Shipping Cost</Item>
+
               <Item>Shipping Details</Item>
               <Item>
                 <Button variant="outlined">Add to Cart</Button>
@@ -118,7 +120,7 @@ const Listings = () => {
               </Item>
               <Item>Price</Item>
               <Item>Description</Item>
-              <Item>Shipping Cost</Item>
+
               <Item>Shipping Details</Item>
               <Item>
                 <Button variant="outlined">Add to Cart</Button>
@@ -130,7 +132,7 @@ const Listings = () => {
               </Item>
               <Item>Price</Item>
               <Item>Description</Item>
-              <Item>Shipping Cost</Item>
+
               <Item>Shipping Details</Item>
               <Item>
                 <Button variant="outlined">Add to Cart</Button>
@@ -142,7 +144,7 @@ const Listings = () => {
               </Item>
               <Item>Price</Item>
               <Item>Description</Item>
-              <Item>Shipping Cost</Item>
+
               <Item>Shipping Details</Item>
               <Item>
                 <Button variant="outlined">Add to Cart</Button>
