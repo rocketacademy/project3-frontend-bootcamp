@@ -1,10 +1,20 @@
-import NavBar from "../../../components/NavBar/NavBar";
-import { useLocation, useNavigate } from "react-router-dom";
-import "./EventsHome.css";
+//----------- React -----------//
+
 import { useEffect, useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
+
+//---------- Components ----------//
+
+import NavBar from "../../../components/NavBar/NavBar";
 import EventComposer from "../../../components/Forms/EventComposer";
-import axios from "axios";
 import EventButton from "../../../components/Buttons/EventButton";
+
+//---------- Others ----------//
+
+import axios from "axios";
+import "./EventsHome.css";
+
+//------------------------------//
 
 const EventsHome = () => {
   const location = useLocation();
@@ -30,6 +40,7 @@ const EventsHome = () => {
   const handleToggle = () => {
     setToggleComposer((prev) => !prev);
   };
+
   if (!data) {
     return <p>Loading...</p>;
   } else {
@@ -45,9 +56,11 @@ const EventsHome = () => {
         <NavBar />
         <div className="header">
           <h1>Events Home</h1>
-          <button onClick={handleToggle}>Add Event</button>
+          <button onClick={handleToggle}>
+            <h5>Add Event</h5>
+          </button>
         </div>
-        {buttons}
+        <div className="events-home-buttons">{buttons}</div>
       </div>
     );
   }

@@ -22,7 +22,7 @@ const EventComposer = ({ handleToggle }) => {
         endTime: end,
         date: date,
         venue: venue,
-        eventType: "Neighbourhood",
+        eventType: type,
       };
       const event = await axios.post(
         `${process.env.REACT_APP_BACKEND_URL}/events`,
@@ -184,10 +184,10 @@ const EventComposer = ({ handleToggle }) => {
                 onChange={handleChange}
                 value={type}
               >
-                <option value="neighbourhood">Neighbourhood</option>
-                <option value="open">Open-To-All</option>
-                <option value="sector">Sector-Based</option>
-                <option value="others">Others</option>
+                <option value="Neighbourhood">Neighbourhood</option>
+                <option value="Open-To-All">Open-To-All</option>
+                <option value="Sector-Based">Sector-Based</option>
+                <option value="Others">Others</option>
               </select>
             </div>
           </div>

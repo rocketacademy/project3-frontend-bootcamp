@@ -56,4 +56,6 @@ const groupingColumns = [
   { Header: "Race", accessor: "race" },
 ];
 
-export { allColumns, groupingColumns };
+const facilitatorColumns = [{ Header: "Facilitator Name", accessor: "name" }];
+
+export { allColumns, groupingColumns, facilitatorColumns };
