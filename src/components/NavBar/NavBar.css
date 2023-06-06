@@ -15,7 +15,6 @@
 
 #nav-links {
   display: flex;
-  gap: 15px;
 }
 
 #nav-links button {

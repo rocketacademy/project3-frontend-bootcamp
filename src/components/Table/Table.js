@@ -1,27 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { useTable, useSortBy } from "react-table";
 import Select from "react-select";
-
+import { statusOptions, attendanceOptions } from "./statuses";
 import "./Table.css";
 
 const Table = ({ tableColumns, tableData, options = "none" }) => {
   const [columnsState, setColumnsState] = useState([]);
   const [status, setStatus] = useState({});
   const [attendance, setAttendance] = useState(false);
-  const statuses = [
-    { value: "not-contacted", label: "Not Contacted" },
-    { value: "contacted", label: "Contacted" },
-    { value: "to-reject", label: "To Reject" },
-    { value: "rejected", label: "Rejected" },
-    { value: "confirmed", label: "Confirmed" },
-    { value: "not-coming", label: "Not Coming" },
-    { value: "prompted", label: "Prompted" },
-    { value: "ghosted", label: "Ghosted" },
-  ];
-  const attendanceOptions = [
-    { value: true, label: "Yes" },
-    { value: false, label: "No" },
-  ];
 
   const handleChange = (e, id) => {
     console.log("Selected: " + e.value + " at index " + id);
@@ -56,9 +42,11 @@ const Table = ({ tableColumns, tableData, options = "none" }) => {
                 menuPlacement="auto"
                 className="select-status"
                 id={row.id}
-                options={statuses}
+                options={statusOptions}
                 onChange={(e) => handleChange(e, row.id)}
-                value={statuses.find((item) => item.value === status[row.id])}
+                value={statusOptions.find(
+                  (item) => item.value === status[row.id]
+                )}
               />
             );
           },
@@ -75,7 +63,7 @@ const Table = ({ tableColumns, tableData, options = "none" }) => {
                 menuPortalTarget={document.body}
                 menuPosition={"fixed"}
                 menuPlacement="auto"
-                className="select-status"
+                className="select-attendance"
                 id={row.id}
                 options={attendanceOptions}
                 onChange={(e) => handleChange(e, row.id)}
@@ -92,14 +80,10 @@ const Table = ({ tableColumns, tableData, options = "none" }) => {
     // eslint-disable-next-line
   }, []);
 
+  // Definining & Initialising data to be used
+
   const data = React.useMemo(() => tableData, [tableData]);
-
-  // Defining columns
-
   const columns = React.useMemo(() => [...columnsState], [columnsState]);
-
-  // Initialising table
-
   const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } =
     useTable({ columns, data }, useSortBy);
 

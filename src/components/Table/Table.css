@@ -26,3 +26,7 @@ th {
 .select-status {
   min-width: 200px;
 }
+
+.select-attendance {
+  min-width: 100px;
+}
