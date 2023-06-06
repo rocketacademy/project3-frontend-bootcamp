@@ -35,6 +35,7 @@ const EventPage = () => {
         statusId: raw.statusId,
         isAttended: raw.isAttended,
       }));
+      console.log(tableData);
       setData(tableData);
     };
     const getEventData = async () => {
@@ -82,7 +83,13 @@ const EventPage = () => {
         </div>
       </div>
       {data && (
-        <Table tableColumns={allColumns} tableData={data} options="status" />
+        <Table
+          tableColumns={allColumns}
+          tableData={data}
+          setTableData={setData}
+          options="status"
+          eventId={eventId}
+        />
       )}
     </div>
   );

@@ -1,12 +1,12 @@
 const statusOptions = [
-  { value: "not-contacted", label: "Not Contacted" },
-  { value: "contacted", label: "Contacted" },
-  { value: "to-reject", label: "To Reject" },
-  { value: "rejected", label: "Rejected" },
-  { value: "confirmed", label: "Confirmed" },
-  { value: "not-coming", label: "Not Coming" },
-  { value: "prompted", label: "Prompted" },
-  { value: "ghosted", label: "Ghosted" },
+  { value: "1", label: "Not Contacted" },
+  { value: "2", label: "Contacted" },
+  { value: "3", label: "To Reject" },
+  { value: "4", label: "Rejected" },
+  { value: "5", label: "Confirmed" },
+  { value: "6", label: "Not Coming" },
+  { value: "7", label: "Prompted" },
+  { value: "8", label: "Ghosted" },
 ];
 const attendanceOptions = [
   { value: true, label: "Yes" },
