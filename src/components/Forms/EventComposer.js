@@ -152,7 +152,9 @@ const EventComposer = ({ handleToggle }) => {
       <div className="form-event">
         <div className="header">
           <h1>Add Event</h1>
-          <button onClick={handleToggle}>Close</button>
+          <button onClick={handleToggle}>
+            <h5>Close</h5>
+          </button>
         </div>
 
         <form>

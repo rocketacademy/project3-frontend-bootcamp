@@ -94,7 +94,9 @@ const ParticipantAdder = ({ handleToggle, eventId }) => {
       <div className="form-event">
         <div className="header">
           <h1>Add Participants</h1>
-          <button onClick={handleToggle}>Close</button>
+          <button onClick={handleToggle}>
+            <h5>Close</h5>
+          </button>
         </div>
 
         <div className="pop-up-note">

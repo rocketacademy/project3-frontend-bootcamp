@@ -31,7 +31,9 @@ const FacilitatorAdder = ({ handleToggle, setData }) => {
       <div className="form-event">
         <div className="header">
           <h1>Add Facilitator</h1>
-          <button onClick={handleToggle}>Close</button>
+          <button onClick={handleToggle}>
+            <h5>Close</h5>
+          </button>
         </div>
 
         <form>

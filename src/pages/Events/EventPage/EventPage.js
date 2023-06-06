@@ -26,10 +26,11 @@ const EventPage = () => {
 
   useEffect(() => {
     const getTableData = async () => {
-      const tableData = await axios.get(
-        `${process.env.REACT_APP_BACKEND_URL}/participants`
+      const rawData = await axios.get(
+        `${process.env.REACT_APP_BACKEND_URL}/events/${eventId}/participants`
       );
-      setData(tableData.data);
+      const tableData = await rawData.data.map((raw) => raw.participant);
+      setData(tableData);
     };
     const getEventData = async () => {
       const event = await axios.get(
