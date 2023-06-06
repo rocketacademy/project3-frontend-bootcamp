@@ -9,18 +9,18 @@ const Table = ({ tableColumns, tableData, options = "none" }) => {
   const [status, setStatus] = useState({});
   const [attendance, setAttendance] = useState(false);
 
-  const handleChange = (e, id) => {
-    console.log("Selected: " + e.value + " at index " + id);
+  const handleChange = async (e, egpId, participantId) => {
+    console.log("Selected: " + e.value + " at index " + egpId);
     // These states are temporary. Will read from eventGroupParticipant for actual one
     if (options === "status") {
       setStatus((prevStatus) => ({
         ...prevStatus,
-        [id]: e.value,
+        [egpId]: e.value,
       }));
     } else if (options === "attendance") {
       setAttendance((prevAttendance) => ({
         ...prevAttendance,
-        [id]: e.value,
+        [egpId]: e.value,
       }));
     }
   };
@@ -41,11 +41,13 @@ const Table = ({ tableColumns, tableData, options = "none" }) => {
                 menuPosition={"fixed"}
                 menuPlacement="auto"
                 className="select-status"
-                id={row.id}
+                id={row.original.egpId}
                 options={statusOptions}
-                onChange={(e) => handleChange(e, row.id)}
+                onChange={(e) =>
+                  handleChange(e, row.original.egpId, row.original.id)
+                }
                 value={statusOptions.find(
-                  (item) => item.value === status[row.id]
+                  (item) => item.value === status[row.original.egpId]
                 )}
               />
             );

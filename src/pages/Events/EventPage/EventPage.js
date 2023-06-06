@@ -29,7 +29,12 @@ const EventPage = () => {
       const rawData = await axios.get(
         `${process.env.REACT_APP_BACKEND_URL}/events/${eventId}/participants`
       );
-      const tableData = await rawData.data.map((raw) => raw.participant);
+      const tableData = await rawData.data.map((raw) => ({
+        ...raw.participant,
+        egpId: raw.id,
+        statusId: raw.statusId,
+        isAttended: raw.isAttended,
+      }));
       setData(tableData);
     };
     const getEventData = async () => {

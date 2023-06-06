@@ -6,13 +6,5 @@
   background-color: rgb(113, 113, 113);
   display: flex;
   justify-content: space-between;
-}
-
-.event-home-button h2,
-.event-home-button h1 {
   color: white;
-}
-
-.event-home-button h5 {
-  color: rgba(255, 255, 255, 0.6);
 }
