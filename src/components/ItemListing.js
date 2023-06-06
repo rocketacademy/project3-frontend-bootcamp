@@ -16,6 +16,7 @@ import Button from "@mui/material/Button";
 
 
 import { toast } from "react-toastify";
+import NavBar from "./NavBar"
 import ItemListingStyle from "./ItemListingStyle.css"
 
 /* const Item = styled(Paper)(({ theme }) => ({
@@ -29,9 +30,10 @@ import ItemListingStyle from "./ItemListingStyle.css"
 const ItemListing = () => {
 	return (
 		<div>
+			<NavBar />
 			<h1>Product Title</h1>
 			<Grid container spacing={2}>
-				<Grid Item xs={4}>
+				<Grid item xs={4}>
 					<Box sx={{
 						backgroundColor: "primary.main",
 						color: 'white',
@@ -40,7 +42,7 @@ const ItemListing = () => {
 						<h2>Product Image</h2>
 					</Box>
 				</Grid>
-				<Grid Item xs={8}>
+				<Grid item xs={8}>
 					<Box sx={{
 						backgroundColor: "primary.light",
 						color: 'white',
@@ -58,7 +60,7 @@ const ItemListing = () => {
 						}} variant="outlined">Add to Cart</Button>
 					</Box>
 				</Grid>
-				<Grid Item xs={12}>
+				<Grid item xs={12}>
 					<Box sx={{
 						backgroundColor: "aquamarine",
 						color: 'black',

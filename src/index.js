@@ -15,13 +15,13 @@ root.render(
     domain={process.env.REACT_APP_DOMAIN}
     clientId={process.env.REACT_APP_CLIENT_ID}
     authorizationParams={{
-      redirect_uri: "http://localhost:3000/listings",
+      redirect_uri: process.env.REACT_APP_REDIRECT_URI,
       audience: process.env.REACT_APP_AUDIENCE,
       scope: "read:current_user update:current_user_metadata",
     }}
 
-    // useRefreshTokens={true}
-    // useRefreshTokensFallback={false}
+  // useRefreshTokens={true}
+  // useRefreshTokensFallback={false}
   >
     <BrowserRouter>
       <Routes>
