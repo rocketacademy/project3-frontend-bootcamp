@@ -3,26 +3,39 @@ import { useTable, useSortBy } from "react-table";
 import Select from "react-select";
 import { statusOptions, attendanceOptions } from "./statuses";
 import "./Table.css";
+import axios from "axios";
 
-const Table = ({ tableColumns, tableData, options = "none" }) => {
+const Table = ({
+  tableColumns,
+  tableData,
+  setTableData,
+  eventId,
+  options = "none",
+}) => {
   const [columnsState, setColumnsState] = useState([]);
-  const [status, setStatus] = useState({});
-  const [attendance, setAttendance] = useState(false);
 
-  const handleChange = (e, id) => {
-    console.log("Selected: " + e.value + " at index " + id);
-    // These states are temporary. Will read from eventGroupParticipant for actual one
+  const handleChange = async (e, egpId, participantId, rowId) => {
+    console.log("Selected: " + e.value + " at index " + egpId);
     if (options === "status") {
-      setStatus((prevStatus) => ({
-        ...prevStatus,
-        [id]: e.value,
-      }));
+      await axios.put(
+        `${process.env.REACT_APP_BACKEND_URL}/events/${eventId}/participants`,
+        { participantId, statusId: e.value }
+      );
     } else if (options === "attendance") {
-      setAttendance((prevAttendance) => ({
-        ...prevAttendance,
-        [id]: e.value,
-      }));
+      await axios.put(
+        `${process.env.REACT_APP_BACKEND_URL}/events/${eventId}/participants`,
+        { participantId, isAttended: e.value }
+      );
     }
+    setTableData((prevData) => {
+      const data = [...prevData];
+      if (options === "status") {
+        data[rowId].statusId = e.value;
+      } else if (options === "attendance") {
+        data[rowId].isAttended = e.value;
+      }
+      return data;
+    });
   };
 
   // Selecting table through selector that's passed in
@@ -41,11 +54,13 @@ const Table = ({ tableColumns, tableData, options = "none" }) => {
                 menuPosition={"fixed"}
                 menuPlacement="auto"
                 className="select-status"
-                id={row.id}
+                id={row.original.egpId}
                 options={statusOptions}
-                onChange={(e) => handleChange(e, row.id)}
+                onChange={(e) =>
+                  handleChange(e, row.original.egpId, row.original.id, row.id)
+                }
                 value={statusOptions.find(
-                  (item) => item.value === status[row.id]
+                  (item) => item.value === String(row.original.statusId)
                 )}
               />
             );

@@ -29,7 +29,13 @@ const EventPage = () => {
       const rawData = await axios.get(
         `${process.env.REACT_APP_BACKEND_URL}/events/${eventId}/participants`
       );
-      const tableData = await rawData.data.map((raw) => raw.participant);
+      const tableData = await rawData.data.map((raw) => ({
+        ...raw.participant,
+        egpId: raw.id,
+        statusId: raw.statusId,
+        isAttended: raw.isAttended,
+      }));
+      console.log(tableData);
       setData(tableData);
     };
     const getEventData = async () => {
@@ -77,7 +83,13 @@ const EventPage = () => {
         </div>
       </div>
       {data && (
-        <Table tableColumns={allColumns} tableData={data} options="status" />
+        <Table
+          tableColumns={allColumns}
+          tableData={data}
+          setTableData={setData}
+          options="status"
+          eventId={eventId}
+        />
       )}
     </div>
   );

@@ -5,12 +5,5 @@
   height: 100%;
   overflow-y: auto;
   gap: 10px;
-}
-
-.events-home-buttons button {
-  transition: 0.2s;
-}
-
-.events-home-buttons button:hover {
-  transform: translateY(-5px);
+  padding: 20px;
 }
