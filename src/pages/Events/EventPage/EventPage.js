@@ -34,7 +34,11 @@ const EventPage = () => {
       </button>
       <h1>{eventId} Page</h1>
       {data && (
-        <Table tableColumns={allColumns} tableData={data} options="status" />
+        <Table
+          tableColumns={allColumns}
+          tableData={data}
+          options="attendance"
+        />
       )}
     </div>
   );

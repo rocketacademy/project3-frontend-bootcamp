@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { useTable, useSortBy } from "react-table";
-import { allColumns, groupingColumns } from "./columns";
 import Select from "react-select";
 
 import "./Table.css";
 
-const Table = ({ selector = "participants", tableData }) => {
-  const [columnState, setColumnState] = useState([]);
+const Table = ({ tableColumns, tableData, options = "none" }) => {
+  const [columnsState, setColumnsState] = useState([]);
   const [status, setStatus] = useState({});
+  const [attendance, setAttendance] = useState(false);
   const statuses = [
     { value: "not-contacted", label: "Not Contacted" },
     { value: "contacted", label: "Contacted" },
@@ -18,22 +18,34 @@ const Table = ({ selector = "participants", tableData }) => {
     { value: "prompted", label: "Prompted" },
     { value: "ghosted", label: "Ghosted" },
   ];
+  const attendanceOptions = [
+    { value: true, label: "Yes" },
+    { value: false, label: "No" },
+  ];
 
   const handleChange = (e, id) => {
     console.log("Selected: " + e.value + " at index " + id);
-    setStatus((prevStatus) => ({
-      ...prevStatus,
-      [id]: e.value,
-    }));
+    // These states are temporary. Will read from eventGroupParticipant for actual one
+    if (options === "status") {
+      setStatus((prevStatus) => ({
+        ...prevStatus,
+        [id]: e.value,
+      }));
+    } else if (options === "attendance") {
+      setAttendance((prevAttendance) => ({
+        ...prevAttendance,
+        [id]: e.value,
+      }));
+    }
   };
 
   // Selecting table through selector that's passed in
 
   useEffect(() => {
-    if (selector === "participants") {
-      setColumnState([...allColumns]);
-    } else if (selector === "eventpage") {
-      setColumnState([
+    if (options === "none") {
+      setColumnsState([...tableColumns]);
+    } else if (options === "status") {
+      setColumnsState([
         {
           Header: "Status",
           Cell: ({ row }) => {
@@ -51,21 +63,40 @@ const Table = ({ selector = "participants", tableData }) => {
             );
           },
         },
-        ...allColumns,
+        ...tableColumns,
       ]);
-    } else if (selector === "groupings") {
-      setColumnState([...groupingColumns]);
+    } else if (options === "attendance") {
+      setColumnsState([
+        {
+          Header: "Attended",
+          Cell: ({ row }) => {
+            return (
+              <Select
+                menuPortalTarget={document.body}
+                menuPosition={"fixed"}
+                menuPlacement="auto"
+                className="select-status"
+                id={row.id}
+                options={attendanceOptions}
+                onChange={(e) => handleChange(e, row.id)}
+                value={attendanceOptions.find(
+                  (item) => item.value === attendanceOptions[row.id]
+                )}
+              />
+            );
+          },
+        },
+        ...tableColumns,
+      ]);
     }
     // eslint-disable-next-line
-  }, [status]);
-
-  // Dummy data for now
+  }, []);
 
   const data = React.useMemo(() => tableData, [tableData]);
 
   // Defining columns
 
-  const columns = React.useMemo(() => [...columnState], [columnState]);
+  const columns = React.useMemo(() => [...columnsState], [columnsState]);
 
   // Initialising table
 

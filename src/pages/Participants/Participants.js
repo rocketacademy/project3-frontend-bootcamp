@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import NavBar from "../../components/NavBar/NavBar";
 import Table from "../../components/Table/Table";
+import { allColumns } from "../../components/Table/columns";
 import axios from "axios";
 
 const Participants = () => {
@@ -20,7 +21,7 @@ const Participants = () => {
     <div className="contents">
       <NavBar />
       <h1>Participants Page</h1>
-      {data && <Table tableData={data} />}
+      {data && <Table tableColumns={allColumns} tableData={data} />}
     </div>
   );
 };

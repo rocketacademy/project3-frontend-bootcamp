@@ -12,6 +12,15 @@ body #root {
   height: 100%;
 }
 
+h1 {
+  font-size: 40px;
+  letter-spacing: -0.5px;
+}
+
+h2 {
+  font-size: 25px;
+}
+
 h5 {
   font-size: 12px;
   text-transform: uppercase;

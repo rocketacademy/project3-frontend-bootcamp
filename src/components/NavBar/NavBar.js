@@ -9,7 +9,7 @@ const NavBar = () => {
 
   return (
     <div id="nav">
-      <h1>Friendzone</h1>
+      <h2>Friendzone</h2>
       <div id="nav-links">
         <button onClick={handleNavigate} id="events">
           <h5>Events</h5>
