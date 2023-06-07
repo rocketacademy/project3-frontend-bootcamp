@@ -50,48 +50,17 @@ const NavBar = () => {
             </Button>
           </Typography>
 
-          {/* {context.loggedInUser != null ? (
-            ""
-          ) : ( */}
-
-          {/* )} */}
-          {/* 
-          <Stack direction="row" spacing={2}>
-            {context.loggedInUser != null ? (
-              <Stack direction="row" spacing={2}>
-                <SearchBar sx={{ width: "100%" }} />
-                <Button
-                  variant="contained"
-                  onClick={handleProfileClick}
-                  type="button"
-                  disableElevation
-                  startIcon="" />}
-                >
-                  {displayName}
-                </Button> */}
-
           <Button
             variant="contained"
             disableElevation
-            onClick={() =>
-              logout({ logoutParams: { returnTo: window.location.origin } })
-            }
+            onClick={() => {
+              localStorage.removeItem("accessToken");
+              logout({ logoutParams: { returnTo: window.location.origin } });
+            }}
             type="button"
           >
             Log Out
           </Button>
-          {/* </Stack>
-            ) : (
-              <Button
-                variant="contained"
-                // sx={{ width: "50%", m: 1 }}
-                onClick={signUpButton}
-                type="button"
-              >
-                Sign Up
-              </Button>
-            )}
-          </Stack> */}
         </Toolbar>
       </AppBar>
       <Outlet />

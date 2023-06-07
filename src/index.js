@@ -9,22 +9,16 @@ import { Auth0Provider } from "@auth0/auth0-react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import SignUpInfoPage from "./components/SignUpInfoPage";
 
-// const onRedirectCallback = (appState) => {
-//   history.push(
-//     appState && appState.returnTo ? appState.returnTo : window.location.pathname
-//   );
-// };
-
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <Auth0Provider
     domain={process.env.REACT_APP_DOMAIN}
     clientId={process.env.REACT_APP_CLIENT_ID}
-    // onRedirectCallback={onRedirectCallback}
     authorizationParams={{
       redirect_uri: process.env.REACT_APP_REDIRECT_URI,
       audience: process.env.REACT_APP_AUDIENCE,
-      scope: "read:current_user update:current_user_metadata",
+      scope:
+        "read:current_user update:current_user_metadata openid profile email",
     }}
 
     // useRefreshTokens={true}
