@@ -9,6 +9,7 @@ import Table from "../Table/Table";
 //---------- Others ----------//
 
 import { groupingColumns } from "../Table/columns";
+import { useEffect, useState } from "react";
 
 //------------------------------//
 
@@ -20,6 +21,21 @@ const ParticipantsGroups = ({
   toggleTab,
 }) => {
   const { eventId } = useParams();
+  const [filteredData, setFilteredData] = useState([]);
+
+  useEffect(() => {
+    setFilteredData(data.filter((participant) => participant.statusId === 5));
+    //eslint-disable-next-line
+  }, []);
+
+  useEffect(() => {
+    setFilteredData((prevData) => {
+      const sortedData = [...prevData];
+      sortedData.sort((a, b) => a.groupId - b.groupId);
+      return sortedData;
+    });
+    //eslint-disable-next-line
+  }, [filteredData]);
 
   return (
     <>
@@ -48,7 +64,7 @@ const ParticipantsGroups = ({
       {data && (
         <Table
           tableColumns={groupingColumns}
-          tableData={data}
+          tableData={filteredData}
           setTableData={setData}
           options="attendance"
           eventId={eventId}

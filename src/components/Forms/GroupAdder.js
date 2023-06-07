@@ -43,7 +43,12 @@ const GroupAdder = ({ handleToggle, eventId, groupData, setGroupData }) => {
           </div>
         </div>,
       ]);
-      setCreatedRows([{ name: String(groupCount + 1) }]);
+      setCreatedRows([
+        {
+          name: String(groupCount + 1),
+          facilitatorId: Number(facilOptions.props.children[0].key),
+        },
+      ]);
       setGroupCount((prevCount) => prevCount + 1);
     }
 
@@ -93,7 +98,10 @@ const GroupAdder = ({ handleToggle, eventId, groupData, setGroupData }) => {
     ]);
     setCreatedRows((prevRows) => [
       ...prevRows,
-      { name: String(groupCount + 1) },
+      {
+        name: String(groupCount + 1),
+        facilitatorId: Number(facilOptions.props.children[0].key),
+      },
     ]);
     setGroupCount((prevCount) => prevCount + 1);
   };

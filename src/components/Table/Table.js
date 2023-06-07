@@ -14,7 +14,7 @@ const Table = ({
 }) => {
   const [columnsState, setColumnsState] = useState([]);
 
-  const handleChange = async (e, egpId, participantId, rowId) => {
+  const handleChange = async (e, egpId, participantId, rowId, column) => {
     console.log("Selected: " + e.value + " at index " + egpId);
     if (options === "status") {
       await axios.put(
@@ -22,23 +22,32 @@ const Table = ({
         { participantId, statusId: e.value }
       );
     } else if (options === "attendance") {
-      await axios.put(
-        `${process.env.REACT_APP_BACKEND_URL}/events/${eventId}/participants`,
-        { participantId, isAttended: e.value }
-      );
+      if (column === "Attended") {
+        await axios.put(
+          `${process.env.REACT_APP_BACKEND_URL}/events/${eventId}/participants`,
+          { participantId, isAttended: e.value }
+        );
+      } else if (column === "Group") {
+        await axios.put(
+          `${process.env.REACT_APP_BACKEND_URL}/events/${eventId}/participants`,
+          { participantId, groupId: e.value }
+        );
+      }
     }
     setTableData((prevData) => {
       const data = [...prevData];
       if (options === "status") {
         data[rowId].statusId = e.value;
       } else if (options === "attendance") {
-        data[rowId].isAttended = e.value;
+        if (column === "Attended") {
+          data[rowId].isAttended = e.value;
+        } else if (column === "Group") {
+          data[rowId].groupId = e.value;
+        }
       }
       return data;
     });
   };
-
-  // Selecting table through selector that's passed in
 
   useEffect(() => {
     if (options === "none") {
@@ -72,7 +81,7 @@ const Table = ({
       setColumnsState([
         {
           Header: "Attended",
-          Cell: ({ row }) => {
+          Cell: ({ row, column }) => {
             return (
               <Select
                 menuPortalTarget={document.body}
@@ -82,7 +91,13 @@ const Table = ({
                 id={row.id}
                 options={attendanceOptions}
                 onChange={(e) =>
-                  handleChange(e, row.original.egpId, row.original.id, row.id)
+                  handleChange(
+                    e,
+                    row.original.egpId,
+                    row.original.id,
+                    row.id,
+                    column.Header
+                  )
                 }
                 value={attendanceOptions.find(
                   (item) => item.value === row.original.isAttended
@@ -93,7 +108,7 @@ const Table = ({
         },
         {
           Header: "Group",
-          Cell: ({ row }) => {
+          Cell: ({ row, column }) => {
             return (
               <Select
                 menuPortalTarget={document.body}
@@ -102,9 +117,17 @@ const Table = ({
                 className="select-attendance"
                 id={row.id}
                 options={groupOptions}
-                onChange={(e) => handleChange(e, row.id)}
+                onChange={(e) =>
+                  handleChange(
+                    e,
+                    row.original.egpId,
+                    row.original.id,
+                    row.id,
+                    column.Header
+                  )
+                }
                 value={groupOptions.find(
-                  (item) => item.value === String(groupOptions[row.id])
+                  (item) => item.value === String(row.original.groupId)
                 )}
               />
             );

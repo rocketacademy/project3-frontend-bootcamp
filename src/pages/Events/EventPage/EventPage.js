@@ -40,6 +40,7 @@ const EventPage = () => {
         egpId: raw.id,
         statusId: raw.statusId,
         isAttended: raw.isAttended,
+        groupId: raw.groupId,
       }));
       setData(tableData);
     };
