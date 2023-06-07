@@ -8,19 +8,23 @@ import { Button, Paper, Stack, TextField, Typography } from "@mui/material";
 import { toast } from "react-toastify";
 
 const LoginPage = () => {
-  const { loginWithRedirect } = useAuth0();
+  const { loginWithRedirect, isAuthenticated, isLoading } = useAuth0();
+  const navigate = useNavigate();
 
-  // sign up button logic to redirect first time users to sign up on Auth0 and after hitting sign up button to redirect them to /signupinfo page:
-  const handleSignUp = () => {
-    loginWithRedirect({
-      appState: {
-        returnTo: "/signupinfo",
-      },
-      authorizationParams: {
-        screen_hint: "signup",
-      },
-    });
-  };
+  useEffect(() => {
+    if (isAuthenticated) {
+      navigate("/listings");
+    }
+  });
+
+  if (isLoading) {
+    // Show loading state
+    return (
+      <div>
+        <h1>Loading...Your patience is appreciated.</h1>
+      </div>
+    );
+  }
 
   return (
     <Stack alignItems={"center"} justifyContent={"center"} my={1}>
@@ -39,7 +43,19 @@ const LoginPage = () => {
       <br />
       <Typography variant="h4">Don't have an account yet?</Typography>
       <br />
-      <Button variant="contained" onClick={handleSignUp}>
+      <Button
+        variant="contained"
+        onClick={() =>
+          loginWithRedirect({
+            authorizationParams: {
+              screen_hint: "signup",
+            },
+            appState: {
+              returnTo: "/listings",
+            },
+          })
+        }
+      >
         Sign Up
       </Button>
     </Stack>
