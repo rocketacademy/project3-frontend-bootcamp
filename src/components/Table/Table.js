@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useTable, useSortBy } from "react-table";
 import Select from "react-select";
-import { statusOptions, attendanceOptions } from "./statuses";
+import { statusOptions, attendanceOptions, groupOptions } from "./statuses";
 import "./Table.css";
 import axios from "axios";
 
@@ -81,9 +81,30 @@ const Table = ({
                 className="select-attendance"
                 id={row.id}
                 options={attendanceOptions}
-                onChange={(e) => handleChange(e, row.id)}
+                onChange={(e) =>
+                  handleChange(e, row.original.egpId, row.original.id, row.id)
+                }
                 value={attendanceOptions.find(
-                  (item) => item.value === attendanceOptions[row.id]
+                  (item) => item.value === row.original.isAttended
+                )}
+              />
+            );
+          },
+        },
+        {
+          Header: "Group",
+          Cell: ({ row }) => {
+            return (
+              <Select
+                menuPortalTarget={document.body}
+                menuPosition={"fixed"}
+                menuPlacement="auto"
+                className="select-attendance"
+                id={row.id}
+                options={groupOptions}
+                onChange={(e) => handleChange(e, row.id)}
+                value={groupOptions.find(
+                  (item) => item.value === String(groupOptions[row.id])
                 )}
               />
             );
