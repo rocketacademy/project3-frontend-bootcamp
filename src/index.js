@@ -19,7 +19,8 @@ root.render(
     authorizationParams={{
       redirect_uri: process.env.REACT_APP_REDIRECT_URI,
       audience: process.env.REACT_APP_AUDIENCE,
-      scope: "read:current_user update:current_user_metadata",
+      scope:
+        "read:current_user update:current_user_metadata openid profile email",
     }}
 
   // useRefreshTokens={true}
