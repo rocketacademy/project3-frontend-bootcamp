@@ -6,10 +6,14 @@ import { Link } from "react-router-dom";
 import { UserContext } from "../App";
 import { Button, Paper, Stack, TextField, Typography } from "@mui/material";
 import { toast } from "react-toastify";
+import NavBar from "./NavBar";
 
 const Carts = () => {
 	return (
-		<div>Carts</div>
+		<>
+			<NavBar />
+			<div>Carts</div>
+		</>
 	)
 }
 

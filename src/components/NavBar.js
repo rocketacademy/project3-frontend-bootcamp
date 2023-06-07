@@ -48,6 +48,9 @@ const NavBar = () => {
                 BENDAN
               </Typography>
             </Button>
+            <Button onClick={() => navigate('/profile')}>Profile</Button>
+            <Button onClick={() => navigate('/createlisting')}>CreateListing</Button>
+            <Button onClick={() => navigate('/signupinfo')}>Signup</Button>
           </Typography>
 
           <Button

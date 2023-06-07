@@ -16,6 +16,7 @@ import Paper from "@mui/material/Paper";
 import Button from "@mui/material/Button";
 import NavBar from "./NavBar";
 import { toast } from "react-toastify";
+import "./ListingsStyle.css"
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
@@ -26,6 +27,7 @@ const Item = styled(Paper)(({ theme }) => ({
 }));
 
 const Listings = () => {
+
   const { logout, isAuthenticated, getAccessTokenSilently, user, isLoading } =
     useAuth0();
   const navigate = useNavigate();
@@ -105,121 +107,85 @@ const Listings = () => {
   return isAuthenticated ? (
     <div>
       <NavBar />
-      <h1>ADD TO CART NOW! WHILE STOCKS LAST!</h1>
+        <h1 className="centralized">ADD TO CART NOW! WHILE STOCKS LAST!</h1>
 
-      <br />
-      <Box sx={{ width: "100%" }}>
-        <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
-          <Grid item xs={4}>
-            <Item>
-              <strong>Product Title 1</strong>
-            </Item>
-            <Item>Price</Item>
-            <Item>Description</Item>
+       <br />
+        <Box sx={{ width: '100%' }}>
+          <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
+            <Grid item xs={4}>
+              <Item><strong>Product Title 1</strong></Item>
+              <Item>Price</Item>
+              <Item>Description</Item>
 
-            <Item>Shipping Details</Item>
-            <Item>
-              <Button variant="outlined">Add to Cart</Button>
-            </Item>
+              <Item>Shipping Details</Item>
+              <Item><Button variant="outlined">Add to Cart</Button></Item>
+            </Grid>
+            <Grid item xs={4}>
+              <Item><strong>Product Title 2</strong></Item>
+              <Item>Price</Item>
+              <Item>Description</Item>
+
+              <Item>Shipping Details</Item>
+              <Item><Button variant="outlined">Add to Cart</Button></Item>
+            </Grid>
+            <Grid item xs={4}>
+              <Item><strong>Product Title 3</strong></Item>
+              <Item>Price</Item>
+              <Item>Description</Item>
+
+              <Item>Shipping Details</Item>
+              <Item><Button variant="outlined">Add to Cart</Button></Item>
+            </Grid>
+            <Grid item xs={4}>
+              <Item><strong>Product Title 4</strong></Item>
+              <Item>Price</Item>
+              <Item>Description</Item>
+
+              <Item>Shipping Details</Item>
+              <Item><Button variant="outlined">Add to Cart</Button></Item>
+            </Grid>
+            <Grid item xs={4}>
+              <Item><strong>Product Title 5</strong></Item>
+              <Item>Price</Item>
+              <Item>Description</Item>
+
+              <Item>Shipping Details</Item>
+              <Item><Button variant="outlined">Add to Cart</Button></Item>
+            </Grid>
+            <Grid item xs={4}>
+              <Item><strong>Product Title 6</strong></Item>
+              <Item>Price</Item>
+              <Item>Description</Item>
+
+              <Item>Shipping Details</Item>
+              <Item><Button variant="outlined">Add to Cart</Button></Item>
+            </Grid>
+            <Grid item xs={4}>
+              <Item><strong>Product Title 7</strong></Item>
+              <Item>Price</Item>
+              <Item>Description</Item>
+
+              <Item>Shipping Details</Item>
+              <Item><Button variant="outlined">Add to Cart</Button></Item>
+            </Grid>
+            <Grid item xs={4}>
+              <Item><strong>Product Title </strong>8</Item>
+              <Item>Price</Item>
+              <Item>Description</Item>
+
+              <Item>Shipping Details</Item>
+              <Item><Button variant="outlined">Add to Cart</Button></Item>
+            </Grid>
+            <Grid item xs={4}>
+              <Item><strong>Product Title 9</strong></Item>
+              <Item>Price</Item>
+              <Item>Description</Item>
+
+              <Item>Shipping Details</Item>
+              <Item><Button variant="outlined">Add to Cart</Button></Item>
+            </Grid>
           </Grid>
-          <Grid item xs={4}>
-            <Item>
-              <strong>Product Title 2</strong>
-            </Item>
-            <Item>Price</Item>
-            <Item>Description</Item>
-
-            <Item>Shipping Details</Item>
-            <Item>
-              <Button variant="outlined">Add to Cart</Button>
-            </Item>
-          </Grid>
-          <Grid item xs={4}>
-            <Item>
-              <strong>Product Title 3</strong>
-            </Item>
-            <Item>Price</Item>
-            <Item>Description</Item>
-
-            <Item>Shipping Details</Item>
-            <Item>
-              <Button variant="outlined">Add to Cart</Button>
-            </Item>
-          </Grid>
-          <Grid item xs={4}>
-            <Item>
-              <strong>Product Title 4</strong>
-            </Item>
-            <Item>Price</Item>
-            <Item>Description</Item>
-
-            <Item>Shipping Details</Item>
-            <Item>
-              <Button variant="outlined">Add to Cart</Button>
-            </Item>
-          </Grid>
-          <Grid item xs={4}>
-            <Item>
-              <strong>Product Title 5</strong>
-            </Item>
-            <Item>Price</Item>
-            <Item>Description</Item>
-
-            <Item>Shipping Details</Item>
-            <Item>
-              <Button variant="outlined">Add to Cart</Button>
-            </Item>
-          </Grid>
-          <Grid item xs={4}>
-            <Item>
-              <strong>Product Title 6</strong>
-            </Item>
-            <Item>Price</Item>
-            <Item>Description</Item>
-
-            <Item>Shipping Details</Item>
-            <Item>
-              <Button variant="outlined">Add to Cart</Button>
-            </Item>
-          </Grid>
-          <Grid item xs={4}>
-            <Item>
-              <strong>Product Title 7</strong>
-            </Item>
-            <Item>Price</Item>
-            <Item>Description</Item>
-
-            <Item>Shipping Details</Item>
-            <Item>
-              <Button variant="outlined">Add to Cart</Button>
-            </Item>
-          </Grid>
-          <Grid item xs={4}>
-            <Item>
-              <strong>Product Title </strong>8
-            </Item>
-            <Item>Price</Item>
-            <Item>Description</Item>
-
-            <Item>Shipping Details</Item>
-            <Item>
-              <Button variant="outlined">Add to Cart</Button>
-            </Item>
-          </Grid>
-          <Grid item xs={4}>
-            <Item>
-              <strong>Product Title 9</strong>
-            </Item>
-            <Item>Price</Item>
-            <Item>Description</Item>
-
-            <Item>Shipping Details</Item>
-            <Item>
-              <Button variant="outlined">Add to Cart</Button>
-            </Item>
-          </Grid>
-        </Grid>
-      </Box>
+        </Box>
     </div>
   ) : (
     // content rendered for users that are NOT signed in NOR logged in:
@@ -231,4 +197,5 @@ const Listings = () => {
     </div>
   );
 };
+
 export default Listings;
