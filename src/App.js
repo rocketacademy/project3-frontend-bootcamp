@@ -18,14 +18,14 @@ class App extends React.Component {
     return (
       <div className="App">
         <LoginPage />
-        <Listings />
-        {/*  <ItemListing /> */}
+        <CreateListing />
+
         <Link to="/listings">Listings</Link>
         <br />
         <Link to="/profile">Profile</Link>
         <br />
         <Link to="/signupinfo">Sign Up Info</Link>
-        {/* <CreateListing /> */}
+        <ItemListing />
       </div>
     );
   }
