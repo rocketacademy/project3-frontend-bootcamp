@@ -19,13 +19,13 @@ class App extends React.Component {
       <div className="App">
         <LoginPage />
         <Listings />
-        <ItemListing />
+        {/*  <ItemListing /> */}
         <Link to="/listings">Listings</Link>
         <br />
         <Link to="/profile">Profile</Link>
         <br />
         <Link to="/signupinfo">Sign Up Info</Link>
-        <CreateListing />
+        {/* <CreateListing /> */}
       </div>
     );
   }
