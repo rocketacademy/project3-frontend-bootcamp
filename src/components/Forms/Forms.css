@@ -1,4 +1,4 @@
-.form-event {
+.forms {
   /* flex */
   display: flex;
   flex-direction: column;
@@ -11,7 +11,7 @@
   border-radius: 5px;
 }
 
-.form-event form {
+.forms form {
   /* flex */
   display: flex;
   flex-direction: column;
@@ -23,24 +23,8 @@
   gap: 10px;
   align-items: center;
 }
-
-.input-with-header {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  padding-top: 10px;
-  background-color: rgb(233, 233, 233);
-  border-radius: 15px;
-  color: rgb(166, 166, 166);
-}
-
-.input-with-header h5 {
-  padding-left: 15px;
-}
-
-.form-event input,
-.form-event select {
+.forms input,
+.forms select {
   width: 100%;
   padding: 10px;
   border-radius: 15px;
@@ -51,14 +35,27 @@
   font-weight: 500;
 }
 
-.form-event input:focus,
-.form-event input:active,
-.form-event select:focus,
-.form-event select:active {
+/* .forms select {
+  appearance: none;
+  padding: 12px;
+} */
+
+/* .forms select::after {
+  content: "";
+  width: 0.8em;
+  height: 0.5em;
+  background-color: black;
+  clip-path: polygon(100% 0%, 0 0%, 50% 100%);
+} */
+
+.forms input:focus,
+.forms input:active,
+.forms select:focus,
+.forms select:active {
   outline: none;
 }
 
-.form-event form button {
+.forms form button {
   width: 100%;
   padding: 10px;
   border-radius: 30px;
@@ -72,4 +69,32 @@
 
 .pop-up-note {
   text-align: left;
+}
+
+.input-with-header {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding-top: 10px;
+  background-color: rgb(233, 233, 233);
+  border-radius: 15px;
+  color: rgb(166, 166, 166);
+}
+
+.input-with-header h5,
+.input-with-header h4 {
+  padding-left: 15px;
+}
+
+.input-with-header h4 {
+  padding: 10px 15px;
+}
+
+.group {
+  flex: 1;
+}
+
+.facil {
+  flex: 3;
 }

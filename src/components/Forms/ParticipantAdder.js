@@ -1,7 +1,6 @@
 import "./Forms.css";
 import { useState } from "react";
 import { parse } from "papaparse";
-import "axios";
 import axios from "axios";
 
 const ParticipantAdder = ({ handleToggle, eventId }) => {
@@ -91,10 +90,10 @@ const ParticipantAdder = ({ handleToggle, eventId }) => {
 
   return (
     <div id="pop-up">
-      <div className="form-event">
+      <div className="forms">
         <div className="header">
           <h1>Add Participants</h1>
-          <button onClick={handleToggle}>
+          <button onClick={handleToggle} id="participants">
             <h5>Close</h5>
           </button>
         </div>

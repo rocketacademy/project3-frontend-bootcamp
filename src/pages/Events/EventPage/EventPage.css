@@ -4,3 +4,25 @@
   color: black;
   border: 1.5px solid black;
 }
+
+.event-page-tabs {
+  display: flex;
+  margin-top: 5px;
+}
+
+.event-page-tabs button {
+  width: 100%;
+  border-radius: 0;
+}
+
+.event-page-tabs .active {
+  background-color: black;
+}
+
+.event-page-tabs .inactive {
+  background-color: grey;
+}
+
+#event-page {
+  gap: 0px;
+}
