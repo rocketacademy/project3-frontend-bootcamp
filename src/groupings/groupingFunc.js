@@ -1,9 +1,4 @@
-const generateGroupings = (confirmedParticipants, groupData) => {
-  const numGroups = groupData.length;
-  /*
-  for (const participant of confirmedParticipants) {
-    participant.groupId = 1;
-  }*/
+const generateGroupings = (confirmedParticipants, numGroups) => {
   const sortByAge = (participants) => {
     return participants.sort((obj1, obj2) => {
       return obj2.year - obj1.year;

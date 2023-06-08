@@ -95,7 +95,7 @@ const ParticipantsGroups = ({
             <h5>Add Group</h5>
           </button>
           <button
-            onClick={() => createGroupings(filteredData, groupData)}
+            onClick={() => createGroupings(filteredData, groupData.length)}
             id="participants"
           >
             <h5>Generate</h5>
