@@ -37,23 +37,51 @@ const allColumns = [
 
 const groupingColumns = [
   { Header: "Name", accessor: "name" },
-  { Header: "Neighbourhood", accessor: "neighbourhood" },
+  {
+    Header: "Neighbourhood",
+    accessor: "neighbourhood",
+    Cell: ({ row }) => {
+      if (row.original.mobile) {
+        return row.original.neighbourhood;
+      } else {
+        return <p></p>;
+      }
+    },
+  },
   {
     Header: "Age",
     accessor: "year",
-    Cell: (content) => {
-      return 2023 - content.value;
+    Cell: ({ row }) => {
+      if (row.original.mobile) {
+        return 2023 - row.original.year;
+      } else {
+        return <p></p>;
+      }
     },
   },
   {
     Header: "Sex",
     accessor: "isMale",
     sortType: "basic",
-    Cell: (content) => {
-      return content.value ? "M" : "F";
+    Cell: ({ row }) => {
+      if (row.original.mobile) {
+        return row.original.isMale ? "M" : "F";
+      } else {
+        return <p></p>;
+      }
     },
   },
-  { Header: "Race", accessor: "race" },
+  {
+    Header: "Race",
+    accessor: "race",
+    Cell: ({ row }) => {
+      if (row.original.mobile) {
+        return row.original.race;
+      } else {
+        return <p></p>;
+      }
+    },
+  },
 ];
 
 const facilitatorColumns = [{ Header: "Facilitator Name", accessor: "name" }];

@@ -10,26 +10,37 @@ import ParticipantAdder from "../../../components/Forms/ParticipantAdder";
 import ParticipantsAll from "../../../components/EventPage/ParticipantsAll";
 import ParticipantsGroups from "../../../components/EventPage/ParticipantsGroups";
 import GroupAdder from "../../../components/Forms/GroupAdder";
+import GroupEditor from "../../../components/Forms/GroupEditor";
 
 //---------- Others ----------//
 
 import axios from "axios";
 import "./EventPage.css";
-import GroupEditor from "../../../components/Forms/GroupEditor";
 
 //------------------------------//
 
 const EventPage = () => {
   const navigate = useNavigate();
+
+  //---------- Data ----------//
+
   const { eventId } = useParams();
   const [data, setData] = useState(null);
   const [eventData, setEventData] = useState(null);
   const [groupData, setGroupData] = useState(null);
-  const [togglePComposer, setTogglePComposer] = useState(false);
-  const [toggleGComposer, setToggleGComposer] = useState(false);
-  const [toggleGEditor, setToggleGEditor] = useState(false);
+  const [facilData, setFacilData] = useState(null);
+
+  //---------- UI ----------//
+
+  const [toggleComposer, setToggleComposer] = useState({
+    composer: false,
+    groupAdd: false,
+    groupEdit: false,
+  });
   const [tab, setTab] = useState("all");
 
+  //------------------------------//
+  console.log(groupData);
   useEffect(() => {
     const getTableData = async () => {
       const rawData = await axios.get(
@@ -56,10 +67,17 @@ const EventPage = () => {
       );
       setGroupData(groups.data.data);
     };
+    const getFacilData = async () => {
+      const facilitators = await axios.get(
+        `${process.env.REACT_APP_BACKEND_URL}/facilitators`
+      );
+      setFacilData(facilitators.data.data);
+    };
 
     getTableData();
     getEventData();
     getGroupData();
+    getFacilData();
     // eslint-disable-next-line
   }, []);
 
@@ -71,11 +89,11 @@ const EventPage = () => {
 
   const handleToggle = (e) => {
     if (e.currentTarget.id === "participants") {
-      setTogglePComposer((prev) => !prev);
+      setToggleComposer((prev) => ({ ...prev, composer: !prev.composer }));
     } else if (e.currentTarget.id === "groups") {
-      setToggleGComposer((prev) => !prev);
+      setToggleComposer((prev) => ({ ...prev, groupAdd: !prev.groupAdd }));
     } else if (e.currentTarget.id === "groups-edit") {
-      setToggleGEditor((prev) => !prev);
+      setToggleComposer((prev) => ({ ...prev, groupEdit: !prev.groupEdit }));
     }
   };
 
@@ -89,23 +107,25 @@ const EventPage = () => {
 
   return (
     <div className="contents" id="event-page">
-      {togglePComposer && (
+      {toggleComposer.composer && (
         <ParticipantAdder handleToggle={handleToggle} eventId={eventId} />
       )}
-      {toggleGComposer && (
+      {toggleComposer.groupAdd && (
         <GroupAdder
           handleToggle={handleToggle}
           eventId={eventId}
           groupData={groupData}
           setGroupData={setGroupData}
+          facilData={facilData}
         />
       )}
-      {toggleGEditor && (
+      {toggleComposer.groupEdit && (
         <GroupEditor
           handleToggle={handleToggle}
           eventId={eventId}
           groupData={groupData}
           setGroupData={setGroupData}
+          facilData={facilData}
         />
       )}
       <NavBar />
@@ -127,6 +147,8 @@ const EventPage = () => {
           eventData={eventData}
           handleToggle={handleToggle}
           toggleTab={toggleTab}
+          groupData={groupData}
+          facilData={facilData}
         />
       )}
     </div>

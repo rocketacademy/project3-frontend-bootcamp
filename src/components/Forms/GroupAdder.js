@@ -2,19 +2,22 @@ import "./Forms.css";
 import { useEffect, useState } from "react";
 import axios from "axios";
 
-const GroupAdder = ({ handleToggle, eventId, groupData, setGroupData }) => {
+const GroupAdder = ({
+  handleToggle,
+  eventId,
+  groupData,
+  setGroupData,
+  facilData,
+}) => {
   const [groupCount, setGroupCount] = useState(null);
   const [facilOptions, setFacilOptions] = useState("");
   const [formRow, setFormRow] = useState([]);
   const [createdRows, setCreatedRows] = useState([]);
 
   useEffect(() => {
-    const getFacils = async () => {
-      const facilitators = await axios.get(
-        `${process.env.REACT_APP_BACKEND_URL}/facilitators`
-      );
+    const getFacilOptions = async () => {
       setFacilOptions(() => {
-        const options = facilitators.data.data.map((facil) => (
+        const options = facilData.map((facil) => (
           <option key={facil.id} value={facil.id}>
             {facil.name}
           </option>
@@ -22,7 +25,7 @@ const GroupAdder = ({ handleToggle, eventId, groupData, setGroupData }) => {
         return <>{options}</>;
       });
     };
-    getFacils();
+    getFacilOptions();
     setGroupCount(groupData.length);
     // eslint-disable-next-line
   }, []);
@@ -56,6 +59,7 @@ const GroupAdder = ({ handleToggle, eventId, groupData, setGroupData }) => {
   }, [facilOptions]);
 
   const handleSubmit = async (e) => {
+    handleToggle(e);
     e.preventDefault();
     const response = await axios.post(
       `${process.env.REACT_APP_BACKEND_URL}/groups/${eventId}`,
@@ -118,7 +122,9 @@ const GroupAdder = ({ handleToggle, eventId, groupData, setGroupData }) => {
         <form>
           {formRow}
           <button onClick={addRow}>Add Row</button>
-          <button onClick={handleSubmit}>Create Groups</button>
+          <button onClick={handleSubmit} id="groups">
+            Create Groups
+          </button>
         </form>
       </div>
     </div>

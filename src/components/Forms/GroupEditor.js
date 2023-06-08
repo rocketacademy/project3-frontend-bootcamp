@@ -2,17 +2,20 @@ import "./Forms.css";
 import { useEffect, useState } from "react";
 import axios from "axios";
 
-const GroupEditor = ({ handleToggle, eventId, groupData, setGroupData }) => {
+const GroupEditor = ({
+  handleToggle,
+  eventId,
+  groupData,
+  setGroupData,
+  facilData,
+}) => {
   const [facilOptions, setFacilOptions] = useState("");
   const [formRow, setFormRow] = useState([]);
 
   useEffect(() => {
-    const getFacils = async () => {
-      const facilitators = await axios.get(
-        `${process.env.REACT_APP_BACKEND_URL}/facilitators`
-      );
+    const getFacilOptions = async () => {
       setFacilOptions(() => {
-        const options = facilitators.data.data.map((facil) => (
+        const options = facilData.map((facil) => (
           <option key={facil.id} value={facil.id}>
             {facil.name}
           </option>
@@ -20,7 +23,7 @@ const GroupEditor = ({ handleToggle, eventId, groupData, setGroupData }) => {
         return <>{options}</>;
       });
     };
-    getFacils();
+    getFacilOptions();
     // eslint-disable-next-line
   }, []);
 
@@ -53,12 +56,15 @@ const GroupEditor = ({ handleToggle, eventId, groupData, setGroupData }) => {
   }, [facilOptions, groupData]);
 
   const handleSubmit = async (e) => {
+    handleToggle(e);
     e.preventDefault();
     const response = await axios.put(
       `${process.env.REACT_APP_BACKEND_URL}/groups/${eventId}`,
       { groupArray: groupData }
     );
-    console.log(response);
+    console.log(groupData);
+    console.log(response.data.data);
+    setGroupData(response.data.data);
   };
 
   const handleChange = (e) => {
@@ -85,7 +91,9 @@ const GroupEditor = ({ handleToggle, eventId, groupData, setGroupData }) => {
         </div>
         <form>
           {formRow}
-          <button onClick={handleSubmit}>Save Groups</button>
+          <button onClick={handleSubmit} id="groups-edit">
+            Save Groups
+          </button>
         </form>
       </div>
     </div>

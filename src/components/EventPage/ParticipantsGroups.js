@@ -19,9 +19,12 @@ const ParticipantsGroups = ({
   eventData,
   handleToggle,
   toggleTab,
+  groupData,
+  facilData,
 }) => {
   const { eventId } = useParams();
   const [filteredData, setFilteredData] = useState([]);
+  const [tableData, setTableData] = useState([]);
 
   useEffect(() => {
     setFilteredData(
@@ -30,14 +33,36 @@ const ParticipantsGroups = ({
     //eslint-disable-next-line
   }, []);
 
+  // To sort
+
   useEffect(() => {
-    setFilteredData((prevData) => {
-      const sortedData = [...prevData];
-      sortedData.sort((a, b) => a.groupId - b.groupId);
+    let facilGroups = groupData.map((group) => {
+      const index = facilData.findIndex(
+        (facil) => Number(facil.id) === Number(group.facilitatorId)
+      );
+      return {
+        name: facilData[index].name,
+        groupId: Number(group.name),
+      };
+    });
+
+    setTableData(() => {
+      const sortedData = [...filteredData, ...facilGroups];
+      sortedData.sort((a, b) => {
+        if (a.groupId === b.groupId) {
+          if (a.mobile && b.mobile) {
+            return a.groupId - b.groupId;
+          } else {
+            return !a.mobile ? -1 : 1;
+          }
+        } else {
+          return a.groupId - b.groupId;
+        }
+      });
       return sortedData;
     });
     //eslint-disable-next-line
-  }, [filteredData]);
+  }, [filteredData, data, groupData]);
 
   return (
     <>
@@ -66,10 +91,11 @@ const ParticipantsGroups = ({
       {data && (
         <Table
           tableColumns={groupingColumns}
-          tableData={filteredData}
+          tableData={tableData}
           setTableData={setData}
           options="attendance"
           eventId={eventId}
+          noOfGroups={groupData.length}
         />
       )}
     </>

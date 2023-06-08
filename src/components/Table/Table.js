@@ -11,35 +11,32 @@ const Table = ({
   setTableData,
   eventId,
   options = "none",
+  noOfGroups,
 }) => {
   const [columnsState, setColumnsState] = useState([]);
 
   const handleChange = async (e, egpId, participantId, columnName) => {
-    console.log("Selected: " + e.value + " at index " + egpId);
+    let updatedId;
     if (options === "status") {
-      await axios.put(
-        `${process.env.REACT_APP_BACKEND_URL}/events/${eventId}/participants`,
-        { participantId, statusId: e.value }
-      );
+      updatedId = "statusId";
     } else if (options === "attendance") {
       if (columnName === "Attended") {
-        await axios.put(
-          `${process.env.REACT_APP_BACKEND_URL}/events/${eventId}/participants`,
-          { participantId, isAttended: e.value }
-        );
+        updatedId = "isAttended";
       } else if (columnName === "Group") {
-        await axios.put(
-          `${process.env.REACT_APP_BACKEND_URL}/events/${eventId}/participants`,
-          { participantId, groupId: e.value }
-        );
+        updatedId = "groupId";
       }
     }
+
+    await axios.put(
+      `${process.env.REACT_APP_BACKEND_URL}/events/${eventId}/participants`,
+      { participantId, [updatedId]: e.value }
+    );
+
     setTableData((prevData) => {
       const data = [...prevData];
       const editedIndex = data.findIndex(
         (participant) => participant.egpId === egpId
       );
-      console.log(data[editedIndex]);
       if (options === "status") {
         data[editedIndex].statusId = e.value;
       } else if (options === "attendance") {
@@ -82,64 +79,74 @@ const Table = ({
         ...tableColumns,
       ]);
     } else if (options === "attendance") {
+      // Get group options based on no of groups
+      const groups = groupOptions(noOfGroups);
       setColumnsState([
         {
           Header: "Attended",
           Cell: ({ row, column }) => {
-            return (
-              <Select
-                menuPortalTarget={document.body}
-                menuPosition={"fixed"}
-                menuPlacement="auto"
-                className="select-attendance"
-                id={row.id}
-                options={attendanceOptions}
-                onChange={(e) =>
-                  handleChange(
-                    e,
-                    row.original.egpId,
-                    row.original.id,
-                    column.Header
-                  )
-                }
-                value={attendanceOptions.find(
-                  (item) => item.value === row.original.isAttended
-                )}
-              />
-            );
+            if (row.original.mobile) {
+              return (
+                <Select
+                  menuPortalTarget={document.body}
+                  menuPosition={"fixed"}
+                  menuPlacement="auto"
+                  className="select-attendance"
+                  id={row.id}
+                  options={attendanceOptions}
+                  onChange={(e) =>
+                    handleChange(
+                      e,
+                      row.original.egpId,
+                      row.original.id,
+                      column.Header
+                    )
+                  }
+                  value={attendanceOptions.find(
+                    (item) => item.value === row.original.isAttended
+                  )}
+                />
+              );
+            } else {
+              return <h5>Facilitator</h5>;
+            }
           },
         },
         {
           Header: "Group",
           Cell: ({ row, column }) => {
-            return (
-              <Select
-                menuPortalTarget={document.body}
-                menuPosition={"fixed"}
-                menuPlacement="auto"
-                className="select-attendance"
-                id={row.id}
-                options={groupOptions}
-                onChange={(e) =>
-                  handleChange(
-                    e,
-                    row.original.egpId,
-                    row.original.id,
-                    column.Header
-                  )
-                }
-                value={groupOptions.find(
-                  (item) => item.value === String(row.original.groupId)
-                )}
-              />
-            );
+            if (row.original.mobile) {
+              return (
+                <Select
+                  menuPortalTarget={document.body}
+                  menuPosition={"fixed"}
+                  menuPlacement="auto"
+                  className="select-attendance"
+                  id={row.id}
+                  options={groups}
+                  onChange={(e) =>
+                    handleChange(
+                      e,
+                      row.original.egpId,
+                      row.original.id,
+                      column.Header
+                    )
+                  }
+                  value={groups.find(
+                    (item) => item.value === String(row.original.groupId)
+                  )}
+                />
+              );
+            } else {
+              return <h5>Group {row.original.groupId}</h5>;
+            }
           },
         },
         ...tableColumns,
       ]);
     }
     // eslint-disable-next-line
-  }, []);
+  }, [noOfGroups]);
 
   // Definining & Initialising data to be used
 
@@ -181,12 +188,16 @@ const Table = ({
 
                   // Conditional Row Color Rendering
                   let rowColor = "white";
+                  let textColor = "black";
                   if (options === "status") {
                     if (participant.statusId === 5) {
                       rowColor = "#B3DFA1";
                     }
                   } else if (options === "attendance") {
-                    if (participant.groupId % 2) {
+                    if (!participant.mobile) {
+                      rowColor = "rgb(70,70,70)";
+                      textColor = "white";
+                    } else if (participant.groupId % 2) {
                       rowColor = "#CECECE";
                     }
                   }
@@ -195,6 +206,7 @@ const Table = ({
                     <td
                       style={{
                         backgroundColor: rowColor,
+                        color: textColor,
                       }}
                       {...cell.getCellProps()}
                     >
