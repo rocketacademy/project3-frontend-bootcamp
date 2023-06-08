@@ -27,8 +27,7 @@ const EventsHome = () => {
       const eventList = await axios.get(
         `${process.env.REACT_APP_BACKEND_URL}/events`
       );
-      console.log(eventList.data);
-      setData(eventList.data);
+      setData(eventList.data.data);
     };
     getTableData();
   }, []);

@@ -35,7 +35,7 @@ const EventPage = () => {
       const rawData = await axios.get(
         `${process.env.REACT_APP_BACKEND_URL}/events/${eventId}/participants`
       );
-      const tableData = await rawData.data.map((raw) => ({
+      const tableData = await rawData.data.data.map((raw) => ({
         ...raw.participant,
         egpId: raw.id,
         statusId: raw.statusId,
@@ -54,7 +54,6 @@ const EventPage = () => {
       const groups = await axios.get(
         `${process.env.REACT_APP_BACKEND_URL}/groups/${eventId}`
       );
-      console.log(groups.data);
       setGroupData(groups.data);
     };
 

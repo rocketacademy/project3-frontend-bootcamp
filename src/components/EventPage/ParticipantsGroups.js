@@ -24,7 +24,9 @@ const ParticipantsGroups = ({
   const [filteredData, setFilteredData] = useState([]);
 
   useEffect(() => {
-    setFilteredData(data.filter((participant) => participant.statusId === 5));
+    setFilteredData(
+      data.filter((participant) => Number(participant.statusId) === 5)
+    );
     //eslint-disable-next-line
   }, []);
 

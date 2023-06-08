@@ -12,7 +12,7 @@ const Participants = () => {
       const tableData = await axios.get(
         `${process.env.REACT_APP_BACKEND_URL}/participants`
       );
-      setData(tableData.data);
+      setData(tableData.data.data);
     };
     getTableData();
   }, []);

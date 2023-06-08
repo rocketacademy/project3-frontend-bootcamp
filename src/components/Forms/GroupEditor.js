@@ -12,7 +12,7 @@ const GroupEditor = ({ handleToggle, eventId, groupData, setGroupData }) => {
         `${process.env.REACT_APP_BACKEND_URL}/facilitators`
       );
       setFacilOptions(() => {
-        const options = facilitators.data.map((facil) => (
+        const options = facilitators.data.data.map((facil) => (
           <option key={facil.id} value={facil.id}>
             {facil.name}
           </option>

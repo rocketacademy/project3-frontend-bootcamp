@@ -14,7 +14,7 @@ const Table = ({
 }) => {
   const [columnsState, setColumnsState] = useState([]);
 
-  const handleChange = async (e, egpId, participantId, rowId, column) => {
+  const handleChange = async (e, egpId, participantId, columnName) => {
     console.log("Selected: " + e.value + " at index " + egpId);
     if (options === "status") {
       await axios.put(
@@ -22,12 +22,12 @@ const Table = ({
         { participantId, statusId: e.value }
       );
     } else if (options === "attendance") {
-      if (column === "Attended") {
+      if (columnName === "Attended") {
         await axios.put(
           `${process.env.REACT_APP_BACKEND_URL}/events/${eventId}/participants`,
           { participantId, isAttended: e.value }
         );
-      } else if (column === "Group") {
+      } else if (columnName === "Group") {
         await axios.put(
           `${process.env.REACT_APP_BACKEND_URL}/events/${eventId}/participants`,
           { participantId, groupId: e.value }
@@ -36,13 +36,17 @@ const Table = ({
     }
     setTableData((prevData) => {
       const data = [...prevData];
+      const editedIndex = data.findIndex(
+        (participant) => participant.egpId === egpId
+      );
+      console.log(data[editedIndex]);
       if (options === "status") {
-        data[rowId].statusId = e.value;
+        data[editedIndex].statusId = e.value;
       } else if (options === "attendance") {
-        if (column === "Attended") {
-          data[rowId].isAttended = e.value;
-        } else if (column === "Group") {
-          data[rowId].groupId = e.value;
+        if (columnName === "Attended") {
+          data[editedIndex].isAttended = e.value;
+        } else if (columnName === "Group") {
+          data[editedIndex].groupId = e.value;
         }
       }
       return data;
@@ -66,7 +70,7 @@ const Table = ({
                 id={row.original.egpId}
                 options={statusOptions}
                 onChange={(e) =>
-                  handleChange(e, row.original.egpId, row.original.id, row.id)
+                  handleChange(e, row.original.egpId, row.original.id)
                 }
                 value={statusOptions.find(
                   (item) => item.value === String(row.original.statusId)
@@ -95,7 +99,6 @@ const Table = ({
                     e,
                     row.original.egpId,
                     row.original.id,
-                    row.id,
                     column.Header
                   )
                 }
@@ -122,7 +125,6 @@ const Table = ({
                     e,
                     row.original.egpId,
                     row.original.id,
-                    row.id,
                     column.Header
                   )
                 }
@@ -175,8 +177,29 @@ const Table = ({
             return (
               <tr {...row.getRowProps()}>
                 {row.cells.map((cell) => {
+                  const participant = cell.row.original;
+
+                  // Conditional Row Color Rendering
+                  let rowColor = "white";
+                  if (options === "status") {
+                    if (participant.statusId === 5) {
+                      rowColor = "#B3DFA1";
+                    }
+                  } else if (options === "attendance") {
+                    if (participant.groupId % 2) {
+                      rowColor = "#CECECE";
+                    }
+                  }
+
                   return (
-                    <td {...cell.getCellProps()}>{cell.render("Cell")}</td>
+                    <td
+                      style={{
+                        backgroundColor: rowColor,
+                      }}
+                      {...cell.getCellProps()}
+                    >
+                      {cell.render("Cell")}
+                    </td>
                   );
                 })}
               </tr>

@@ -14,7 +14,7 @@ const Facilitators = () => {
       const tableData = await axios.get(
         `${process.env.REACT_APP_BACKEND_URL}/facilitators`
       );
-      setData(tableData.data);
+      setData(tableData.data.data);
     };
 
     getTableData();
