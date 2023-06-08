@@ -29,8 +29,10 @@ const LoginPage = () => {
   return (
     <Stack alignItems={"center"} justifyContent={"center"} my={1}>
       <Paper sx={{ px: 5, py: 4, my: 7 }} elevation={0}>
-        <Typography variant="h1" sx={{ fontFamily: "'Yeseva One', cursive" }}>
-          BENDAN Ecommerce
+        <Typography variant="h1" sx={{ fontFamily: "'Yeseva One'" }}>
+          笨 蛋 <br />
+          BEN-DAN <br />
+          Ecommerce
         </Typography>
       </Paper>
       <Typography variant="h4">
@@ -58,6 +60,13 @@ const LoginPage = () => {
       >
         Sign Up
       </Button>
+      <br />
+      <br />
+      <br />
+      <br />
+      <Typography variant="h6">
+        Proudly brought to you by reuBEN & DANiel
+      </Typography>
     </Stack>
   );
 };

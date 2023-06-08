@@ -38,6 +38,38 @@ const SignUpInfoPage = () => {
 
   console.log("email:", state.email);
 
+  // UseEffect here to validate if user has given backend his user data, if yes redirect them to /listings page:
+  useEffect(() => {
+    const checkUserInfoExists = async () => {
+      if (state.email !== "") {
+        try {
+          const response = await axios.get(
+            `${BACKEND_URL}/users/checkuserinfo?email=${state.email}`,
+            {
+              headers: {
+                Authorization: `Bearer ${accessToken}`,
+              },
+            }
+          );
+          console.log(response.data);
+          // Check the response to determine if the project exists
+          if (!response.data.error) {
+            console.log("user info exists!");
+            navigate("/listings");
+          } else {
+            console.log("user info does not exist!");
+          }
+        } catch (error) {
+          console.error(
+            "Error occurred while checking user info exists on db:",
+            error
+          );
+        }
+      }
+    };
+    checkUserInfoExists();
+  }, [state?.email, accessToken]);
+
   const handleSubmit = (e) => {
     e.preventDefault();
     // Perform form submission actions

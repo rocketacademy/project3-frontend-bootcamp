@@ -34,23 +34,40 @@ const NavBar = () => {
     <>
       <AppBar position="static">
         <Toolbar>
-          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+          <Typography variant="h6" component="div" sx={{ flexGrow: 2 }}>
             <Button
               variant="contained"
               onClick={benDanButton}
               type="button"
               disableElevation
             >
-              <Typography
-                variant="h5"
-                sx={{ fontFamily: "'Yeseva One', cursive" }}
-              >
-                BENDAN
+              <Typography variant="h4" sx={{ fontFamily: "'Yeseva One'" }}>
+                笨 蛋
               </Typography>
             </Button>
-            <Button onClick={() => navigate('/profile')}>Profile</Button>
-            <Button onClick={() => navigate('/createlisting')}>CreateListing</Button>
-            <Button onClick={() => navigate('/signupinfo')}>Signup</Button>
+
+            <Button
+              variant="contained"
+              disableElevation
+              onClick={() => navigate("/profile")}
+            >
+              Profile
+            </Button>
+
+            <Button
+              variant="contained"
+              disableElevation
+              onClick={() => navigate("/createlisting")}
+            >
+              Create A New Listing
+            </Button>
+            <Button
+              variant="contained"
+              disableElevation
+              onClick={() => navigate("/signupinfo")}
+            >
+              New User Info
+            </Button>
           </Typography>
 
           <Button
