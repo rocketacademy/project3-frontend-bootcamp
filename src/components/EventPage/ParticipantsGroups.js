@@ -11,7 +11,7 @@ import Table from "../Table/Table";
 import { groupingColumns } from "../Table/columns";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import generateGroupings from "../../groupings/groupingFunc";
+import generateGroupings from "../../groupings/groupingFunction";
 
 //------------------------------//
 
