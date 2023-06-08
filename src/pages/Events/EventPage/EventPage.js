@@ -40,7 +40,7 @@ const EventPage = () => {
   const [tab, setTab] = useState("all");
 
   //------------------------------//
-  console.log(groupData);
+
   useEffect(() => {
     const getTableData = async () => {
       const rawData = await axios.get(

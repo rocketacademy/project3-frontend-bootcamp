@@ -195,7 +195,7 @@ const Table = ({
                     }
                   } else if (options === "attendance") {
                     if (!participant.mobile) {
-                      rowColor = "rgb(70,70,70)";
+                      rowColor = "rgb(120,120,120)";
                       textColor = "white";
                     } else if (participant.groupId % 2) {
                       rowColor = "#CECECE";

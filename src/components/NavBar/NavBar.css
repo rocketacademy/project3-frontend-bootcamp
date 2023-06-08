@@ -3,6 +3,8 @@
   left: 0;
   top: 0;
   width: 100%;
+  background-image: url("../../../public/images/fz_gradient_main.jpg");
+  background-size: cover;
   background-color: black;
   height: 60px;
   padding: 20px;

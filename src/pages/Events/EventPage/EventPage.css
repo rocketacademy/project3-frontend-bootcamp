@@ -13,16 +13,23 @@
 .event-page-tabs button {
   width: 100%;
   border-radius: 0;
+  border-radius: 10px 10px 0 0;
+  padding: 10px;
 }
 
 .event-page-tabs .active {
-  background-color: black;
+  background-color: #2a85ff;
 }
 
 .event-page-tabs .inactive {
-  background-color: grey;
+  background-color: #b9eaff;
+  color: #2a85ff;
 }
 
 #event-page {
   gap: 0px;
+}
+
+#event-page .header {
+  margin: 15px 0;
 }

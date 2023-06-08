@@ -9,7 +9,7 @@ const NavBar = () => {
 
   return (
     <div id="nav">
-      <h2>Friendzone</h2>
+      <img src="../logos/fz_logo_full.svg" alt="logo" />
       <div id="nav-links">
         <button onClick={handleNavigate} id="events">
           <h5>Events</h5>

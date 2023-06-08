@@ -11,7 +11,7 @@ table {
 
 th,
 td {
-  border: 1px solid black;
+  border: 1px solid rgb(65, 65, 65);
   padding: 5px 10px;
 }
 
@@ -20,7 +20,9 @@ td {
 }
 
 th {
-  background-color: rgb(179, 179, 179);
+  background-color: rgb(55, 55, 55);
+  border: 1px solid rgb(109, 109, 109);
+  color: white;
 }
 
 .select-status {
