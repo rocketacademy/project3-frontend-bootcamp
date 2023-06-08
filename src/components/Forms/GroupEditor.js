@@ -26,10 +26,9 @@ const GroupEditor = ({ handleToggle, eventId, groupData, setGroupData }) => {
 
   useEffect(() => {
     if (facilOptions !== "") {
-      groupData.map((data) => {
-        return setFormRow((prevRows) => [
-          ...prevRows,
-          <div className="form-2up">
+      setFormRow(() => {
+        const rows = groupData.map((data) => (
+          <div className="form-2up" key={Number(data.name) - 1}>
             <div className="input-with-header group">
               <h5>Group No.</h5>
               <h4>{data.name}</h4>
@@ -45,12 +44,13 @@ const GroupEditor = ({ handleToggle, eventId, groupData, setGroupData }) => {
                 {facilOptions}
               </select>
             </div>
-          </div>,
-        ]);
+          </div>
+        ));
+        return rows;
       });
     }
     // eslint-disable-next-line
-  }, [facilOptions]);
+  }, [facilOptions, groupData]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -62,7 +62,16 @@ const GroupEditor = ({ handleToggle, eventId, groupData, setGroupData }) => {
   };
 
   const handleChange = (e) => {
-    // setFacil(e.currentTarget.value);
+    const id = Number(e.currentTarget.id) + 1;
+    const facilId = e.currentTarget.value;
+    const rowIndex = groupData.findIndex(
+      (row) => Number(row.name) === Number(id)
+    );
+    setGroupData((prevGroups) => {
+      let groups = [...prevGroups];
+      groups[rowIndex].facilitatorId = facilId;
+      return groups;
+    });
   };
 
   return (

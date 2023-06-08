@@ -54,7 +54,7 @@ const EventPage = () => {
       const groups = await axios.get(
         `${process.env.REACT_APP_BACKEND_URL}/groups/${eventId}`
       );
-      setGroupData(groups.data);
+      setGroupData(groups.data.data);
     };
 
     getTableData();

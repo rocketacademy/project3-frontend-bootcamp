@@ -30,7 +30,7 @@ const GroupAdder = ({ handleToggle, eventId, groupData, setGroupData }) => {
   useEffect(() => {
     if (facilOptions !== "") {
       setFormRow([
-        <div className="form-2up">
+        <div className="form-2up" key={groupCount + 1}>
           <div className="input-with-header group">
             <h5>Group No.</h5>
             <h4>{groupCount + 1}</h4>
@@ -61,7 +61,7 @@ const GroupAdder = ({ handleToggle, eventId, groupData, setGroupData }) => {
       `${process.env.REACT_APP_BACKEND_URL}/groups/${eventId}`,
       { groupArray: createdRows }
     );
-    console.log(response);
+    setGroupData((prevGroups) => [...prevGroups, ...response.data.data]);
   };
 
   const handleChange = (e) => {
@@ -83,7 +83,7 @@ const GroupAdder = ({ handleToggle, eventId, groupData, setGroupData }) => {
     e.preventDefault();
     setFormRow((prevRows) => [
       ...prevRows,
-      <div className="form-2up">
+      <div className="form-2up" key={groupCount + 1}>
         <div className="input-with-header group">
           <h5>Group No.</h5>
           <h4>{groupCount + 1}</h4>
