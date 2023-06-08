@@ -86,6 +86,16 @@ const ParticipantsGroups = ({
     setFilteredData(generateGroupings(filteredData, groupData));
   };
 
+  const saveGroupings = async (filteredData) => {
+    const response = await axios.put(
+      `${process.env.REACT_APP_BACKEND_URL}/events/${eventId}/bulk/participants`,
+      {
+        participantArray: filteredData,
+      }
+    );
+    console.log("Posted: ", response);
+  };
+
   return (
     <>
       <div className="header">
@@ -100,8 +110,7 @@ const ParticipantsGroups = ({
           >
             <h5>Generate</h5>
           </button>
-          {/* TODO: post filteredData to backend to edit participant groupingId*/}
-          <button id="participants">
+          <button onClick={() => saveGroupings(filteredData)} id="participants">
             <h5>Save Groupings</h5>
           </button>
         </div>
