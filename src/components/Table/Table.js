@@ -1,12 +1,28 @@
+//----------- React -----------//
+
 import React, { useEffect, useState } from "react";
-import { useTable, useSortBy } from "react-table";
+
+//---------- Table ----------//
+
+import {
+  flexRender,
+  getSortedRowModel,
+  getCoreRowModel,
+  useReactTable,
+} from "@tanstack/react-table";
 import Select from "react-select";
+
+//---------- Statuses ----------//
+
 import {
   statusOptions,
   attendanceOptions,
   groupOptions,
   facilOptions,
 } from "./statuses";
+
+//---------- Others ----------//
+
 import "./Table.css";
 import axios from "axios";
 
@@ -76,8 +92,8 @@ const Table = ({
     } else if (options === "status") {
       setColumnsState([
         {
-          Header: "Status",
-          Cell: ({ row }) => {
+          header: "Status",
+          cell: ({ row }) => {
             return (
               <Select
                 menuPortalTarget={document.body}
@@ -104,8 +120,8 @@ const Table = ({
       const facils = facilOptions(facilData);
       setColumnsState([
         {
-          Header: "Group",
-          Cell: ({ row, column }) => {
+          header: "Group",
+          cell: ({ row, column }) => {
             if (row.original.mobile) {
               return (
                 <Select
@@ -134,8 +150,8 @@ const Table = ({
           },
         },
         {
-          Header: "Attended",
-          Cell: ({ row, column }) => {
+          header: "Attended",
+          cell: ({ row, column }) => {
             if (row.original.mobile) {
               return (
                 <Select
@@ -164,9 +180,9 @@ const Table = ({
           },
         },
         {
-          Header: "Name",
-          accessor: "name",
-          Cell: ({ row, column }) => {
+          header: "Name",
+          accessorKey: "name",
+          cell: ({ row, column }) => {
             if (row.original.mobile) {
               return row.original.name;
             } else {
@@ -197,71 +213,81 @@ const Table = ({
 
   const data = React.useMemo(() => tableData, [tableData]);
   const columns = React.useMemo(() => [...columnsState], [columnsState]);
-  const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } =
-    useTable({ columns, data }, useSortBy);
+  const table = useReactTable({
+    columns,
+    data,
+    getSortedRowModel: getSortedRowModel(),
+    getCoreRowModel: getCoreRowModel(),
+  });
 
   return (
     <div className="table">
-      <table {...getTableProps()}>
+      <table>
         <thead>
-          {headerGroups.map((headerGroup) => (
-            <tr {...headerGroup.getHeaderGroupProps()}>
-              {headerGroup.headers.map((column) => (
-                <th {...column.getHeaderProps(column.getSortByToggleProps())}>
-                  <h5>
-                    {column.render("Header")}
-                    <span>
-                      {column.isSorted
-                        ? column.isSortedDesc
-                          ? " ⬇"
-                          : " ⬆"
-                        : ""}
-                    </span>
-                  </h5>
+          {table.getHeaderGroups().map((headerGroup) => (
+            <tr key={headerGroup.id}>
+              {headerGroup.headers.map((header) => (
+                <th key={header.id}>
+                  {header.isPlaceholder ? null : (
+                    <div
+                      {...{
+                        className: header.column.getCanSort()
+                          ? "cursor-pointer select-none"
+                          : "",
+                        onClick: header.column.getToggleSortingHandler(),
+                      }}
+                    >
+                      {flexRender(
+                        header.column.columnDef.header,
+                        header.getContext()
+                      )}
+                      {{
+                        asc: " ⬆",
+                        desc: " ⬇",
+                      }[header.column.getIsSorted()] ?? null}
+                    </div>
+                  )}{" "}
                 </th>
               ))}
             </tr>
           ))}
         </thead>
-        <tbody {...getTableBodyProps()}>
-          {rows.map((row) => {
-            prepareRow(row);
-            return (
-              <tr {...row.getRowProps()}>
-                {row.cells.map((cell) => {
-                  const participant = cell.row.original;
+        <tbody>
+          {table.getRowModel().rows.map((row) => (
+            <tr key={row.id}>
+              {row.getVisibleCells().map((cell) => {
+                const participant = cell.row.original;
 
-                  // Conditional Row Color Rendering
-                  let rowColor = "white";
-                  let textColor = "black";
-                  if (options === "status") {
-                    if (participant.statusId === 5) {
-                      rowColor = "#B3DFA1";
-                    }
-                  } else if (options === "attendance") {
-                    if (!participant.mobile) {
-                      rowColor = "rgb(120,120,120)";
-                      textColor = "white";
-                    } else if (participant.groupId % 2) {
-                      rowColor = "#CECECE";
-                    }
+                // Conditional Row Color Rendering
+                let rowColor = "white";
+                let textColor = "black";
+                if (options === "status") {
+                  if (participant.statusId === 5) {
+                    rowColor = "#B3DFA1";
                   }
+                } else if (options === "attendance") {
+                  if (!participant.mobile) {
+                    rowColor = "rgb(120,120,120)";
+                    textColor = "white";
+                  } else if (participant.groupId % 2) {
+                    rowColor = "#CECECE";
+                  }
+                }
 
-                  return (
-                    <td
-                      style={{
-                        backgroundColor: rowColor,
-                        color: textColor,
-                      }}
-                      {...cell.getCellProps()}
-                    >
-                      {cell.render("Cell")}
-                    </td>
-                  );
-                })}
-              </tr>
-            );
-          })}
+                return (
+                  <td
+                    key={cell.id}
+                    style={{
+                      backgroundColor: rowColor,
+                      color: textColor,
+                    }}
+                  >
+                    {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                  </td>
+                );
+              })}
+            </tr>
+          ))}
         </tbody>
       </table>
     </div>

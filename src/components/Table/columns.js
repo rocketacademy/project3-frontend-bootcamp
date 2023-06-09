@@ -1,45 +1,42 @@
 // Columns for Participants Page
 
 const allColumns = [
-  { Header: "Name", accessor: "name" },
-  { Header: "Postal Code", accessor: "postalCode" },
-  { Header: "Neighbourhood", accessor: "neighbourhood" },
+  { header: "Name", accessorKey: "name" },
+  { header: "Postal Code", accessorKey: "postalCode" },
+  { header: "Neighbourhood", accessorKey: "neighbourhood" },
   {
-    Header: "Age",
-    accessor: "year",
-    Cell: (content) => {
-      return 2023 - content.value;
-    },
+    header: "Age",
+    accessorFn: (row) => 2023 - row.year,
   },
-  { Header: "Phone No.", accessor: "mobile" },
+  { header: "Phone No.", accessorKey: "mobile" },
   {
-    Header: "Sex",
-    accessor: "isMale",
+    header: "Sex",
+    accessorKey: "isMale",
     sortType: "basic",
-    Cell: (content) => {
+    cell: (content) => {
       return content.value ? "M" : "F";
     },
   },
   {
-    Header: "First Timer",
-    accessor: "isFirstTime",
+    header: "First Timer",
+    accessorKey: "isFirstTime",
     sortType: "basic",
-    Cell: (content) => {
+    cell: (content) => {
       return content.value ? "Yes" : "No";
     },
   },
-  { Header: "Nationality", accessor: "nationality" },
-  { Header: "Race", accessor: "race" },
-  { Header: "Marital Status", accessor: "maritalStatus" },
+  { header: "Nationality", accessorKey: "nationality" },
+  { header: "Race", accessorKey: "race" },
+  { header: "Marital Status", accessorKey: "maritalStatus" },
 ];
 
 // Columns for Groupings Page
 
 const groupingColumns = [
   {
-    Header: "Neighbourhood",
-    accessor: "neighbourhood",
-    Cell: ({ row }) => {
+    header: "Neighbourhood",
+    accessorKey: "neighbourhood",
+    cell: ({ row }) => {
       if (row.original.mobile) {
         return row.original.neighbourhood;
       } else {
@@ -48,9 +45,9 @@ const groupingColumns = [
     },
   },
   {
-    Header: "Age",
-    accessor: "year",
-    Cell: ({ row }) => {
+    header: "Age",
+    accessorKey: "year",
+    cell: ({ row }) => {
       if (row.original.mobile) {
         return 2023 - row.original.year;
       } else {
@@ -59,10 +56,10 @@ const groupingColumns = [
     },
   },
   {
-    Header: "Sex",
-    accessor: "isMale",
+    header: "Sex",
+    accessorKey: "isMale",
     sortType: "basic",
-    Cell: ({ row }) => {
+    cell: ({ row }) => {
       if (row.original.mobile) {
         return row.original.isMale ? "M" : "F";
       } else {
@@ -71,9 +68,9 @@ const groupingColumns = [
     },
   },
   {
-    Header: "Race",
-    accessor: "race",
-    Cell: ({ row }) => {
+    header: "Race",
+    accessorKey: "race",
+    cell: ({ row }) => {
       if (row.original.mobile) {
         return row.original.race;
       } else {
@@ -83,6 +80,8 @@ const groupingColumns = [
   },
 ];
 
-const facilitatorColumns = [{ Header: "Facilitator Name", accessor: "name" }];
+const facilitatorColumns = [
+  { header: "Facilitator Name", accessorKey: "name" },
+];
 
 export { allColumns, groupingColumns, facilitatorColumns };

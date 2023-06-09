@@ -2,6 +2,7 @@
   width: 100%;
   overflow-x: auto;
   display: flex;
+  text-align: left;
 }
 
 table {
@@ -9,9 +10,12 @@ table {
   min-width: 100%;
 }
 
+tr {
+  border: 1px solid rgb(65, 65, 65);
+}
+
 th,
 td {
-  border: 1px solid rgb(65, 65, 65);
   padding: 5px 10px;
 }
 
@@ -20,9 +24,10 @@ td {
 }
 
 th {
-  background-color: rgb(55, 55, 55);
-  border: 1px solid rgb(109, 109, 109);
-  color: white;
+  background-color: rgb(255, 255, 255);
+  border: none;
+  color: rgb(163, 163, 163);
+  padding: 10px;
 }
 
 .select-status {
