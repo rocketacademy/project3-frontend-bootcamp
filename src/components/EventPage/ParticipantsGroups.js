@@ -10,6 +10,7 @@ import Table from "../Table/Table";
 
 import { groupingColumns } from "../Table/columns";
 import { useEffect, useState } from "react";
+import axios from "axios";
 
 //------------------------------//
 
@@ -17,7 +18,6 @@ const ParticipantsGroups = ({
   data,
   setData,
   eventData,
-  handleToggle,
   toggleTab,
   groupData,
   setGroupData,
@@ -65,15 +65,30 @@ const ParticipantsGroups = ({
     //eslint-disable-next-line
   }, [filteredData, data, groupData]);
 
+  const addGroup = async () => {
+    const response = await axios.post(
+      `${process.env.REACT_APP_BACKEND_URL}/groups/${eventId}`,
+      {
+        groupArray: [
+          {
+            name: String(groupData.length + 1),
+            facilitatorId: 1,
+          },
+        ],
+      }
+    );
+    setGroupData((prevGroups) => [...prevGroups, ...response.data.data]);
+  };
+
   return (
     <>
       <div className="header">
         {eventData && <h1>{eventData.name}</h1>}
         <div className="header-buttons">
-          <button onClick={handleToggle} id="groups">
-            <h5>Add</h5>
+          <button onClick={addGroup} id="groups">
+            <h5>Add Group</h5>
           </button>
-          <button onClick={handleToggle} id="participants">
+          <button id="participants">
             <h5>Generate</h5>
           </button>
         </div>

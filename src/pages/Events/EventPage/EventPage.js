@@ -9,7 +9,6 @@ import NavBar from "../../../components/NavBar/NavBar";
 import ParticipantAdder from "../../../components/Forms/ParticipantAdder";
 import ParticipantsAll from "../../../components/EventPage/ParticipantsAll";
 import ParticipantsGroups from "../../../components/EventPage/ParticipantsGroups";
-import GroupAdder from "../../../components/Forms/GroupAdder";
 
 //---------- Others ----------//
 
@@ -31,10 +30,7 @@ const EventPage = () => {
 
   //---------- UI ----------//
 
-  const [toggleComposer, setToggleComposer] = useState({
-    composer: false,
-    groupAdd: false,
-  });
+  const [toggleComposer, setToggleComposer] = useState(false);
   const [tab, setTab] = useState("all");
 
   //------------------------------//
@@ -87,9 +83,7 @@ const EventPage = () => {
 
   const handleToggle = (e) => {
     if (e.currentTarget.id === "participants") {
-      setToggleComposer((prev) => ({ ...prev, composer: !prev.composer }));
-    } else if (e.currentTarget.id === "groups") {
-      setToggleComposer((prev) => ({ ...prev, groupAdd: !prev.groupAdd }));
+      setToggleComposer((prev) => !prev);
     }
   };
 
@@ -103,17 +97,8 @@ const EventPage = () => {
 
   return (
     <div className="contents" id="event-page">
-      {toggleComposer.composer && (
+      {toggleComposer && (
         <ParticipantAdder handleToggle={handleToggle} eventId={eventId} />
-      )}
-      {toggleComposer.groupAdd && (
-        <GroupAdder
-          handleToggle={handleToggle}
-          eventId={eventId}
-          groupData={groupData}
-          setGroupData={setGroupData}
-          facilData={facilData}
-        />
       )}
       <NavBar />
       <button onClick={handleClick} id="back">

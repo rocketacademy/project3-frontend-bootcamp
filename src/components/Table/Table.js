@@ -170,7 +170,6 @@ const Table = ({
             if (row.original.mobile) {
               return row.original.name;
             } else {
-              console.log(row);
               return (
                 <Select
                   menuPortalTarget={document.body}
