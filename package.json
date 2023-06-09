@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "@auth0/auth0-react": "^2.1.0",
+    "@tanstack/react-table": "^8.9.2",
     "axios": "^1.4.0",
     "papaparse": "^5.4.1",
     "react": "^18.1.0",
