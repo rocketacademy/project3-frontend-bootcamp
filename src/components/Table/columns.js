@@ -8,7 +8,7 @@ const allColumns = [
     header: "Age",
     accessorFn: (row) => 2023 - row.year,
   },
-  { header: "Phone No.", accessorKey: "mobile" },
+  { header: "Mobile", accessorKey: "mobile" },
   {
     header: "Sex",
     accessorKey: "isMale",

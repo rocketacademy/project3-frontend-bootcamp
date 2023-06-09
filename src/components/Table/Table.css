@@ -3,6 +3,8 @@
   overflow-x: auto;
   display: flex;
   text-align: left;
+  border-radius: 5px;
+  border: 1px solid rgb(185, 185, 185);
 }
 
 table {
@@ -11,7 +13,7 @@ table {
 }
 
 tr {
-  border: 1px solid rgb(65, 65, 65);
+  border-bottom: 1px solid rgb(185, 185, 185);
 }
 
 th,
@@ -19,19 +21,21 @@ td {
   padding: 5px 10px;
 }
 
-td {
-  font-weight: 500;
-}
-
 th {
-  background-color: rgb(255, 255, 255);
+  background-color: rgb(237, 237, 237);
   border: none;
   color: rgb(163, 163, 163);
   padding: 10px;
+  font-size: 14px;
+}
+
+td {
+  font-weight: 500;
+  font-size: 16px;
 }
 
 .select-status {
-  min-width: 200px;
+  min-width: 170px;
 }
 
 .select-attendance {
