@@ -1,7 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { useTable, useSortBy } from "react-table";
 import Select from "react-select";
-import { statusOptions, attendanceOptions, groupOptions } from "./statuses";
+import {
+  statusOptions,
+  attendanceOptions,
+  groupOptions,
+  facilOptions,
+} from "./statuses";
 import "./Table.css";
 import axios from "axios";
 
@@ -11,7 +16,9 @@ const Table = ({
   setTableData,
   eventId,
   options = "none",
-  noOfGroups,
+  groupData,
+  setGroupData,
+  facilData,
 }) => {
   const [columnsState, setColumnsState] = useState([]);
 
@@ -50,6 +57,19 @@ const Table = ({
     });
   };
 
+  const handleFacilChange = async (e, content) => {
+    const tempData = [...groupData];
+    const targetIndex = tempData.findIndex(
+      (data) => Number(data.name) === content.groupId
+    );
+    tempData[targetIndex].facilitatorId = e.value;
+    const response = await axios.put(
+      `${process.env.REACT_APP_BACKEND_URL}/groups/${eventId}`,
+      { groupArray: tempData }
+    );
+    setGroupData(response.data.data);
+  };
+
   useEffect(() => {
     if (options === "none") {
       setColumnsState([...tableColumns]);
@@ -80,38 +100,9 @@ const Table = ({
       ]);
     } else if (options === "attendance") {
       // Get group options based on no of groups
-      const groups = groupOptions(noOfGroups);
+      const groups = groupOptions(groupData.length);
+      const facils = facilOptions(facilData);
       setColumnsState([
-        {
-          Header: "Attended",
-          Cell: ({ row, column }) => {
-            if (row.original.mobile) {
-              return (
-                <Select
-                  menuPortalTarget={document.body}
-                  menuPosition={"fixed"}
-                  menuPlacement="auto"
-                  className="select-attendance"
-                  id={row.id}
-                  options={attendanceOptions}
-                  onChange={(e) =>
-                    handleChange(
-                      e,
-                      row.original.egpId,
-                      row.original.id,
-                      column.Header
-                    )
-                  }
-                  value={attendanceOptions.find(
-                    (item) => item.value === row.original.isAttended
-                  )}
-                />
-              );
-            } else {
-              return <h5>Facilitator</h5>;
-            }
-          },
-        },
         {
           Header: "Group",
           Cell: ({ row, column }) => {
@@ -142,11 +133,66 @@ const Table = ({
             }
           },
         },
+        {
+          Header: "Attended",
+          Cell: ({ row, column }) => {
+            if (row.original.mobile) {
+              return (
+                <Select
+                  menuPortalTarget={document.body}
+                  menuPosition={"fixed"}
+                  menuPlacement="auto"
+                  className="select-attendance"
+                  id={row.id}
+                  options={attendanceOptions}
+                  onChange={(e) =>
+                    handleChange(
+                      e,
+                      row.original.egpId,
+                      row.original.id,
+                      column.Header
+                    )
+                  }
+                  value={attendanceOptions.find(
+                    (item) => item.value === row.original.isAttended
+                  )}
+                />
+              );
+            } else {
+              return <h5>Facilitator:</h5>;
+            }
+          },
+        },
+        {
+          Header: "Name",
+          accessor: "name",
+          Cell: ({ row, column }) => {
+            if (row.original.mobile) {
+              return row.original.name;
+            } else {
+              console.log(row);
+              return (
+                <Select
+                  menuPortalTarget={document.body}
+                  menuPosition={"fixed"}
+                  menuPlacement="auto"
+                  className="select-attendance"
+                  id={row.id}
+                  options={facils}
+                  onChange={(e) => handleFacilChange(e, row.original)}
+                  value={facils.find((item) => {
+                    return item.label === row.original.name;
+                  })}
+                />
+              );
+            }
+          },
+        },
         ...tableColumns,
       ]);
     }
     // eslint-disable-next-line
-  }, [noOfGroups]);
+  }, [groupData]);
 
   // Definining & Initialising data to be used
 

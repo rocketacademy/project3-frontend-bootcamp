@@ -36,7 +36,6 @@ const allColumns = [
 // Columns for Groupings Page
 
 const groupingColumns = [
-  { Header: "Name", accessor: "name" },
   {
     Header: "Neighbourhood",
     accessor: "neighbourhood",

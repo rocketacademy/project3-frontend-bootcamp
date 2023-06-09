@@ -20,6 +20,7 @@ const ParticipantsGroups = ({
   handleToggle,
   toggleTab,
   groupData,
+  setGroupData,
   facilData,
 }) => {
   const { eventId } = useParams();
@@ -72,9 +73,6 @@ const ParticipantsGroups = ({
           <button onClick={handleToggle} id="groups">
             <h5>Add</h5>
           </button>
-          <button onClick={handleToggle} id="groups-edit">
-            <h5>Edit</h5>
-          </button>
           <button onClick={handleToggle} id="participants">
             <h5>Generate</h5>
           </button>
@@ -95,7 +93,9 @@ const ParticipantsGroups = ({
           setTableData={setData}
           options="attendance"
           eventId={eventId}
-          noOfGroups={groupData.length}
+          groupData={groupData}
+          setGroupData={setGroupData}
+          facilData={facilData}
         />
       )}
     </>

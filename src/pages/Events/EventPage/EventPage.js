@@ -10,7 +10,6 @@ import ParticipantAdder from "../../../components/Forms/ParticipantAdder";
 import ParticipantsAll from "../../../components/EventPage/ParticipantsAll";
 import ParticipantsGroups from "../../../components/EventPage/ParticipantsGroups";
 import GroupAdder from "../../../components/Forms/GroupAdder";
-import GroupEditor from "../../../components/Forms/GroupEditor";
 
 //---------- Others ----------//
 
@@ -35,7 +34,6 @@ const EventPage = () => {
   const [toggleComposer, setToggleComposer] = useState({
     composer: false,
     groupAdd: false,
-    groupEdit: false,
   });
   const [tab, setTab] = useState("all");
 
@@ -92,8 +90,6 @@ const EventPage = () => {
       setToggleComposer((prev) => ({ ...prev, composer: !prev.composer }));
     } else if (e.currentTarget.id === "groups") {
       setToggleComposer((prev) => ({ ...prev, groupAdd: !prev.groupAdd }));
-    } else if (e.currentTarget.id === "groups-edit") {
-      setToggleComposer((prev) => ({ ...prev, groupEdit: !prev.groupEdit }));
     }
   };
 
@@ -112,15 +108,6 @@ const EventPage = () => {
       )}
       {toggleComposer.groupAdd && (
         <GroupAdder
-          handleToggle={handleToggle}
-          eventId={eventId}
-          groupData={groupData}
-          setGroupData={setGroupData}
-          facilData={facilData}
-        />
-      )}
-      {toggleComposer.groupEdit && (
-        <GroupEditor
           handleToggle={handleToggle}
           eventId={eventId}
           groupData={groupData}
@@ -148,6 +135,7 @@ const EventPage = () => {
           handleToggle={handleToggle}
           toggleTab={toggleTab}
           groupData={groupData}
+          setGroupData={setGroupData}
           facilData={facilData}
         />
       )}

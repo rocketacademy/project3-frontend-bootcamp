@@ -21,4 +21,12 @@ const groupOptions = (noOfGroups) => {
   return options;
 };
 
-export { statusOptions, attendanceOptions, groupOptions };
+const facilOptions = (facilData) => {
+  const options = [];
+  facilData.forEach((facil) =>
+    options.push({ value: facil.id, label: facil.name })
+  );
+  return options;
+};
+
+export { statusOptions, attendanceOptions, groupOptions, facilOptions };
