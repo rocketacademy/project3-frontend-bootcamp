@@ -1,56 +1,118 @@
 import React, { useState, useEffect, useContext } from "react";
 import { useAuth0 } from "@auth0/auth0-react";
 import { useNavigate } from "react-router-dom";
-
+import axios from "axios";
+import { BACKEND_URL } from "../constants";
 import { Button, Stack, TextField, Typography } from "@mui/material";
 import { toast } from "react-toastify";
 
 const SignUpInfoPage = () => {
-  const { logout, isAuthenticated } = useAuth0();
+  const { logout, isAuthenticated, user, getAccessTokenSilently, isLoading } =
+    useAuth0();
+
+  const accessToken = localStorage.getItem("accessToken");
+  console.log("access token:", accessToken);
 
   const [state, setState] = useState({
     email: "",
     first_name: "",
     last_name: "",
-    phone: "",
+    phone_number: "",
     buyer_address: "",
     seller_address: "",
   });
   const navigate = useNavigate();
 
-  // useEffect(() => {
-  //   if (!isAuthenticated) {
-  //     navigate("/");
-  //   }
-  // }, []);
+  // GET EMAIL ON MOUNT:
+  useEffect(() => {
+    if (!isAuthenticated) {
+      navigate("/");
+    }
+    if (isAuthenticated && user) {
+      setState({
+        email: user.email,
+      });
+      console.log("user email:", user.email);
+    }
+  }, [isAuthenticated]);
 
-  // const handleSubmit = (e) => {
-  //   e.preventDefault();
+  console.log("email:", state.email);
 
-  //   toast
-  //     .promise(
-  //       createUserWithEmailAndPassword(
-  //         auth,
-  //         state.emailInput,
-  //         state.passwordInput
-  //       ),
-  //       {
-  //         pending: "Creating an account...",
-  //         success: "Successfully created an account!",
-  //         error: "Oops, something went wrong. Try again!",
-  //       }
-  //     )
-  //     .then(() => {
-  //       toast.success("🐝 Successfully created a new account!");
-  //       setState({ emailInput: "", passwordInput: "" });
-  //     })
-  //     .then(() => {
-  //       navigate("/createprofile");
-  //     });
-  // };
+  // UseEffect here to validate if user has given backend his user data, if yes redirect them to /listings page:
+  useEffect(() => {
+    const checkUserInfoExists = async () => {
+      if (state.email !== "") {
+        try {
+          const response = await axios.get(
+            `${BACKEND_URL}/users/checkuserinfo?email=${state.email}`,
+            {
+              headers: {
+                Authorization: `Bearer ${accessToken}`,
+              },
+            }
+          );
+          console.log(response.data);
+          // Check the response to determine if the project exists
+          if (!response.data.error) {
+            console.log("user info exists!");
+            navigate("/listings");
+          } else {
+            console.log("user info does not exist!");
+          }
+        } catch (error) {
+          console.error(
+            "Error occurred while checking user info exists on db:",
+            error
+          );
+        }
+      }
+    };
+    checkUserInfoExists();
+  }, [state?.email, accessToken]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    // Perform form submission actions
+    axios
+      .post(
+        `${BACKEND_URL}/users/signupinfo`,
+        {
+          email: state.email,
+          first_name: state.first_name,
+          last_name: state.last_name,
+          phone_number: state.phone_number,
+          buyer_address: state.buyer_address,
+          seller_address: state.seller_address,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+          },
+        }
+      )
+      .then((res) => {
+        setState({
+          email: "",
+          first_name: "",
+          last_name: "",
+          phone_number: "",
+          buyer_address: "",
+          seller_address: "",
+        });
+
+        navigate("/listings");
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+    console.log({
+      email: state.email,
+      first_name: state.first_name,
+      last_name: state.last_name,
+      phone_number: state.phone_number,
+      buyer_address: state.buyer_address,
+      seller_address: state.seller_address,
+    });
     return console.log("you've submitted user info!");
   };
 
@@ -59,11 +121,22 @@ const SignUpInfoPage = () => {
     console.log(state);
   };
 
+  if (isLoading) {
+    // Show loading state
+    return (
+      <div>
+        <h1>Loading...Your patience is appreciated.</h1>
+      </div>
+    );
+  }
   return (
     <Stack alignItems={"center"} justifyContent={"center"} my={5}>
       <Typography variant="h2">
-        Thank you for signing up! Welcome to our community!
+        Thank you for signing up!
+        <br />
+        Welcome to our community!
       </Typography>
+      <br />
       <Typography variant="subtitle1">
         Please kindly provide your details below to make your shopping a breeze:
       </Typography>
@@ -74,16 +147,6 @@ const SignUpInfoPage = () => {
           spacing={2}
           mt={2}
         >
-          <TextField
-            required
-            autoComplete="off"
-            value={state.email}
-            size="small"
-            id="email"
-            type="email"
-            label="Email"
-            onChange={handleChange}
-          ></TextField>
           <TextField
             required
             autoComplete="off"
@@ -107,11 +170,11 @@ const SignUpInfoPage = () => {
           <TextField
             required
             autoComplete="off"
-            value={state.phone}
+            value={state.phone_number}
             size="small"
-            id="phone"
-            type="phone"
-            label="Phone"
+            id="phone_number"
+            type="phone_number"
+            label="Phone No."
             onChange={handleChange}
           ></TextField>
           <TextField
@@ -139,11 +202,6 @@ const SignUpInfoPage = () => {
           </Button>
         </Stack>
       </form>
-      <br />
-      <br />
-      <Button variant="contained" color="secondary">
-        Back to main
-      </Button>
     </Stack>
   );
 };

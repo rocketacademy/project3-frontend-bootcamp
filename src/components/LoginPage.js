@@ -8,25 +8,31 @@ import { Button, Paper, Stack, TextField, Typography } from "@mui/material";
 import { toast } from "react-toastify";
 
 const LoginPage = () => {
-  const { loginWithRedirect } = useAuth0();
+  const { loginWithRedirect, isAuthenticated, isLoading } = useAuth0();
+  const navigate = useNavigate();
 
-  // sign up button logic to redirect first time users to sign up page on Auth0:
-  const handleSignUp = () => {
-    loginWithRedirect({
-      appState: {
-        returnTo: "/signupinfo",
-      },
-      authorizationParams: {
-        screen_hint: "signup",
-      },
-    });
-  };
+  useEffect(() => {
+    if (isAuthenticated) {
+      navigate("/listings");
+    }
+  });
+
+  if (isLoading) {
+    // Show loading state
+    return (
+      <div>
+        <h1>Loading...Your patience is appreciated.</h1>
+      </div>
+    );
+  }
 
   return (
     <Stack alignItems={"center"} justifyContent={"center"} my={1}>
       <Paper sx={{ px: 5, py: 4, my: 7 }} elevation={0}>
-        <Typography variant="h1" sx={{ fontFamily: "'Yeseva One', cursive" }}>
-          BENDAN Ecommerce
+        <Typography variant="h1" sx={{ fontFamily: "'Yeseva One'" }}>
+          笨 蛋 <br />
+          BEN-DAN <br />
+          Ecommerce
         </Typography>
       </Paper>
       <Typography variant="h4">
@@ -39,9 +45,28 @@ const LoginPage = () => {
       <br />
       <Typography variant="h4">Don't have an account yet?</Typography>
       <br />
-      <Button variant="contained" onClick={handleSignUp}>
+      <Button
+        variant="contained"
+        onClick={() =>
+          loginWithRedirect({
+            authorizationParams: {
+              screen_hint: "signup",
+            },
+            appState: {
+              returnTo: "/listings",
+            },
+          })
+        }
+      >
         Sign Up
       </Button>
+      <br />
+      <br />
+      <br />
+      <br />
+      <Typography variant="h6">
+        Proudly brought to you by reuBEN & DANiel
+      </Typography>
     </Stack>
   );
 };
