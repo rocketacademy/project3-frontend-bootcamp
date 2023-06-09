@@ -136,7 +136,7 @@ const Table = ({
                       e,
                       row.original.egpId,
                       row.original.id,
-                      column.Header
+                      column.id
                     )
                   }
                   value={groups.find(
@@ -166,7 +166,7 @@ const Table = ({
                       e,
                       row.original.egpId,
                       row.original.id,
-                      column.Header
+                      column.id
                     )
                   }
                   value={attendanceOptions.find(
@@ -267,10 +267,10 @@ const Table = ({
                   }
                 } else if (options === "attendance") {
                   if (!participant.mobile) {
-                    rowColor = "rgb(120,120,120)";
+                    rowColor = "rgb(160,160,160)";
                     textColor = "white";
                   } else if (participant.groupId % 2) {
-                    rowColor = "#CECECE";
+                    rowColor = "rgb(225,225,225)";
                   }
                 }
 
