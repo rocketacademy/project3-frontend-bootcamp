@@ -18,7 +18,8 @@ import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 // import Select from "@mui/material/Select";
-import Select from "react-select";
+/* import Select from "react-select"; */
+import Select from '@mui/material/Select';
 import { toast } from "react-toastify";
 import NavBar from "./NavBar";
 

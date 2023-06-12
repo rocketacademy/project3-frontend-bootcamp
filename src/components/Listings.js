@@ -29,7 +29,7 @@ import IconButton from '@mui/material/IconButton';
 
 import { red } from '@mui/material/colors';
 
-
+import data from './data.js';
 
 import "./ListingsStyle.css"
 
