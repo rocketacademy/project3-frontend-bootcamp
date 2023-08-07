@@ -1,20 +1,30 @@
 import React from "react";
-import logo from "./logo.png";
 import "./App.css";
+import Navbar from "./components/Navbar";
+import { Route, Routes } from "react-router-dom";
+import Cart from "./pages/Cart";
+import Homepage from "./pages/Homepage";
+import Categories from "./pages/Categories";
+import Search from "./pages/Search";
+import Profile from "./pages/Profile";
+import Deals from "./pages/Deals";
+import Delivery from "./pages/Delivery";
 
-class App extends React.Component {
-  render() {
-    return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-        </header>
-      </div>
-    );
-  }
+function App() {
+  return (
+    <div>
+      <Navbar />
+      <Routes>
+        <Route path="/" element={<Homepage />} />
+        <Route path="/categories" element={<Categories />} />
+        <Route path="/search" element={<Search />} />
+        <Route path="/cart" element={<Cart />} />
+        <Route path="/profile" element={<Profile />} />
+        <Route path="/deals" element={<Deals />} />
+        <Route path="/delivery" element={<Delivery />} />
+      </Routes>
+    </div>
+  );
 }
 
 export default App;
