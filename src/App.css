@@ -21,3 +21,18 @@
 body {
   margin: 0;
 }
+a {
+  text-decoration: none;
+}
+
+.saja-logo img {
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+}
+
+.hero img {
+  object-fit: cover;
+  width: 100%;
+  height: auto;
+}
