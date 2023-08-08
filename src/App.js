@@ -1,6 +1,6 @@
 import React from "react";
 import "./App.css";
-import Navbar from "./components/Navbar";
+import Navbar from "./Components/Navbar";
 import { Route, Routes } from "react-router-dom";
 import Cart from "./pages/Cart";
 import Homepage from "./pages/Homepage";
@@ -24,7 +24,7 @@ function App() {
         <Route path="/deals" element={<Deals />} />
         <Route path="/delivery" element={<Delivery />} />
       </Routes>
-          <FirebaseUpload />
+      <FirebaseUpload />
     </div>
   );
 }
