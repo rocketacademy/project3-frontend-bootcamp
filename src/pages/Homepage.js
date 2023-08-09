@@ -265,6 +265,15 @@ const Homepage = () => {
           ))}
         </Grid>
       </Box>
+
+      {/* Footer */}
+      <Box
+        sx={{
+          height: "500px",
+          width: "99vw",
+          backgroundColor: "primary.main",
+        }}
+      ></Box>
     </>
   );
 };
