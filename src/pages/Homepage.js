@@ -44,7 +44,7 @@ const Homepage = () => {
     },
     {
       image: InstaxMini9,
-      name: "HomePod mini",
+      name: "Instax Mini 9",
       description: "Selfie mode and selfie mirror, Macro mode",
       price: 239.0,
       stars: 121,
@@ -182,8 +182,10 @@ const Homepage = () => {
               <Grid
                 item
                 xs={12}
+                sm={4}
                 md={4}
                 lg={4}
+                xl={4}
                 mkey={index}
                 sx={{ width: "100%", margin: "0", padding: "0" }}
               >
