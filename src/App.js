@@ -9,8 +9,8 @@ import Search from "./Pages/Search";
 import Profile from "./Pages/Profile";
 import Deals from "./Pages/Deals";
 import Delivery from "./Pages/Delivery";
+import Product from "./Pages/Product";
 import FirebaseUpload from "./Components/firebaseUpload";
-import SingleProduct from "./Pages/SingleProduct";
 
 function App() {
   return (
@@ -24,9 +24,9 @@ function App() {
         <Route path="/profile" element={<Profile />} />
         <Route path="/deals" element={<Deals />} />
         <Route path="/delivery" element={<Delivery />} />
-        <Route path="/singletest" element={<SingleProduct />} />
-        <Route path="/storage" element={<FirebaseUpload />} />
+        <Route path="/products/:productId" element={<Product />} />
       </Routes>
+      <FirebaseUpload />
     </div>
   );
 }

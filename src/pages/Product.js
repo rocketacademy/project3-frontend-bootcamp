@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import VibingCat from "../images/vibingcat.gif";
 import Cat1 from "../images/cat1.png";
 import Cat2 from "../images/cat2.png";
@@ -6,8 +6,10 @@ import Cat3 from "../images/cat3.png";
 import Cat4 from "../images/cat4.jpeg";
 import { Box, Grid, Typography, Button, TextField } from "@mui/material";
 import "./Product.css";
+import { useParams } from "react-router-dom";
 
-function SingleProduct() {
+const Product = () => {
+  const { productId } = useParams();
   const [itemName, setItemName] = useState("ITEM NAME");
   const [itemDescription, setItemDescription] = useState(
     "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
@@ -154,6 +156,6 @@ function SingleProduct() {
       </Button>
     </div>
   );
-}
+};
 
-export default SingleProduct;
+export default Product;
