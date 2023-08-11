@@ -11,6 +11,7 @@ import Deals from "./Pages/Deals";
 import Delivery from "./Pages/Delivery";
 import Product from "./Pages/Product";
 import FirebaseUpload from "./Components/firebaseUpload";
+import Payment from "./Pages/Payment";
 
 function App() {
   return (
@@ -25,8 +26,9 @@ function App() {
         <Route path="/deals" element={<Deals />} />
         <Route path="/delivery" element={<Delivery />} />
         <Route path="/products/:productId" element={<Product />} />
+        <Route path="/payment" element={<Payment />} />
+        <Route path="/firebaseupload" element={<FirebaseUpload />} />
       </Routes>
-      <FirebaseUpload />
     </div>
   );
 }

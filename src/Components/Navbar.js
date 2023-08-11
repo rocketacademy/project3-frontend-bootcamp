@@ -94,7 +94,10 @@ function Navbar() {
                 </Button>
               </Link>
             ))}
-            <Box sx={{ width: "70px" }} className="saja-logo">
+            <Box
+              sx={{ width: "70px", marginLeft: "23.5vw" }}
+              className="saja-logo"
+            >
               <img src={Saja} alt="Saja logo" />
             </Box>
           </Box>
