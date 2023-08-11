@@ -2,14 +2,15 @@ import React from "react";
 import "./App.css";
 import Navbar from "./Components/Navbar";
 import { Route, Routes } from "react-router-dom";
-import Cart from "./pages/Cart";
-import Homepage from "./pages/Homepage";
-import Categories from "./pages/Categories";
-import Search from "./pages/Search";
-import Profile from "./pages/Profile";
-import Deals from "./pages/Deals";
-import Delivery from "./pages/Delivery";
+import Cart from "./Pages/Cart";
+import Homepage from "./Pages/Homepage";
+import Categories from "./Pages/Categories";
+import Search from "./Pages/Search";
+import Profile from "./Pages/Profile";
+import Deals from "./Pages/Deals";
+import Delivery from "./Pages/Delivery";
 import FirebaseUpload from "./Components/firebaseUpload";
+import SingleProduct from "./Pages/SingleProduct";
 
 function App() {
   return (
@@ -23,8 +24,9 @@ function App() {
         <Route path="/profile" element={<Profile />} />
         <Route path="/deals" element={<Deals />} />
         <Route path="/delivery" element={<Delivery />} />
+        <Route path="/singletest" element={<SingleProduct />} />
+        <Route path="/storage" element={<FirebaseUpload />} />
       </Routes>
-      <FirebaseUpload />
     </div>
   );
 }
