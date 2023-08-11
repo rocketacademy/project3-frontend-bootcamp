@@ -15,6 +15,8 @@ root.render(
     clientId={process.env.REACT_APP_AUTHO_CLIENT_ID}
     authorizationParams={{
       redirect_uri: "http://localhost:3000/",
+      audience: process.env.REACT_APP_AUDIENCE,
+      scope:process.env.REACT_APP_SCOPE
     }}
   >
     <BrowserRouter>
