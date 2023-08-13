@@ -16,7 +16,7 @@ import {
 
 const Search = () => {
   const [filter, setFilter] = useState("");
-
+  const [filteredProducts, setFilteredProducts] = useState([]);
   const products = [
     {
       image: HomepodMini,
@@ -41,21 +41,41 @@ const Search = () => {
     },
   ];
 
-  const filteredProducts = products.filter((product) => {
-    return product.name.toLowerCase().includes(filter.toLowerCase());
-  });
+  const search = (e) => {
+    e.preventDefault();
+    const trimmedFilter = filter.trim();
+    if (trimmedFilter === "") {
+      setFilteredProducts([]);
+    } else {
+      const filterProductsByName = products.filter((product) => {
+        return product.name.toLowerCase().includes(trimmedFilter.toLowerCase());
+      });
+      setFilteredProducts(filterProductsByName);
+    }
+  };
 
   return (
     <>
       <Box>
         <Box>
-          <TextField
-            label="Filter Products"
-            variant="outlined"
-            value={filter}
-            onChange={(e) => setFilter(e.target.value)}
-            sx={{ marginBottom: "16px" }}
-          />
+          <Box
+            sx={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+            }}
+          >
+            <TextField
+              label="Search"
+              variant="outlined"
+              value={filter}
+              onChange={(e) => setFilter(e.target.value)}
+              sx={{ marginBottom: "16px", width: "100%", maxWidth: "300px" }}
+            />
+            <Button onClick={(e) => search(e)} variant="contained">
+              Search
+            </Button>
+          </Box>
           <Box sx={{ pt: "20px", margin: "0" }}>
             <Grid container spacing={2}>
               {filteredProducts.map((product, index) => (
@@ -66,7 +86,7 @@ const Search = () => {
                   md={4}
                   lg={4}
                   xl={4}
-                  mkey={index}
+                  key={index}
                   sx={{ width: "100%", margin: "0", padding: "0" }}
                 >
                   <Card sx={{ width: "100%", maxWidth: 345 }}>

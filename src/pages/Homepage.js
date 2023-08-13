@@ -23,6 +23,7 @@ import FurnitureSaves from "../images/furniture-saves.png";
 import BooksSaves from "../images/book-saves.png";
 import ClothesSaves from "../images/clothes-saves.png";
 import BackpacksSaves from "../images/backpacks-saves.png";
+import ProductCard from "../Components/ProductCard";
 
 const Homepage = () => {
   const categories = [
@@ -120,7 +121,7 @@ const Homepage = () => {
       </Box>
 
       {/* Top Categories */}
-      <Box className="top-categories" sx={{ py: "20px" }}>
+      <Box className="top-categories" sx={{ p: "20px" }}>
         <Typography variant="h2" sx={{}}>
           SHOP OUR TOP CATEGORIES
         </Typography>
@@ -130,7 +131,7 @@ const Homepage = () => {
               <Grid item xs={4} sm={6} md={4} lg={2} xl={2} key={index}>
                 <Card
                   sx={{
-                    height: { xs: "200px", sm: "250px" }, // Adjust as needed
+                    height: { xs: "200px", sm: "250px" },
                     width: { xs: "100%", sm: "200px" },
                     position: "relative",
                     display: "flex",
@@ -142,10 +143,6 @@ const Homepage = () => {
                     component="img"
                     sx={{
                       position: "absolute",
-                      top: "0",
-                      left: "0",
-                      right: "0",
-                      bottom: "0",
                       objectFit: "cover",
                       width: "100%",
                       height: "100%",
@@ -176,53 +173,11 @@ const Homepage = () => {
         <Typography variant="h2" sx={{}}>
           TODAY'S BEST DEALS FOR YOU
         </Typography>
-        <Box sx={{ pt: "20px", margin: "0" }}>
+        <Box sx={{ p: "20px 5% 0 5%", margin: "0" }}>
           <Grid container spacing={2}>
-            {deals.map((deal, index) => (
-              <Grid
-                item
-                xs={12}
-                sm={4}
-                md={4}
-                lg={4}
-                xl={4}
-                mkey={index}
-                sx={{ width: "100%", margin: "0", padding: "0" }}
-              >
-                <Card sx={{ width: "100%", maxWidth: 345 }}>
-                  <CardActionArea>
-                    <CardMedia
-                      component="img"
-                      height="100%"
-                      image={deal.image}
-                      alt={deal.name}
-                    />
-                    <CardContent>
-                      <Box
-                        sx={{
-                          display: "flex",
-                          alignItems: "center",
-                          paddingBottom: "10px",
-                        }}
-                      >
-                        <Typography gutterBottom variant="h5" component="div">
-                          {deal.name}
-                        </Typography>
-                        <Typography sx={{ marginLeft: "auto" }} variant="h8">
-                          ${deal.price}
-                        </Typography>
-                      </Box>
-                      <Typography
-                        sx={{ marginBottom: "20px" }}
-                        variant="body2"
-                        color="text.secondary"
-                      >
-                        {deal.description} <br />
-                      </Typography>
-                      <Button variant="outlined">Add to cart</Button>
-                    </CardContent>
-                  </CardActionArea>
-                </Card>
+            {deals.map((product, index) => (
+              <Grid item xs={6} md={4}>
+                <ProductCard product={product} />
               </Grid>
             ))}
           </Grid>
@@ -230,19 +185,24 @@ const Homepage = () => {
       </Box>
 
       {/*  Get Up to 50% Off */}
-      <Box sx={{ py: "20px" }}>
+      <Box sx={{ p: "20px" }}>
         <Typography variant="h2">GET UP TO 50% OFF</Typography>
-        <Grid container spacing={2}>
+        <Grid container spacing={4}>
           {saves.map((save, i) => (
             <Grid
               item
-              xs={12}
-              md={3}
-              lg={3}
-              mkey={i}
-              sx={{ width: "100%", margin: "0", padding: "0" }}
+              xs={6}
+              md={6}
+              xl={3}
+              key={i}
+              sx={{ margin: "0", padding: "0" }}
             >
-              <Card sx={{ maxWidth: 345, backgroundColor: save.color }}>
+              <Card
+                sx={{
+                  height: "97%",
+                  backgroundColor: save.color,
+                }}
+              >
                 <CardContent>
                   <Typography gutterBottom variant="h5" component="div">
                     Save
