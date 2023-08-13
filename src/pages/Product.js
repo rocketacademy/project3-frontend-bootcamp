@@ -63,6 +63,7 @@ const Product = () => {
   const setQuantityToBuy = (e) => {
     const requestedQuantity = Number(e.target.value);
     if (isNaN(requestedQuantity)) {
+      setCurrentAmountChoice(0);
       alert("You can only key in numbers!");
       return;
     }
