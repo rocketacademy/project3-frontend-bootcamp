@@ -1,0 +1,48 @@
+.main-picture-area {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 15px;
+}
+
+.main-picture-container {
+  margin: 15px;
+  width: 48.4vw;
+  height: 33vw;
+}
+
+.side-picture-area {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.side-picture-container {
+  width: 11vw;
+  height: 11vw;
+  margin-left: 0.77vw;
+  margin-right: 0.77vw;
+}
+
+.picture {
+  min-width: 100%;
+  min-height: 100%;
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: cover;
+}
+
+.description-area-overall {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.description-area-bg {
+  background-image: url("../images/blackwhitebg.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  width: 56vw;
+  height: 56vw;
+}
