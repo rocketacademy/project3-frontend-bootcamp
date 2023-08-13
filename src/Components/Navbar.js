@@ -16,11 +16,13 @@ import LocalMallIcon from "@mui/icons-material/LocalMall";
 import { Link } from "react-router-dom";
 import Saja from "../images/saja.png";
 import { Paper } from "@mui/material";
+import { useAuth0 } from "@auth0/auth0-react";
 
 const pages = ["Categories", "Deals", "Delivery"];
 const settings = ["Profile", "Account", "Dashboard", "Logout"];
 
 function Navbar() {
+  const { logout } = useAuth0();
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
 
@@ -144,7 +146,19 @@ function Navbar() {
             >
               {settings.map((setting) => (
                 <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                  <Typography textAlign="center">{setting}</Typography>
+                  {/* Render the logout button with Auth0 logout functionality */}
+                  {setting === "Logout" ? (
+                    <Button
+                      onClick={() =>
+                        logout({ returnTo: "http://localhost:3000" })
+                      }
+                      color="inherit"
+                    >
+                      Logout
+                    </Button>
+                  ) : (
+                    <Typography textAlign="center">{setting}</Typography>
+                  )}
                 </MenuItem>
               ))}
             </Menu>

@@ -12,6 +12,8 @@ import Delivery from "./Pages/Delivery";
 import Product from "./Pages/Product";
 import FirebaseUpload from "./Components/firebaseUpload";
 import Payment from "./Pages/Payment";
+import Auth0 from "./pages/Auth0"; // Import your Auth0 component
+import { useAuth0 } from "@auth0/auth0-react";
 
 function App() {
   return (
