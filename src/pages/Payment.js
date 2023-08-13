@@ -7,6 +7,11 @@ import {
   Paper,
   IconButton,
   InputBase,
+  Radio,
+  RadioGroup,
+  FormControlLabel,
+  FormControl,
+  FormLabel,
 } from "@mui/material";
 import { Directions } from "@mui/icons-material";
 import React, { useEffect, useState } from "react";
@@ -14,6 +19,7 @@ import React, { useEffect, useState } from "react";
 function Payment() {
   const [overallPrice, setOverallPrice] = useState(0);
   const [couponCode, setCouponCode] = useState("");
+  const [selectedPaymentOption, setSelectedPaymentOption] = useState("COD");
   const itemsCart = [
     {
       name: "iPhone 4S",
@@ -29,17 +35,21 @@ function Payment() {
     },
   ];
 
-  function calculateTotalPrice(cart) {
+  const calculateTotalPrice = (cart) => {
     let totalPrice = 0;
     for (const item of cart) {
       totalPrice += item.price * item.quantity;
     }
     return totalPrice;
-  }
+  };
 
   useEffect(() => {
     setOverallPrice(calculateTotalPrice(itemsCart));
   }, []);
+
+  const changePaymentOption = (event) => {
+    setSelectedPaymentOption(event.target.value);
+  };
 
   return (
     <>
@@ -81,6 +91,8 @@ function Payment() {
       </Typography>
       <br />
       <Divider variant="middle" />
+      <br />
+
       <Paper
         component="form"
         sx={{ p: "2px 4px", display: "flex", alignItems: "center", width: 400 }}
@@ -96,6 +108,38 @@ function Payment() {
           <Directions />
         </IconButton>
       </Paper>
+      <br />
+      <Divider variant="middle" />
+      <br />
+      <Typography variant="h4">Payment Options:</Typography>
+      <FormControl>
+        <FormLabel>Select an Option</FormLabel>
+        <RadioGroup
+          value={selectedPaymentOption}
+          onChange={changePaymentOption}
+        >
+          <FormControlLabel
+            value="COD"
+            control={<Radio />}
+            label="Cash on Delivery"
+          />
+          <FormControlLabel
+            value="CDC"
+            control={<Radio />}
+            label="Credit/Debit Card"
+          />
+        </RadioGroup>
+      </FormControl>
+      <br />
+      {selectedPaymentOption === "CDC" ? (
+        <Button variant="contained" size="large">
+          Checkout
+        </Button>
+      ) : (
+        <Button variant="outlined" size="large">
+          Proceed to Payment
+        </Button>
+      )}
     </>
   );
 }
