@@ -14,7 +14,7 @@ import FirebaseUpload from "./Components/firebaseUpload";
 import Payment from "./Pages/Payment";
 import Auth0 from "./Pages/Auth0"; // Import your Auth0 component
 import { useAuth0 } from "@auth0/auth0-react";
-import Category from "./pages/Category";
+import Category from "./Pages/Category";
 
 function App() {
   const { isAuthenticated } = useAuth0();
