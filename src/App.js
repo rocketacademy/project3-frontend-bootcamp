@@ -32,7 +32,7 @@ function App() {
             <Route path="/deals" element={<Deals />} />
             <Route path="/delivery" element={<Delivery />} />
             <Route path="/products/:productId" element={<Product />} />
-            <Route path="/firebaseupload" element={<FirebaseUpload />} />
+            <Route path="/firebaseUpload" element={<FirebaseUpload />} />
             <Route path="/payment" element={<Payment />} />
           </>
         ) : (
@@ -42,7 +42,6 @@ function App() {
           </>
         )}
       </Routes>
-      {/*<FirebaseUpload />*/}
     </div>
   );
 }
