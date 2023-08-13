@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import VibingCat from "../images/vibingcat.gif";
 import Cat1 from "../images/cat1.png";
 import Cat2 from "../images/cat2.png";
@@ -7,15 +7,36 @@ import Cat4 from "../images/cat4.jpeg";
 import { Box, Grid, Typography, Button, TextField } from "@mui/material";
 import "./Product.css";
 import { useParams } from "react-router-dom";
+import axios from "axios";
 
 const Product = () => {
-  const { productId } = useParams();
+  const [productIndex, setProductIndex] = useState();
   const [itemName, setItemName] = useState("ITEM NAME");
-  const [itemDescription, setItemDescription] = useState(
-    "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
-  );
-  const [itemPricePerUnit, setItemPricePerUnit] = useState(1);
+  const [itemDescription, setItemDescription] = useState("");
+  const [itemPricePerUnit, setItemPricePerUnit] = useState("1.00");
   const [currentAmountChoice, setCurrentAmountChoice] = useState(1);
+
+  const param = useParams();
+  if (productIndex !== param.productId) {
+    setProductIndex(param.productId);
+  }
+
+  useEffect(() => {
+    if (productIndex) {
+      axios
+        .get(`${process.env.REACT_APP_BACKEND_URL}/products/${productIndex}`)
+        .then((info) => {
+          console.log(info);
+          const data = info.data;
+          setItemName(data.title);
+          setItemDescription(data.description);
+          setItemPricePerUnit(Number(data.price).toFixed(2));
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }
+  }, [productIndex]);
 
   const handleChangeAmount = (input) => {
     if (input === "L") {
@@ -120,7 +141,7 @@ const Product = () => {
                       >
                         Price:
                         <Typography fontSize="1.5vw">
-                          ${itemPricePerUnit.toFixed(2)}
+                          ${itemPricePerUnit}
                         </Typography>
                       </Typography>
                     </Grid>
