@@ -14,7 +14,7 @@ import FirebaseUpload from "./Components/firebaseUpload";
 import Payment from "./Pages/Payment";
 import Auth0 from "./Pages/Auth0"; // Import your Auth0 component
 import { useAuth0 } from "@auth0/auth0-react";
-import Category from "./pages/Category";
+import Category from "./Pages/Category";
 
 function App() {
   const { isAuthenticated } = useAuth0();
@@ -28,7 +28,7 @@ function App() {
             <Route path="/" element={<Homepage />} />
             <Route path="/categories" element={<Categories />} />
             <Route path="/categories/:categoryId" element={<Category />} />
-        <Route path="/search" element={<Search />} />
+            <Route path="/search" element={<Search />} />
             <Route path="/cart" element={<Cart />} />
             <Route path="/profile" element={<Profile />} />
             <Route path="/deals" element={<Deals />} />
