@@ -2,20 +2,21 @@ import React from "react";
 import "./App.css";
 import Navbar from "./Components/Navbar";
 import { Route, Routes } from "react-router-dom";
-import Cart from "./pages/Cart";
-import Homepage from "./pages/Homepage";
-import Categories from "./pages/Categories";
-import Search from "./pages/Search";
-import Profile from "./pages/Profile";
-import Deals from "./pages/Deals";
-import Delivery from "./pages/Delivery";
-import Product from "./pages/Product";
+import Cart from "./Pages/Cart";
+import Homepage from "./Pages/Homepage";
+import Categories from "./Pages/Categories";
+import Search from "./Pages/Search";
+import Profile from "./Pages/Profile";
+import Deals from "./Pages/Deals";
+import Delivery from "./Pages/Delivery";
+import Product from "./Pages/Product";
 import FirebaseUpload from "./Components/firebaseUpload";
-import Auth0 from "./pages/Auth0"; // Import your Auth0 component
+import Payment from "./Pages/Payment";
+import Auth0 from "./Pages/Auth0"; // Import your Auth0 component
 import { useAuth0 } from "@auth0/auth0-react";
 
 function App() {
-   const { isAuthenticated } = useAuth0();
+  const { isAuthenticated } = useAuth0();
   return (
     <div>
       <Navbar />
@@ -31,6 +32,8 @@ function App() {
             <Route path="/deals" element={<Deals />} />
             <Route path="/delivery" element={<Delivery />} />
             <Route path="/products/:productId" element={<Product />} />
+            <Route path="/firebaseUpload" element={<FirebaseUpload />} />
+            <Route path="/payment" element={<Payment />} />
           </>
         ) : (
           <>
@@ -39,7 +42,6 @@ function App() {
           </>
         )}
       </Routes>
-     { /*<FirebaseUpload />*/}
     </div>
   );
 }
