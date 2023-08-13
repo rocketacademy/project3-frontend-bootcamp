@@ -9,16 +9,16 @@ import { Auth0Provider, useAuth0 } from "@auth0/auth0-react"; // Import useAuth0
 import { theme } from "./theme";
 
 const AppWithAuth = () => {
-  const { isLoading, getTokenSilently } = useAuth0();
+  const { isLoading, getAccessTokenSilently } = useAuth0();
 
   if (isLoading) {
     return <div>Loading...</div>;
   }
 
   // After authentication, get the token and store it in local storage
-  getTokenSilently().then((token) => {
-    localStorage.setItem("access_token", token);
-  });
+   getAccessTokenSilently().then((token) => {
+     localStorage.setItem("access_token", token);
+   });
 
   return (
     <BrowserRouter>
