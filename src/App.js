@@ -30,7 +30,6 @@ function App() {
             <Route path="/categories" element={<Categories />} />
             <Route path="/categories/:categoryId" element={<Category />} />
             <Route path="/search" element={<Search />} />
-
             <Route path="/cart" element={<Cart />} />
             <Route path="/profile" element={<Profile />} />
             <Route path="/deals" element={<Deals />} />
