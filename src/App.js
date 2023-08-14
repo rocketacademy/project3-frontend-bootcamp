@@ -10,7 +10,7 @@ import Profile from "./pages/Profile";
 import Deals from "./pages/Deals";
 import Delivery from "./pages/Delivery";
 import Product from "./pages/Product";
-import FirebaseUpload from "./Components/firebaseUpload";
+import FirebaseUpload from "./Components/FirebaseUpload";
 
 function App() {
   return (
@@ -25,8 +25,8 @@ function App() {
         <Route path="/deals" element={<Deals />} />
         <Route path="/delivery" element={<Delivery />} />
         <Route path="/products/:productId" element={<Product />} />
+        <Route path="/firebaseupload" element={<FirebaseUpload />} />
       </Routes>
-      <FirebaseUpload />
     </div>
   );
 }
