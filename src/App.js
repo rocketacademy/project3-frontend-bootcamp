@@ -14,8 +14,8 @@ import FirebaseUpload from "./Components/FirebaseUpload";
 import Payment from "./pages/Payment";
 import Auth0 from "./pages/Auth0"; // Import your Auth0 component
 import { useAuth0 } from "@auth0/auth0-react";
-import Category from "./Pages/Category";
-import Chat from "./Pages/Chat";
+import Category from "./pages/Category";
+import Chat from "./pages/Chat";
 
 function App() {
   const { isAuthenticated } = useAuth0();
@@ -37,7 +37,6 @@ function App() {
             <Route path="/products/:productId" element={<Product />} />
             <Route path="/firebaseUpload" element={<FirebaseUpload />} />
             <Route path="/payment" element={<Payment />} />
-            <Route path="/uploadproduct" element={<UploadProduct />} />
           </>
         ) : (
           <>
