@@ -1,48 +1,69 @@
-import { Box, Button, Typography } from "@mui/material";
+import { Box, Button, Grid, Typography } from "@mui/material";
+import HomepodMini from "../images/deals-homepodmini.png";
+import InstaxMini9 from "../images/deals-instaxmini9.png";
+import BaseCampDuffelM from "../images/deals-basecampduffelm.png";
 import React from "react";
+import ProductCard from "../Components/ProductCard";
 
 const Cart = () => {
-  const itemsCart = [
+  const products = [
     {
-      name: "iPhone 4S",
-      description: "apple product",
-      quantity: 2,
+      photos: [
+        {
+          url: HomepodMini,
+        },
+      ],
+      title: "HomePod mini",
+      description: "Table with air purifier, stained veneer/black",
+      price: 239.0,
+      stars: 121,
     },
     {
-      name: "iPhone X",
-      description: "apple product",
-      quantity: 3,
+      photos: [
+        {
+          url: InstaxMini9,
+        },
+      ],
+      title: "Instax Mini 9",
+      description: "Selfie mode and selfie mirror, Macro mode",
+      price: 239.0,
+      stars: 121,
+    },
+    {
+      photos: [
+        {
+          url: BaseCampDuffelM,
+        },
+      ],
+      title: "Base Camp Duffel M",
+      description: "Table with air purifier, stained veneer/black",
+      price: 239.0,
+      stars: 121,
     },
   ];
 
   return (
     <>
       <Typography variant="h3">My Cart</Typography>
-      <Box>
-        {itemsCart.map((item, i) => (
-          <Box sx={{ display: "flex", flexDirection: "row", py: "20px" }}>
-            <Box sx={{ width: "200px" }}>
-              <img
-                alt={i}
-                className="product-img"
-                src="https://hinacreates.com/wp-content/uploads/2021/06/dummy2-450x341.png"
-              ></img>
-            </Box>
-            <Box>
-              <Typography>{item.name}</Typography>
-              <Typography>Quantity: {item.quantity}</Typography>
-              <Typography>
-                Description:
-                {item.description?.split(" ").slice(0, 15).join(" ")}
-              </Typography>
-              <Box sx={{ paddingTop: "20px" }}>
-                <Button variant="outlined">Add one more</Button>
-                <Button variant="outlined">Delete item</Button>
-              </Box>
-            </Box>
+      <Box sx={{ width: "400px" }}>
+        <Box sx={{ p: "2% 5%", margin: "0" }}>
+          <Box
+            sx={{
+              display: "flex",
+              flexDirection: "column",
+            }}
+          >
+            {products.map((product, index) => (
+              <ProductCard
+                cart={true}
+                quantity={20}
+                product={product}
+                key={index}
+              />
+            ))}
           </Box>
-        ))}
-        <Button variant="contained">Check Out</Button>
+          <Button variant="contained">Check Out</Button>
+        </Box>
       </Box>
     </>
   );

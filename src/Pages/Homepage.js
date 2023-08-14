@@ -37,22 +37,34 @@ const Homepage = () => {
 
   const deals = [
     {
-      image: HomepodMini,
-      name: "HomePod mini",
+      photos: [
+        {
+          url: HomepodMini,
+        },
+      ],
+      title: "HomePod mini",
       description: "Table with air purifier, stained veneer/black",
       price: 239.0,
       stars: 121,
     },
     {
-      image: InstaxMini9,
-      name: "Instax Mini 9",
+      photos: [
+        {
+          url: InstaxMini9,
+        },
+      ],
+      title: "Instax Mini 9",
       description: "Selfie mode and selfie mirror, Macro mode",
       price: 239.0,
       stars: 121,
     },
     {
-      image: BaseCampDuffelM,
-      name: "Base Camp Duffel M",
+      photos: [
+        {
+          url: BaseCampDuffelM,
+        },
+      ],
+      title: "Base Camp Duffel M",
       description: "Table with air purifier, stained veneer/black",
       price: 239.0,
       stars: 121,

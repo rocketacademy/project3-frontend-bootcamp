@@ -1,5 +1,7 @@
 import { Box, Button, TextField, Typography } from "@mui/material";
+import axios from "axios";
 import React, { useState } from "react";
+import { useEffect } from "react";
 
 const Profile = () => {
   const [firstName, setFirstName] = useState("");
@@ -7,6 +9,16 @@ const Profile = () => {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [mobileNumber, setMobileNumber] = useState("");
+
+  useEffect(() => {
+     {
+      getUserInfo();
+    }
+  }, [])
+  
+  const getUserInfo = async () => {
+    const response = await axios.get()
+  } 
 
   return (
     <>

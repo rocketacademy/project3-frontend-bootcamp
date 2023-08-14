@@ -15,7 +15,6 @@ import SearchIcon from "@mui/icons-material/Search";
 import LocalMallIcon from "@mui/icons-material/LocalMall";
 import { Link } from "react-router-dom";
 import Saja from "../images/saja.png";
-import { Paper } from "@mui/material";
 import { useAuth0 } from "@auth0/auth0-react";
 
 const pages = ["Categories", "Deals", "Delivery"];
@@ -100,7 +99,9 @@ function Navbar() {
               sx={{ width: "70px", marginLeft: "23.5vw" }}
               className="saja-logo"
             >
-              <img src={Saja} alt="Saja logo" />
+              <Link to="/">
+                <img src={Saja} alt="Saja logo" />
+              </Link>
             </Box>
           </Box>
 
