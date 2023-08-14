@@ -165,6 +165,9 @@ const Product = () => {
                       </Typography>
                     )}
                   </Box>
+                  <Box>
+                    <Button variant="text">Like this? ❤️</Button>
+                  </Box>
                 </Stack>
                 <Stack
                   direction="row"

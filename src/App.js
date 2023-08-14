@@ -43,6 +43,7 @@ function App() {
             {/* Unauthenticated route */}
             <Route path="/" element={<Auth0 />} />
             <Route path="/chat" element={<Chat />} />
+            <Route path="/products/:productId" element={<Product />} />
           </>
         )}
       </Routes>
