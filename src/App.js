@@ -38,6 +38,7 @@ function App() {
             <Route path="/products/:productId" element={<Product />} />
             <Route path="/firebaseUpload" element={<FirebaseUpload />} />
             <Route path="/payment" element={<Payment />} />
+            <Route path="/uploadproduct" element={<UploadProduct />} />
           </>
         ) : (
           <>
@@ -45,6 +46,7 @@ function App() {
             <Route path="/" element={<Auth0 />} />
             <Route path="/chat" element={<Chat />} />
             <Route path="/products/:productId" element={<Product />} />
+            <Route path="/uploadproduct" element={<UploadProduct />} />
           </>
         )}
       </Routes>
