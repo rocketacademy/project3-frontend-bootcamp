@@ -10,12 +10,12 @@ import Profile from "./pages/Profile";
 import Deals from "./pages/Deals";
 import Delivery from "./pages/Delivery";
 import Product from "./pages/Product";
-import FirebaseUpload from "./Components/firebaseUpload";
+import FirebaseUpload from "./Components/FirebaseUpload";
 import Payment from "./pages/Payment";
 import Auth0 from "./pages/Auth0"; // Import your Auth0 component
 import { useAuth0 } from "@auth0/auth0-react";
 import Category from "./pages/Category";
-import Chat from "./pages/Chat";
+import Chat from "./pages/Chat
 import UploadProduct from "./pages/UploadProduct.js";
 
 function App() {
