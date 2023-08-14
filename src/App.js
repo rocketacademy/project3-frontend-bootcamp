@@ -2,20 +2,20 @@ import React from "react";
 import "./App.css";
 import Navbar from "./Components/Navbar";
 import { Route, Routes } from "react-router-dom";
-import Cart from "./Pages/Cart";
-import Homepage from "./Pages/Homepage";
-import Categories from "./Pages/Categories";
-import Search from "./Pages/Search";
-import Profile from "./Pages/Profile";
-import Deals from "./Pages/Deals";
-import Delivery from "./Pages/Delivery";
-import Product from "./Pages/Product";
-import FirebaseUpload from "./Components/firebaseUpload";
-import Payment from "./Pages/Payment";
-import Auth0 from "./Pages/Auth0"; // Import your Auth0 component
+import Cart from "./pages/Cart";
+import Homepage from "./pages/Homepage";
+import Categories from "./pages/Categories";
+import Search from "./pages/Search";
+import Profile from "./pages/Profile";
+import Deals from "./pages/Deals";
+import Delivery from "./pages/Delivery";
+import Product from "./pages/Product";
+import FirebaseUpload from "./Components/FirebaseUpload";
+import Payment from "./pages/Payment";
+import Auth0 from "./pages/Auth0"; // Import your Auth0 component
 import { useAuth0 } from "@auth0/auth0-react";
-import Category from "./Pages/Category";
-import Chat from "./Pages/Chat";
+import Category from "./pages/Category";
+import Chat from "./pages/Chat";
 
 function App() {
   const { isAuthenticated } = useAuth0();
