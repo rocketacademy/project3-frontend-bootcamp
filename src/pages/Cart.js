@@ -1,4 +1,4 @@
-import { Box, Button, Grid, Typography } from "@mui/material";
+import { Box, Button, Typography } from "@mui/material";
 import HomepodMini from "../images/deals-homepodmini.png";
 import InstaxMini9 from "../images/deals-instaxmini9.png";
 import BaseCampDuffelM from "../images/deals-basecampduffelm.png";
