@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useAuth0 } from "@auth0/auth0-react";
 import Grid from "@mui/material/Grid";
 import Button from "@mui/material/Button";
@@ -22,7 +22,7 @@ function Auth0() {
       <Grid item>
         <Button
           disableRipple
-          onClick={loginWithRedirect}
+          onClick={() => loginWithRedirect()}
           style={{
             cursor: "pointer",
             display: "inline-flex",

@@ -34,7 +34,7 @@ function App() {
             <Route path="/profile" element={<Profile />} />
             <Route path="/deals" element={<Deals />} />
             <Route path="/delivery" element={<Delivery />} />
-            <Route path="/products/:productId" element={<Product />} />
+
             <Route path="/firebaseUpload" element={<FirebaseUpload />} />
             <Route path="/payment" element={<Payment />} />
           </>
@@ -43,6 +43,7 @@ function App() {
             {/* Unauthenticated route */}
             <Route path="/" element={<Auth0 />} />
             <Route path="/chat" element={<Chat />} />
+            <Route path="/products/:productId" element={<Product />} />
           </>
         )}
       </Routes>

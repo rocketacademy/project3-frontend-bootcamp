@@ -1,5 +1,6 @@
 import { Box, Button, TextField, Typography } from "@mui/material";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useUserContext } from "../Components/UserContext";
 
 const Profile = () => {
   const [firstName, setFirstName] = useState("");
@@ -7,6 +8,16 @@ const Profile = () => {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [mobileNumber, setMobileNumber] = useState("");
+  const { currUser, setCurrUser } = useUserContext();
+
+  useEffect(() => {
+    console.log(currUser);
+    if (currUser === null) {
+      const localAccess = JSON.parse(localStorage.getItem("currUser"));
+      console.log(localAccess);
+      setCurrUser(localAccess);
+    }
+  }, [currUser]);
 
   return (
     <>

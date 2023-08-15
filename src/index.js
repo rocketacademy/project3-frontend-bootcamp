@@ -5,6 +5,7 @@ import App from "./App";
 import { BrowserRouter } from "react-router-dom";
 import { ThemeProvider } from "@mui/material/styles";
 import { Auth0Provider, useAuth0 } from "@auth0/auth0-react"; // Import useAuth0 hook
+import { UserProvider } from "./Components/UserContext";
 
 import { theme } from "./theme";
 
@@ -16,9 +17,9 @@ const AppWithAuth = () => {
   }
 
   // After authentication, get the token and store it in local storage
-   getAccessTokenSilently().then((token) => {
-     localStorage.setItem("access_token", token);
-   });
+  getAccessTokenSilently().then((token) => {
+    localStorage.setItem("access_token", token);
+  });
 
   return (
     <BrowserRouter>
@@ -40,6 +41,8 @@ root.render(
       scope: process.env.REACT_APP_SCOPE,
     }}
   >
-    <AppWithAuth />
+    <UserProvider>
+      <AppWithAuth />
+    </UserProvider>
   </Auth0Provider>
 );
