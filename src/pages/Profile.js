@@ -20,6 +20,8 @@ const Profile = () => {
     }
   }, [currUser]);
 
+  console.log(currUser);
+
   const handleUpdate = async () => {
     console.log(firstName, lastName, username, email, mobileNumber);
     try {
