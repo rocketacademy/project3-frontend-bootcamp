@@ -1,6 +1,7 @@
 import { Box, Button, TextField, Typography } from "@mui/material";
-import React, { useState } from "react";
-import axios from "axios"; 
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import { useUserContext } from "../Components/UserContext";
 
 const Profile = () => {
   const [firstName, setFirstName] = useState("");
@@ -8,6 +9,16 @@ const Profile = () => {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [mobileNumber, setMobileNumber] = useState("");
+  const { currUser, setCurrUser } = useUserContext();
+
+  useEffect(() => {
+    console.log(currUser);
+    if (currUser === null) {
+      const localAccess = JSON.parse(localStorage.getItem("currUser"));
+      console.log(localAccess);
+      setCurrUser(localAccess);
+    }
+  }, [currUser]);
 
   const handleUpdate = async () => {
     console.log(firstName, lastName, username, email, mobileNumber);
@@ -92,7 +103,9 @@ const Profile = () => {
               style: { backgroundColor: "white" },
             }}
           />
-          <Button onClick={handleUpdate} variant="contained">Update</Button>
+          <Button onClick={handleUpdate} variant="contained">
+            Update
+          </Button>
         </Box>
       </Box>
     </>
