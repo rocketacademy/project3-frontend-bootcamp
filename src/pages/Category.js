@@ -1,14 +1,4 @@
-import {
-  Box,
-  Button,
-  Card,
-  CardActionArea,
-  CardContent,
-  CardMedia,
-  Grid,
-  Paper,
-  Typography,
-} from "@mui/material";
+import { Box, Button, Grid, Typography } from "@mui/material";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
@@ -48,6 +38,7 @@ const Category = () => {
   };
 
   console.log(categoryInfo);
+  console.log(products);
 
   return (
     <>
