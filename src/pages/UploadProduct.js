@@ -14,6 +14,9 @@ import {
   Card,
   CardContent,
   Stack,
+  InputLabel,
+  Select,
+  MenuItem,
 } from "@mui/material";
 import BasePlaceholder from "../images/280x280.svg";
 
@@ -23,7 +26,8 @@ function UploadProduct() {
   const [productDescription, setProductDescription] = useState();
   const [productCategory, setProductCategory] = useState("");
   const [productQuantity, setProductQuantity] = useState();
-  const [productDiscount, setProductDiscount] = useState();
+  const [productDiscount, setProductDiscount] = useState(false);
+  const [productDiscountAmount, setProductDiscountAmount] = useState();
   const [uploadPicture1, setUploadPicture1] = useState(BasePlaceholder);
   const [uploadPicture2, setUploadPicture2] = useState(BasePlaceholder);
   const [uploadPicture3, setUploadPicture3] = useState(BasePlaceholder);
@@ -260,15 +264,39 @@ function UploadProduct() {
                   justifyContent="space-between"
                 >
                   <FormControlLabel
-                    value={true}
+                    value={"true"}
                     control={<Radio />}
                     label="Yes"
                   />
                   <FormControlLabel
-                    value={false}
+                    value={"false"}
                     control={<Radio />}
                     label="No"
                   />
+                  <FormControl sx={{ width: "20vw" }}>
+                    <InputLabel>Discount %</InputLabel>
+                    <Select
+                      labelId="demo-simple-select-label"
+                      id="demo-simple-select"
+                      value={productDiscountAmount}
+                      label="Age"
+                      onChange={(e) => setProductDiscountAmount(e.target.value)}
+                      disabled={productDiscount === "false"}
+                    >
+                      <MenuItem value={1}>1</MenuItem>
+                      <MenuItem value={2}>2</MenuItem>
+                      <MenuItem value={3}>3</MenuItem>
+                      <MenuItem value={4}>4</MenuItem>
+                      <MenuItem value={5}>5</MenuItem>
+                      <MenuItem value={6}>6</MenuItem>
+                      <MenuItem value={7}>7</MenuItem>
+                      <MenuItem value={8}>8</MenuItem>
+                      <MenuItem value={9}>9</MenuItem>
+                      <MenuItem value={10}>10</MenuItem>
+                      <MenuItem value={11}>11</MenuItem>
+                      <MenuItem value={12}>12</MenuItem>
+                    </Select>
+                  </FormControl>
                 </Stack>
               </RadioGroup>
             </FormControl>
@@ -365,7 +393,6 @@ function UploadProduct() {
             </Stack>
           </Box>
         </Stack>
-
         <Grid container justifyContent="center" sx={{ mt: 3, mb: 3 }}>
           <Button variant="contained" color="secondary" onClick={handleSubmit}>
             Submit Product
