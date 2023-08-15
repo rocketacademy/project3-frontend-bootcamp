@@ -26,8 +26,8 @@ function UploadProduct() {
   const [productDescription, setProductDescription] = useState();
   const [productCategory, setProductCategory] = useState("");
   const [productQuantity, setProductQuantity] = useState();
-  const [productDiscount, setProductDiscount] = useState(false);
-  const [productDiscountAmount, setProductDiscountAmount] = useState();
+  const [productDiscount, setProductDiscount] = useState("false");
+  const [productDiscountAmount, setProductDiscountAmount] = useState(1);
   const [uploadPicture1, setUploadPicture1] = useState(BasePlaceholder);
   const [uploadPicture2, setUploadPicture2] = useState(BasePlaceholder);
   const [uploadPicture3, setUploadPicture3] = useState(BasePlaceholder);
@@ -276,10 +276,8 @@ function UploadProduct() {
                   <FormControl sx={{ width: "20vw" }}>
                     <InputLabel>Discount %</InputLabel>
                     <Select
-                      labelId="demo-simple-select-label"
-                      id="demo-simple-select"
                       value={productDiscountAmount}
-                      label="Age"
+                      label="DiscountPercent"
                       onChange={(e) => setProductDiscountAmount(e.target.value)}
                       disabled={productDiscount === "false"}
                     >
