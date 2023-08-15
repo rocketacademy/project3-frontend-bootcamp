@@ -4,13 +4,16 @@ import ScrollToBottom from "react-scroll-to-bottom";
 function ChatRoom({ socket, username, room }) {
   const [currentMessage, setCurrentMessage] = useState("");
   const [messageList, setMessageList] = useState([]);
+  const [chatDate, setChatDate] = useState("");
 
   const sendMessage = async () => {
     if (currentMessage !== "") {
       const messageData = {
-        room: room,
+        room: room, //prodId+userId
         author: username,
-        message: currentMessage,
+        content: currentMessage,
+        prodId: 3,
+        userId: 4,
         time:
           new Date(Date.now()).getHours() +
           ":" +
@@ -24,10 +27,20 @@ function ChatRoom({ socket, username, room }) {
   };
 
   useEffect(() => {
+    const currentDate = new Date();
+    const day = String(currentDate.getDate()).padStart(2, "0");
+    const month = String(currentDate.getMonth() + 1).padStart(2, "0");
+    const year = currentDate.getFullYear();
+    const formattedDate = `${day}/${month}/${year}`;
+    setChatDate(formattedDate);
+  }, []);
+
+  useEffect(() => {
     socket.on("receive_message", (data) => {
       setMessageList((list) => [...list, data]);
     });
-  }, [socket]);
+    console.log(messageList);
+  }, [socket, messageList]);
 
   return (
     <div className="chat-window">
@@ -36,7 +49,9 @@ function ChatRoom({ socket, username, room }) {
       </div>
       <div className="chat-body">
         <ScrollToBottom className="message-container">
+          {chatDate}
           {messageList.map((messageContent, index) => {
+            console.log(messageContent, index);
             return (
               <div
                 className="message"
@@ -45,7 +60,7 @@ function ChatRoom({ socket, username, room }) {
               >
                 <div>
                   <div className="message-content">
-                    <p>{messageContent.message}</p>
+                    <p>{messageContent.content}</p>
                   </div>
                   <div className="message-meta">
                     <p id="time">{messageContent.time}</p>
