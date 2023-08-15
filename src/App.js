@@ -17,7 +17,7 @@ import Auth from "./pages/Auth"; // Import your Auth0 component
 import { useAuth0 } from "@auth0/auth0-react";
 import Category from "./pages/Category";
 import Chat from "./pages/Chat";
-import UploadProduct from "./pages/UploadProduct.js";
+import UploadProduct from "./pages/UploadProduct";
 
 function App() {
   const { isAuthenticated } = useAuth0();
