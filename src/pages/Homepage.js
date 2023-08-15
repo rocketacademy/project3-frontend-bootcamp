@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Hero from "../images/hero-image.png";
 import {
   Box,
@@ -24,8 +24,16 @@ import BooksSaves from "../images/book-saves.png";
 import ClothesSaves from "../images/clothes-saves.png";
 import BackpacksSaves from "../images/backpacks-saves.png";
 import ProductCard from "../Components/ProductCard";
+import { useAuth0 } from "@auth0/auth0-react";
+import axios from "axios";
+import { useUserContext } from "../Components/UserContext";
 
 const Homepage = () => {
+  const { loginWithRedirect, getAccessTokenSilently, user, isAuthenticated } =
+    useAuth0();
+  const [accessToken, setAccessToken] = useState("");
+  const { setCurrUser, currUser } = useUserContext();
+
   const categories = [
     { image: Books, name: "Books" },
     { image: Furniture, name: "Furniture" },
@@ -96,6 +104,53 @@ const Homepage = () => {
       color: "#d2f7ec",
     },
   ];
+
+  useEffect(() => {
+    const checkLogin = async () => {
+      const accessToken = await getAccessTokenSilently({
+        authorizationParams: {
+          audience: process.env.REACT_APP_AUDIENCE,
+          scope: process.env.REACT_APP_SCOPE,
+        },
+      });
+      setAccessToken(accessToken);
+      // }
+      console.log("Access Token : ", accessToken);
+      console.log("User: ", user);
+      if (
+        isAuthenticated &&
+        accessToken !== null &&
+        typeof user.email !== "undefined"
+      ) {
+        // post to db
+        const userInfo = await axios.post(
+          `${process.env.REACT_APP_BACKEND_URL}/users/login`,
+          user
+        );
+        console.log(userInfo.data.checkedUser);
+        if (userInfo != null) {
+          setCurrUser(userInfo.data.checkedUser);
+        }
+      }
+    };
+    checkLogin();
+  }, [user, isAuthenticated]);
+
+  useEffect(() => {
+    if (accessToken !== null) {
+      localStorage.setItem("Token", JSON.stringify(accessToken));
+    }
+  }, [accessToken]);
+
+  useEffect(() => {
+    if (currUser !== null || currUser !== "") {
+      localStorage.setItem("currUser", JSON.stringify(currUser));
+    }
+  }, [currUser]);
+
+  useEffect(() => {
+    console.log(setCurrUser);
+  }, [setCurrUser]);
 
   return (
     <>
@@ -194,7 +249,7 @@ const Homepage = () => {
         <Box sx={{ p: "20px 5% 0 5%", margin: "0" }}>
           <Grid container spacing={2}>
             {deals.map((product, index) => (
-              <Grid item xs={6} md={4}>
+              <Grid item xs={6} md={4} key={index}>
                 <ProductCard product={product} />
               </Grid>
             ))}
