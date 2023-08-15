@@ -44,24 +44,32 @@ const Cart = () => {
 
   return (
     <>
-      <Typography variant="h3">My Cart</Typography>
-      <Box sx={{ width: "400px" }}>
-        <Box sx={{ p: "2% 5%", margin: "0" }}>
-          <Box
-            sx={{
-              display: "flex",
-              flexDirection: "column",
-            }}
-          >
-            {products.map((product, index) => (
-              <ProductCard
-                cart={true}
-                quantity={20}
-                product={product}
-                key={index}
-              />
-            ))}
+      <Typography variant="h3" sx={{ py: "20px", textAlign: "center" }}>
+        My Cart
+      </Typography>
+      <Box sx={{ display: "flex", justifyContent: "space-around" }}>
+        <Box sx={{ width: "400px" }}>
+          <Box sx={{ p: "2% 5%", margin: "0" }}>
+            <Box
+              sx={{
+                display: "flex",
+                flexDirection: "column",
+              }}
+            >
+              {products.map((product, index) => (
+                <ProductCard
+                  cart={true}
+                  quantity={20}
+                  product={product}
+                  key={index}
+                />
+              ))}
+            </Box>
           </Box>
+        </Box>
+        <Box>
+          <Typography>Subtotal: 30$</Typography>
+          <Typography>GST 8%: 2.4$</Typography>
           <Button variant="contained">Check Out</Button>
         </Box>
       </Box>

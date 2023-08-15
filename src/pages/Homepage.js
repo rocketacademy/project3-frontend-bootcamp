@@ -29,9 +29,9 @@ const Homepage = () => {
   const categories = [
     { image: Books, name: "Books" },
     { image: Furniture, name: "Furniture" },
-    { image: HandBag, name: "Hand Bag" },
-    { image: Sneakers, name: "Sneakers" },
-    { image: Tech, name: "Tech" },
+    { image: HandBag, name: "Fashion accesories" },
+    { image: Sneakers, name: "Women's fashion" },
+    { image: Tech, name: "Electronic Devices" },
     { image: Travel, name: "Travel" },
   ];
 
@@ -109,7 +109,7 @@ const Homepage = () => {
           alignItems: "center",
           width: "100%",
           height: {
-            xl: "60%",
+            xl: "70vh",
           },
           overflow: "hidden",
         }}
@@ -133,11 +133,14 @@ const Homepage = () => {
       </Box>
 
       {/* Top Categories */}
-      <Box className="top-categories" sx={{ p: "20px" }}>
-        <Typography variant="h2" sx={{}}>
+      <Box className="top-categories" sx={{}}>
+        <Typography
+          variant="h2"
+          sx={{ p: "20px 0 20px 0", overflow: "hidden" }}
+        >
           SHOP OUR TOP CATEGORIES
         </Typography>
-        <Box sx={{ pt: "20px" }}>
+        <Box sx={{ p: "20px" }}>
           <Grid container spacing={2}>
             {categories.map((category, index) => (
               <Grid item xs={4} sm={6} md={4} lg={2} xl={2} key={index}>
@@ -166,7 +169,10 @@ const Homepage = () => {
                     sx={{
                       position: "absolute",
                       top: "10px",
-                      left: "10px",
+                      left: {
+                        xs: "-1",
+                        md: "10px",
+                      },
                       color: "white",
                       padding: "5px",
                     }}
@@ -182,7 +188,7 @@ const Homepage = () => {
 
       {/* Best deals */}
       <Box className="best-deals">
-        <Typography variant="h2" sx={{}}>
+        <Typography variant="h2" sx={{ py: "30px" }}>
           TODAY'S BEST DEALS FOR YOU
         </Typography>
         <Box sx={{ p: "20px 5% 0 5%", margin: "0" }}>
@@ -198,7 +204,9 @@ const Homepage = () => {
 
       {/*  Get Up to 50% Off */}
       <Box sx={{ p: "20px" }}>
-        <Typography variant="h2">GET UP TO 50% OFF</Typography>
+        <Typography variant="h2" sx={{ py: "20px" }}>
+          GET UP TO 50% OFF
+        </Typography>
         <Grid container spacing={4}>
           {saves.map((save, i) => (
             <Grid
@@ -244,8 +252,9 @@ const Homepage = () => {
       <Box
         sx={{
           height: "500px",
-          width: "99vw",
+          width: "100%",
           backgroundColor: "primary.main",
+          overflow: "hidden",
         }}
       ></Box>
     </>

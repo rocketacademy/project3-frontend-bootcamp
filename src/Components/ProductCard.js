@@ -59,7 +59,9 @@ const ProductCard = ({ product, cart, quantity }) => {
             <>
               <Button variant="outlined">-</Button>
               <Button variant="outlined">+</Button>
-              <Button variant="outlined">Delete</Button>
+              <Button variant="outlined" color="error">
+                Delete
+              </Button>
             </>
           ) : (
             <Button variant="outlined">Add to cart</Button>
