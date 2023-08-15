@@ -10,15 +10,21 @@ import Profile from "./pages/Profile";
 import Deals from "./pages/Deals";
 import Delivery from "./pages/Delivery";
 import Product from "./pages/Product";
+import Cart from "./pages/Cart";
+import Homepage from "./pages/Homepage";
+import Categories from "./pages/Categories";
+import Search from "./pages/Search";
+import Profile from "./pages/Profile";
+import Deals from "./pages/Deals";
+import Delivery from "./pages/Delivery";
+import Product from "./pages/Product";
 import FirebaseUpload from "./Components/firebaseUpload";
 import Payment from "./pages/Payment";
-import Auth0 from "./pages/Auth0";
+import Auth from "./pages/Auth"; // Import your Auth0 component
 import { useAuth0 } from "@auth0/auth0-react";
 import Category from "./pages/Category";
 import Chat from "./pages/Chat";
-import axios from "axios";
-
-export const UserContext = createContext({});
+import UploadProduct from "./pages/UploadProduct.js";
 
 function App() {
   const { user, isAuthenticated, getAccessTokenSilently } = useAuth0();
@@ -86,11 +92,12 @@ function App() {
             <Route path="/products/:productId" element={<Product />} />
             <Route path="/firebaseUpload" element={<FirebaseUpload />} />
             <Route path="/payment" element={<Payment />} />
+            <Route path="/uploadproduct" element={<UploadProduct />} />
           </>
         ) : (
           <>
-            {/* Unauthenticated routes */}
-            <Route path="/" element={<Auth0 />} />
+            {/* Unauthenticated route */}
+            <Route path="/" element={<Auth />} />
             <Route path="/chat" element={<Chat />} />
           </>
         )}

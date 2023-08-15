@@ -1,7 +1,7 @@
 import { Box, Button, TextField, Typography } from "@mui/material";
 import axios from "axios";
 import React, { useState } from "react";
-import { useEffect } from "react";
+import axios from "axios"; 
 
 const Profile = () => {
   const [firstName, setFirstName] = useState("");
@@ -20,6 +20,24 @@ const Profile = () => {
     const response = await axios.get()
   } 
 
+  const handleUpdate = async () => {
+    console.log(firstName, lastName, username, email, mobileNumber);
+    try {
+      // Send the updated user data to your backend API
+      const response = await axios.post(`http://localhost:8080/users`, {
+        username: username,
+        firstName: firstName,
+        lastName: lastName,
+        email: email,
+        mobileNumber: mobileNumber,
+      });
+      console.log(response);
+      // You can also show a success message to the user if needed
+    } catch (error) {
+      console.log(error);
+      // Handle error, show an error message, etc.
+    }
+  };
   return (
     <>
       <Box>
@@ -85,7 +103,7 @@ const Profile = () => {
               style: { backgroundColor: "white" },
             }}
           />
-          <Button variant="contained">Update</Button>
+          <Button onClick={handleUpdate} variant="contained">Update</Button>
         </Box>
       </Box>
     </>
