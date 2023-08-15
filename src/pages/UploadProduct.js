@@ -15,15 +15,59 @@ import {
   CardContent,
   Stack,
 } from "@mui/material";
+import BasePlaceholder from "../images/280x280.svg";
 
 function UploadProduct() {
   const [productName, setProductName] = useState("");
   const [productPricePerUnit, setProductPricePerUnit] = useState();
   const [productDescription, setProductDescription] = useState();
   const [productCategory, setProductCategory] = useState("");
-  const [productQuantity, setProductQuantity] = useState(1);
+  const [productQuantity, setProductQuantity] = useState();
   const [productDiscount, setProductDiscount] = useState();
+  const [uploadPicture1, setUploadPicture1] = useState(BasePlaceholder);
+  const [uploadPicture2, setUploadPicture2] = useState(BasePlaceholder);
+  const [uploadPicture3, setUploadPicture3] = useState(BasePlaceholder);
+  const [uploadPicture4, setUploadPicture4] = useState(BasePlaceholder);
 
+  const handleUploadPicture1 = (event) => {
+    const file = event.target.files[0];
+    const reader = new FileReader();
+    reader.onloadend = () => {
+      setUploadPicture1(reader.result);
+    };
+    reader.readAsDataURL(file);
+  };
+
+  const handleUploadPicture2 = (event) => {
+    const file = event.target.files[0];
+    const reader = new FileReader();
+    reader.onloadend = () => {
+      setUploadPicture2(reader.result);
+    };
+    reader.readAsDataURL(file);
+  };
+
+  const handleUploadPicture3 = (event) => {
+    const file = event.target.files[0];
+    const reader = new FileReader();
+    reader.onloadend = () => {
+      setUploadPicture3(reader.result);
+    };
+    reader.readAsDataURL(file);
+  };
+  const handleUploadPicture4 = (event) => {
+    const file = event.target.files[0];
+    const reader = new FileReader();
+    reader.onloadend = () => {
+      setUploadPicture4(reader.result);
+    };
+    reader.readAsDataURL(file);
+  };
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    console.log(uploadPicture1, uploadPicture2, uploadPicture3, uploadPicture4);
+  };
   return (
     <>
       <Box>
@@ -231,8 +275,99 @@ function UploadProduct() {
             <Divider sx={{ mt: 1, mb: 1 }} />
           </CardContent>
         </Card>
+        <Stack direction="row" sx={{ mt: 9 }} justifyContent="space-around">
+          <Box>
+            <Stack direction="column" spacing={2}>
+              {uploadPicture1 && (
+                <img src={uploadPicture1} alt="Pic" height="280" width="280" />
+              )}
+              <label>
+                <Button
+                  variant="contained"
+                  component="span"
+                  sx={{ width: 280 }}
+                >
+                  Upload Main Picture
+                </Button>
+                <input
+                  hidden
+                  accept="image/*"
+                  type="file"
+                  onChange={handleUploadPicture1}
+                />
+              </label>
+            </Stack>
+          </Box>
+          <Box>
+            <Stack direction="column" spacing={2}>
+              {uploadPicture2 && (
+                <img src={uploadPicture2} alt="Pic" height="280" width="280" />
+              )}
+              <label>
+                <Button
+                  variant="contained"
+                  component="span"
+                  sx={{ width: 280 }}
+                >
+                  Upload Side Picture 1
+                </Button>
+                <input
+                  hidden
+                  accept="image/*"
+                  type="file"
+                  onChange={handleUploadPicture2}
+                />
+              </label>
+            </Stack>
+          </Box>
+          <Box>
+            <Stack direction="column" spacing={2}>
+              {uploadPicture3 && (
+                <img src={uploadPicture3} alt="Pic" height="280" width="280" />
+              )}
+              <label>
+                <Button
+                  variant="contained"
+                  component="span"
+                  sx={{ width: 280 }}
+                >
+                  Upload Side Picture 2
+                </Button>
+                <input
+                  hidden
+                  accept="image/*"
+                  type="file"
+                  onChange={handleUploadPicture3}
+                />
+              </label>
+            </Stack>
+          </Box>
+          <Box>
+            <Stack direction="column" spacing={2}>
+              {uploadPicture4 && (
+                <img src={uploadPicture4} alt="Pic" height="280" width="280" />
+              )}
+              <label>
+                <Button
+                  variant="contained"
+                  component="span"
+                  sx={{ width: 280 }}
+                >
+                  Upload Side Picture 3
+                </Button>
+                <input
+                  hidden
+                  accept="image/*"
+                  type="file"
+                  onChange={handleUploadPicture4}
+                />
+              </label>
+            </Stack>
+          </Box>
+        </Stack>
+
         <Grid container justifyContent="center" sx={{ mt: 3, mb: 3 }}>
-          <Button variant="contained" color="secondary">
+          <Button variant="contained" color="secondary" onClick={handleSubmit}>
             Submit Product
           </Button>
         </Grid>
