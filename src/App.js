@@ -1,15 +1,7 @@
-import React, { createContext, useEffect, useState } from "react";
+import React from "react";
 import "./App.css";
 import Navbar from "./Components/Navbar";
 import { Route, Routes } from "react-router-dom";
-import Cart from "./pages/Cart";
-import Homepage from "./pages/Homepage";
-import Categories from "./pages/Categories";
-import Search from "./pages/Search";
-import Profile from "./pages/Profile";
-import Deals from "./pages/Deals";
-import Delivery from "./pages/Delivery";
-import Product from "./pages/Product";
 import Cart from "./pages/Cart";
 import Homepage from "./pages/Homepage";
 import Categories from "./pages/Categories";
@@ -27,53 +19,7 @@ import Chat from "./pages/Chat";
 import UploadProduct from "./pages/UploadProduct.js";
 
 function App() {
-  const { user, isAuthenticated, getAccessTokenSilently } = useAuth0();
-
-  const [currUser, setCurrUser] = useState({});
-  const [accessToken, setAccessToken] = useState("");
-
-  useEffect(() => {
-    const checkLogin = async () => {
-      const localAccess = JSON.parse(localStorage.getItem("Token"));
-
-      if (localAccess) {
-        setAccessToken(accessToken);
-      } else if (isAuthenticated) {
-        const accessToken = await getAccessTokenSilently({
-          authorizationParams: {
-            audience: process.env.REACT_APP_AUDIENCE,
-            scope: process.env.REACT_APP_SCOPE,
-          },
-        });
-        console.log("This is access token ", accessToken);
-        setAccessToken(accessToken);
-      }
-
-      if (isAuthenticated && accessToken !== null) {
-        //login
-        const userInfo = await axios.post(
-          `${process.env.REACT_APP_BACKEND_URL}/users/login`,
-          user
-        );
-        console.log(userInfo.data.checkedUser);
-        if (userInfo != null) {
-          setCurrUser(userInfo.data.checkedUser);
-        }
-      }
-    };
-    checkLogin();
-    console.log(user);
-  }, [user, isAuthenticated]);
-
-  useEffect(() => {
-    if (accessToken !== null) {
-      localStorage.setItem("Token", JSON.stringify(accessToken));
-    }
-  }, [accessToken]);
-
-  console.log("curruser", currUser);
-  console.log("auth user", user);
-
+  const { isAuthenticated } = useAuth0();
   return (
     <div>
       <Navbar />

@@ -1,7 +1,6 @@
 import { Box, Button, TextField, Typography } from "@mui/material";
 import axios from "axios";
 import React, { useState } from "react";
-import axios from "axios"; 
 
 const Profile = () => {
   const [firstName, setFirstName] = useState("");
@@ -9,16 +8,6 @@ const Profile = () => {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [mobileNumber, setMobileNumber] = useState("");
-
-  useEffect(() => {
-     {
-      getUserInfo();
-    }
-  }, [])
-  
-  const getUserInfo = async () => {
-    const response = await axios.get()
-  } 
 
   const handleUpdate = async () => {
     console.log(firstName, lastName, username, email, mobileNumber);
@@ -103,7 +92,9 @@ const Profile = () => {
               style: { backgroundColor: "white" },
             }}
           />
-          <Button onClick={handleUpdate} variant="contained">Update</Button>
+          <Button onClick={handleUpdate} variant="contained">
+            Update
+          </Button>
         </Box>
       </Box>
     </>
