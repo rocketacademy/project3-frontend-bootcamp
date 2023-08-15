@@ -5,7 +5,7 @@ import CardContent from "@mui/material/CardContent";
 import CardActions from "@mui/material/CardActions";
 import { Box, Button, Typography } from "@mui/material";
 
-const ProductCard = ({ product, cart, quantity }) => {
+const ProductCard = ({ product, cart, quantity, pastorder }) => {
   console.log("cart", cart);
   return (
     <Box>
@@ -63,6 +63,10 @@ const ProductCard = ({ product, cart, quantity }) => {
                 Delete
               </Button>
             </>
+          ) : pastorder && !cart ? (
+            <Button variant="outlined" color="success">
+              Rate Product!
+            </Button>
           ) : (
             <Button variant="outlined">Add to cart</Button>
           )}

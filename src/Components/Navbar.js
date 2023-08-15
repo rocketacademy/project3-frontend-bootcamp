@@ -18,7 +18,14 @@ import Saja from "../images/saja.png";
 import { useAuth0 } from "@auth0/auth0-react";
 
 const pages = ["Categories", "Deals", "Delivery"];
-const settings = ["Profile", "Account", "Dashboard", "Chat", "Logout"];
+const settings = [
+  "Profile",
+  "Account",
+  "Dashboard",
+  "Past Orders",
+  "Chat",
+  "Logout",
+];
 
 function Navbar() {
   const { logout } = useAuth0();
