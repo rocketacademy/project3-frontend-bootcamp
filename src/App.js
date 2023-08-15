@@ -10,7 +10,7 @@ import Profile from "./pages/Profile";
 import Deals from "./pages/Deals";
 import Delivery from "./pages/Delivery";
 import Product from "./pages/Product";
-import FirebaseUpload from "./Components/firebaseUpload";
+import FirebaseUpload from "./Components/FirebaseUpload";
 import Payment from "./pages/Payment";
 import Auth from "./pages/Auth"; // Import your Auth0 component
 import { useAuth0 } from "@auth0/auth0-react";
