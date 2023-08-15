@@ -15,13 +15,20 @@ import MenuIcon from "@mui/icons-material/Menu";
 import PersonOutlineIcon from "@mui/icons-material/PersonOutline";
 import SearchIcon from "@mui/icons-material/Search";
 import LocalMallIcon from "@mui/icons-material/LocalMall";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Saja from "../images/saja.png";
 import { useAuth0 } from "@auth0/auth0-react";
 import { useUserContext } from "../Components/UserContext";
 
 const pages = ["Categories", "Deals", "Delivery"];
-const settings = ["Profile", "Account", "Dashboard", "Chat", "Logout"];
+const settings = [
+  "Profile",
+  "Account",
+  "Dashboard",
+  "Past Orders",
+  "Chat",
+  "Logout",
+];
 const settingsNotUser = ["Login/Signup"];
 
 function Navbar() {
@@ -29,7 +36,9 @@ function Navbar() {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
   const { currUser, setCurrUser } = useUserContext();
+  const navigate = useNavigate();
 
+  // to retrieve currUser from local storage and to set it for context
   useEffect(() => {
     console.log(currUser);
     if (currUser === null) {
@@ -39,8 +48,10 @@ function Navbar() {
     }
   }, [currUser]);
 
+  // checks if user is logged in or not to display user menu
   const login = currUser !== null ? true : false;
 
+  // handle user menu click
   const handleUserMenu = (page) => {
     if (page === "Logout") {
       logout({ returnTo: process.env.REACT_APP_REDIRECT_URI });
@@ -49,12 +60,16 @@ function Navbar() {
       localStorage.removeItem("Token");
       localStorage.removeItem("currUser");
     } else if (page === "Login/Signup") {
+      setAnchorElUser(null);
       loginWithRedirect({
         authorizationParams: {
           redirect_uri: `${process.env.REACT_APP_REDIRECT_URI}`,
         },
       });
-      setAnchorElUser(null);
+    } else if (page === "Past Orders") {
+      navigate("pastorders");
+    } else {
+      navigate(`${page.toLowerCase()}`);
     }
   };
 
@@ -117,7 +132,9 @@ function Navbar() {
               sx={{ width: "70px", marginLeft: "23.5vw" }}
               className="saja-logo"
             >
-              <img src={Saja} alt="Saja logo" />
+              <Link to="/">
+                <img src={Saja} alt="Saja logo" />
+              </Link>
             </Box>
           </Box>
 

@@ -1,11 +1,11 @@
-import { Box, Button, Typography } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import HomepodMini from "../images/deals-homepodmini.png";
 import InstaxMini9 from "../images/deals-instaxmini9.png";
 import BaseCampDuffelM from "../images/deals-basecampduffelm.png";
 import React from "react";
 import ProductCard from "../Components/ProductCard";
 
-const Cart = () => {
+const PastOrders = () => {
   const products = [
     {
       photos: [
@@ -45,7 +45,7 @@ const Cart = () => {
   return (
     <>
       <Typography variant="h3" sx={{ py: "20px", textAlign: "center" }}>
-        My Cart
+        Past Orders
       </Typography>
       <Box sx={{ display: "flex", justifyContent: "space-around" }}>
         <Box sx={{ width: "400px" }}>
@@ -57,24 +57,17 @@ const Cart = () => {
               }}
             >
               {products.map((product, index) => (
-                <ProductCard
-                  cart={true}
-                  quantity={20}
-                  product={product}
-                  key={index}
-                />
+                <ProductCard product={product} pastorder={true} key={index} />
               ))}
             </Box>
           </Box>
         </Box>
         <Box>
-          <Typography>Subtotal: 30$</Typography>
-          <Typography>GST 8%: 2.4$</Typography>
-          <Button variant="contained">Check Out</Button>
+          <Typography>Total: 32.4$</Typography>
         </Box>
       </Box>
     </>
   );
 };
 
-export default Cart;
+export default PastOrders;
