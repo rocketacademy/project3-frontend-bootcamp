@@ -92,7 +92,7 @@ const Profile = () => {
               style: { backgroundColor: "white" },
             }}
           />
-          <Button variant="contained" onClick={handleUpdate}>
+          <Button onClick={handleUpdate} variant="contained">
             Update
           </Button>
         </Box>
