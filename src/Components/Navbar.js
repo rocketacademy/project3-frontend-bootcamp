@@ -21,14 +21,7 @@ import { useAuth0 } from "@auth0/auth0-react";
 import { useUserContext } from "../Components/UserContext";
 
 const pages = ["Categories", "Deals", "Delivery"];
-const settings = [
-  "Profile",
-  "Account",
-  "Dashboard",
-  "Past Orders",
-  "Chat",
-  "Logout",
-];
+const settings = ["Profile", "Chat", "Past Orders", "Logout"];
 const settingsNotUser = ["Login/Signup"];
 
 function Navbar() {
