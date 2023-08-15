@@ -20,6 +20,8 @@ const Profile = () => {
     }
   }, [currUser]);
 
+  console.log(currUser);
+
   const handleUpdate = async () => {
     console.log(firstName, lastName, username, email, mobileNumber);
     try {
@@ -104,9 +106,7 @@ const Profile = () => {
             }}
           />
           <Button onClick={handleUpdate} variant="contained">
-            
             Update
-          
           </Button>
         </Box>
       </Box>

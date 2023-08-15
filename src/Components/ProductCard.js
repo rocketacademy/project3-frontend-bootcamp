@@ -1,12 +1,17 @@
-import React from "react";
+import React, { useState } from "react";
 import Card from "@mui/material/Card";
 import CardMedia from "@mui/material/CardMedia";
 import CardContent from "@mui/material/CardContent";
 import CardActions from "@mui/material/CardActions";
 import { Box, Button, Typography } from "@mui/material";
+import ReviewProduct from "./ReviewProduct";
 
 const ProductCard = ({ product, cart, quantity, pastorder }) => {
-  console.log("cart", cart);
+  const [open, setOpen] = useState(false);
+
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
+
   return (
     <Box>
       <Card sx={{ width: "100%", height: "100%" }}>
@@ -64,9 +69,20 @@ const ProductCard = ({ product, cart, quantity, pastorder }) => {
               </Button>
             </>
           ) : pastorder && !cart ? (
-            <Button variant="outlined" color="success">
-              Rate Product!
-            </Button>
+            <>
+              <Button
+                onClick={() => handleOpen()}
+                variant="outlined"
+                color="success"
+              >
+                Rate Product!
+              </Button>
+              <ReviewProduct
+                product={product}
+                open={open}
+                handleClose={handleClose}
+              />
+            </>
           ) : (
             <Button variant="outlined">Add to cart</Button>
           )}
