@@ -10,12 +10,13 @@ import Profile from "./pages/Profile";
 import Deals from "./pages/Deals";
 import Delivery from "./pages/Delivery";
 import Product from "./pages/Product";
-import FirebaseUpload from "./Components/FirebaseUpload";
+import FirebaseUpload from "./Components/firebaseUpload";
 import Payment from "./pages/Payment";
-import Auth0 from "./pages/Auth0"; // Import your Auth0 component
+import Auth from "./pages/Auth"; // Import your Auth0 component
 import { useAuth0 } from "@auth0/auth0-react";
 import Category from "./pages/Category";
 import Chat from "./pages/Chat";
+import UploadProduct from "./pages/UploadProduct.js";
 
 function App() {
   const { isAuthenticated } = useAuth0();
@@ -37,11 +38,12 @@ function App() {
 
             <Route path="/firebaseUpload" element={<FirebaseUpload />} />
             <Route path="/payment" element={<Payment />} />
+            <Route path="/uploadproduct" element={<UploadProduct />} />
           </>
         ) : (
           <>
             {/* Unauthenticated route */}
-            <Route path="/" element={<Auth0 />} />
+            <Route path="/" element={<Auth />} />
             <Route path="/chat" element={<Chat />} />
             <Route path="/products/:productId" element={<Product />} />
           </>
