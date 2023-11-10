@@ -1,0 +1,14 @@
+//-----------Libaries-----------//
+//-----------Components-----------//
+import NavBar from "../Components/Details/NavBar";
+
+//-----------Media-----------//
+
+export default function MetricsPage() {
+  return (
+    <div className="flex h-screen flex-col items-center justify-center bg-background">
+      <NavBar />
+      <p>Metrics</p>
+    </div>
+  );
+}
