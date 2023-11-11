@@ -5,7 +5,7 @@
 export default function NewApplicationPage() {
   return (
     <div className="flex items-center justify-center bg-background">
-      <p>New Application</p>
+      <p>New Applicatione</p>
     </div>
   );
 }
