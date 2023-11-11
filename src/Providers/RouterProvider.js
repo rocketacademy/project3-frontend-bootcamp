@@ -5,12 +5,12 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import HomePage from "../Pages/HomePage";
 import OnboardingPage from "../Pages/OnboardingPage";
 import DashboardPage from "../Pages/DashboardPage";
-import NewApplicationPage from "../Pages/NewApplicationPage";
-import PracticePage from "../Pages/PracticePage";
-import MetricsPage from "../Pages/MetricsPage";
-import SettingsPage from "../Pages/SettingsPage";
+import NewApplicationPage from "../Pages/NewApplicationsPage";
+import PracticePage from "../Pages/PracticePagePage";
+import MetricsPage from "../Pages/MetricsPagee";
 import ContactsPage from "../Pages/ContactsPage";
 import ErrorPage from "../Pages/ErrorPage";
+import SettingsPage from "../Pages/SettingsPage";
 
 const router = createBrowserRouter([
   {
