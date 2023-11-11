@@ -3,10 +3,17 @@ import { NavLink } from "react-router-dom";
 
 //-----------Media-----------//
 import logo from "../../Images/Logo-GitHired.svg";
+import { useNavigate } from "react-router-dom";
 
 const NavBar = () => {
+  const navigate = useNavigate();
+
+  const handleClick = () => {
+    console.log("test button");
+    navigate("/");
+  };
   return (
-    <div className="fixed top-0 z-10 flex w-screen flex-row items-center justify-between bg-slate-900 p-3">
+    <div className="fixed top-0 flex w-screen flex-row items-center justify-between bg-primary p-3">
       <section className="z-20 flex flex-row gap-2">
         <NavLink to="/dashboard">Dashboard</NavLink>
         <NavLink to="/metrics">Metrics</NavLink>
@@ -15,7 +22,15 @@ const NavBar = () => {
         <NavLink to="/settings">Settings</NavLink>
       </section>
 
-      <img src={logo} className="fixed h-8 w-full" alt="GitHired Logo" />
+      <div className="fixed z-10 flex w-full justify-center">
+        <button onClick={handleClick}>
+          <img
+            src={logo}
+            className=" h-8 translate-x-[-12px] hover:translate-y-[-2px]"
+            alt="GitHired Logo"
+          />
+        </button>
+      </div>
     </div>
   );
 };

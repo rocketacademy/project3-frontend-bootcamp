@@ -5,7 +5,7 @@ import { NavLink } from "react-router-dom";
 //-----------Components-----------//
 import Button from "../Components/Details/Button";
 import InputText from "../Components/Details/InputText";
-import RotatingWords from "../Components/Home/RotatingWords";
+import RotatingWords from "../Components/HomePage/RotatingWords";
 
 //-----------Media-----------//
 import logo from "../Images/Logo-GitHired.svg";

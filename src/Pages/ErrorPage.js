@@ -16,10 +16,10 @@ export default function ErrorPage() {
           alt="GitHired Logo"
         />
       </NavLink>
-
-      <figure className="border-text m-2 flex flex-col items-center justify-center rounded-lg border-2 p-3">
-        <p>Sorry, an unexpected error has occurred.</p>
-        <p className="m-2 w-[300px] rounded-xl bg-primary p-2 text-center">
+      {console.log(error)}
+      <figure className="border-text m-2 flex max-w-sm flex-col items-center justify-center rounded-lg border-2 p-3 sm:max-w-lg">
+        <p>Sorry, an unexpected error has occurred!</p>
+        <p className="m-2  min-w-full rounded-xl bg-primary p-2 text-center">
           <i>Error: {error.statusText || error.message}</i>
         </p>
         <p className="text-[10px] leading-none text-slate-500">

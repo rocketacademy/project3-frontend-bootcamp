@@ -21,32 +21,39 @@ const router = createBrowserRouter([
   {
     path: "/onboarding",
     element: <OnboardingPage />,
+    errorElement: <ErrorPage />,
   },
   {
     path: "/dashboard",
     element: <DashboardPage />,
+    errorElement: <ErrorPage />,
     children: [
       {
         path: "add",
         element: <NewApplicationPage />,
+        errorElement: <ErrorPage />,
       },
     ],
   },
   {
     path: "/practice",
     element: <PracticePage />,
+    errorElement: <ErrorPage />,
   },
   {
     path: "/metrics",
     element: <MetricsPage />,
+    errorElement: <ErrorPage />,
   },
   {
     path: "/settings",
     element: <SettingsPage />,
+    errorElement: <ErrorPage />,
   },
   {
     path: "/contacts",
     element: <ContactsPage />,
+    errorElement: <ErrorPage />,
   },
 ]);
 
