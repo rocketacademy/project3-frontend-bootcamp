@@ -9,7 +9,6 @@ import NewApplicationPage from "../Pages/NewApplicationPage";
 import PracticePage from "../Pages/PracticePage";
 import MetricsPage from "../Pages/MetricsPage";
 import ContactsPage from "../Pages/ContactsPage";
-
 import ErrorPage from "../Pages/ErrorPage";
 import SettingsPage from "../Pages/SettingsPage";
 

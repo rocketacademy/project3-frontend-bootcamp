@@ -1,4 +1,5 @@
 //-----------Libaries-----------//
+import { NavLink } from "react-router-dom";
 
 //-----------Components-----------//
 import Button from "../Components/Details/Button";
@@ -8,7 +9,6 @@ import RotatingWords from "../Components/HomePage/RotatingWords";
 //-----------Media-----------//
 import logo from "../Images/Logo-GitHired.svg";
 import demo from "../Images/Mock-demo.png";
-import "./HomePage.css";
 
 export default function HomePage() {
   const rotatingText = ["Applications", "Reminders", "Questions", "Notes"];
@@ -21,7 +21,8 @@ export default function HomePage() {
         <form>
           <InputText placeholder="Enter your email" />
           <Button label="Enter" />
-        </form>
+        </form>{" "}
+        <NavLink to="/dashboard">Try the app</NavLink>
       </main>
       <article className=" flex h-full w-1/2 items-center justify-center bg-primary">
         <img

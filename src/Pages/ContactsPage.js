@@ -4,11 +4,11 @@ import NavBar from "../Components/Details/NavBar";
 
 //-----------Media-----------//
 
-export default function MetricsPage() {
+export default function ContactsPage() {
   return (
     <div className="flex h-screen flex-col items-center justify-center bg-background">
       <NavBar />
-      <p>Metricss</p>
+      <p>Contacts!</p>
     </div>
   );
 }
