@@ -1,20 +1,39 @@
-import React from "react";
-import logo from "./logo.png";
-import "./App.css";
+//--------------REACT--------------//
+import React from 'react';
+import { Route, Routes } from 'react-router-dom';
 
-class App extends React.Component {
-  render() {
-    return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-        </header>
-      </div>
-    );
-  }
+//--------------COMPONENTS--------------//
+import { PwGenPage } from './Pages/PwGenPage';
+
+import { PwBookPage } from './Pages/PwBookPage';
+import { PwBookPersonalPage } from './Pages/PwBookPersonalPage';
+import { PwBookSharedPage } from './Pages/PwBookSharedPage';
+
+import { ProfilePage } from './Pages/ProfilePage';
+import { OnboardingPage } from './Pages/OnboardingPage';
+import { ForgotPwPage } from './Pages/ForgotPwPage';
+import { SignUpPage } from './Pages/SignUpPage';
+import { ErrorPage } from './Pages/ErrorPage';
+
+//--------------STYLING--------------//
+import './App.css';
+
+export default function App() {
+  return (
+    <>
+      <Routes>
+        <Route path="/" element={<PwGenPage />} />
+        <Route path="/passwordbook">
+          <Route index element={<PwBookPage />} />
+          <Route path="personal" element={<PwBookPersonalPage />} />
+          <Route path="shared" element={<PwBookSharedPage />} />
+        </Route>
+        <Route path="/profile" element={<ProfilePage />} />
+        <Route path="/onboarding" element={<OnboardingPage />} />
+        <Route path="/forgotpassword" element={<ForgotPwPage />} />
+        <Route path="/singup" element={<SignUpPage />} />
+        <Route path="*" element={<ErrorPage />} />
+      </Routes>
+    </>
+  );
 }
-
-export default App;
