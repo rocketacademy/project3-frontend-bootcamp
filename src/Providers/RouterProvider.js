@@ -5,7 +5,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import HomePage from "../Pages/HomePage";
 import OnboardingPage from "../Pages/OnboardingPage";
 import DashboardPage from "../Pages/DashboardPage";
-import NewApplicationPage from "../Pages/NewApplicationPage";
+import ApplicationPage from "../Pages/ApplicationPage";
 import PracticePage from "../Pages/PracticePage";
 import MetricsPage from "../Pages/MetricsPage";
 import ContactsPage from "../Pages/ContactsPage";
@@ -30,7 +30,7 @@ const router = createBrowserRouter([
     children: [
       {
         path: "add",
-        element: <NewApplicationPage />,
+        element: <ApplicationPage />,
         errorElement: <ErrorPage />,
       },
     ],
