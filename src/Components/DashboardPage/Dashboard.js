@@ -1,10 +1,17 @@
-//-----------Components-----------//
+//-----------Libraries-----------//
+import axios from "axios";
+import { useEffect, useState } from "react";
 
+//-----------Components-----------//
 import ApplicationGroup from "./ApplicationGroup";
 
 const Dashboard = () => {
   // Data to request from backend
-  const apps = [
+
+  const [apps, setApps] = useState();
+  const [appGroup, setAppGroup] = useState(null);
+
+  const apps2 = [
     {
       id: "1",
       company: "Tesla",
@@ -63,23 +70,54 @@ const Dashboard = () => {
     },
   ];
 
-  // Filter out apps by status
-  const wishlistApps = apps.filter((app) => app.status === "Wishlist");
-  const appliedApps = apps.filter((app) => app.status === "Applied");
-  const screeningApps = apps.filter((app) => app.status === "Screening");
-  const interviewApps = apps.filter((app) => app.status === "Interview");
-  const offerApps = apps.filter((app) => app.status === "Offer");
-  const archiveApps = apps.filter((app) => app.status === "Archive");
+  useEffect(() => {
+    axios
+      .get("http://localhost:8080/users/1/applications")
+      .then((response) => {
+        console.log("Pulled Data: ", response.data.applications);
+        // Assuming response.data is an array with at least one item
+        setApps(response.data.applications);
+
+        // Grouping apps by status after setting 'apps'
+        const groupedApps = {
+          Wishlist: response.data.applications.filter(
+            (app) => app.applicationStatus.status === "Wishlist",
+          ),
+          Applied: response.data.applications.filter(
+            (app) => app.applicationStatus.status === "Applied",
+          ),
+          Screening: response.data.applications.filter(
+            (app) => app.applicationStatus.status === "Screening",
+          ),
+          Interview: response.data.applications.filter(
+            (app) => app.applicationStatus.status === "Interview",
+          ),
+          Offer: response.data.applications.filter(
+            (app) => app.applicationStatus.status === "Offer",
+          ),
+          Archive: response.data.applications.filter(
+            (app) => app.applicationStatus.status === "Archive",
+          ),
+        };
+        setAppGroup(groupedApps);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }, []);
 
   return (
     <main className="mt-[50px] flex flex-row">
-      <ApplicationGroup header="Wishlist" apps={wishlistApps} />
-      <ApplicationGroup header="Applied" apps={appliedApps} />
-      <ApplicationGroup header="Screening" apps={screeningApps} />
-      <ApplicationGroup header="Interview" apps={interviewApps} />
-      <ApplicationGroup header="Offer" apps={offerApps} />
-      <ApplicationGroup header="No Response" apps={archiveApps} />
-      <ApplicationGroup header="Archive" apps={archiveApps} />
+      {console.log("Apps", apps)}
+      {console.log("AppGroups", appGroup)}
+
+      <ApplicationGroup header="Wishlist" apps={appGroup?.Wishlist || []} />
+      <ApplicationGroup header="Applied" apps={appGroup?.Applied || []} />
+      <ApplicationGroup header="Screening" apps={appGroup?.Screening || []} />
+      <ApplicationGroup header="Interview" apps={appGroup?.Interview || []} />
+      <ApplicationGroup header="Offer" apps={appGroup?.Offer || []} />
+      <ApplicationGroup header="No Response" apps={appGroup?.Archive || []} />
+      <ApplicationGroup header="Archive" apps={appGroup?.Archive || []} />
     </main>
   );
 };

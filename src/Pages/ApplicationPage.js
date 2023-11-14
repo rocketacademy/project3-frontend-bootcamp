@@ -2,10 +2,10 @@
 //-----------Components-----------//
 //-----------Media-----------//
 
-export default function NewApplicationPage() {
+export default function ApplicationPage() {
   return (
     <div className="flex items-center justify-center bg-background">
-      <p>New Applicatione</p>
+      <p>Application</p>
     </div>
   );
 }

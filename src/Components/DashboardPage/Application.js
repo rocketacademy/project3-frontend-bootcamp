@@ -1,7 +1,7 @@
 import { NavLink } from "react-router-dom";
 
 const Application = ({ application }) => {
-  const { id, company, title, activity, color } = application;
+  const { id, companyName, jobPosition, updatedAt, color } = application;
   return (
     <NavLink
       to="/dashboard/edit"
@@ -12,16 +12,18 @@ const Application = ({ application }) => {
         className="w-[12px] rounded-l-lg"
         style={{ backgroundColor: `${color}` }}
       ></div>
-      <div className="bg-text flex w-[200px] flex-col p-2">
+      <div className="flex w-[200px] flex-col bg-text p-2">
         <p className="text-left text-[18px] leading-none text-black">
-          {company}
+          {companyName}
         </p>
-        <p className="text-left text-xs font-semibold text-black">{title}</p>
+        <p className="text-left text-xs font-semibold text-black">
+          {jobPosition}
+        </p>
         <p className="mt-auto text-left text-[10px] leading-none text-primary">
-          {activity}
+          {updatedAt}
         </p>
       </div>
-      <div className="bg-text w-[40px] rounded-r-lg p-1 pr-2 text-end text-accent hover:text-primary">
+      <div className="w-[40px] rounded-r-lg bg-text p-1 pr-2 text-end text-accent hover:text-primary">
         <button className="mb-auto text-[22px] leading-none">♥︎</button>
       </div>
     </NavLink>
