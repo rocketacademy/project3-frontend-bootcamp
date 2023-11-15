@@ -12,7 +12,7 @@ const Dashboard = () => {
   // Retrieve data from the backend to populate dashboard
   useEffect(() => {
     axios
-      .get(`${BACKEND_URL}/users/1/applications`)
+      .get(`${BACKEND_URL}/users/1/applications`) // Endpoint: /users/:userId/applications
       .then((response) => {
         console.log("Backend Data Pulled: ", response.data.applications);
         const data = response.data.applications;

@@ -39,19 +39,20 @@ const NewApplication = () => {
     });
   };
 
-  const toggleIsBookmarked = () => {
-    setFormInfo((prevState) => ({
-      ...prevState,
-      is_bookmarked: !prevState.is_bookmarked,
-    }));
-  };
-
+  // Data validation
   const isFilled = () => {
     return (
       formInfo.companyName.trim() !== "" &&
       formInfo.jobPosition.trim() !== "" &&
       formInfo.statusId.trim() !== ""
     );
+  };
+
+  const toggleIsBookmarked = () => {
+    setFormInfo((prevState) => ({
+      ...prevState,
+      is_bookmarked: !prevState.is_bookmarked,
+    }));
   };
 
   const postNewApplication = async () => {
