@@ -17,6 +17,7 @@ import InvalidTokenAlert from "../Details/InvalidTokenAlert.js";
 //-----------Media-----------//
 import logo from "../Images/Logo-GitHired.svg";
 import defaultProfile from "../Images/defaultProfile.png";
+import "./OnboardingPage.css";
 
 export default function OnboardingPage() {
   const navigate = useNavigate();
@@ -155,14 +156,16 @@ export default function OnboardingPage() {
         ) : (
           <>
             <form className="flex flex-col items-center justify-center gap-2 text-black">
-              <label htmlFor="profile-picture" style={{ cursor: "pointer" }}>
-                <ProfileImage
-                  src={
-                    formInfo.profilePic ? formInfo.profilePic : defaultProfile
-                  }
-                  alt="Profile photo"
-                />
-              </label>
+              <div className="tooltip " data-tip="📸 Upload Profile Picture!">
+                <label htmlFor="profile-picture" style={{ cursor: "pointer" }}>
+                  <ProfileImage
+                    src={
+                      formInfo.profilePic ? formInfo.profilePic : defaultProfile
+                    }
+                    alt="Profile photo"
+                  />
+                </label>
+              </div>
               <input
                 type="file"
                 id="profile-picture"
