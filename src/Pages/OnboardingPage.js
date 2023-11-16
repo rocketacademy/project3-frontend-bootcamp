@@ -1,8 +1,12 @@
 //-----------Libaries-----------//
 import { useEffect, useState } from "react";
-import { NavLink, useNavigate, useSearchParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { BACKEND_URL } from "../constants";
 import axios from "axios";
+
+//-----------Firebase-----------//
+import { storage } from "../firebase/firebase";
+import { uploadBytes, ref, getDownloadURL } from "firebase/storage";
 
 //-----------Components-----------//
 import InputText from "../Details/InputText";
@@ -11,7 +15,6 @@ import ProfileImage from "../Details/ProfileImage.js";
 
 //-----------Media-----------//
 import logo from "../Images/Logo-GitHired.svg";
-import uploadImage from "../Images/upload-image.png";
 import defaultProfile from "../Images/defaultProfile.png";
 
 export default function OnboardingPage() {
@@ -22,11 +25,12 @@ export default function OnboardingPage() {
     email: "email1234@email.com",
     firstName: "",
     lastName: "",
-    profilePic: "picture",
+    profilePic: null,
     applicationsGoalCount: "",
     questionsGoalCount: "",
   });
   const [goals, setGoals] = useState(false);
+  const [file, setFile] = useState(null);
 
   // Helper Functions
   const textChange = (e) => {
@@ -39,6 +43,12 @@ export default function OnboardingPage() {
 
   const isFilled = () => {
     return formInfo.firstName.trim() !== "" && formInfo.lastName.trim() !== "";
+  };
+
+  const handleImageUpload = (e) => {
+    const file = e.target.files[0];
+    console.log("File stored", file);
+    setFile(file);
   };
 
   // Retrieve token and email from JWT
@@ -56,11 +66,24 @@ export default function OnboardingPage() {
       });
   }, []);
 
-  // Database Functions
-  const handleImageUpload = () => {
-    console.log("Image Uploaded");
-  };
+  // Firebase: Upload image to firebase and retrieve the url
+  useEffect(() => {
+    if (file) {
+      const fileRef = ref(storage, `profile-images/${file.name}`);
+      uploadBytes(fileRef, file)
+        .then(() => getDownloadURL(fileRef))
+        .then((url) => {
+          setFormInfo({ ...formInfo, profilePic: url });
+          setFile(null);
+          console.log("Image Uploaded", url);
+        })
+        .catch((error) => {
+          console.error("Error uploading image:", error);
+        });
+    }
+  }, [file]);
 
+  // ExpressJS: Create new user on backend and redirect to dashboard
   const postNewUser = async () => {
     // const data = {
     //   email: "testing@rocketacademy.co",
@@ -87,6 +110,10 @@ export default function OnboardingPage() {
         {goals ? (
           <>
             <form className="flex flex-col items-center justify-center gap-2">
+              <ProfileImage
+                src={formInfo.profilePic ? formInfo.profilePic : defaultProfile}
+                alt="Profile photo"
+              />
               <h1 className="text-[32px] font-bold">
                 Hello {formInfo.firstName}!
               </h1>
@@ -114,9 +141,7 @@ export default function OnboardingPage() {
               <label htmlFor="profile-picture" style={{ cursor: "pointer" }}>
                 <ProfileImage
                   src={
-                    formInfo.profilePicture
-                      ? formInfo.profilePicture
-                      : defaultProfile
+                    formInfo.profilePic ? formInfo.profilePic : defaultProfile
                   }
                   alt="Profile photo"
                 />
