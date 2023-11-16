@@ -35,7 +35,6 @@ const Dashboard = () => {
         });
 
         setAppGroup(groupedApps);
-        console.log("Grouped Apps", appGroup);
       })
       .catch((error) => {
         console.error(error);

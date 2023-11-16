@@ -1,7 +1,7 @@
 //-----------Libaries-----------//
 import { Outlet } from "react-router-dom";
 //-----------Components-----------//
-import NavBar from "../Components/Details/NavBar";
+import NavBar from "../Details/NavBar";
 import Dashboard from "../Components/DashboardPage/Dashboard";
 import NewApplication from "../Components/DashboardPage/NewApplication";
 

@@ -2,14 +2,13 @@
 import { NavLink } from "react-router-dom";
 
 //-----------Media-----------//
-import logo from "../../Images/Logo-GitHired.svg";
+import logo from "../Images/Logo-GitHired.svg";
 import { useNavigate } from "react-router-dom";
 
 const NavBar = () => {
   const navigate = useNavigate();
 
   const handleClick = () => {
-    console.log("test button");
     navigate("/");
   };
   return (
