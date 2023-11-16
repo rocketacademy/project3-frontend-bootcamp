@@ -5,7 +5,7 @@ import { NavLink } from "react-router-dom";
 import logo from "../Images/Logo-GitHired.svg";
 import { useNavigate } from "react-router-dom";
 
-const NavBar = () => {
+const NavBar = ({ name }) => {
   const navigate = useNavigate();
 
   const handleClick = () => {
@@ -30,6 +30,7 @@ const NavBar = () => {
           />
         </button>
       </div>
+      <div>{name ? name : "Please login"}</div>
     </div>
   );
 };

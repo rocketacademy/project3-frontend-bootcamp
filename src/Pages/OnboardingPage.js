@@ -58,6 +58,7 @@ export default function OnboardingPage() {
   useEffect(() => {
     const queryParams = new URLSearchParams(window.location.search);
     const tokenRetrieved = queryParams.get("token");
+    localStorage.setItem("token", tokenRetrieved);
     console.log("Token Retrieved", tokenRetrieved);
     if (tokenRetrieved) {
       axios
@@ -68,6 +69,7 @@ export default function OnboardingPage() {
         })
         .catch((error) => {
           console.log("Token not valid");
+          localStorage.removeItem("token"); // Remove existing tokens if not valid
           setShowFailedAlert(true);
           const countdownInterval = setInterval(() => {
             setCountdown((prevCount) => prevCount - 1);

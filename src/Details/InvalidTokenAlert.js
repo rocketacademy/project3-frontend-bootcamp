@@ -9,7 +9,7 @@ const InvalidTokenAlert = ({ countdown }) => {
       className="alert alert-error fixed top-10 z-30 w-[600px] bg-red-200 shadow-lg shadow-slate-900 "
     >
       <span className=" font-semibold text-background">
-        ❌ Invalid Token - Redirecting to home in {countdown} seconds
+        ❌ Invalid/Missing Token - Redirecting to home in {countdown} seconds
       </span>
     </motion.div>
   );

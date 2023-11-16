@@ -17,7 +17,7 @@ export default function DashboardPage() {
 
   const [formInfo, setFormInfo] = useState({
     id: "",
-    email: "email1234@email.com",
+    email: "",
     firstName: "",
     profilePic: null,
   });
@@ -26,12 +26,24 @@ export default function DashboardPage() {
   const [showFailedAlert, setShowFailedAlert] = useState(false);
 
   useEffect(() => {
-    const queryParams = new URLSearchParams(window.location.search);
-    const tokenRetrieved = queryParams.get("token");
-    console.log("Token Retrieved", tokenRetrieved);
-    if (tokenRetrieved) {
+    // Retrieve token from localStorage, if it's null retrieve from URL search params
+    const token =
+      localStorage.getItem("token") ??
+      (() => {
+        const tokenRetrieved = new URLSearchParams(window.location.search).get(
+          "token",
+        );
+        if (tokenRetrieved) {
+          localStorage.setItem("token", tokenRetrieved);
+        }
+        return tokenRetrieved;
+      })();
+    console.log("Token Retrieved", token);
+
+    if (token) {
+      // Verify token and retrieve info
       axios
-        .get(`${BACKEND_URL}/auth/verify?token=${tokenRetrieved}`)
+        .get(`${BACKEND_URL}/auth/verify?token=${token}`)
         .then((response) => {
           const { id, email, firstName, profilePic } = response.data;
           setFormInfo({
@@ -41,10 +53,10 @@ export default function DashboardPage() {
             firstName: firstName,
             profilePic: profilePic,
           });
-          console.log("Verified User", formInfo);
         })
         .catch((error) => {
           console.log("Token not valid");
+          localStorage.removeItem("token"); // Remove existing tokens if not valid
           setShowFailedAlert(true);
           const countdownInterval = setInterval(() => {
             setCountdown((prevCount) => prevCount - 1);
@@ -60,11 +72,14 @@ export default function DashboardPage() {
   return (
     <div className="flex h-screen flex-col overflow-x-auto bg-background">
       <div className="flex w-screen justify-center">
-        {<InvalidTokenAlert countdown={countdown} />}
+        {showFailedAlert && <InvalidTokenAlert countdown={countdown} />}
       </div>
-      <NavBar />
+
+      <NavBar name={formInfo.firstName} />
+
       <Dashboard />
       <Outlet />
+      <p className="text-[20px] text-white">email:{formInfo.email}</p>
       <NewApplication />
     </div>
   );
