@@ -3,6 +3,7 @@ import { NavLink } from "react-router-dom";
 import { BACKEND_URL } from "../constants";
 import axios from "axios";
 import { useState } from "react";
+import { motion } from "framer-motion";
 
 //-----------Components-----------//
 import Button from "../Details/Button";
@@ -37,7 +38,15 @@ export default function HomePage() {
   };
 
   return (
-    <div className=" flex h-screen flex-row items-center justify-center bg-background">
+    <motion.div
+      initial={{ opacity: 0, scale: 1 }} // Initial state (hidden and scaled down)
+      animate={{ opacity: 1, scale: 1 }} // Final state (visible and at full scale)
+      transition={{
+        duration: 0.8,
+        ease: "easeInOut",
+      }}
+      className=" flex h-screen flex-row items-center justify-center bg-background"
+    >
       <main className="flex w-1/2 flex-col items-center justify-center">
         <img src={logo} className="scale-125" alt="GitHired Logo" />
         <RotatingWords words={rotatingText} />
@@ -72,6 +81,6 @@ export default function HomePage() {
         />
       </article>
       <footer></footer>
-    </div>
+    </motion.div>
   );
 }

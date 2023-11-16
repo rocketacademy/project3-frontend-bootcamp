@@ -12,6 +12,7 @@ import { uploadBytes, ref, getDownloadURL } from "firebase/storage";
 import InputText from "../Details/InputText";
 import Button from "../Details/Button";
 import ProfileImage from "../Details/ProfileImage.js";
+import InvalidTokenAlert from "../Details/InvalidTokenAlert.js";
 
 //-----------Media-----------//
 import logo from "../Images/Logo-GitHired.svg";
@@ -31,6 +32,8 @@ export default function OnboardingPage() {
   });
   const [goals, setGoals] = useState(false);
   const [file, setFile] = useState(null);
+  const [countdown, setCountdown] = useState(5);
+  const [showFailedAlert, setShowFailedAlert] = useState(false);
 
   // Helper Functions
   const textChange = (e) => {
@@ -57,13 +60,26 @@ export default function OnboardingPage() {
     console.log(queryParams);
     const tokenRetrieved = queryParams.get("token");
     console.log("Token Retrieved", tokenRetrieved);
-
-    axios
-      .get(`${BACKEND_URL}/auth/retrieve-email?token=${tokenRetrieved}`)
-      .then((response) => {
-        console.log(response);
-        setFormInfo({ ...formInfo, email: response.data });
-      });
+    if (tokenRetrieved) {
+      axios
+        .get(`${BACKEND_URL}/auth/retrieve-email?token=${tokenRetrieved}`)
+        .then((response) => {
+          console.log(response);
+          setFormInfo({ ...formInfo, email: response.data });
+        })
+        .catch((error) => {
+          console.log("Token not valid");
+          setShowFailedAlert(true);
+          const countdownInterval = setInterval(() => {
+            setCountdown((prevCount) => prevCount - 1);
+          }, 1000);
+          setTimeout(() => {
+            clearInterval(countdownInterval);
+            navigate("/");
+          }, 5000);
+        });
+    } else {
+    }
   }, []);
 
   // Firebase: Upload image to firebase and retrieve the url
@@ -106,6 +122,7 @@ export default function OnboardingPage() {
 
   return (
     <div className="flex h-screen flex-row items-center justify-center bg-background">
+      {showFailedAlert && <InvalidTokenAlert countdown={countdown} />}
       <main className="flex w-1/2 flex-col items-center justify-center">
         {goals ? (
           <>
