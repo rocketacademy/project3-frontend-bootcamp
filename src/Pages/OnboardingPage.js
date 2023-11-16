@@ -57,7 +57,6 @@ export default function OnboardingPage() {
   // Retrieve token and email from JWT
   useEffect(() => {
     const queryParams = new URLSearchParams(window.location.search);
-    console.log(queryParams);
     const tokenRetrieved = queryParams.get("token");
     console.log("Token Retrieved", tokenRetrieved);
     if (tokenRetrieved) {
@@ -78,7 +77,6 @@ export default function OnboardingPage() {
             navigate("/");
           }, 5000);
         });
-    } else {
     }
   }, []);
 

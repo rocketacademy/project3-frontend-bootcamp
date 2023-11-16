@@ -48,8 +48,6 @@ const Dashboard = () => {
       <ApplicationGroup header="Screening" apps={appGroup?.Screening || []} />
       <ApplicationGroup header="Interview" apps={appGroup?.Interview || []} />
       <ApplicationGroup header="Offer" apps={appGroup?.Offer || []} />
-      <ApplicationGroup header="No Response" apps={appGroup?.Archive || []} />
-      <ApplicationGroup header="Archive" apps={appGroup?.Archive || []} />
     </main>
   );
 };
