@@ -26,19 +26,24 @@ export default function DashboardPage() {
   const [showFailedAlert, setShowFailedAlert] = useState(false);
 
   useEffect(() => {
-    // Retrieve token from localStorage, if it's null retrieve from URL search params
-    const token =
-      localStorage.getItem("token") ??
-      (() => {
-        const tokenRetrieved = new URLSearchParams(window.location.search).get(
-          "token",
-        );
-        if (tokenRetrieved) {
-          localStorage.setItem("token", tokenRetrieved);
-        }
-        return tokenRetrieved;
-      })();
-    console.log("Token Retrieved", token);
+    // Attempt to Retrieve token from search params
+    let storedToken;
+    const tokenRetrieved = new URLSearchParams(window.location.search).get(
+      "token",
+    );
+
+    // If token retrieved, store in local storage
+    if (tokenRetrieved) {
+      localStorage.setItem("token", tokenRetrieved);
+      console.log("Param Token Retrieved", tokenRetrieved);
+    } else {
+      // If not attempt to retrieve from local storage
+      storedToken = localStorage.getItem("token");
+      console.log("Stored Token Retrieved", storedToken);
+    }
+
+    const token = tokenRetrieved ?? storedToken;
+    console.log("Token", token);
 
     if (token) {
       // Verify token and retrieve info
@@ -66,6 +71,8 @@ export default function DashboardPage() {
             navigate("/");
           }, 5000);
         });
+    } else {
+      console.log("No Token Found");
     }
   }, []);
 
@@ -75,11 +82,15 @@ export default function DashboardPage() {
         {showFailedAlert && <InvalidTokenAlert countdown={countdown} />}
       </div>
 
-      <NavBar name={formInfo.firstName} />
+      <NavBar name={formInfo.firstName} profilePic={formInfo.profilePic} />
 
       <Dashboard />
       <Outlet />
-      <p className="text-[20px] text-white">email:{formInfo.email}</p>
+
+      <p className=" p-2 text-white">
+        user_id: {formInfo.id} (Remove post-development) <br></br>email:
+        {formInfo.email}
+      </p>
       <NewApplication />
     </div>
   );
