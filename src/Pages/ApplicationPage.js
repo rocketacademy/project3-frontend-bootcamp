@@ -2,13 +2,14 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { NavLink, useParams } from "react-router-dom";
-import { BACKEND_URL } from "../constants";
 
 //-----------Components-----------//
 //-----------Media-----------//
 import logo from "../Images/favicon_io/logo192.png";
 
 export default function ApplicationPage() {
+  const BACKEND_URL = process.env.BACKEND_URL;
+
   const { id } = useParams();
   const [formInfo, setFormInfo] = useState({
     userId: 1, //Set as 1 for now

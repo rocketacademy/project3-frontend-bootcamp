@@ -2,7 +2,6 @@
 import { useEffect, useState } from "react";
 import { Outlet, useNavigate } from "react-router-dom";
 import axios from "axios";
-import { BACKEND_URL } from "../constants";
 
 //-----------Components-----------//
 import NavBar from "../Details/NavBar";
@@ -13,6 +12,7 @@ import InvalidTokenAlert from "../Details/InvalidTokenAlert";
 //-----------Media-----------//
 
 export default function DashboardPage() {
+  const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
   const navigate = useNavigate();
 
   const [formInfo, setFormInfo] = useState({

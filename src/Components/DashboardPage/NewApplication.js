@@ -1,6 +1,5 @@
 //-----------Library-----------//
 import { useState } from "react";
-import { BACKEND_URL } from "../../constants";
 import axios from "axios";
 
 //-----------Components-----------//
@@ -10,6 +9,8 @@ import Button from "../../Details/Button";
 import { useNavigate } from "react-router-dom";
 
 const NewApplication = () => {
+  const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
+
   const navigate = useNavigate();
 
   const [formInfo, setFormInfo] = useState({
