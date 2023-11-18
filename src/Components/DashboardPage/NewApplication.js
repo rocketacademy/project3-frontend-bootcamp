@@ -104,14 +104,24 @@ const NewApplication = () => {
           <h1 className=" text-[20px] font-bold ">Create New Application</h1>
           <h2 className=" mb-2 text-[10px] ">* indicates a required field</h2>
           <form className="grid grid-cols-2 gap-y-1 text-black">
-            <p className="">Colour:</p>
-            <input
-              type="color"
-              id="color"
-              className="h-8 w-full cursor-pointer rounded-lg bg-transparent hover:translate-y-[-2px] "
-              value={formInfo.color}
-              onChange={textChange}
-            />
+            <p>Application Status: *</p>
+
+            <select
+              className="h-12 w-full rounded-lg border-[1px] border-text bg-transparent p-2 text-text hover:translate-y-[-2px] hover:border-[2px]"
+              onChange={(e) => selectChange(e)}
+              id="statusId"
+              defaultValue="" // Set the defaultValue to an empty string
+            >
+              <option value="" disabled>
+                Choose One
+              </option>
+              <option value="1">Wishlist</option>
+              <option value="2">Applied</option>
+              <option value="3">Interview</option>
+              <option value="4">Screening</option>
+              <option value="5">Offer</option>
+            </select>
+
             <p className="">Company Name: *</p>
             <InputText
               id="companyName"
@@ -126,6 +136,14 @@ const NewApplication = () => {
               placeholder="e.g. Software Engineer"
               handleChange={textChange}
               value={formInfo.jobPosition}
+            />
+            <p className="">Colour:</p>
+            <input
+              type="color"
+              id="color"
+              className="h-8 w-full cursor-pointer rounded-lg bg-transparent hover:translate-y-[-2px] "
+              value={formInfo.color}
+              onChange={textChange}
             />
             <p className="">Location:</p>
             <InputText
@@ -151,25 +169,8 @@ const NewApplication = () => {
               value={formInfo.applicationDate}
               handleChange={textChange}
             />
-
-            <p>Application Status: *</p>
-
-            <select
-              className="h-12 w-full rounded-lg border-[1px] border-text bg-transparent p-2 text-text hover:translate-y-[-2px] hover:border-[2px]"
-              onChange={(e) => selectChange(e)}
-              id="statusId"
-              defaultValue="" // Set the defaultValue to an empty string
-            >
-              <option value="" disabled>
-                Choose One
-              </option>
-              <option value="1">Wishlist</option>
-              <option value="2">Applied</option>
-              <option value="3">Interview</option>
-              <option value="4">Screening</option>
-              <option value="5">Offer</option>
-            </select>
           </form>
+
           <div className="mt-2 flex w-full justify-center">
             <Button
               label="Create"
