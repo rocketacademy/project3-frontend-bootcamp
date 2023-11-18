@@ -1,7 +1,7 @@
 //-----------Libaries-----------//
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { NavLink, useParams, Outlet } from "react-router-dom";
+import { NavLink, useParams, Outlet, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 
 //-----------Components-----------//
@@ -14,6 +14,7 @@ import logo from "../Images/favicon_io/logo192.png";
 
 export default function ApplicationPage() {
   const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
+  const navigate = useNavigate();
 
   const { id } = useParams();
   const [formInfo, setFormInfo] = useState({
@@ -54,6 +55,7 @@ export default function ApplicationPage() {
       .delete(`${BACKEND_URL}/applications/delete/${id}`)
       .then((response) => {
         console.log("Application Deleted", response);
+        navigate("/dashboard");
       });
   };
 
@@ -142,15 +144,24 @@ export default function ApplicationPage() {
             >
               Interview 💼
             </NavLink>
-            <button className=" w-[110px] rounded-lg bg-primary px-2 py-1 text-center hover:translate-y-[-2px] hover:bg-secondary">
+            <NavLink
+              to={`/dashboard/edit/${id}/reminders`}
+              className=" w-[110px] rounded-lg bg-primary px-2 py-1 text-center hover:translate-y-[-2px] hover:bg-secondary"
+            >
               Reminders 🔔
-            </button>
-            <button className=" w-[110px] rounded-lg bg-primary px-2 py-1 text-center hover:translate-y-[-2px] hover:bg-secondary">
+            </NavLink>
+            <NavLink
+              to={`/dashboard/edit/${id}/contacts`}
+              className=" w-[110px] rounded-lg bg-primary px-2 py-1 text-center hover:translate-y-[-2px] hover:bg-secondary"
+            >
               Contacts 👤
-            </button>
-            <button className=" w-[110px] rounded-lg bg-primary px-2 py-1 text-center hover:translate-y-[-2px] hover:bg-secondary">
+            </NavLink>
+            <NavLink
+              to={`/dashboard/edit/${id}/documents`}
+              className=" w-[110px] rounded-lg bg-primary px-2 py-1 text-center hover:translate-y-[-2px] hover:bg-secondary"
+            >
               Documents 📁
-            </button>
+            </NavLink>
             <button
               className=" w-[60px] rounded-lg bg-red-600 px-2 py-1 text-center hover:translate-y-[-2px] hover:bg-red-800"
               onClick={deleteApplication}

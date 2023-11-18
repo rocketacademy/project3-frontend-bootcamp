@@ -13,6 +13,7 @@ import ErrorPage from "../Pages/ErrorPage";
 import SettingsPage from "../Pages/SettingsPage";
 import NotesSection from "../Components/Applications/NotesSection";
 import InterviewSection from "../Components/Applications/InterviewSection";
+import RemindersSection from "../Components/Applications/RemindersSection";
 
 const router = createBrowserRouter([
   {
@@ -47,7 +48,7 @@ const router = createBrowserRouter([
           },
           {
             path: "reminders",
-            element: <InterviewSection />,
+            element: <RemindersSection />,
             errorElement: <ErrorPage />,
           },
           {
