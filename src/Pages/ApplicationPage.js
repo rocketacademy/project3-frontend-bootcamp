@@ -1,7 +1,7 @@
 //-----------Libaries-----------//
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { NavLink, useParams } from "react-router-dom";
+import { NavLink, useParams, Outlet } from "react-router-dom";
 import { motion } from "framer-motion";
 
 //-----------Components-----------//
@@ -28,7 +28,7 @@ export default function ApplicationPage() {
     applicationDate: "",
   });
 
-  // Retrieve Data from Backend
+  // GET - Retrieve application data from Backend
   useEffect(() => {
     axios
       .get(`${BACKEND_URL}/users/1/${id}`) // Endpoint: users/:userId/:applicationId
@@ -38,13 +38,22 @@ export default function ApplicationPage() {
       });
   }, []);
 
-  // Edit application details
+  // PUT - Edit application details
   const updateDetails = () => {
     console.log("Details to be updated", formInfo);
     axios
-      .put(`${BACKEND_URL}/applications/${id}`, formInfo)
+      .put(`${BACKEND_URL}/applications/edit/${id}`, formInfo)
       .then((response) => {
         console.log("Update response", response);
+      });
+  };
+
+  // DELETE - Delete application
+  const deleteApplication = () => {
+    axios
+      .delete(`${BACKEND_URL}/applications/delete/${id}`)
+      .then((response) => {
+        console.log("Application Deleted", response);
       });
   };
 
@@ -121,12 +130,18 @@ export default function ApplicationPage() {
           </div>
           {/* Navigation */}
           <nav className="mr-12 flex flex-row gap-3">
-            <button className=" w-[110px] rounded-lg bg-primary px-2 py-1 text-center hover:translate-y-[-2px] hover:bg-secondary">
+            <NavLink
+              to={`/dashboard/edit/${id}/notes`}
+              className=" w-[110px] rounded-lg bg-primary px-2 py-1 text-center hover:translate-y-[-2px] hover:bg-secondary"
+            >
               Notes 📝
-            </button>
-            <button className=" w-[110px] rounded-lg bg-primary px-2 py-1 text-center hover:translate-y-[-2px] hover:bg-secondary">
+            </NavLink>
+            <NavLink
+              to={`/dashboard/edit/${id}/interview`}
+              className=" w-[110px] rounded-lg bg-primary px-2 py-1 text-center hover:translate-y-[-2px] hover:bg-secondary"
+            >
               Interview 💼
-            </button>
+            </NavLink>
             <button className=" w-[110px] rounded-lg bg-primary px-2 py-1 text-center hover:translate-y-[-2px] hover:bg-secondary">
               Reminders 🔔
             </button>
@@ -136,7 +151,10 @@ export default function ApplicationPage() {
             <button className=" w-[110px] rounded-lg bg-primary px-2 py-1 text-center hover:translate-y-[-2px] hover:bg-secondary">
               Documents 📁
             </button>
-            <button className=" w-[60px] rounded-lg bg-red-600 px-2 py-1 text-center hover:translate-y-[-2px] hover:bg-red-800">
+            <button
+              className=" w-[60px] rounded-lg bg-red-600 px-2 py-1 text-center hover:translate-y-[-2px] hover:bg-red-800"
+              onClick={deleteApplication}
+            >
               Delete
             </button>
           </nav>
@@ -221,7 +239,9 @@ export default function ApplicationPage() {
             </form>
           </main>
           {/* Additional Details*/}
-          <section className="w-2/3 border-[1px] border-text">hello</section>
+          <section className="w-2/3  bg-slate-800">
+            <Outlet />
+          </section>
         </div>
       </div>
     </motion.div>

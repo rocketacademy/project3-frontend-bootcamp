@@ -45,7 +45,8 @@ const NewApplication = () => {
     return (
       formInfo.companyName.trim() !== "" &&
       formInfo.jobPosition.trim() !== "" &&
-      formInfo.statusId.trim() !== ""
+      formInfo.statusId.trim() !== "" &&
+      formInfo.applicationDate.trim() !== ""
     );
   };
 
@@ -72,7 +73,7 @@ const NewApplication = () => {
 
     try {
       const post = await axios.post(
-        `${BACKEND_URL}/applications/newApplication`,
+        `${BACKEND_URL}/applications/create`,
         formInfo,
       );
       document.getElementById("new_application_modal").close(); // Close modal if successful
@@ -163,7 +164,7 @@ const NewApplication = () => {
               cols="30"
             />
 
-            <p>Application Date:</p>
+            <p>Application Date: *</p>
             <InputDate
               id="applicationDate"
               value={formInfo.applicationDate}
