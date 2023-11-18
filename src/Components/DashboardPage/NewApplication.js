@@ -19,7 +19,7 @@ const NewApplication = () => {
     jobPosition: "",
     location: "",
     jobDescription: "",
-    is_bookmarked: false,
+    isBookmarked: false,
     color: "#1C3F58", // Default primary color
     statusId: "",
     applicationDate: "",
@@ -53,7 +53,7 @@ const NewApplication = () => {
   const toggleIsBookmarked = () => {
     setFormInfo((prevState) => ({
       ...prevState,
-      is_bookmarked: !prevState.is_bookmarked,
+      isBookmarked: !prevState.isBookmarked,
     }));
   };
 
@@ -65,7 +65,7 @@ const NewApplication = () => {
     //   companyName: "My First Company Co", // words
     //   location: "Bali, Indonesia",
     //   statusId: 4,
-    //   is_bookmarked: true,
+    //   isBookmarked: true,
     //   jobDescription: "I am a job",
     //   applicationDate: "2023-11-14",
     // };
@@ -180,7 +180,7 @@ const NewApplication = () => {
             />
             <div
               className={`flex items-center justify-center ${
-                formInfo.is_bookmarked ? "text-red-500" : "text-text"
+                formInfo.isBookmarked ? "text-red-500" : "text-text"
               }  hover:text-primary`}
             >
               <button

@@ -23,7 +23,7 @@ export default function ApplicationPage() {
     jobPosition: "",
     location: "",
     jobDescription: "",
-    is_bookmarked: false,
+    isBookmarked: false,
     color: "", // Default primary color
     statusId: "",
     applicationDate: "",
@@ -78,7 +78,7 @@ export default function ApplicationPage() {
   const toggleIsBookmarked = () => {
     setFormInfo((prevState) => ({
       ...prevState,
-      is_bookmarked: !prevState.is_bookmarked,
+      isBookmarked: !prevState.isBookmarked,
     }));
   };
 
@@ -113,14 +113,14 @@ export default function ApplicationPage() {
               </h1>
               <h2 className="">
                 {formInfo && formInfo.jobPosition}{" "}
-                {formInfo && formInfo.is_bookmarked}
+                {formInfo && formInfo.isBookmarked}
               </h2>
             </main>
           </div>
           {/* Bookmark */}
           <div
             className={`ml-5 mr-auto flex items-center justify-center  ${
-              formInfo && formInfo.is_bookmarked ? "text-red-500" : "text-text"
+              formInfo && formInfo.isBookmarked ? "text-red-500" : "text-text"
             }  hover:text-primary`}
           >
             <button
