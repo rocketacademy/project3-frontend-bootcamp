@@ -2,6 +2,7 @@
 import { useEffect, useState } from "react";
 import { Outlet, useNavigate } from "react-router-dom";
 import axios from "axios";
+import { motion } from "framer-motion";
 
 //-----------Components-----------//
 import NavBar from "../Details/NavBar";
@@ -77,7 +78,15 @@ export default function DashboardPage() {
   }, []);
 
   return (
-    <div className="flex h-screen flex-col overflow-x-auto bg-background">
+    <motion.div
+      initial={{ opacity: 0, scale: 1 }}
+      animate={{ opacity: 1, scale: 1 }}
+      transition={{
+        duration: 0.5,
+        ease: "easeInOut",
+      }}
+      className="flex h-screen flex-col overflow-x-auto bg-background"
+    >
       <div className="flex w-screen justify-center">
         {showFailedAlert && <InvalidTokenAlert countdown={countdown} />}
       </div>
@@ -92,6 +101,6 @@ export default function DashboardPage() {
         {formInfo.email}
       </p>
       <NewApplication />
-    </div>
+    </motion.div>
   );
 }
