@@ -8,7 +8,7 @@ import InputDate from "../../Details/InputDate";
 import Button from "../../Details/Button";
 import { useNavigate } from "react-router-dom";
 
-const NewApplication = () => {
+const NewApplication = ({ refresh }) => {
   const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 
   const navigate = useNavigate();
@@ -77,7 +77,7 @@ const NewApplication = () => {
         formInfo,
       );
       document.getElementById("new_application_modal").close(); // Close modal if successful
-      navigate("/dashboard");
+      refresh();
       console.log("Post data", post);
     } catch (err) {
       console.log(err);

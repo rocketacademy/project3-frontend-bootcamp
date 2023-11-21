@@ -1,7 +1,13 @@
 //-----------Libaries-----------//
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { NavLink, useParams, Outlet, useNavigate } from "react-router-dom";
+import {
+  NavLink,
+  useParams,
+  Outlet,
+  useNavigate,
+  useOutletContext,
+} from "react-router-dom";
 import { motion } from "framer-motion";
 
 //-----------Components-----------//
@@ -13,6 +19,7 @@ import Button from "../Details/Button";
 import logo from "../Images/favicon_io/logo192.png";
 
 export default function ApplicationPage() {
+  const refresh = useOutletContext();
   const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
   const navigate = useNavigate();
 
@@ -46,6 +53,7 @@ export default function ApplicationPage() {
       .put(`${BACKEND_URL}/applications/edit/${id}`, formInfo)
       .then((response) => {
         console.log("Update response", response);
+        refresh();
       });
   };
 
@@ -55,6 +63,7 @@ export default function ApplicationPage() {
       .delete(`${BACKEND_URL}/applications/delete/${id}`)
       .then((response) => {
         console.log("Application Deleted", response);
+        refresh();
         navigate("/dashboard");
       });
   };

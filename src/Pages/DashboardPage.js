@@ -16,6 +16,7 @@ export default function DashboardPage() {
   const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
   const navigate = useNavigate();
 
+  // Store user data
   const [formInfo, setFormInfo] = useState({
     id: "",
     email: "",
@@ -23,9 +24,14 @@ export default function DashboardPage() {
     profilePic: null,
   });
 
+  // Store application data
+  const [data, setData] = useState(null);
+
+  // State trackers
   const [countdown, setCountdown] = useState(5);
   const [showFailedAlert, setShowFailedAlert] = useState(false);
 
+  // Token management
   useEffect(() => {
     // Attempt to Retrieve token from search params
     let storedToken;
@@ -77,6 +83,41 @@ export default function DashboardPage() {
     }
   }, []);
 
+  // Retrieve application data from db
+  useEffect(() => {
+    refreshApps();
+  }, []);
+
+  const refreshApps = () => {
+    axios
+      .get(`${BACKEND_URL}/users/1/applications`) // Endpoint: /users/:userId/applications
+      .then((response) => {
+        console.log("Backend Data Pulled: ", response.data.applications);
+        const data = response.data.applications;
+        const statusArray = [
+          "Wishlist",
+          "Applied",
+          "Screening",
+          "Interview",
+          "Offer",
+          "Archive",
+        ];
+
+        // Grouping applications in "data" by status
+        const groupedApps = {};
+
+        statusArray.forEach((status) => {
+          groupedApps[status] = data.filter(
+            (app) => app.applicationStatus.status === status,
+          );
+        });
+        setData(groupedApps);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  };
+
   return (
     <motion.div
       initial={{ opacity: 0, scale: 1 }}
@@ -93,14 +134,14 @@ export default function DashboardPage() {
 
       <NavBar name={formInfo.firstName} profilePic={formInfo.profilePic} />
 
-      <Dashboard />
-      <Outlet />
+      <Dashboard appGroup={data} />
+      <Outlet context={refreshApps} />
 
       <p className=" p-2 text-white">
         user_id: {formInfo.id} (Remove post-development) <br></br>email:
         {formInfo.email}
       </p>
-      <NewApplication />
+      <NewApplication refresh={refreshApps} />
     </motion.div>
   );
 }
