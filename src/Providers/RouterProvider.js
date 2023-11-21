@@ -12,8 +12,8 @@ import ContactsPage from "../Pages/ContactsPage";
 import ErrorPage from "../Pages/ErrorPage";
 import SettingsPage from "../Pages/SettingsPage";
 import NotesSection from "../Components/Applications/Notes/NotesSection";
-import InterviewSection from "../Components/Applications/InterviewSection";
-import RemindersSection from "../Components/Applications/RemindersSection";
+import InterviewSection from "../Components/Applications/Interviews/InterviewSection";
+import RemindersSection from "../Components/Applications/Reminders/RemindersSection";
 
 const router = createBrowserRouter([
   {
