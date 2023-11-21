@@ -32,10 +32,10 @@ export default function ApplicationPage() {
   // GET - Retrieve application data from Backend
   useEffect(() => {
     axios
-      .get(`${BACKEND_URL}/users/1/${id}`) // Endpoint: users/:userId/:applicationId
+      .get(`${BACKEND_URL}/applications/${id}`) // Endpoint: users/:userId/:applicationId
       .then((response) => {
-        console.log("Single Application Endpoint", response.data.application);
-        setFormInfo(response.data.application);
+        console.log("Single Application Endpoint", response.data.data);
+        setFormInfo(response.data.data);
       });
   }, []);
 
@@ -250,7 +250,7 @@ export default function ApplicationPage() {
             </form>
           </main>
           {/* Additional Details*/}
-          <section className="w-2/3  bg-slate-800">
+          <section className="w-2/3">
             <Outlet />
           </section>
         </div>
