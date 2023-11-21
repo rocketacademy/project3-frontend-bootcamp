@@ -5,7 +5,7 @@ const Application = ({ application }) => {
     application;
   return (
     <NavLink
-      to={`/dashboard/edit/${id}`}
+      to={`/dashboard/edit/${id}/notes`}
       className="m-1 flex h-[80px] flex-row rounded-lg shadow-lg shadow-primary hover:translate-y-[-2px]"
     >
       {/* Color coding for applications */}
