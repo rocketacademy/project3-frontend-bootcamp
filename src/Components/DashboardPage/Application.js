@@ -3,6 +3,24 @@ import { NavLink } from "react-router-dom";
 const Application = ({ application }) => {
   const { id, companyName, jobPosition, updatedAt, color, isBookmarked } =
     application;
+
+  const getLastUpdatedText = (updatedAt) => {
+    const updatedDate = new Date(updatedAt);
+    const currDate = new Date();
+
+    const minutesAgo = Math.floor((currDate - updatedDate) / (1000 * 60));
+    const hoursAgo = Math.floor(minutesAgo / 60);
+    const daysAgo = Math.floor(hoursAgo / 24);
+
+    if (minutesAgo < 60) {
+      return `Last updated: ${minutesAgo} minutes ago`;
+    } else if (hoursAgo < 24) {
+      return `Last updated: ${hoursAgo} hours ago`;
+    } else {
+      return `Last updated: ${daysAgo} days ago`;
+    }
+  };
+
   return (
     <NavLink
       to={`/dashboard/edit/${id}/notes`}
@@ -20,8 +38,8 @@ const Application = ({ application }) => {
         <p className="text-left text-xs font-semibold text-black">
           {jobPosition}
         </p>
-        <p className="mt-auto text-left text-[10px] leading-none text-primary">
-          {updatedAt}
+        <p className="mt-auto text-left text-[9px] leading-none text-primary">
+          {getLastUpdatedText(updatedAt)}
         </p>
       </div>
       <div
