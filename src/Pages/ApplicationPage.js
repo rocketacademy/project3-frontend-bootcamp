@@ -14,7 +14,6 @@ import { motion } from "framer-motion";
 import InputText from "../Details/InputText";
 import InputDate from "../Details/InputDate";
 import Button from "../Details/Button";
-import DeleteModal from "../Details/DeleteModal";
 
 //-----------Media-----------//
 import logo from "../Images/favicon_io/logo192.png";
@@ -284,7 +283,6 @@ export default function ApplicationPage() {
             <Outlet />
           </section>
         </div>
-        <DeleteModal label="application" key={id} />
       </div>
     </motion.div>
   );
