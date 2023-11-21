@@ -1,5 +1,9 @@
+//-----------Library-----------//
 import axios from "axios";
 import { useState, useEffect } from "react";
+
+//-----------Components-----------//
+import NotesAdd from "./NotesAdd";
 
 const NotesEdit = ({ currentNote, refresh }) => {
   const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
@@ -11,7 +15,7 @@ const NotesEdit = ({ currentNote, refresh }) => {
     content: "",
   });
 
-  // Set Current Note Data
+  // Populate current Note Data
   useEffect(() => {
     if (currentNote) {
       const { id, applicationId, title, content } = currentNote;
@@ -41,28 +45,34 @@ const NotesEdit = ({ currentNote, refresh }) => {
   };
 
   return (
-    <button className="m-1 flex h-full w-full shrink-0 flex-col rounded-md bg-slate-600 p-1 ">
-      <div>
+    <div className="m-1 flex h-full w-full shrink-0 flex-col p-1 ">
+      <div className="flex w-full flex-row justify-between rounded-lg bg-slate-500">
         <input
           id="title"
-          className="w-full rounded-lg bg-slate-500 px-2 font-bold"
+          className="w-full bg-transparent px-2 font-bold"
           type="text"
           value={noteData && noteData.title}
           onChange={textChange}
         />
-        <button onClick={updateNote}>update</button>
+        <button
+          className="px-2 text-xs hover:text-slate-400"
+          onClick={updateNote}
+        >
+          Update
+        </button>
       </div>
 
       <textarea
         id="content"
         className="w-full bg-slate-600 p-1"
         type="text"
-        rows="22"
+        rows="21"
         cols="30"
         value={noteData && noteData.content}
         onChange={textChange}
       />
-    </button>
+      <NotesAdd appId={noteData && noteData.applicationId} refresh={refresh} />
+    </div>
   );
 };
 

@@ -250,7 +250,7 @@ export default function ApplicationPage() {
             </form>
           </main>
           {/* Additional Details*/}
-          <section className="w-2/3  bg-slate-800">
+          <section className="w-2/3">
             <Outlet />
           </section>
         </div>
