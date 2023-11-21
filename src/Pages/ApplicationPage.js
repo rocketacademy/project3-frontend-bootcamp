@@ -225,8 +225,8 @@ export default function ApplicationPage() {
               >
                 <option value="1">Wishlist</option>
                 <option value="2">Applied</option>
-                <option value="3">Interview</option>
-                <option value="4">Screening</option>
+                <option value="3">Screening</option>
+                <option value="4">Interview</option>
                 <option value="5">Offer</option>
               </select>
 

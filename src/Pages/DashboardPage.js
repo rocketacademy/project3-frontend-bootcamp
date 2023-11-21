@@ -10,10 +10,12 @@ import Dashboard from "../Components/DashboardPage/Dashboard";
 import NewApplication from "../Components/DashboardPage/NewApplication";
 import InvalidTokenAlert from "../Details/InvalidTokenAlert";
 
-//-----------Media-----------//
+//-----------Utlities-----------//
+import { bearerToken } from "../Utilities/token";
 
 export default function DashboardPage() {
   const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
+  const token = localStorage.getItem("token");
   const navigate = useNavigate();
 
   // Store user data
@@ -28,7 +30,7 @@ export default function DashboardPage() {
   const [data, setData] = useState(null);
 
   // State trackers
-  const [countdown, setCountdown] = useState(5);
+  const [countdown, setCountdown] = useState(30);
   const [showFailedAlert, setShowFailedAlert] = useState(false);
 
   // Token management
@@ -57,6 +59,7 @@ export default function DashboardPage() {
       axios
         .get(`${BACKEND_URL}/auth/verify?token=${token}`)
         .then((response) => {
+          console.log("Token is valid", response.data);
           const { id, email, firstName, profilePic } = response.data;
           setFormInfo({
             ...formInfo,
@@ -65,10 +68,11 @@ export default function DashboardPage() {
             firstName: firstName,
             profilePic: profilePic,
           });
+          refreshApps(); // Pull user applications info
         })
         .catch((error) => {
-          console.log("Token not valid");
-          localStorage.removeItem("token"); // Remove existing tokens if not valid
+          console.log("Token not valid", error);
+          localStorage.removeItem("token"); // Remove existing tokens if not valid + timeout
           setShowFailedAlert(true);
           const countdownInterval = setInterval(() => {
             setCountdown((prevCount) => prevCount - 1);
@@ -76,21 +80,16 @@ export default function DashboardPage() {
           setTimeout(() => {
             clearInterval(countdownInterval);
             navigate("/");
-          }, 5000);
+          }, 30000);
         });
     } else {
       console.log("No Token Found");
     }
   }, []);
 
-  // Retrieve application data from db
-  useEffect(() => {
-    refreshApps();
-  }, []);
-
   const refreshApps = () => {
     axios
-      .get(`${BACKEND_URL}/users/1/applications`) // Endpoint: /users/:userId/applications
+      .get(`${BACKEND_URL}/users/1/applications`, bearerToken(token)) // Endpoint: /users/:userId/applications
       .then((response) => {
         console.log("Backend Data Pulled: ", response.data.applications);
         const data = response.data.applications;
