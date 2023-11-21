@@ -55,12 +55,12 @@ export default function DashboardPage() {
     console.log("Token", token);
 
     if (token) {
-      // Verify token and retrieve info
+      // Retrieve user info
       axios
-        .get(`${BACKEND_URL}/auth/verify?token=${token}`)
+        .get(`${BACKEND_URL}/users/data`, bearerToken(token))
         .then((response) => {
-          console.log("Token is valid", response.data);
-          const { id, email, firstName, profilePic } = response.data;
+          console.log("Token is valid", response.data.userData);
+          const { id, email, firstName, profilePic } = response.data.userData;
           setFormInfo({
             ...formInfo,
             id: id,
@@ -135,7 +135,7 @@ export default function DashboardPage() {
 
       <Dashboard appGroup={data} />
       <Outlet context={refreshApps} />
-      <NewApplication refresh={refreshApps} />
+      <NewApplication userId={formInfo.id} refresh={refreshApps} />
     </motion.div>
   );
 }
