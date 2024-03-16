@@ -1,7 +1,7 @@
 import React from "react";
 import logo from "./logo.png";
-import LoginButton from "./components/LoginButton";
 import "./App.css";
+import { Outlet } from "react-router-dom";
 import LogoutButton from "./components/LogoutButton";
 
 class App extends React.Component {
@@ -10,11 +10,8 @@ class App extends React.Component {
       <div className="App">
         <header className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-            <LoginButton />
-            <LogoutButton />
-          </p>
+          <Outlet />
+          <LogoutButton />
         </header>
       </div>
     );
