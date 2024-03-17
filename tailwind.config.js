@@ -4,6 +4,7 @@ module.exports = {
     "./src/components/Forum/Forum.js",
     "./src/components/Forum/ForumMainPage.js",
     "./src/components/Forum/ForumNavBar.js",
+    "./src/components/Forum/ForumCreate.js",
   ],
   theme: {
     extend: {},

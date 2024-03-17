@@ -8,6 +8,7 @@ import App from "./App";
 import AuthWrapper from "./components/AuthWrapper";
 import Forum from "./components/Forum/Forum";
 import ForumMainPage from "./components/Forum/ForumMainPage";
+import ForumCreate from "./components/Forum/ForumCreate";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
@@ -35,6 +36,7 @@ root.render(
           />
           <Route path="/forum" element={<Forum />}>
             <Route path="" element={<ForumMainPage />} />
+            <Route path="create" element={<ForumCreate />} />
           </Route>
           {/* <Route path="*" element={"Nothing here!"} /> */}
         </Route>
