@@ -1,11 +1,9 @@
 import { useAuth0 } from "@auth0/auth0-react";
-import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import axios from "axios";
 
 function AuthWrapper({ children }) {
   const { isAuthenticated, isLoading, loginWithRedirect, user } = useAuth0();
-  const navigate = useNavigate();
 
   useEffect(() => {
     if (!isLoading) {
