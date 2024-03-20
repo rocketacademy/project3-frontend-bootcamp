@@ -1,7 +1,10 @@
 /** @type {import('tailwindcss').Config} */
 const fs = require("fs");
 const path = require("path");
-const componentFiles = [];
+const componentFiles = [
+  "./src/components/Dashboard/CategoryList.js",
+  "./src/components/Dashboard/BookList.js",
+];
 const getAllJSFile = (currentPath) => {
   const files = fs.readdirSync(currentPath);
   for (const file of files) {
@@ -20,5 +23,5 @@ module.exports = {
   theme: {
     extend: {},
   },
-  plugins: [require("daisyui")],
+  plugins: [require("daisyui"), require("@tailwindcss/aspect-ratio")],
 };
