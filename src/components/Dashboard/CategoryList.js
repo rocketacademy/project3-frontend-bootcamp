@@ -25,6 +25,14 @@ const callouts = [
     imageAlt: "Collection of four insulated travel bottles on wooden shelf.",
     href: "#",
   },
+  {
+    name: "Philosophy",
+    description: "Daily commute essentials",
+    imageSrc:
+      "https://tailwindui.com/img/ecommerce-images/home-page-02-edition-03.jpg",
+    imageAlt: "Collection of four insulated travel bottles on wooden shelf.",
+    href: "#",
+  },
 ];
 
 export default function CategoryList() {
@@ -34,10 +42,10 @@ export default function CategoryList() {
         <div className="mx-auto max-w-2xl py-16 sm:py-24 lg:max-w-none lg:py-32">
           <h2 className="text-2xl font-bold text-gray-900">Categories</h2>
 
-          <div className="mt-6 space-y-12 lg:grid lg:grid-cols-3 lg:gap-x-6 lg:space-y-0">
+          <div className="mt-6 space-y-12 grid grid-cols-3 gap-x-6 space-y-0">
             {callouts.map((callout) => (
               <div key={callout.name} className="group relative">
-                <div className="relative h-80 w-full overflow-hidden rounded-lg bg-white sm:aspect-h-1 sm:aspect-w-2 lg:aspect-h-1 lg:aspect-w-1 group-hover:opacity-75 sm:h-64">
+                <div className="relative w-full overflow-hidden rounded-lg bg-white aspect-w-1 aspect-h-1 group-hover:opacity-75">
                   <img
                     src={callout.imageSrc}
                     alt={callout.imageAlt}
