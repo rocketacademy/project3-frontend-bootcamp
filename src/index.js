@@ -9,6 +9,8 @@ import AuthWrapper from "./components/AuthWrapper";
 import Forum from "./components/Forum/Forum";
 import ForumMainPage from "./components/Forum/ForumMainPage";
 import ForumCreate from "./components/Forum/ForumCreate";
+import Onboarding from "./components/Onboarding/OnboardingForm";
+import { OnDeviceTraining } from "@mui/icons-material";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
@@ -16,7 +18,7 @@ root.render(
   <Auth0Provider
     domain={process.env.REACT_APP_DOMAIN}
     clientId={process.env.REACT_APP_CLIENT_ID}
-    redirectUri={`${window.location.origin}/home`}
+    redirectUri={`${window.location.origin}/onboarding`}
     audience={process.env.REACT_APP_AUDIENCE}
     scope="read:current_user update:current_user_metadata"
   >
@@ -34,6 +36,7 @@ root.render(
               </AuthWrapper>
             }
           />
+          <Route path="/onboarding" element={<Onboarding />}></Route>
           <Route path="/forum" element={<Forum />}>
             <Route path="" element={<ForumMainPage />} />
             <Route path="create" element={<ForumCreate />} />
