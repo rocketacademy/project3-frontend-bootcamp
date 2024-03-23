@@ -1,10 +1,8 @@
-import { Fragment, useState } from "react";
+import { Fragment } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 import { XMarkIcon } from "@heroicons/react/24/outline";
 
-export default function Example() {
-  const [open, setOpen] = useState(true);
-
+const Settings = ({ open, setOpen }) => {
   return (
     <Transition.Root show={open} as={Fragment}>
       <Dialog as="div" className="relative z-10" onClose={setOpen}>
@@ -72,4 +70,6 @@ export default function Example() {
       </Dialog>
     </Transition.Root>
   );
-}
+};
+
+export default Settings;

@@ -1,7 +1,7 @@
 import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
 import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
 import { Link } from "react-router-dom";
-import SlideOver from ".././ProfileSettings/Settings";
+import Settings from ".././ProfileSettings/Settings";
 import { useState } from "react";
 
 export default function NavBar() {
@@ -18,7 +18,7 @@ export default function NavBar() {
         <Link className="btn btn-ghost" onClick={() => setSlideOverOpen(true)}>
           <AccountCircleOutlinedIcon fontSize="large" />
         </Link>
-        <SlideOver open={slideOverOpen} setOpen={setSlideOverOpen} />
+        <Settings open={slideOverOpen} setOpen={setSlideOverOpen} />
       </div>
     </div>
   );
