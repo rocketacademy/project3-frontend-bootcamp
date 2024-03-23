@@ -72,7 +72,7 @@ const Onboarding = () => {
               >
                 Photo
               </label>
-              <div className="mt-2 flex items-center gap-x-3">
+              {/* <div className="mt-2 flex items-center gap-x-3">
                 <UserCircleIcon
                   className="h-12 w-12 text-gray-300"
                   aria-hidden="true"
@@ -83,16 +83,10 @@ const Onboarding = () => {
                 >
                   Change
                 </button>
-              </div>
+              </div> */}
             </div>
 
             <div className="col-span-full">
-              {/* <label
-                htmlFor="cover-photo"
-                className="block text-sm font-medium leading-6 text-gray-900"
-              >
-                Cover photo
-              </label>
               <div className="mt-2 flex justify-center rounded-lg border border-dashed border-gray-900/25 px-6 py-10">
                 <div className="text-center">
                   <PhotoIcon
@@ -118,7 +112,7 @@ const Onboarding = () => {
                     PNG, JPG, GIF up to 10MB
                   </p>
                 </div>
-              </div> */}
+              </div>
             </div>
           </div>
         </div>
