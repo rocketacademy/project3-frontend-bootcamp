@@ -14,6 +14,7 @@ const Onboarding = () => {
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
+    phone: "",
     bookPreferences: [],
     emailNotifications: {
       comments: false,
@@ -44,6 +45,7 @@ const Onboarding = () => {
           userEmail: user.email,
           firstName: formData.firstName,
           lastName: formData.lastName,
+          phone: formData.phone,
         });
         navigate("/home"); // Navigate after successful update
       } catch (error) {
@@ -137,6 +139,24 @@ const Onboarding = () => {
                         />
                       </div>
                     </div>
+                    <div className="sm:col-span-3">
+                      <label
+                        htmlFor="phone"
+                        className="block text-sm font-medium leading-6 text-gray-900"
+                      >
+                        Phone
+                      </label>
+                      <div className="mt-2">
+                        <input
+                          type="text"
+                          name="phone"
+                          id="hone"
+                          autoComplete="phone"
+                          className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                          onChange={(event) => handleInputChange(event)}
+                        />
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -215,10 +235,11 @@ const Onboarding = () => {
                         htmlFor="comments"
                         className="font-medium text-gray-900"
                       >
-                        Comments
+                        Requests
                       </label>
                       <p className="text-gray-500">
-                        Get notified when someones posts a comment on a posting.
+                        Get notified when someones requests to receive your
+                        donated book
                       </p>
                     </div>
                   </div>
@@ -236,32 +257,10 @@ const Onboarding = () => {
                         htmlFor="candidates"
                         className="font-medium text-gray-900"
                       >
-                        Candidates
+                        Donations
                       </label>
                       <p className="text-gray-500">
-                        Get notified when a candidate applies for a job.
-                      </p>
-                    </div>
-                  </div>
-                  <div className="relative flex gap-x-3">
-                    <div className="flex h-6 items-center">
-                      <input
-                        id="offers"
-                        name="offers"
-                        type="checkbox"
-                        className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600"
-                      />
-                    </div>
-                    <div className="text-sm leading-6">
-                      <label
-                        htmlFor="offers"
-                        className="font-medium text-gray-900"
-                      >
-                        Offers
-                      </label>
-                      <p className="text-gray-500">
-                        Get notified when a candidate accepts or rejects an
-                        offer.
+                        Get notified when anyone donates their books
                       </p>
                     </div>
                   </div>
