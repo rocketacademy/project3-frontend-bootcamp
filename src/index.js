@@ -10,7 +10,6 @@ import Forum from "./components/Forum/Forum";
 import ForumMainPage from "./components/Forum/ForumMainPage";
 import ForumCreate from "./components/Forum/ForumCreate";
 import Onboarding from "./components/Onboarding/OnboardingForm";
-import { OnDeviceTraining } from "@mui/icons-material";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
@@ -36,6 +35,7 @@ root.render(
               </AuthWrapper>
             }
           />
+
           <Route
             path="/onboarding"
             element={
@@ -44,6 +44,12 @@ root.render(
               </AuthWrapper>
             }
           ></Route>
+          <Route
+            path=""
+            element={
+              <div>We are just expecting this root page to be blank????</div>
+            }
+          />
           <Route path="/forum" element={<Forum />}>
             <Route path="" element={<ForumMainPage />} />
             <Route path="create" element={<ForumCreate />} />
