@@ -9,7 +9,7 @@ export default function ForumNavBar() {
         <Link to="/home" className="btn btn-ghost">
           <HomeOutlinedIcon fontSize="large" />
         </Link>
-        <Link to="/forum/create" className="btn btn-outline rounded-full">
+        <Link to="/forum/create/post" className="btn btn-outline rounded-full">
           Create Post
         </Link>
       </div>

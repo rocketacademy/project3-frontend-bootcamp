@@ -1,3 +1,6 @@
+// import { useOutletContext } from "react-router-dom";
+
 export default function ForumMainPage() {
-  return <div></div>;
+  // const [errorMessage, setErrorMessage] = useOutletContext();
+  return <div>main</div>;
 }

@@ -1,9 +1,6 @@
 export default function ForumErrorPopUp({ errorMessage, setErrorMessage }) {
   return (
     <div>
-      <button className="btn" onClick={() => setErrorMessage("test")}>
-        open modal
-      </button>
       <dialog
         id="error_box"
         className={`modal ${errorMessage.length && "modal-open"}`}

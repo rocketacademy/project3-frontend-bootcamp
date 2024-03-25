@@ -1,16 +1,24 @@
 import { Outlet } from "react-router-dom";
 import ForumNavBar from "./ForumNavBar";
 import ForumErrorPopUp from "./ForumErrorPopUp";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useAuth0 } from "@auth0/auth0-react";
 export default function Forum() {
   const [errorMessage, setErrorMessage] = useState("");
-  const { isAuthenticated } = useAuth0();
+  const { isAuthenticated, isLoading, loginWithRedirect } = useAuth0();
 
-  return (
+  useEffect(() => {
+    if (!isLoading && !isAuthenticated) {
+      loginWithRedirect();
+    }
+  }, [isAuthenticated, isLoading, loginWithRedirect]);
+
+  return isLoading || !isAuthenticated ? (
+    <span className="loading loading-dots loading-lg"></span>
+  ) : (
     <div>
       <ForumNavBar />
-      <Outlet />
+      <Outlet context={[errorMessage, setErrorMessage]} />
       <ForumErrorPopUp
         errorMessage={errorMessage}
         setErrorMessage={setErrorMessage}

@@ -52,7 +52,7 @@ root.render(
           />
           <Route path="/forum" element={<Forum />}>
             <Route path="" element={<ForumMainPage />} />
-            <Route path="create" element={<ForumCreate />} />
+            <Route path="create/post" element={<ForumCreate type="post" />} />
           </Route>
           {/* <Route path="*" element={"Nothing here!"} /> */}
         </Route>
