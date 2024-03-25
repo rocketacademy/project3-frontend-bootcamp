@@ -16,7 +16,7 @@ export default function Forum() {
   return isLoading || !isAuthenticated ? (
     <span className="loading loading-dots loading-lg"></span>
   ) : (
-    <div>
+    <div className="flex flex-col items-center">
       <ForumNavBar />
       <Outlet context={[errorMessage, setErrorMessage]} />
       <ForumErrorPopUp
