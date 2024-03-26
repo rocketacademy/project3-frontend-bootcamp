@@ -1,11 +1,10 @@
-import { Outlet } from "react-router-dom";
+import { Outlet, useOutletContext } from "react-router-dom";
 import ForumNavBar from "./ForumNavBar";
-import ForumErrorPopUp from "./ForumErrorPopUp";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useAuth0 } from "@auth0/auth0-react";
 export default function Forum() {
-  const [errorMessage, setErrorMessage] = useState("");
   const { isAuthenticated, isLoading, loginWithRedirect } = useAuth0();
+  const [errorMessage, setErrorMessage] = useOutletContext();
 
   useEffect(() => {
     if (!isLoading && !isAuthenticated) {
@@ -19,10 +18,6 @@ export default function Forum() {
     <div className="flex flex-col items-center">
       <ForumNavBar />
       <Outlet context={[errorMessage, setErrorMessage]} />
-      <ForumErrorPopUp
-        errorMessage={errorMessage}
-        setErrorMessage={setErrorMessage}
-      />
     </div>
   );
 }

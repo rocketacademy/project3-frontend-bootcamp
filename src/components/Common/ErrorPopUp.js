@@ -1,4 +1,4 @@
-export default function ForumErrorPopUp({ errorMessage, setErrorMessage }) {
+export default function ErrorPopUp({ errorMessage, setErrorMessage }) {
   return (
     <div>
       <dialog
